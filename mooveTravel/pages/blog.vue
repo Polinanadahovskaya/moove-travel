@@ -12,6 +12,28 @@
     </div>
     <div class="blog-border line"></div>
     <div class="blog-button">Показать больше</div>
+    <div class="all-article">
+      <div class="article-tittle">Все статьи</div>
+      <div style="display: flex">
+        <div style="display: flex; flex-direction: column">
+          <div class="article-search">Поиск</div>
+          <div class="article-article">
+            <div v-for="a in 3">
+              <tub-article/>
+            </div>
+          </div>
+        </div>
+        <div class="article-filter">
+          <div>
+            <div v-for="a in 3">
+              <div>
+                <div class="filter-name">По странам</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -90,6 +112,48 @@ import TubCountry from '../components/tubCountry.vue'
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.all-article{
+  margin: 110px auto 180px;
+}
+
+.article-tittle{
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 84px;
+  line-height: 100%;
+  color: #C75454;
+  margin-bottom: 80px;
+}
+
+.article-article{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.article-search{
+  border-bottom: 3px dashed #C3C3C3;
+  margin-bottom: 32px;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  color: #C3C3C3;
+}
+
+.article-filter{
+  background: #EBEBEB;
+  height: 100%;
+}
+
+.filter-name{
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 100%;
+  vertical-align: middle;
 }
 
 @media (max-width: 768px) {

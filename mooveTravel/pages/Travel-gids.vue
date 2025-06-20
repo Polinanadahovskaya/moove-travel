@@ -27,6 +27,10 @@
 import BestVariant from '~/components/BestVariant.vue';
 import TubCountry from '~/components/tubCountry.vue';
 import PopupApplication from '~/components/popupApplication.vue';
+
+defineOptions({
+  name: 'Travel-Gids',
+})
 </script>
 
 <style scoped>

@@ -41,15 +41,25 @@
         </div>
       </div>
       <div class="team">
-        <div class="about-tittle">КОМАНДА</div>
-        <div class="about-border"></div>
+        <div>
+          <div class="about-tittle">КОМАНДА</div>
+          <div class="about-border"></div>
+        </div>
+        <div class="blog-grid">
+          <div v-for="a in 2">
+            <team-tab/>
+          </div>
+        </div>
       </div>
+      <popup-application/>
     </div>
   </div>
 </template>
 
 <script setup>
 import TubOffice from "~/components/tubOffice.vue";
+import PopupApplication from "~/components/popupApplication.vue";
+import teamTab from "~/components/teamTab.vue";
 
 defineOptions({
   name: "About",
@@ -126,8 +136,8 @@ defineOptions({
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 108px;
-  margin-top: 40px;
+  gap: 177px;
+  margin-top: 233px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -209,5 +219,6 @@ defineOptions({
   margin-left: -50vw;
   margin-right: -50vw;
   padding: 70px 182px 150px;
+  margin-bottom: 180px;
 }
 </style> 

@@ -1,6 +1,7 @@
 <template>
-  <div class="popup-comp">
-    <div class="popup-body background-yellow">
+  <div class="popup-comp" >
+    <div v-if="route.path !== '/Travel-gids'" class="popup-body"
+    :class="{'background-yellow': route.path === '/about'}">
       <div class="popup-header"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА</div>
       <div class="popup-line"></div>
       <div class="popup-inputs">
@@ -70,11 +71,86 @@
       </div>
       <div class="popup-button" @click="submitForm">Оставить заявку</div>
     </div>
-    <div></div>
+    <div v-if="route.path === '/Travel-gids'">
+      <div class="popup-header" style="color: #1E1E1E; text-align: justify;">ПОДБЕРЕМ ТУР ДЛЯ ВАС</div>
+      <div class="popup-line" style="width: 294px"></div>
+      <div style="display: flex; justify-content: space-between;">
+        <div><div class="popup-inputs">
+          <div class="pop-in">
+            <input
+                class="popup-input"
+                :class="{'error' : nameError}"
+                type="text"
+                id="userName"
+                name="userName"
+                placeholder=" "
+                v-model="name"
+                @input="handleNameInput"
+                @blur="validateName"
+            >
+            <label class="popup-label" for="userName">Имя</label>
+            <div v-if="nameError" class="error-message">{{ nameError }}</div>
+          </div>
+          <div class="pop-in">
+            <input
+                ref="phoneInput"
+                class="popup-input"
+                :class="{'error': phoneError}"
+                v-model="phone"
+                type="tel"
+                id="userTel"
+                @blur="validatePhone"
+                @input="handlePhoneInput"
+                name="userTel"
+                placeholder=" "
+            >
+            <label class="popup-label" for="userTel">Номер телефона </label>
+          </div>
+          <div class="pop-in">
+            <input
+                class="popup-input"
+                :class="{ 'error': emailError }"
+                type="email"
+                id="emailId"
+                name="emailId"
+                placeholder=" "
+                v-model="email"
+                @blur="validateEmail"
+                @input="handleEmailInput"
+            >
+            <label class="popup-label" for="emailId">Email</label>
+            <div v-if="emailError" class="error-message">{{ emailError }}</div>
+          </div>
+        </div></div>
+        <div><div class="popup-questions" style="font-size: 24px">Предпочтительный формат связи</div>
+          <div class="popup-checkbox" style="flex-direction: column">
+            <div class="checkbox-element">
+              <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone"/>
+              <label for="checkbox-phone"></label>
+              <div>Звонок по телефону</div>
+            </div>
+            <div class="checkbox-element">
+              <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" />
+              <label for="checkbox-email"></label>
+              <div>Письмо на электронную почту</div>
+            </div>
+            <div class="checkbox-element">
+              <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" />
+              <label for="checkbox-whats"></label>
+              <div>Сообщение в WhatsApp</div>
+            </div>
+          </div>
+          <div class="popup-button" @click="submitForm">Оставить заявку</div></div>
+      </div>
+    </div>
+    <div v-if="notification" :class="['popup-notification', notificationType]">
+      {{ notification }}
+    </div>
   </div>
 </template>
 <script setup>
 import {ref, onMounted, computed} from 'vue'
+import { useRoute } from '#app'
 import IMask from 'imask'
 
 defineOptions({
@@ -176,6 +252,8 @@ const handlePhoneInput = (event) => {
 
 const phoneInput = ref(null)
 
+const route = useRoute()
+
 onMounted(() => {
   if (phoneInput.value) {
     IMask(phoneInput.value, {
@@ -250,6 +328,9 @@ const validateForm = () => {
   return !!valid
 }
 
+const notification = ref("");
+const notificationType = ref(""); // success или error
+
 const submitForm = () => {
   let data = {
     phone: phone.value,
@@ -264,9 +345,15 @@ const submitForm = () => {
       },
       body: JSON.stringify(data)
     })
-        .then(res => res.json())
-        .catch(err => console.log(err))
-    alert('Заявка отправлена!')
+      .then(res => res.json())
+      .then(() => {
+        notification.value = 'Заявка отправлена!';
+        notificationType.value = 'success';
+      })
+      .catch(() => {
+        notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
+        notificationType.value = 'error';
+      });
   }
 }
 </script>
@@ -435,5 +522,27 @@ const submitForm = () => {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+.popup-notification {
+  margin-top: 20px;
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-family: Montserrat;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+.popup-notification.success {
+  background: #e6ffe6;
+  color: #1a7f1a;
+  border: 1px solid #1a7f1a;
+}
+.popup-notification.error {
+  background: #ffe6e6;
+  color: #c75454;
+  border: 1px solid #c75454;
 }
 </style>
