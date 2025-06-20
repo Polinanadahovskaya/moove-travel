@@ -14,8 +14,8 @@
     <div class="blog-button">Показать больше</div>
     <div class="all-article">
       <div class="article-tittle">Все статьи</div>
-      <div style="display: flex">
-        <div style="display: flex; flex-direction: column">
+      <div style="display: flex;     gap: 45px;">
+        <div style="display: flex; flex-direction: column; flex-basis: 70%; max-width: 70%;">
           <div class="article-search">Поиск</div>
           <div class="article-article">
             <div v-for="a in 3">
@@ -23,12 +23,11 @@
             </div>
           </div>
         </div>
-        <div class="article-filter">
+        <div class="article-filter" style="flex-basis: 30%; max-width: 30%;">
           <div>
-            <div v-for="a in 3">
-              <div>
-                <div class="filter-name">По странам</div>
-              </div>
+            <div class="filter-name">По странам</div>
+            <div v-for="pair in filterPairs" :key="pair[0]" style="display: flex; justify-content: space-between; gap: 20px; margin-bottom: 10px;">
+              <div v-for="filter in pair" :key="filter" class="filter-element">{{ filter }}</div>
             </div>
           </div>
         </div>
@@ -39,6 +38,18 @@
 
 <script setup>
 import TubCountry from '../components/tubCountry.vue'
+import { computed } from 'vue'
+
+// Пример массива фильтров (замени на реальные данные при необходимости)
+const filters = Array.from({ length: 20 }, (_, i) => `Фильтр ${i + 1}`)
+
+const filterPairs = computed(() => {
+  const pairs = []
+  for (let i = 0; i < filters.length; i += 2) {
+    pairs.push(filters.slice(i, i + 2))
+  }
+  return pairs
+})
 </script>
 
 <style scoped>
@@ -145,7 +156,8 @@ import TubCountry from '../components/tubCountry.vue'
 
 .article-filter{
   background: #EBEBEB;
-  height: 100%;
+  border-radius: 30px;
+  padding: 40px;
 }
 
 .filter-name{
@@ -156,6 +168,17 @@ import TubCountry from '../components/tubCountry.vue'
   vertical-align: middle;
 }
 
+.filter-element{
+  height: 39px;
+  border-radius: 5px;
+  border: 1px solid #D9D9D9;
+  background: #FFFFFF;
+  width: 100%;
+  display: flex
+;
+  justify-content: center;
+  align-items: center;
+}
 @media (max-width: 768px) {
   .blog-tittle {
     font-size: 48px;
