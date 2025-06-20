@@ -1,0 +1,111 @@
+<template>
+  <div>
+    <div class="variant-body">
+      <div>
+        <div class="variant-tittle">Название</div>
+        <div class="variant-text">Описание</div>
+      </div>
+      <div>
+        <div class="variant-price">{{ formatPrice(1990) }} ₽</div>
+        <div class="variant-button">Купить</div>
+      </div>
+    </div>
+  </div>
+</template>
+<script setup>
+defineOptions({
+  name: 'bestVariant',
+})
+const formatPrice = (price) => {
+  const roundedPrice = Math.round(price);
+  return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+</script>
+<style scoped>
+.variant-body {
+  width: 100%;
+  height: 789px;
+  border-radius: 34px;
+  background-color: #D9D9D9;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.variant-tittle {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  vertical-align: middle;
+  margin-bottom: 18px;
+}
+
+.variant-text {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 120%;
+  vertical-align: middle;
+}
+
+.variant-price {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  vertical-align: middle;
+  margin-bottom: 21px;
+}
+
+.variant-button {
+  width: 100%;
+  padding: 30px;
+  border-radius: 24px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  background: #F89C1D;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .variant-tittle,
+  .variant-price {
+    font-size: 28px;
+  }
+  
+  .variant-text {
+    font-size: 24px;
+  }
+  
+  .variant-button {
+    font-size: 28px;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .variant-body {
+    padding: 30px;
+    min-height: 300px;
+  }
+  
+  .variant-tittle,
+  .variant-price {
+    font-size: 24px;
+  }
+  
+  .variant-text {
+    font-size: 20px;
+  }
+  
+  .variant-button {
+    font-size: 24px;
+    padding: 20px;
+  }
+}
+</style>
