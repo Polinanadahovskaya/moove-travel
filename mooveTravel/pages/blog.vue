@@ -40,7 +40,6 @@
 import TubCountry from '../components/tubCountry.vue'
 import { computed } from 'vue'
 
-// Пример массива фильтров (замени на реальные данные при необходимости)
 const filters = Array.from({ length: 20 }, (_, i) => `Фильтр ${i + 1}`)
 
 const filterPairs = computed(() => {
