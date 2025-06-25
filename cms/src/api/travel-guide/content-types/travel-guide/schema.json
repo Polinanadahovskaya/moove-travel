@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "travel_guides",
+  "info": {
+    "singularName": "travel-guide",
+    "pluralName": "travel-guides",
+    "displayName": "Travel guide"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "price": {
+      "type": "integer",
+      "required": true
+    },
+    "guide": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "files"
+      ]
+    }
+  }
+}
