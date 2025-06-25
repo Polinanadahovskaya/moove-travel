@@ -36,6 +36,7 @@
             placeholder=" "
           >
           <label class="popup-label" for="userTel">Номер телефона </label>
+          <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
         </div>
         <div class="pop-in">
           <input
@@ -108,6 +109,7 @@
                 placeholder=" "
             >
             <label class="popup-label" for="userTel">Номер телефона </label>
+            <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
           </div>
           <div class="pop-in">
             <input
