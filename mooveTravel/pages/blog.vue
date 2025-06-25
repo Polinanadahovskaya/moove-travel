@@ -26,7 +26,8 @@
         <div class="article-filter" style="flex-basis: 30%; max-width: 30%;">
           <div>
             <div class="filter-name">По странам</div>
-            <div v-for="pair in filterPairs" :key="pair[0]" style="display: flex; justify-content: space-between; gap: 20px; margin-bottom: 10px;">
+            <div v-for="pair in filterPairs" :key="pair[0]"
+                 style="display: flex; justify-content: space-between; gap: 20px; margin-bottom: 10px;">
               <div v-for="filter in pair" :key="filter" class="filter-element">{{ filter }}</div>
             </div>
           </div>
@@ -38,9 +39,9 @@
 
 <script setup>
 import TubCountry from '../components/tubCountry.vue'
-import { computed } from 'vue'
+import {computed} from 'vue'
 
-const filters = Array.from({ length: 20 }, (_, i) => `Фильтр ${i + 1}`)
+const filters = Array.from({length: 20}, (_, i) => `Фильтр ${i + 1}`)
 
 const filterPairs = computed(() => {
   const pairs = []
@@ -52,20 +53,21 @@ const filterPairs = computed(() => {
 </script>
 
 <style scoped>
-.blog-tittle-header{
+.blog-tittle-header {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-top: 90px;
 }
-.blog-tittle{
+
+.blog-tittle {
   font-family: Montserrat;
   font-weight: 700;
   font-size: 84px;
   line-height: 100%;
 }
 
-.blog-border{
+.blog-border {
   border-bottom: 6px solid #C75454;
   width: 294px;
 }
@@ -113,7 +115,7 @@ const filterPairs = computed(() => {
   padding-bottom: 48px;
   padding-left: 126px;
   border-radius: 24px;
-  border: 6px solid#C75454;
+  border: 6px solid #C75454;
   font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
@@ -124,11 +126,11 @@ const filterPairs = computed(() => {
   cursor: pointer;
 }
 
-.all-article{
+.all-article {
   margin: 110px auto 180px;
 }
 
-.article-tittle{
+.article-tittle {
   font-family: Montserrat;
   font-weight: 700;
   font-size: 84px;
@@ -137,13 +139,13 @@ const filterPairs = computed(() => {
   margin-bottom: 80px;
 }
 
-.article-article{
+.article-article {
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-.article-search{
+.article-search {
   border-bottom: 3px dashed #C3C3C3;
   margin-bottom: 32px;
   font-family: Montserrat;
@@ -153,13 +155,13 @@ const filterPairs = computed(() => {
   color: #C3C3C3;
 }
 
-.article-filter{
+.article-filter {
   background: #EBEBEB;
   border-radius: 30px;
   padding: 40px;
 }
 
-.filter-name{
+.filter-name {
   font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
@@ -167,27 +169,27 @@ const filterPairs = computed(() => {
   vertical-align: middle;
 }
 
-.filter-element{
+.filter-element {
   height: 39px;
   border-radius: 5px;
   border: 1px solid #D9D9D9;
   background: #FFFFFF;
   width: 100%;
-  display: flex
-;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
+
 @media (max-width: 768px) {
   .blog-tittle {
     font-size: 48px;
   }
-  
+
   .blog-text {
     font-size: 24px;
     margin: 40px 0;
   }
-  
+
   .blog-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
@@ -198,12 +200,12 @@ const filterPairs = computed(() => {
   .blog-tittle {
     font-size: 36px;
   }
-  
+
   .blog-text {
     font-size: 20px;
     margin: 30px 0;
   }
-  
+
   .blog-grid {
     grid-template-columns: 1fr;
     gap: 15px;

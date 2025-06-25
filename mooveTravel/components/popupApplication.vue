@@ -2,8 +2,9 @@
   <div class="popup-comp" >
     <div v-if="route.path !== '/Travel-gids'" class="popup-body"
     :class="{'background-yellow': route.path === '/about'}">
-      <div class="popup-header"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА</div>
-      <div class="popup-line"></div>
+      <div class="header-popup">
+        <div class="popup-header"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА<div class="popup-line"></div></div>
+      </div>
       <div class="popup-inputs">
         <div class="pop-in">
           <input
@@ -412,7 +413,6 @@ const submitForm = () => {
   font-weight: 700;
   font-size: 51px;
   line-height: 100%;
-  text-align: center;
   vertical-align: middle;
 }
 
@@ -544,5 +544,10 @@ const submitForm = () => {
   background: #ffe6e6;
   color: #c75454;
   border: 1px solid #c75454;
+}
+
+.header-popup {
+  display: flex;
+  justify-content: center;
 }
 </style>

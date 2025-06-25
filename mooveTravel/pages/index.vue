@@ -1,21 +1,24 @@
 <template>
   <div>
     <div class="main-header_tittle">
-      <div class="header-text">Дополнительный текст</div>
-      <div class="header-tittle">СТАРТОВЫЙ ТЕКСТ
-        В ДВЕ СТРОКИ
-      </div>
+      <h1 class="header-tittle">Куда поедем<br/>
+        отдыхать?
+      </h1>
     </div>
+    <div class="tv-search-form tv-moduleid-9971497"></div>
     <div class="main-search"></div>
-    <div class="header-wave">
-      <div class="plane-wave"></div>
-    </div>
+    <div class="header-wave"/>
     <div class="help-search">
       <div>
-        <div class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</div>
+        <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
         <div class="tittle-border"></div>
       </div>
-      <div>
+      <div style="display: flex; gap: 55px;">
+        <div style="display: flex;gap: 10px;flex-direction: column;">
+          <div v-for="a in 3">
+            <div class="hollow-arrow"></div>
+          </div>
+        </div>
         <a href="#application" style="text-decoration: none">
           <div class="tittle-button">Оставить заявку</div>
         </a>
@@ -24,7 +27,7 @@
     </div>
     <div class="help-about">
       <div>
-        <div class="about-tittle">О НАС</div>
+        <h2 class="about-tittle">О НАС</h2>
         <div class="about-border"></div>
       </div>
       <div class="about-block">
@@ -32,10 +35,10 @@
           <div class="block-button">Подробнее</div>
         </NuxtLink>
         <div class="numbers">
-          <div v-for="a in 3" :key="a">
+          <div v-for="arr in aboutArray" :key="arr">
             <div class="block-tab">
-              <div class="tub-number">01</div>
-              <div class="block-">Дополнительный текст в несколько строчек</div>
+              <div class="tub-number">{{arr.id}}</div>
+              <div class="block-">{{arr.text}}</div>
             </div>
           </div>
         </div>
@@ -43,31 +46,27 @@
     </div>
     <div class="priorities">
       <div>
-        <div class="about-tittle">ПРЕИМУЩЕСТВА</div>
+        <h2 class="about-tittle">ПРЕИМУЩЕСТВА</h2>
         <div class="about-border"></div>
       </div>
       <div>
         <div class="panel">
           <div class="panel-column">
-            <div class="tab-panel">
-              <div class="tab"></div>
-              <div class="tab-text"><span class="bold">Работаем без выходных</span> — всегда на связи, когда удобно вам.</div>
-            </div>
-            <div class="tab-panel">
-              <div class="tab"></div>
-              <div class="tab-text"><span class="bold">Ведём до конца</span> — остаёмся на связи до вашего возвращения.
+            <div v-for="arr in pluses.slice(0, 2)" :key="arr">
+              <div class="tab-panel">
+                <div class="tab"><div class="mask" :class="{'time-mask': arr.id === 'time', 'end-mask': arr.id === 'end' }"></div></div>
+                <div class="tab-text"><span class="bold">{{arr.boldText}}</span> {{ arr.text }}
+                </div>
               </div>
             </div>
           </div>
           <div class="panel-column">
-            <div class="tab-panel">
-              <div class="tab"></div>
-              <div class="tab-text"><span class="bold">Подбираем, как себе </span> — учитываем желания, бюджет и нюансы.
+            <div v-for="arr in pluses.slice(2, 4)" :key="arr">
+              <div class="tab-panel">
+                <div class="tab"><div class="mask" :class="{'self-mask': arr.id === 'self', 'ticket-mask': arr.id === 'ticket' }"></div></div>
+                <div class="tab-text"><span class="bold">{{arr.boldText}}</span> {{ arr.text }}
+                </div>
               </div>
-            </div>
-            <div class="tab-panel">
-              <div class="tab"></div>
-              <div class="tab-text"><span class="bold">Создаем лучшие тревел-гиды</span> — изучаем маршруты и отели не по вебинарам, а своими ногами.</div>
             </div>
           </div>
         </div>
@@ -78,20 +77,64 @@
 </template>
 
 <script setup>
-import PopupApplication from '~/components/PopupApplication.vue'
+import {onMounted} from 'vue'
+import PopupApplication from '~/components/popupApplication.vue'
+
+onMounted(() => {
+  if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = '//tourvisor.ru/module/init.js'
+    script.async = true
+    script.onload = () => {
+      if (window.tv_init) window.tv_init()
+    }
+    document.body.appendChild(script)
+  } else {
+    if (window.tv_init) window.tv_init()
+  }
+})
+
+const aboutArray = [
+  {
+    id: '01',
+    text: "Мы запустили агентство, потому что устали от шаблонного сервиса. Здесь нет случайных туров и формального подхода. Честный подбор, внимание к деталям и уважение к чужому отпуску."
+  },
+  {
+    id: '02',
+    text: "Не впариваем. Не торопим. Слушаем. Подбираем тур под вас, а не под акции. Мы за комфорт, разум и человеческое отношение — без скриптов и маркетинговых фокусов."
+  },
+  {
+    id: '03',
+    text: "Мы не гонимся за количеством. Нам важно, чтобы вы вернулись — и привели тех, кто дорог и вам. Потому что хороший отдых начинается с тех, кто вас к нему ведёт."
+  }]
+const pluses = [
+  {
+    id:'time',
+    boldText: 'Работаем без выходных',
+    text: ' — всегда на связи, когда удобно вам.'
+  },
+  {
+    id:'end',
+    boldText: 'Ведём до конца',
+    text: ' — остаёмся на связи до вашего возвращения.'
+  },
+  {
+    id:'self',
+    boldText: 'Подбираем, как себе',
+    text: '— учитываем желания, бюджет и нюансы.'
+  },
+  {
+    id:'ticket',
+    boldText: 'Создаем лучшие тревел-гиды',
+    text: '— изучаем маршруты и отели не по вебинарам, а своими ногами.'
+  }
+]
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .main-header_tittle {
   margin: 90px auto 33px;
-}
-
-.header-text {
-  font-family: Montserrat;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 100%;
-  margin-bottom: 16px;
 }
 
 .header-tittle {
@@ -103,8 +146,8 @@ import PopupApplication from '~/components/PopupApplication.vue'
 }
 
 .header-wave {
-  background: url("/src/assets/images/wave.svg") no-repeat;
-  height: 672px;
+  background: url("/src/assets/images/planeStartPage.svg") no-repeat;
+  height: 595px;
   width: 100vw;
   position: relative;
   left: 50%;
@@ -112,15 +155,10 @@ import PopupApplication from '~/components/PopupApplication.vue'
   margin-left: -50vw;
   margin-right: -50vw;
   position: relative;
-
-}
-
-.plane-wave {
-  background: url("/src/assets/images/planeWave.svg") no-repeat;
-  position: absolute;
-  height: 298px;
-  width: 100%;
-  top: 106px;
+  background-size: cover;
+  @media (max-width: 1640px) {
+    background-size: contain;
+  }
 }
 
 .main-search {
@@ -142,11 +180,6 @@ import PopupApplication from '~/components/PopupApplication.vue'
 }
 
 .help-tittle {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 64px;
-  line-height: 100%;
-  vertical-align: middle;
   color: #FFFFFF;
 }
 
@@ -173,17 +206,15 @@ import PopupApplication from '~/components/PopupApplication.vue'
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  @media (max-width: 1650px) {
+    width: 352px;
+    height: 106px;
+    font-size: 30px;
+  }
 }
 
 .help-about {
   margin: 110px auto;
-}
-
-.about-tittle {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 84px;
-  line-height: 100%;
 }
 
 .about-border {
@@ -208,11 +239,13 @@ import PopupApplication from '~/components/PopupApplication.vue'
   left: 0;
   top: 0;
   width: 100%;
-  height: 574px;
-  background: #D9D9D9;
+  height: 100%;
+  background: url("/src/assets/images/aboutBackground.png") no-repeat;
   border-radius: 34px;
   z-index: 0;
+  background-size: cover;
 }
+
 .about-block > * {
   position: relative;
   z-index: 1;
@@ -233,18 +266,18 @@ import PopupApplication from '~/components/PopupApplication.vue'
   justify-content: center;
 }
 
-.link-button{
+.link-button {
   display: flex;
   align-self: end;
-  margin-bottom: 76px;
+  margin-bottom: 41px;
   text-decoration: none;
 }
 
 
-.block-tab{
+.block-tab {
   display: flex;
   gap: 44px;
-  height: 166px;
+  height: 152px;
   padding: 36px 44px;
   border-radius: 28px;
   align-items: center;
@@ -252,7 +285,7 @@ import PopupApplication from '~/components/PopupApplication.vue'
   box-shadow: 0px 0px 60px 0px #0000001A;
 }
 
-.tub-number{
+.tub-number {
   font-family: Montserrat;
   font-weight: 400;
   font-size: 96px;
@@ -261,28 +294,30 @@ import PopupApplication from '~/components/PopupApplication.vue'
   color: #C75454;
 }
 
-.numbers{
+.numbers {
   display: flex;
   flex-direction: column;
   gap: 33px;
+  width: 55%;
 }
 
-.priorities{
+.priorities {
   margin: 110px auto 180px;
 }
 
-.panel{
+.panel {
   display: flex;
   gap: 33px;
 }
 
-.panel-column{
+.panel-column {
   display: flex;
   flex-direction: column;
   gap: 90px;
+  width: 50%;
 }
 
-.tab{
+.tab {
   width: 154px;
   height: 154px;
   border-width: 1px;
@@ -291,26 +326,73 @@ import PopupApplication from '~/components/PopupApplication.vue'
   border-image-source: linear-gradient(135deg, #FFFFFF 30.25%, #C75454 100%);
   box-shadow: 8px 8px 30px 0px #00000026;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.tab-text{
+.tab-text {
   font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
   vertical-align: middle;
 }
-.bold{
+
+.bold {
   font-weight: 700;
 }
 
-.tab-panel{
+.tab-panel {
   display: flex;
   gap: 33px;
   align-items: center;
 }
 
+.hollow-arrow {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.hollow-arrow::before {
+  content: "";
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  border-right: 10px solid white;
+  border-bottom: 10px solid white;
+  transform: rotate(45deg);
+  top: 5px;
+  left: 5px;
+  border-radius: 3px;
+}
+
+.mask{
+mask-size: 100px 100px;
+-webkit-mask-size: 100px 100px;
+background-color: #C75454;
+width: 100px;
+height: 100px;
+}
+
 .time-mask{
-  mask: ;
+  mask: url(/src/assets/images/icons/time.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/time.svg) no-repeat center/contain;
+}
+
+.end-mask{
+  mask: url(/src/assets/images/icons/goEnd.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/goEnd.svg) no-repeat center/contain;
+}
+
+.self-mask{
+  mask: url(/src/assets/images/icons/self.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/self.svg) no-repeat center/contain;
+}
+
+.ticket-mask{
+  mask: url(/src/assets/images/icons/ticket.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/ticket.svg) no-repeat center/contain;
 }
 </style> 

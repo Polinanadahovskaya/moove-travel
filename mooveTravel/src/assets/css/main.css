@@ -39,4 +39,24 @@ body {
 
 .font-black {
   font-weight: 900;
-} 
+}
+
+h1 {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 84px;
+  line-height: 100%;
+}
+
+h2 {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 100%;
+  vertical-align: middle;
+  color: #1E1E1E;
+  @media (max-width: 1650px) {
+    font-size: 46px;
+    font-weight: 500;
+  }
+}
