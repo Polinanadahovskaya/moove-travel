@@ -56,21 +56,22 @@
       <div class="popup-questions" :class="{'text': route.path === '/'}">Предпочтительный формат связи</div>
       <div class="popup-checkbox">
           <div class="checkbox-element">
-            <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone"/>
+            <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone" @change="validateForm"/>
             <label for="checkbox-phone"></label>
             <div class="checkbox-text">Звонок по телефону</div>
           </div>
         <div class="checkbox-element">
-          <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" />
+          <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" @change="validateForm"/>
           <label for="checkbox-email"></label>
           <div class="checkbox-text">Письмо на электронную почту</div>
         </div>
         <div class="checkbox-element">
-          <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" />
+          <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
           <div class="checkbox-text">Сообщение в WhatsApp</div>
         </div>
       </div>
+      <div v-if="contactError" class="error-message">{{ contactError }}</div>
       <div class="popup-button" @click="submitForm">Оставить заявку</div>
     </div>
     <div v-if="route.path === '/Travel-gids'">
@@ -127,22 +128,25 @@
         <div><div class="popup-questions" style="font-size: 24px">Предпочтительный формат связи</div>
           <div class="popup-checkbox" style="flex-direction: column">
             <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone"/>
+              <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone" @change="validateForm"/>
               <label for="checkbox-phone"></label>
               <div class="checkbox-text">Звонок по телефону</div>
             </div>
             <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" />
+              <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" @change="validateForm"/>
               <label for="checkbox-email"></label>
               <div class="checkbox-text">Письмо на электронную почту</div>
             </div>
             <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" />
+              <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" @change="validateForm"/>
               <label for="checkbox-whats"></label>
               <div class="checkbox-text">Сообщение в WhatsApp</div>
             </div>
           </div>
-          <div class="popup-button" @click="submitForm">Оставить заявку</div></div>
+          <div v-if="contactError" class="error-message">{{ contactError }}</div>
+          <div class="popup-button" @click="submitForm">Оставить заявку</div>
+<!--        <div>Нажимая «Оставить заявку» <br/> вы даёте согласие на <a> обработку<br/> персональных данных.</a></div>-->
+        </div>
       </div>
     </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
@@ -151,7 +155,7 @@
   </div>
 </template>
 <script setup>
-import {ref, onMounted, computed} from 'vue'
+import {ref, onMounted, computed, watch} from 'vue'
 import { useRoute } from '#app'
 import IMask from 'imask'
 
@@ -310,6 +314,7 @@ const validatePhone = () => {
 const contactByPhone = ref(false)
 const contactByEmail = ref(false)
 const contactByWhatsApp = ref(false)
+const contactError = ref('')
 
 const isPhoneRequired = computed(() => contactByPhone.value || contactByWhatsApp.value)
 const isEmailRequired = computed(() => contactByEmail.value)
@@ -317,13 +322,19 @@ const bothRequired = computed(() => contactByEmail.value && (contactByPhone.valu
 
 const validateForm = () => {
   let valid = true
+  if (!contactByPhone.value && !contactByEmail.value && !contactByWhatsApp.value) {
+    contactError.value = 'Выберите хотя бы один способ связи';
+    valid = false;
+  } else {
+    contactError.value = '';
+  }
   if (bothRequired.value) {
-    valid = validatePhone() & validateEmail()
+    valid = validatePhone() & validateEmail() && valid
   } else if (isPhoneRequired.value) {
-    valid = validatePhone()
+    valid = validatePhone() && valid
     emailError.value = ''
   } else if (isEmailRequired.value) {
-    valid = validateEmail()
+    valid = validateEmail() && valid
     phoneError.value = ''
   }
   valid = validateName() && valid
@@ -358,6 +369,12 @@ const submitForm = () => {
       });
   }
 }
+
+watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
+  if (contactByPhone.value || contactByEmail.value || contactByWhatsApp.value) {
+    contactError.value = '';
+  }
+});
 </script>
 <style scoped>
 .background-yellow {
