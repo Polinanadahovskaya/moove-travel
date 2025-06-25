@@ -1,9 +1,10 @@
 <template>
   <div class="popup-comp" >
     <div v-if="route.path !== '/Travel-gids'" class="popup-body"
-    :class="{'background-yellow': route.path === '/about'}">
+    :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/'}">
+      <div v-if="route.path === '/'" class="popup-darken"></div>
       <div class="header-popup">
-        <div class="popup-header"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА<div class="popup-line"></div></div>
+        <div class="popup-header" :class="{'text': route.path === '/'}"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА<div class="popup-line" :class="{'line-white': route.path === '/'}"></div></div>
       </div>
       <div class="popup-inputs">
         <div class="pop-in">
@@ -52,22 +53,22 @@
           <div v-if="emailError" class="error-message">{{ emailError }}</div>
         </div>
       </div>
-      <div class="popup-questions">Предпочтительный формат связи</div>
+      <div class="popup-questions" :class="{'text': route.path === '/'}">Предпочтительный формат связи</div>
       <div class="popup-checkbox">
           <div class="checkbox-element">
             <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone"/>
             <label for="checkbox-phone"></label>
-            <div>Звонок по телефону</div>
+            <div class="checkbox-text">Звонок по телефону</div>
           </div>
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" />
           <label for="checkbox-email"></label>
-          <div>Письмо на электронную почту</div>
+          <div class="checkbox-text">Письмо на электронную почту</div>
         </div>
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" />
           <label for="checkbox-whats"></label>
-          <div>Сообщение в WhatsApp</div>
+          <div class="checkbox-text">Сообщение в WhatsApp</div>
         </div>
       </div>
       <div class="popup-button" @click="submitForm">Оставить заявку</div>
@@ -128,17 +129,17 @@
             <div class="checkbox-element">
               <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone"/>
               <label for="checkbox-phone"></label>
-              <div>Звонок по телефону</div>
+              <div class="checkbox-text">Звонок по телефону</div>
             </div>
             <div class="checkbox-element">
               <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" />
               <label for="checkbox-email"></label>
-              <div>Письмо на электронную почту</div>
+              <div class="checkbox-text">Письмо на электронную почту</div>
             </div>
             <div class="checkbox-element">
               <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" />
               <label for="checkbox-whats"></label>
-              <div>Сообщение в WhatsApp</div>
+              <div class="checkbox-text">Сообщение в WhatsApp</div>
             </div>
           </div>
           <div class="popup-button" @click="submitForm">Оставить заявку</div></div>
@@ -194,7 +195,7 @@ const handleEmailInput = (event) => {
     return transliterationMap[match] || match
   })
 
-  email.value = transliteratedValue
+  email.value = transliteratedValue.toLowerCase()
 
   if (emailError.value) {
     emailError.value = ''
@@ -405,6 +406,9 @@ const submitForm = () => {
   height: 945px;
   border-radius: 34px;
   padding: 60px 65px;
+  margin-bottom: 180px;
+  position: relative;
+  z-index: 2;
 }
 
 .popup-header {
@@ -472,6 +476,8 @@ const submitForm = () => {
   display: flex;
   gap: 20px;
   margin-top: 20px;
+  width: 98%;
+  justify-content: space-between;
 }
 
 .popup-button {
@@ -549,5 +555,45 @@ const submitForm = () => {
 .header-popup {
   display: flex;
   justify-content: center;
+}
+
+.index-popup {
+  background: url("/src/assets/images/mainPopup.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-darken {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.popup-body > *:not(.popup-darken) {
+  position: relative;
+  z-index: 2;
+}
+
+.text{
+  color: #FFFFFF;
+}
+
+.line-white{
+  border-color: #FFFFFF;
+}
+
+.checkbox-text{
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  vertical-align: middle;
+  color: #FFFFFF;
+  @media (max-width: 1650px) {
+    font-size: 18px;
+  }
 }
 </style>
