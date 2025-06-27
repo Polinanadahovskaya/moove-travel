@@ -1,10 +1,11 @@
 <template>
-  <div class="popup-comp" >
+  <div class="popup-comp" :class="{'popup-comp-background': route.path === '/blog'}">
     <div v-if="route.path !== '/Travel-gids'" class="popup-body"
-    :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/'}">
+    :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/', 'blur-background': route.path === '/blog'}">
       <div v-if="route.path === '/'" class="popup-darken"></div>
       <div class="header-popup">
-        <div class="popup-header" :class="{'text': route.path === '/'}"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА<div class="popup-line" :class="{'line-white': route.path === '/'}"></div></div>
+        <div v-if="route.path !== '/blog'" class="popup-header" :class="{'text': route.path === '/'}"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА<div class="popup-line" :class="{'line-white': route.path === '/'}"></div></div>
+        <div v-if="route.path === '/blog'" class="popup-header header-blog"><span>НУЖНА ПОМОЩЬ </span>С ПОДБОРОМ ТУРА?<div class="popup-line"></div></div>
       </div>
       <div class="popup-inputs">
         <div class="pop-in">
@@ -59,21 +60,24 @@
           <div class="checkbox-element">
             <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone" @change="validateForm"/>
             <label for="checkbox-phone"></label>
-            <div class="checkbox-text">Звонок по телефону</div>
+            <div class="checkbox-text" :class="{'color-black': route.path === '/about' || '/blog'}">Звонок по телефону</div>
           </div>
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" @change="validateForm"/>
           <label for="checkbox-email"></label>
-          <div class="checkbox-text">Письмо на электронную почту</div>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || '/blog'}">Письмо на электронную почту</div>
         </div>
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
-          <div class="checkbox-text">Сообщение в WhatsApp</div>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || '/blog'}">Сообщение в WhatsApp</div>
         </div>
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
-      <div class="popup-button" @click="submitForm">Оставить заявку</div>
+        <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку</div>
+      <div class="lid-container">
+        <div class="giv-lid" :class="{'color-black': route.path === '/about' || '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
+      </div>
     </div>
     <div v-if="route.path === '/Travel-gids'">
       <div class="popup-header" style="color: #1E1E1E; text-align: justify;">ПОДБЕРЕМ ТУР ДЛЯ ВАС</div>
@@ -146,8 +150,10 @@
             </div>
           </div>
           <div v-if="contactError" class="error-message">{{ contactError }}</div>
+        <div style="display: flex">
           <div class="popup-button" @click="submitForm">Оставить заявку</div>
-<!--        <div>Нажимая «Оставить заявку» <br/> вы даёте согласие на <a> обработку<br/> персональных данных.</a></div>-->
+          <div>Нажимая «Оставить заявку» <br/> вы даёте согласие на <a> обработку<br/> персональных данных.</a></div>
+        </div>
         </div>
       </div>
     </div>
@@ -396,6 +402,19 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   padding: 180px auto;
 }
 
+.popup-comp-background{
+  background: url("/src/assets/images/popupBack.png");
+  padding: 176px 182px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .pop-in {
   position: relative;
 }
@@ -422,7 +441,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 
 .popup-body {
   width: 100%;
-  height: 945px;
   border-radius: 34px;
   padding: 60px 65px;
   margin-bottom: 180px;
@@ -515,6 +533,14 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   justify-content: center;
   justify-self: center;
   cursor: pointer;
+  @media (max-width: 1650px) {
+    width: 502px;
+  }
+}
+
+.button-blog{
+  background: #F89C1D;
+  color: #1E1E1E;
 }
 
 .checkbox-input{
@@ -614,5 +640,54 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 1650px) {
     font-size: 18px;
   }
+}
+
+.giv-lid{
+  position: absolute;
+  top: -55px;
+  right: 112px;
+  color: white;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  @media (max-width: 1840px) {
+    right: 20px;
+  }
+  @media (max-width: 1650px) {
+    right: -25px;
+    font-size: 14px;
+    top: -45px;
+  }
+}
+
+.giv-lid-href{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lid-container{
+  position: relative;
+}
+
+.color-black{
+  color: #1E1E1E;
+}
+
+.color-link{
+  color: #C75454;
+}
+
+.blur-background{
+  backdrop-filter: blur(17.3px);
+  -webkit-backdrop-filter: blur(17.3px);
+  background: rgba(255,255,255,0.7);
+  margin-bottom: 0;
+}
+
+.header-blog{
+@media (max-width: 1650px) {
+  font-size: 45px;
+}
 }
 </style>

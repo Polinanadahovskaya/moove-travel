@@ -1,19 +1,20 @@
 <template>
   <div class="blog-page">
     <div class="blog-tittle-header">
-      <div class="blog-tittle">Блог</div>
+      <h1 class="blog-tittle">Блог</h1>
       <div class="blog-border"></div>
     </div>
-    <div class="blog-text">Дополнительный текст<br/> в несколько строчек</div>
+    <div class="blog-text">Пишем о путешествиях, в которых сами были,<br/>
+      делимся личным опытом, полезными советами<br/>
+      и маршрутами, которые действительно работают</div>
     <div class="blog-grid">
       <div v-for="a in 6" :key="a" class="blog-item">
         <tub-country/>
       </div>
     </div>
     <div class="blog-border line"></div>
-    <div class="blog-button">Показать больше</div>
     <div class="all-article">
-      <div class="article-tittle">Все статьи</div>
+      <h2 class="article-tittle">Все статьи</h2>
       <div style="display: flex;     gap: 45px;">
         <div style="display: flex; flex-direction: column; flex-basis: 70%; max-width: 70%;">
           <div class="article-search">Поиск</div>
@@ -34,6 +35,7 @@
         </div>
       </div>
     </div>
+    <popup-application />
   </div>
 </template>
 
@@ -53,6 +55,10 @@ const filterPairs = computed(() => {
 </script>
 
 <style scoped>
+.blog-page{
+  position: relative;
+}
+
 .blog-tittle-header {
   display: flex;
   flex-direction: column;
@@ -77,6 +83,8 @@ const filterPairs = computed(() => {
   margin: 40px 0;
   display: flex;
   justify-self: end;
+  right: -177px;
+  position: absolute;
 }
 
 .blog-text {
@@ -87,6 +95,10 @@ const filterPairs = computed(() => {
   color: #1E1E1E;
   vertical-align: middle;
   margin: 80px 0;
+
+  @media (max-width: 1650px) {
+    font-size: 20px;
+  }
 }
 
 .blog-grid {
@@ -94,7 +106,6 @@ const filterPairs = computed(() => {
   grid-template-columns: repeat(3, 1fr);;
   gap: 30px;
   margin-top: 40px;
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -105,36 +116,11 @@ const filterPairs = computed(() => {
   min-height: 200px;
 }
 
-.blog-button {
-  width: 502px;
-  height: 134px;
-  gap: 10px;
-  border-width: 6px;
-  padding-top: 48px;
-  padding-right: 126px;
-  padding-bottom: 48px;
-  padding-left: 126px;
-  border-radius: 24px;
-  border: 6px solid #C75454;
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
 .all-article {
   margin: 110px auto 180px;
 }
 
 .article-tittle {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 84px;
-  line-height: 100%;
   color: #C75454;
   margin-bottom: 80px;
 }
@@ -167,6 +153,7 @@ const filterPairs = computed(() => {
   font-size: 36px;
   line-height: 100%;
   vertical-align: middle;
+  margin-bottom: 30px;
 }
 
 .filter-element {

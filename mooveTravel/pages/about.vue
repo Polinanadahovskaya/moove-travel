@@ -2,39 +2,34 @@
   <div>
     <div>
       <div class="about-baner">
-        <div class="about-tittle" style="color: white">МЫ КРУТЫЕ! (НАПРИМЕР)</div>
+        <h1 style="color: #FFFFFF">Moov Travel — отпуск,<br/>
+          после которого хочется ещё</h1>
         <div class="about-border"></div>
         <div class="about-points">
-          <div v-for="a in 3">
+          <div v-for="arr in aboutMoove">
             <div style="display: flex;     align-items: center;">
-              <div class="point-number"> 1</div>
-              <div class="point-text">Дополнительный текст в несколько строчек</div>
+              <div class="point-number">{{arr.id}}</div>
+              <div class="point-text" v-html="arr.text"></div>
             </div>
           </div>
         </div>
       </div>
       <div class="about-office">
-        <div class="about-tittle">НАШ ОФИС</div>
+        <h2 class="about-tittle">НАШ ОФИС</h2>
         <div class="about-border"></div>
-        <div class="blog-grid">
-          <div v-for="a in 2">
-            <tub-office/>
-          </div>
-        </div>
         <div class="about-location">
           <div class="contacts">
-            <div class="location">Расположение</div>
-            <div class="location-text">Дополнительный текст
-              в несколько строчек
+            <div class="location">Скоро откроемся!</div>
+            <div class="location-text">Временно работаем онлайн
             </div>
             <div class="location">Контакты</div>
             <div class="location-phone">
               <div class="phone"></div>
-              <div class="number">+7 999 999 99 99</div>
+              <div class="number">+7 903 173-77-88</div>
             </div>
             <div class="location-phone" style="margin-top: 23px">
               <div class="mail"></div>
-              <div class="number">mail@mail.ru</div>
+              <div class="number">Sputnik@moov-travel.ru</div>
             </div>
           </div>
           <div class="map"></div>
@@ -42,12 +37,14 @@
       </div>
       <div class="team">
         <div>
-          <div class="about-tittle">КОМАНДА</div>
+          <h2 class="about-tittle">КОМАНДА</h2>
           <div class="about-border"></div>
         </div>
         <div class="blog-grid">
-          <div v-for="a in 2">
-            <team-tab/>
+          <div v-for="arr in aboutTeam" class="team-card">
+            <team-tab
+            :imgUrl="arr.img"
+            :element="arr"/>
           </div>
         </div>
       </div>
@@ -60,10 +57,43 @@
 import TubOffice from "~/components/tubOffice.vue";
 import PopupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
+import tanyaImg from '/src/assets/images/tanya.png'
+import andrewImg from '/src/assets/images/andrew.png'
 
 defineOptions({
   name: "About",
 })
+
+const aboutMoove = [
+  {
+    id: '01',
+    text: 'Подбираем тур как себе — учтём всё: даты, бюджеты, детские <br>клубы, лавандовые подушки в номере'
+  },
+  {
+    id: '02',
+    text: 'Топ-направления — Турция, Египет, ОАЭ, Таиланд, Мальдивы — <br>и ещё в запасе'
+  },
+  {
+    id: '03',
+    text: 'На связи с клиентами без выходных'
+  }
+]
+const aboutTeam = [
+  {
+    id: 1,
+    name: 'Таня Нагибина',
+    firstText: 'Сооснователь Moov Travel / Эксперт по семейным путешествиям',
+    text: 'Более 10 лет в туризме, сотни довольных клиентов и точно знаю: отпуск не должен быть "наугад". Я соберу для вас тур, в который вы влюбитесь — с учётом бюджета, целей и самых мелких деталей. Люблю сложные задачи и семейные маршруты.',
+    img: tanyaImg
+  },
+  {
+    id: 2,
+    name: 'Андрей Нагибин',
+    firstText: 'Сооснователь Moov Travel / Эксперт по Азии и отдыху «для двоих»',
+    text: 'Отвечаю за чёткую организацию поездок: от бронирования до вашего приземления. Я не просто оформляю тур — я гарантирую, что всё будет на высоте. В любой момент рядом, если потребуется поддержка. Даже ночью.',
+    img: andrewImg
+  },
+]
 
 </script>
 
@@ -77,29 +107,34 @@ defineOptions({
   margin-left: -50vw;
   margin-right: -50vw;
   padding: 90px 182px;
-  height: 910px;
   display: flex;
   flex-direction: column;
   background-size: cover;
 }
 
 .about-tittle {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 84px;
-  line-height: 100%;
+  color: #1E1E1E;
 }
 
 .about-border {
   border-bottom: 6px solid #C75454;
-  margin: 16px 0 80px;
   width: 294px;
+  margin: 16px 0 110px;
+  @media (max-width: 1650px) {
+    width: 165px;
+  }
 }
 
 .about-points {
   display: flex;
   flex-direction: column;
   gap: 77px;
+}
+
+.contacts{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .point-number {
@@ -127,6 +162,10 @@ defineOptions({
   line-height: 100%;
   vertical-align: middle;
   color: #FFFFFF;
+
+  @media (max-width: 1650px) {
+    font-size: 28px;
+  }
 }
 
 .about-office {
@@ -140,6 +179,13 @@ defineOptions({
   margin-top: 233px;
   margin-left: auto;
   margin-right: auto;
+  align-items: stretch;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .about-location {
@@ -155,6 +201,9 @@ defineOptions({
   line-height: 100%;
   font-variant: small-caps;
   margin-bottom: 30px;
+  @media (max-width: 1650px) {
+    font-size: 55px;
+  }
 }
 
 .location-text {
@@ -182,7 +231,6 @@ defineOptions({
 }
 
 .number {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 36px;
   line-height: 100%;
@@ -206,12 +254,16 @@ defineOptions({
   gap: 10px;
   padding: 99px 238px;
   border-radius: 34px;
-  background: #D9D9D9;
+  background: url("/src/assets/images/fastOpen.png") no-repeat;
+  background-size: cover;
+  @media (max-width: 1650px) {
+    width: 524px;
+    height: 416px;
+  }
 }
 
 .team{
   background: #FFC472;
-  height: 1343px;
   width: 100vw;
   position: relative;
   left: 50%;

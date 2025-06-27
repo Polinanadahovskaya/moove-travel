@@ -5,7 +5,7 @@
         отдыхать?
       </h1>
     </div>
-    <div class="tv-search-form tv-moduleid-9971497"></div>
+    <div class="tv-search-form" data-tv-moduleid="9971497"></div>
     <div class="main-search"></div>
     <div class="header-wave"/>
     <div class="help-search">
@@ -84,7 +84,7 @@ onMounted(() => {
   if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {
     const script = document.createElement('script')
     script.type = 'text/javascript'
-    script.src = '//tourvisor.ru/module/init.js'
+    script.src = 'https://tourvisor.ru/module/init.js'
     script.async = true
     script.onload = () => {
       if (window.tv_init) window.tv_init()

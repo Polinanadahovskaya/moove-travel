@@ -46,6 +46,9 @@ const route = useRoute()
   object-fit: cover;
   display: flex;
   align-self: center;
+  @media (max-width: 1650px) {
+    width: 265px;
+  }
 }
 
 .article-information {
@@ -109,6 +112,9 @@ const route = useRoute()
   display: flex;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 1650px){
+    font-size: 18px;
+  }
 }
 
 .article-filters{
