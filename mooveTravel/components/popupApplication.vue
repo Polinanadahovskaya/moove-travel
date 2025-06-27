@@ -60,23 +60,23 @@
           <div class="checkbox-element">
             <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone" @change="validateForm"/>
             <label for="checkbox-phone"></label>
-            <div class="checkbox-text" :class="{'color-black': route.path === '/about' || '/blog'}">Звонок по телефону</div>
+            <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Звонок по телефону</div>
           </div>
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" @change="validateForm"/>
           <label for="checkbox-email"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || '/blog'}">Письмо на электронную почту</div>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Письмо на электронную почту</div>
         </div>
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || '/blog'}">Сообщение в WhatsApp</div>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Сообщение в WhatsApp</div>
         </div>
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку</div>
       <div class="lid-container">
-        <div class="giv-lid" :class="{'color-black': route.path === '/about' || '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
+        <div class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
       </div>
     </div>
     <div v-if="route.path === '/Travel-gids'">
