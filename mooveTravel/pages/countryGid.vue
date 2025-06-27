@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="gid-header">
-        <NuxtLink to="/Travel-gids" class="gid_back">Назад</NuxtLink>
+        <div class="gid_back" @click="router.back()">← Назад</div>
         <div class="gid_tittle">СТРАНА</div>
       </div>
       <div class="gid-tabs">
@@ -15,9 +15,12 @@
 </template>
 <script setup>
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
+import {useRouter} from '#app'
+
 defineOptions({
   name: "CountryGid",
 })
+const router = useRouter()
 </script>
 <style scoped>
 .gid-header{
@@ -55,6 +58,7 @@ defineOptions({
   text-decoration: none;
   align-self: flex-end;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .gid-tabs{

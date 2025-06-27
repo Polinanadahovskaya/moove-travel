@@ -2,10 +2,10 @@
   <div>
     <div class="travel-body container">
       <div class="travel-gid">
-        <div class="travel-tittle">TRAVEL-ГИДЫ</div>
+        <h1 class="travel-tittle">TRAVEL-ГИДЫ</h1>
         <div class="travel-border"></div>
       </div>
-      <div class="travel-text">Дополнительный текст<br/> в несколько строчек</div>
+      <div class="travel-text">Путеводители, которые сэкономят вам <br/> нервы, деньги и время</div>
       <div class="travel-tittle" style="color: #C75454; margin-bottom: 80px">Лучшие предложения</div>
       <div class="travel-grid">
         <div v-for="a in 3" :key="a">
@@ -18,7 +18,7 @@
           <tub-country/>
         </div>
       </div>
-      <popup-application/>
+      <popupTravelGid/>
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@
 <script setup>
 import BestVariant from '~/components/BestVariant.vue';
 import TubCountry from '~/components/tubCountry.vue';
-import PopupApplication from '~/components/popupApplication.vue';
+import PopupTravelGid from '~/components/popupTravelGid.vue';
 
 defineOptions({
   name: 'Travel-Gids',
