@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="gid-header">
-        <NuxtLink to="/Travel-gids" class="gid_back">Назад</NuxtLink>
+        <NuxtLink to="/Travel-gids" class="gid_back">← Назад</NuxtLink>
         <div class="gid_tittle">ТЕМА</div>
       </div>
       <div class="gid-articles">
@@ -29,7 +29,7 @@
 <script setup>
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
 defineOptions({
-  name: "CountryGid",
+  name: "pageGid",
 })
 
 const formatPrice = (price)=> {
@@ -73,6 +73,7 @@ const formatPrice = (price)=> {
   text-decoration: none;
   align-self: flex-end;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .gid-articles{

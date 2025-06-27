@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="article_header">
-      <NuxtLink to="/blog" class="article_back">Назад</NuxtLink>
+      <NuxtLink to="/blog" class="article_back">← Назад</NuxtLink>
       <div class="article_tittle">НАЗВАНИЕ СТАТЬИ</div>
     </div>
     <div class="article_body">
