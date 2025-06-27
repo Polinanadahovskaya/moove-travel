@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{'contry-art' : route.path !== '/blog'}">
     <div class="article-tab">
       <div class="article-information">
         <div class="article-inf">
@@ -167,5 +167,9 @@ const route = useRoute()
   .article-profile-date {
     font-size: 16px;
   }
+}
+.contry-art{
+  z-index: 999;
+  position: relative;
 }
 </style>
