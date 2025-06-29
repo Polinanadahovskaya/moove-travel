@@ -6,13 +6,13 @@
         <div class="travel-border"></div>
       </div>
       <div class="travel-text">Путеводители, которые сэкономят вам <br/> нервы, деньги и время</div>
-      <div class="travel-tittle" style="color: #C75454; margin-bottom: 80px">Лучшие предложения</div>
+      <h2 class="travel-tittle" style="color: #C75454; margin-bottom: 80px">Лучшие предложения</h2>
       <div class="travel-grid">
         <div v-for="a in 3" :key="a">
           <best-variant/>
         </div>
       </div>
-      <div class="travel-tittle" style="color: #C75454; margin-bottom: 80px">Страны</div>
+      <h2 style="color: #C75454; margin-bottom: 80px">Страны</h2>
       <div class="travel-grid">
         <div v-for="a in 9" :key="a">
           <tub-country/>
@@ -45,26 +45,27 @@ defineOptions({
   margin: 90px auto 180px;
 }
 
-.travel-tittle {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 84px;
-  line-height: 120%;
-}
-
 .travel-border {
   border-bottom: 6px solid #C75454;
   width: 294px;
   margin: 16px 0 80px;
+  @media (max-width: 576px) {
+    width: 103px;
+    border-width: 2px;
+    margin: 7px 0 17px;
+  }
 }
 
 .travel-text {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 36px;
   line-height: 120%;
   vertical-align: middle;
   margin-bottom: 180px;
+  @media (max-width: 576px) {
+    font-size: 8px;
+    margin-bottom: 40px;
+  }
 }
 
 .travel-grid {
@@ -75,13 +76,6 @@ defineOptions({
 }
 
 @media (max-width: 1200px) {
-  .travel-tittle {
-    font-size: 64px;
-  }
-
-  .travel-text {
-    font-size: 28px;
-  }
 
   .travel-grid {
     gap: 40px;
@@ -98,21 +92,9 @@ defineOptions({
     gap: 30px;
   }
 
-  .travel-tittle {
-    font-size: 48px;
-  }
-
-  .travel-text {
-    font-size: 24px;
-  }
-
-  .travel-border {
-    width: 200px;
-    margin: 12px 0 40px;
-  }
-
   .travel-body {
-    margin: 40px auto 80px;
+    margin: 20px auto 40px;
+    padding: 0;
   }
 }
 </style> 

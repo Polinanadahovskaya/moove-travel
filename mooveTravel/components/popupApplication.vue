@@ -1,11 +1,16 @@
 <template>
   <div class="popup-comp" :class="{'popup-comp-background': route.path === '/blog'}">
     <div v-if="route.path !== '/Travel-gids'" class="popup-body"
-    :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/', 'blur-background': route.path === '/blog'}">
+         :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/', 'blur-background': route.path === '/blog', 'blog-popup': route.path === '/blog'}">
       <div v-if="route.path === '/'" class="popup-darken"></div>
       <div class="header-popup">
-        <div v-if="route.path !== '/blog'" class="popup-header" :class="{'text': route.path === '/'}"><span>ОСТАВЬ ЗАЯВКУ </span>НА ПОДБОР ТУРА<div class="popup-line" :class="{'line-white': route.path === '/'}"></div></div>
-        <div v-if="route.path === '/blog'" class="popup-header header-blog"><span>НУЖНА ПОМОЩЬ </span>С ПОДБОРОМ ТУРА?<div class="popup-line"></div></div>
+        <div v-if="route.path !== '/blog'" class="popup-header" :class="{'text': route.path === '/'}"><span>ОСТАВЬ ЗАЯВКУ </span>НА
+          ПОДБОР ТУРА
+          <div class="popup-line" :class="{'line-white': route.path === '/'}"></div>
+        </div>
+        <div v-if="route.path === '/blog'" class="popup-header header-blog"><span>НУЖНА ПОМОЩЬ </span>С ПОДБОРОМ ТУРА?
+          <div class="popup-line"></div>
+        </div>
       </div>
       <div class="popup-inputs">
         <div class="pop-in">
@@ -25,16 +30,16 @@
         </div>
         <div class="pop-in">
           <input
-            ref="phoneInput"
-            class="popup-input"
-            :class="{'error': phoneError}"
-            v-model="phone"
-            type="tel"
-            id="userTel"
-            @blur="validatePhone"
-            @input="handlePhoneInput"
-            name="userTel"
-            placeholder=" "
+              ref="phoneInput"
+              class="popup-input"
+              :class="{'error': phoneError}"
+              v-model="phone"
+              type="tel"
+              id="userTel"
+              @blur="validatePhone"
+              @input="handlePhoneInput"
+              name="userTel"
+              placeholder=" "
           >
           <label class="popup-label" for="userTel">Номер телефона </label>
           <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
@@ -57,27 +62,45 @@
       </div>
       <div class="popup-questions" :class="{'text': route.path === '/'}">Предпочтительный формат связи</div>
       <div class="popup-checkbox">
-          <div class="checkbox-element">
-            <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone" @change="validateForm"/>
-            <label for="checkbox-phone"></label>
-            <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Звонок по телефону</div>
-          </div>
         <div class="checkbox-element">
-          <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" @change="validateForm"/>
-          <label for="checkbox-email"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Письмо на электронную почту</div>
+          <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone"
+                 v-model="contactByPhone" @change="validateForm"/>
+          <label for="checkbox-phone"></label>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Звонок
+            по телефону
+          </div>
         </div>
         <div class="checkbox-element">
-          <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" @change="validateForm"/>
+          <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email"
+                 v-model="contactByEmail" @change="validateForm"/>
+          <label for="checkbox-email"></label>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Письмо
+            на электронную почту
+          </div>
+        </div>
+        <div class="checkbox-element">
+          <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats"
+                 v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Сообщение в WhatsApp</div>
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">
+            Сообщение в WhatsApp
+          </div>
         </div>
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
-        <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку</div>
-      <div v-if="isMobile" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
+      <div class="popup-giv-button">
+        <div v-if="isMobile" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">
+          Нажимая «Оставить заявку» вы даёте согласие <br/> на <a
+            :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href">
+          обработку<br/> персональных данных.</a></div>
+        <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку
+        </div>
+      </div>
       <div class="lid-container">
-        <div v-if="!isMobile" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
+        <div v-if="!isMobile" class="giv-lid"
+             :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/>
+          вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}"
+                                  class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
       </div>
     </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
@@ -87,7 +110,7 @@
 </template>
 <script setup>
 import {ref, onMounted, onUnmounted, computed, watch} from 'vue'
-import { useRoute } from '#app'
+import {useRoute} from '#app'
 import IMask from 'imask'
 
 defineOptions({
@@ -110,17 +133,16 @@ const isMobile = computed(() => {
   return windowWidth.value <= 576 && windowWidth.value > 0
 })
 
-console.log(isMobile, 'isMobile')
 onMounted(() => {
   if (typeof window !== 'undefined') {
     windowWidth.value = window.innerWidth
   }
-  
+
   updateWindowWidth()
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWindowWidth)
   }
-  
+
   // Инициализация IMask для телефона
   if (phoneInput.value) {
     IMask(phoneInput.value, {
@@ -307,15 +329,15 @@ const submitForm = () => {
       },
       body: JSON.stringify(data)
     })
-      .then(res => res.json())
-      .then(() => {
-        notification.value = 'Заявка отправлена!';
-        notificationType.value = 'success';
-      })
-      .catch(() => {
-        notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
-        notificationType.value = 'error';
-      });
+        .then(res => res.json())
+        .then(() => {
+          notification.value = 'Заявка отправлена!';
+          notificationType.value = 'success';
+        })
+        .catch(() => {
+          notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
+          notificationType.value = 'error';
+        });
   }
 }
 
@@ -349,17 +371,19 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   padding: 180px auto;
 }
 
-.popup-comp-background{
-  background: url("/src/assets/images/popupBack.png");
-  padding: 176px 182px;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  background-repeat: no-repeat;
-  background-size: cover;
+.popup-comp-background {
+  @media (min-width: 768px) {
+    background: url("/src/assets/images/popupBack.png");
+    padding: 176px 182px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 .pop-in {
@@ -371,7 +395,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   z-index: 99999;
   top: 29px;
   left: 43px;
-  font-family: Montserrat;
   font-weight: 500;
   font-size: 36px;
   line-height: 100%;
@@ -407,6 +430,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 576px) {
     padding: 20px 14px 8px;
     border-radius: 6px;
+    margin-bottom: 40px;
   }
 }
 
@@ -419,6 +443,11 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 576px) {
     font-size: 14px;
     vertical-align: middle;
+  }
+}
+.header-blog{
+  @media (max-width: 576px) {
+    color: #FFFFFF;
   }
 }
 
@@ -511,7 +540,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   width: 602px;
   height: 134px;
   border-radius: 24px;
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
@@ -524,18 +552,24 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 1650px) {
     width: 502px;
   }
-  @media  (max-width: 576px) {
-    width: 100%;
+  @media (max-width: 576px) {
+    gap: 10px;
+    border-radius: 6px;
+    padding: 28px;
+    font-size: 8px;
+    width: 95px;
+    height: 31px;
+    margin-top: 0;
   }
 }
 
 
-.button-blog{
+.button-blog {
   background: #F89C1D;
   color: #1E1E1E;
 }
 
-.checkbox-input{
+.checkbox-input {
   display: none;
 }
 
@@ -566,7 +600,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   transform: rotate(45deg);
 }
 
-.checkbox-element{
+.checkbox-element {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -586,11 +620,13 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   width: 100%;
   box-sizing: border-box;
 }
+
 .popup-notification.success {
   background: #e6ffe6;
   color: #1a7f1a;
   border: 1px solid #1a7f1a;
 }
+
 .popup-notification.error {
   background: #ffe6e6;
   color: #c75454;
@@ -610,10 +646,16 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   overflow: hidden;
 }
 
+.blog-popup{
+  @media (max-width: 576px) {
+    background: url("/src/assets/images/popupBack.png") !important;
+  }
+}
+
 .popup-darken {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1;
   pointer-events: none;
 }
@@ -623,15 +665,15 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   z-index: 2;
 }
 
-.text{
+.text {
   color: #FFFFFF;
 }
 
-.line-white{
+.line-white {
   border-color: #FFFFFF;
 }
 
-.checkbox-text{
+.checkbox-text {
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
@@ -645,7 +687,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   }
 }
 
-.giv-lid{
+.giv-lid {
   position: absolute;
   top: -55px;
   right: 112px;
@@ -662,35 +704,34 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     font-size: 14px;
     top: -45px;
   }
+  @media (max-width: 576px) {
+    top: 0;
+    right: 0;
+    font-size: 8px;
+  }
 }
 
-.giv-lid-href{
+.giv-lid-href {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.lid-container{
+.lid-container {
   position: relative;
 }
 
-.color-black{
+.color-black {
   color: #1E1E1E;
 }
 
-.color-link{
+.color-link {
   color: #C75454;
 }
 
-.blur-background{
+.blur-background {
   backdrop-filter: blur(17.3px);
   -webkit-backdrop-filter: blur(17.3px);
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   margin-bottom: 0;
-}
-
-.header-blog{
-@media (max-width: 1650px) {
-  font-size: 45px;
-}
 }
 </style>

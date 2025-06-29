@@ -49,6 +49,12 @@ h1 {
   @media (max-width: 1650px) {
     font-size: 64px;
   }
+  @media (max-width: 768px) {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
 }
 
 h2 {
@@ -60,5 +66,11 @@ h2 {
   color: #1E1E1E;
   @media (max-width: 1650px) {
     font-size: 46px;
+  }
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+  @media (max-width: 576px) {
+    font-size: 12px;
   }
 }

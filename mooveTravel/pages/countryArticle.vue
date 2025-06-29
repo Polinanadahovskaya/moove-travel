@@ -44,12 +44,17 @@ const router = useRouter()
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  margin-bottom: -10%;
   @media (max-width: 1650px) {
     background-position-y: -237px;
   }
   @media (max-width: 1900px) {
     background-size: 100% 160%, cover;
+  }
+  @media (min-width: 768px) {
+    margin-bottom: -10%;
+  }
+  @media (max-width: 576px) {
+    height: 82px;
   }
 }
 
@@ -77,12 +82,14 @@ const router = useRouter()
 }
 
 .header-content h1 {
-  font-size: 64px;
-  font-weight: bold;
-  color: #222;
-  margin: 0;
-  left: 7.4%;
-  position: relative;
-  bottom: -38%;
+  @media (min-width: 768px) {
+    font-size: 64px;
+    font-weight: bold;
+    color: #222;
+    margin: 0;
+    left: 7.4%;
+    position: relative;
+    bottom: -38%;
+  }
 }
 </style>

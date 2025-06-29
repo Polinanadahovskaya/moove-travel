@@ -22,8 +22,6 @@ defineOptions({
 .country-background {
   width: 100%;
   height: 100%;
-  min-height: 200px;
-  aspect-ratio: 502/354;
   padding: 18px;
   border-radius: 34px;
   background: #D9D9D9;
@@ -32,6 +30,14 @@ defineOptions({
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
+  @media (min-width: 768px) {
+    aspect-ratio: 502/354;
+    min-height: 200px;
+  }
+  @media (max-width: 576px){
+    border-radius: 6px;
+    height: 115px;
+  }
 }
 
 .country-text{
@@ -43,6 +49,9 @@ defineOptions({
   vertical-align: middle;
   color: #1E1E1E;
   text-decoration: none;
+  @media (max-width: 576px){
+    font-size: 12px;
+  }
 }
 
 .travel-background {

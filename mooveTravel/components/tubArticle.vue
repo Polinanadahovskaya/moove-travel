@@ -4,8 +4,10 @@
       <div class="article-information">
         <div class="article-inf">
           <div class="article-profile-img"></div>
+        <div class="tab-header">
           <div class="article-profile-name">Имя Фамилия</div>
           <div class="article-profile-date">Дата</div>
+        </div>
         </div>
         <div class="article-text">Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи... Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи...</div>
       <div class="article-filters">
@@ -25,7 +27,7 @@ defineOptions({
 })
 const route = useRoute()
 </script>
-<style scoped>
+<style scoped lang="scss">
 .article-tab{
   width: 100%;
   height: 365px;
@@ -35,6 +37,23 @@ const route = useRoute()
   display: flex;
   gap: 41px;
   padding: 20px 30px;
+  @media (max-width: 768px) {
+      flex-direction: column;
+      height: auto;
+      padding: 15px 20px;
+      gap: 20px;
+  }
+  @media (max-width: 576px) {
+    gap: 8px;
+    border-radius: 6px;
+  }
+}
+
+.tab-header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .article-img {
@@ -49,12 +68,26 @@ const route = useRoute()
   @media (max-width: 1650px) {
     width: 265px;
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 200px;
+  }
+  @media (max-width: 576px) {
+    height: 91px;
+    border-radius: 9px;
+  }
 }
 
 .article-information {
   display: flex;
   flex-direction: column;
   gap: 41px;
+  @media (max-width: 768px) {
+      gap: 20px;
+  }
+  @media (max-width: 576px) {
+      gap: 8px;
+  }
 }
 
 .article-inf {
@@ -67,28 +100,36 @@ const route = useRoute()
   height: 82px;
   border-radius: 50%;
   background: #D9D9D9;
+  @media (max-width: 576px) {
+    width: 31px;
+    height: 31px;
+  }
 }
 
 .article-profile-name {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 24px;
   line-height: 100%;
   vertical-align: middle;
   margin-left: 23px;
+  @media (max-width: 576px) {
+    margin-left: 11px;
+    font-size: 12px;
+  }
 }
 
 .article-profile-date {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
   vertical-align: middle;
   color: #929292;
+  @media (max-width: 576px) {
+    font-size: 12px;
+  }
 }
 
 .article-text {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
@@ -96,6 +137,12 @@ const route = useRoute()
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  @media (max-width: 768px) {
+      font-size: 18px;
+  }
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
 .article-filter{
@@ -104,7 +151,6 @@ const route = useRoute()
   height: 39px;
   padding: 5px 30px;
   border-radius: 5px;
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
@@ -115,6 +161,13 @@ const route = useRoute()
   @media (max-width: 1650px){
     font-size: 18px;
   }
+  @media (max-width: 576px) {
+    max-width: 61px;
+    height: 14px;
+    border-radius: 2px;
+    font-size: 8px;
+    justify-content: center;
+  }
 }
 
 .article-filters{
@@ -122,52 +175,15 @@ const route = useRoute()
   gap: 10px;
 }
 
-@media (max-width: 768px) {
-  .article-tab {
-    flex-direction: column;
-    height: auto;
-    padding: 15px 20px;
-    gap: 20px;
-  }
-  
-  .article-img {
-    width: 100%;
-    height: 200px;
-  }
-  
-  .article-information {
-    gap: 20px;
-  }
-  
-  .article-text {
-    font-size: 18px;
-  }
-  
-  .article-profile-name,
-  .article-profile-date {
-    font-size: 18px;
-  }
-}
 
-@media (max-width: 480px) {
-  .article-tab {
-    padding: 10px 15px;
-    gap: 15px;
-  }
-  
-  .article-img {
-    height: 150px;
-  }
-  
-  .article-text {
-    font-size: 16px;
-  }
-  
-  .article-profile-name,
-  .article-profile-date {
-    font-size: 16px;
-  }
-}
+
+
+
+  //.article-profile-name,
+  //.article-profile-date {
+  //  font-size: 18px;
+  //}
+
 .contry-art{
   z-index: 999;
   position: relative;

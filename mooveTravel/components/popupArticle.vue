@@ -352,14 +352,13 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 }
 
 .popup-header {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
   vertical-align: middle;
   color: #FFFFFF;
-  @media (max-width: 1500px) {
-
+  @media (max-width: 576px) {
+    font-size: 14px;
   }
 }
 

@@ -29,6 +29,14 @@ import './src/assets/css/main.css'
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  .main-content {
+    width: calc(100vw - 40px);
+    margin: 0 20px;
+    padding: 0;
+  }
+}
+
 /* Глобальные стили для шрифта */
 * {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;

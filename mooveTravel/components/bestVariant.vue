@@ -31,45 +31,61 @@ const formatPrice = (price) => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: 576px) {
+    height: 160px;
+    border-radius: 6px;
+    padding: 12px 13px 7px;
+  }
 }
 
 .variant-tittle {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 120%;
   vertical-align: middle;
   margin-bottom: 18px;
+  @media (max-width: 576px) {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
 }
 
 .variant-text {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 30px;
   line-height: 120%;
   vertical-align: middle;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
 .variant-price {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 120%;
   vertical-align: middle;
   margin-bottom: 21px;
+  @media (max-width: 576px) {
+    font-size: 12px;
+    margin-bottom: 9px;
+  }
 }
 
 .variant-button {
   width: 100%;
   padding: 30px;
   border-radius: 24px;
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 120%;
   background: #F89C1D;
   text-align: center;
   cursor: pointer;
+  @media (max-width: 576px) {
+    font-size: 12px;
+    border-radius: 6px;
+  }
 }
 
 @media (max-width: 1200px) {

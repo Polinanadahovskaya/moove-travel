@@ -1,2 +1,23 @@
-User-Agent: *
-Disallow:
+User-agent: *
+Allow: /
+
+# Разрешаем индексацию всех страниц
+Allow: /about
+Allow: /blog
+Allow: /article
+Allow: /countryArticle
+Allow: /countryGid
+Allow: /pageGid
+Allow: /Travel-gids
+
+# Запрещаем индексацию служебных файлов
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_nuxt/
+Disallow: /server/
+
+# Указываем расположение sitemap
+Sitemap: https://moov-travel.ru/sitemap.xml
+
+# Время задержки между запросами (в секундах)
+Crawl-delay: 1

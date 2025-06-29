@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-header_tittle">
-      <h1 class="header-tittle">Куда поедем<br/>
+      <h1>Куда поедем<br/>
         отдыхать?
       </h1>
     </div>
@@ -14,7 +14,7 @@
         <div class="tittle-border"></div>
       </div>
       <div style="display: flex; gap: 55px;">
-        <div style="display: flex;gap: 10px;flex-direction: column;">
+        <div class="many-arrow">
           <div v-for="a in 3">
             <div class="hollow-arrow"></div>
           </div>
@@ -37,8 +37,8 @@
         <div class="numbers">
           <div v-for="arr in aboutArray" :key="arr">
             <div class="block-tab">
-              <div class="tub-number">{{arr.id}}</div>
-              <div class="block-">{{arr.text}}</div>
+              <div class="tub-number">{{ arr.id }}</div>
+              <div class="block-text">{{ arr.text }}</div>
             </div>
           </div>
         </div>
@@ -54,8 +54,10 @@
           <div class="panel-column">
             <div v-for="arr in pluses.slice(0, 2)" :key="arr">
               <div class="tab-panel">
-                <div class="tab"><div class="mask" :class="{'time-mask': arr.id === 'time', 'end-mask': arr.id === 'end' }"></div></div>
-                <div class="tab-text"><span class="bold">{{arr.boldText}}</span> {{ arr.text }}
+                <div class="tab">
+                  <div class="mask" :class="{'time-mask': arr.id === 'time', 'end-mask': arr.id === 'end' }"></div>
+                </div>
+                <div class="tab-text"><span class="bold">{{ arr.boldText }}</span> {{ arr.text }}
                 </div>
               </div>
             </div>
@@ -63,8 +65,11 @@
           <div class="panel-column">
             <div v-for="arr in pluses.slice(2, 4)" :key="arr">
               <div class="tab-panel">
-                <div class="tab"><div class="mask" :class="{'self-mask': arr.id === 'self', 'ticket-mask': arr.id === 'ticket' }"></div></div>
-                <div class="tab-text"><span class="bold">{{arr.boldText}}</span> {{ arr.text }}
+                <div class="tab">
+                  <div class="mask"
+                       :class="{'self-mask': arr.id === 'self', 'ticket-mask': arr.id === 'ticket' }"></div>
+                </div>
+                <div class="tab-text"><span class="bold">{{ arr.boldText }}</span> {{ arr.text }}
                 </div>
               </div>
             </div>
@@ -110,22 +115,22 @@ const aboutArray = [
   }]
 const pluses = [
   {
-    id:'time',
+    id: 'time',
     boldText: 'Работаем без выходных',
     text: ' — всегда на связи, когда удобно вам.'
   },
   {
-    id:'end',
+    id: 'end',
     boldText: 'Ведём до конца',
     text: ' — остаёмся на связи до вашего возвращения.'
   },
   {
-    id:'self',
+    id: 'self',
     boldText: 'Подбираем, как себе',
     text: '— учитываем желания, бюджет и нюансы.'
   },
   {
-    id:'ticket',
+    id: 'ticket',
     boldText: 'Создаем лучшие тревел-гиды',
     text: '— изучаем маршруты и отели не по вебинарам, а своими ногами.'
   }
@@ -135,14 +140,9 @@ const pluses = [
 <style scoped lang="scss">
 .main-header_tittle {
   margin: 90px auto 33px;
-}
-
-.header-tittle {
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 84px;
-  line-height: 100%;
-  font-variant: small-caps;
+  @media (max-width: 576px) {
+    margin: 27px auto 26px;
+  }
 }
 
 .header-wave {
@@ -159,6 +159,10 @@ const pluses = [
   @media (max-width: 1640px) {
     background-size: contain;
   }
+  @media (max-width: 576px) {
+    height: 131px;
+    background-size: cover;
+  }
 }
 
 .main-search {
@@ -172,11 +176,13 @@ const pluses = [
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: 268px;
   padding: 60px 182px;
   background: #C75454;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 576px) {
+    padding: 20px;
+  }
 }
 
 .help-tittle {
@@ -187,6 +193,11 @@ const pluses = [
   border-bottom: 6px solid #FFFFFF;
   margin-top: 40px;
   width: 315px;
+  @media (max-width: 576px) {
+    width: 103px;
+    border-width: 1px;
+    margin-top: 5px;
+  }
 }
 
 .tittle-button {
@@ -196,7 +207,6 @@ const pluses = [
   padding-left: 5px;
   border-radius: 15px;
   background: #FFFFFF;
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
@@ -211,26 +221,47 @@ const pluses = [
     height: 106px;
     font-size: 30px;
   }
+  @media (max-width: 576px) {
+    width: 104px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 8px;
+  }
 }
 
 .help-about {
   margin: 110px auto;
+  @media (max-width: 576px) {
+    margin: 40px auto;
+  }
 }
 
 .about-border {
   border-bottom: 6px solid #C75454;
   margin: 16px 0 80px;
   width: 295px;
+  @media (max-width: 576px) {
+    border-width: 2px;
+    width: 103px;
+    margin: 7px 0 14px;
+  }
 }
 
 .about-block {
   position: relative;
   width: 100%;
-  height: 608px;
   border-radius: 34px;
   display: flex;
   justify-content: space-between;
   padding: 45px 45px 0;
+  @media (min-width: 768px) {
+    height: 608px;
+  }
+  @media (max-width: 576px) {
+    flex-direction: column-reverse;
+    border-radius: 6px;
+    padding: 20px 15px;
+  }
 }
 
 .about-block::before {
@@ -244,6 +275,9 @@ const pluses = [
   border-radius: 34px;
   z-index: 0;
   background-size: cover;
+  @media (max-width: 576px) {
+    border-radius: 6px;
+  }
 }
 
 .about-block > * {
@@ -258,12 +292,18 @@ const pluses = [
   border-radius: 20px;
   background: #C75454;
   color: #FFFFFF;
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
   display: flex;
   justify-content: center;
+  @media (max-width: 576px) {
+    width: 82px;
+    height: 27px;
+    border-radius: 6px;
+    padding: 8px 40px;
+    font-size: 8px;
+  }
 }
 
 .link-button {
@@ -271,27 +311,41 @@ const pluses = [
   align-self: end;
   margin-bottom: 41px;
   text-decoration: none;
+  @media (max-width: 576px) {
+    align-self: center;
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
 }
 
 
 .block-tab {
   display: flex;
   gap: 44px;
-  height: 152px;
   padding: 36px 44px;
   border-radius: 28px;
   align-items: center;
   background: #ffff;
   box-shadow: 0px 0px 60px 0px #0000001A;
+  @media (min-width: 786px) {
+    height: 152px;
+  }
+  @media (max-width: 576px) {
+    gap: 6px;
+    border-radius: 6px;
+    padding: 4px 6px
+  }
 }
 
 .tub-number {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 96px;
   line-height: 100%;
   font-variant: small-caps;
   color: #C75454;
+  @media (max-width: 576px) {
+    font-size: 24px;
+  }
 }
 
 .numbers {
@@ -299,15 +353,26 @@ const pluses = [
   flex-direction: column;
   gap: 33px;
   width: 55%;
+  @media (max-width: 576px) {
+    width: 100%;
+    gap: 10px;
+  }
 }
 
 .priorities {
   margin: 110px auto 180px;
+  @media (max-width: 576px) {
+    margin: 40px auto;
+  }
 }
 
 .panel {
   display: flex;
   gap: 33px;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 .panel-column {
@@ -315,12 +380,15 @@ const pluses = [
   flex-direction: column;
   gap: 90px;
   width: 50%;
+  @media (max-width: 576px) {
+    gap: 8px;
+    width: 100%;
+  }
 }
 
 .tab {
   width: 154px;
   height: 154px;
-  border-width: 1px;
   border-radius: 15px;
   border: 1px solid;
   border-image-source: linear-gradient(135deg, #FFFFFF 30.25%, #C75454 100%);
@@ -329,14 +397,23 @@ const pluses = [
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 576px) {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border-width: 1px;
+    padding: 7px;
+  }
 }
 
 .tab-text {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
   vertical-align: middle;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
 .bold {
@@ -347,12 +424,19 @@ const pluses = [
   display: flex;
   gap: 33px;
   align-items: center;
+  @media (max-width: 576px) {
+    gap: 7px;
+  }
 }
 
 .hollow-arrow {
   position: relative;
   width: 20px;
   height: 20px;
+  @media (max-width: 576px) {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 .hollow-arrow::before {
@@ -366,32 +450,68 @@ const pluses = [
   top: 5px;
   left: 5px;
   border-radius: 3px;
+
+  @media (max-width: 576px) {
+    width: 8px;
+    height: 8px;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    top: 0px;
+    left: 40px;
+    border-radius: 1px;
+  }
 }
 
-.mask{
-mask-size: 100px 100px;
--webkit-mask-size: 100px 100px;
-background-color: #C75454;
-width: 100px;
-height: 100px;
+.mask {
+  mask-size: 100px 100px;
+  -webkit-mask-size: 100px 100px;
+  background-color: #C75454;
+  width: 100px;
+  height: 100px;
+  @media (max-width: 576px) {
+    width: 25px;
+    height: 25px;
+  }
 }
 
-.time-mask{
+.many-arrow {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  @media (max-width: 576px) {
+    gap: 2px;
+  }
+}
+
+.block-text {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  font-variant: small-caps;
+  @media (max-width: 1850px) {
+    font-size: 16px;
+  }
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
+}
+
+.time-mask {
   mask: url(/src/assets/images/icons/time.svg) no-repeat center/contain;
   -webkit-mask: url(/src/assets/images/icons/time.svg) no-repeat center/contain;
 }
 
-.end-mask{
+.end-mask {
   mask: url(/src/assets/images/icons/goEnd.svg) no-repeat center/contain;
   -webkit-mask: url(/src/assets/images/icons/goEnd.svg) no-repeat center/contain;
 }
 
-.self-mask{
+.self-mask {
   mask: url(/src/assets/images/icons/self.svg) no-repeat center/contain;
   -webkit-mask: url(/src/assets/images/icons/self.svg) no-repeat center/contain;
 }
 
-.ticket-mask{
+.ticket-mask {
   mask: url(/src/assets/images/icons/ticket.svg) no-repeat center/contain;
   -webkit-mask: url(/src/assets/images/icons/ticket.svg) no-repeat center/contain;
 }

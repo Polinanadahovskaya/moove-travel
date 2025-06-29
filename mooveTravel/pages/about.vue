@@ -8,7 +8,7 @@
         <div class="about-points">
           <div v-for="arr in aboutMoove">
             <div style="display: flex;     align-items: center;">
-              <div class="point-number">{{arr.id}}</div>
+              <div class="point-number">{{ arr.id }}</div>
               <div class="point-text" v-html="arr.text"></div>
             </div>
           </div>
@@ -19,17 +19,21 @@
         <div class="about-border"></div>
         <div class="about-location">
           <div class="contacts">
-            <div class="location">Скоро откроемся!</div>
-            <div class="location-text">Временно работаем онлайн
+           <div>
+             <div class="location">Скоро откроемся!</div>
+             <div class="location-text">Временно работаем онлайн
+           </div>
             </div>
-            <div class="location">Контакты</div>
-            <div class="location-phone">
-              <div class="phone"></div>
-              <div class="number">+7 903 173-77-88</div>
-            </div>
-            <div class="location-phone" style="margin-top: 23px">
-              <div class="mail"></div>
-              <div class="number">Sputnik@moov-travel.ru</div>
+            <div class="contacts-phone">
+              <div class="location">Контакты</div>
+              <div class="location-phone">
+                <div class="phone"></div>
+                <div class="number">+7 903 173-77-88</div>
+              </div>
+              <div class="location-phone">
+                <div class="mail"></div>
+                <div class="number">Sputnik@moov-travel.ru</div>
+              </div>
             </div>
           </div>
           <div class="map"></div>
@@ -43,8 +47,8 @@
         <div class="blog-grid">
           <div v-for="arr in aboutTeam" class="team-card">
             <team-tab
-            :imgUrl="arr.img"
-            :element="arr"/>
+                :imgUrl="arr.img"
+                :element="arr"/>
           </div>
         </div>
       </div>
@@ -54,7 +58,6 @@
 </template>
 
 <script setup>
-import TubOffice from "~/components/tubOffice.vue";
 import PopupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
 import tanyaImg from '/src/assets/images/tanya.png'
@@ -102,14 +105,24 @@ const aboutTeam = [
   background: url("/src/assets/images/Plane.svg") no-repeat;
   width: 100vw;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  padding: 90px 182px;
-  display: flex;
-  flex-direction: column;
-  background-size: cover;
+
+  @media (min-width: 786px) {
+
+    padding: 90px 182px;
+  }
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    padding: 30px;
+  }
 }
 
 .about-tittle {
@@ -123,15 +136,23 @@ const aboutTeam = [
   @media (max-width: 1650px) {
     width: 165px;
   }
+  @media (max-width: 576px) {
+    border-width: 2px;
+    margin: 2px 0 12px;
+    width: 139px;
+  }
 }
 
 .about-points {
   display: flex;
   flex-direction: column;
   gap: 77px;
+  @media (max-width: 576px) {
+    gap: 14px;
+  }
 }
 
-.contacts{
+.contacts {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -154,6 +175,15 @@ const aboutTeam = [
   line-height: 100%;
   text-align: center;
   vertical-align: middle;
+
+  @media (max-width: 576px) {
+    width: 31px;
+    height: 31px;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
 }
 
 .point-text {
@@ -166,10 +196,16 @@ const aboutTeam = [
   @media (max-width: 1650px) {
     font-size: 28px;
   }
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
 .about-office {
   margin: 110px 0;
+  @media (max-width: 576px) {
+    margin: 40px 0;
+  }
 }
 
 .blog-grid {
@@ -180,6 +216,12 @@ const aboutTeam = [
   margin-left: auto;
   margin-right: auto;
   align-items: stretch;
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
+    gap: 57px;
+    margin-top: 50px;
+  }
 }
 
 .team-card {
@@ -191,7 +233,10 @@ const aboutTeam = [
 .about-location {
   display: flex;
   justify-content: space-between;
-  margin: 80px 0 110px;
+  margin-bottom: 40px;
+  @media (min-width: 768px) {
+    margin: 80px 0 110px;
+  }
 }
 
 .location {
@@ -204,6 +249,10 @@ const aboutTeam = [
   @media (max-width: 1650px) {
     font-size: 55px;
   }
+  @media (max-width: 576px) {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
 }
 
 .location-text {
@@ -213,10 +262,17 @@ const aboutTeam = [
   line-height: 100%;
   vertical-align: middle;
   margin-bottom: 65px;
+  @media (max-width: 576px) {
+    font-size: 8px;
+    margin-bottom: 0;
+  }
 }
 
 .location-phone {
   display: flex;
+  @media (max-width: 576px) {
+    align-items: center;
+  }
 }
 
 .phone {
@@ -228,6 +284,13 @@ const aboutTeam = [
   width: 50px;
   height: 50px;
   margin-right: 30px;
+  @media (max-width: 576px) {
+    width: 19px;
+    height: 19px;
+    mask-size: 19px 19px;
+    -webkit-mask-size: 19px 19px;
+    margin-right: 10px;
+  }
 }
 
 .number {
@@ -235,9 +298,12 @@ const aboutTeam = [
   font-size: 36px;
   line-height: 100%;
   vertical-align: middle;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
-.mail{
+.mail {
   mask: url(/src/assets/images/icons/mail.svg) no-repeat center/contain;
   -webkit-mask: url(/src/assets/images/icons/mail.svg) no-repeat center/contain;
   mask-size: 50px 50px;
@@ -246,9 +312,16 @@ const aboutTeam = [
   width: 50px;
   height: 50px;
   margin-right: 30px;
+  @media (max-width: 576px) {
+    width: 19px;
+    height: 19px;
+    mask-size: 19px 19px;
+    -webkit-mask-size: 19px 19px;
+    margin-right: 10px;
+  }
 }
 
-.map{
+.map {
   width: 724px;
   height: 516px;
   gap: 10px;
@@ -260,9 +333,16 @@ const aboutTeam = [
     width: 524px;
     height: 416px;
   }
+  @media (max-width: 576px) {
+    width: 50%;
+    height: 116px;
+    border-width: 6px;
+    padding: 0;
+    border-radius: 6px;
+  }
 }
 
-.team{
+.team {
   background: #FFC472;
   width: 100vw;
   position: relative;
@@ -272,5 +352,20 @@ const aboutTeam = [
   margin-right: -50vw;
   padding: 70px 182px 150px;
   margin-bottom: 180px;
+  @media (max-width: 576px) {
+    padding: 16px 20px 30px;
+    margin-bottom: 40px;
+  }
+}
+
+.contacts-phone {
+  display: flex;
+  gap: 23px;
+  flex-direction: column;
+  @media (max-width: 576px) {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
 }
 </style> 
