@@ -75,86 +75,9 @@
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку</div>
+      <div v-if="isMobile" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
       <div class="lid-container">
-        <div class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
-      </div>
-    </div>
-    <div v-if="route.path === '/Travel-gids'">
-      <div class="popup-header" style="color: #1E1E1E; text-align: justify;">ПОДБЕРЕМ ТУР ДЛЯ ВАС</div>
-      <div class="popup-line" style="width: 294px"></div>
-      <div style="display: flex; justify-content: space-between;">
-        <div><div class="popup-inputs">
-          <div class="pop-in">
-            <input
-                class="popup-input"
-                :class="{'error' : nameError}"
-                type="text"
-                id="userName"
-                name="userName"
-                placeholder=" "
-                v-model="name"
-                @input="handleNameInput"
-                @blur="validateName"
-            >
-            <label class="popup-label" for="userName">Имя</label>
-            <div v-if="nameError" class="error-message">{{ nameError }}</div>
-          </div>
-          <div class="pop-in">
-            <input
-                ref="phoneInput"
-                class="popup-input"
-                :class="{'error': phoneError}"
-                v-model="phone"
-                type="tel"
-                id="userTel"
-                @blur="validatePhone"
-                @input="handlePhoneInput"
-                name="userTel"
-                placeholder=" "
-            >
-            <label class="popup-label" for="userTel">Номер телефона </label>
-            <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
-          </div>
-          <div class="pop-in">
-            <input
-                class="popup-input"
-                :class="{ 'error': emailError }"
-                type="email"
-                id="emailId"
-                name="emailId"
-                placeholder=" "
-                v-model="email"
-                @blur="validateEmail"
-                @input="handleEmailInput"
-            >
-            <label class="popup-label" for="emailId">Email</label>
-            <div v-if="emailError" class="error-message">{{ emailError }}</div>
-          </div>
-        </div></div>
-        <div><div class="popup-questions" style="font-size: 24px">Предпочтительный формат связи</div>
-          <div class="popup-checkbox" style="flex-direction: column">
-            <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone" v-model="contactByPhone" @change="validateForm"/>
-              <label for="checkbox-phone"></label>
-              <div class="checkbox-text">Звонок по телефону</div>
-            </div>
-            <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email" v-model="contactByEmail" @change="validateForm"/>
-              <label for="checkbox-email"></label>
-              <div class="checkbox-text">Письмо на электронную почту</div>
-            </div>
-            <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats" v-model="contactByWhatsApp" @change="validateForm"/>
-              <label for="checkbox-whats"></label>
-              <div class="checkbox-text">Сообщение в WhatsApp</div>
-            </div>
-          </div>
-          <div v-if="contactError" class="error-message">{{ contactError }}</div>
-        <div style="display: flex">
-          <div class="popup-button" @click="submitForm">Оставить заявку</div>
-          <div>Нажимая «Оставить заявку» <br/> вы даёте согласие на <a> обработку<br/> персональных данных.</a></div>
-        </div>
-        </div>
+        <div v-if="!isMobile" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/> вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}" class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
       </div>
     </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
@@ -163,12 +86,81 @@
   </div>
 </template>
 <script setup>
-import {ref, onMounted, computed, watch} from 'vue'
+import {ref, onMounted, onUnmounted, computed, watch} from 'vue'
 import { useRoute } from '#app'
 import IMask from 'imask'
 
 defineOptions({
   name: "popupApplication",
+})
+const windowWidth = ref(0)
+
+const updateWindowWidth = () => {
+  if (typeof window !== 'undefined') {
+    windowWidth.value = window.innerWidth
+    console.log('Window width:', windowWidth.value, 'isMobile:', isMobile.value)
+  }
+}
+
+const isMobile = computed(() => {
+
+  if (typeof window === 'undefined') {
+    return false
+  }
+  return windowWidth.value <= 576 && windowWidth.value > 0
+})
+
+console.log(isMobile, 'isMobile')
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    windowWidth.value = window.innerWidth
+  }
+  
+  updateWindowWidth()
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', updateWindowWidth)
+  }
+  
+  // Инициализация IMask для телефона
+  if (phoneInput.value) {
+    IMask(phoneInput.value, {
+      mask: [
+        {
+          mask: '+{7} (000) 000-00-00',
+          startsWith: '7',
+          country: 'Russia'
+        },
+        {
+          mask: '+{375} (00) 000-00-00',
+          startsWith: '375',
+          country: 'Belarus'
+        },
+        {
+          mask: '+{380} (00) 000-00-00',
+          startsWith: '380',
+          country: 'Ukraine'
+        },
+        {
+          mask: '+{1} (000) 000-0000',
+          startsWith: '1',
+          country: 'USA'
+        },
+        {
+          mask: '+0000000000000',
+        }
+      ],
+      dispatch: function (appended, dynamicMasked) {
+        const number = (dynamicMasked.value + appended).replace(/\D/g, '')
+        return dynamicMasked.compiledMasks.find(m => number.indexOf(m.startsWith) === 0) || dynamicMasked.compiledMasks[dynamicMasked.compiledMasks.length - 1]
+      }
+    })
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateWindowWidth)
+  }
 })
 
 const email = ref('')
@@ -268,57 +260,6 @@ const phoneInput = ref(null)
 
 const route = useRoute()
 
-onMounted(() => {
-  if (phoneInput.value) {
-    IMask(phoneInput.value, {
-      mask: [
-        {
-          mask: '+{7} (000) 000-00-00',
-          startsWith: '7',
-          country: 'Russia'
-        },
-        {
-          mask: '+{375} (00) 000-00-00',
-          startsWith: '375',
-          country: 'Belarus'
-        },
-        {
-          mask: '+{380} (00) 000-00-00',
-          startsWith: '380',
-          country: 'Ukraine'
-        },
-        {
-          mask: '+{1} (000) 000-0000',
-          startsWith: '1',
-          country: 'USA'
-        },
-        {
-          mask: '+0000000000000',
-        }
-      ],
-      dispatch: function (appended, dynamicMasked) {
-        const number = (dynamicMasked.value + appended).replace(/\D/g, '')
-        return dynamicMasked.compiledMasks.find(m => number.indexOf(m.startsWith) === 0) || dynamicMasked.compiledMasks[dynamicMasked.compiledMasks.length - 1]
-      }
-    })
-  }
-})
-
-const validatePhone = () => {
-  const digits = phone.value.replace(/\D/g, '')
-  if (!digits) {
-    phoneError.value = 'Телефон обязателен для заполнения'
-    return false
-  }
-
-  if (digits.length < 10) {
-    phoneError.value = 'Введите корректный номер телефона'
-    return false
-  }
-  phoneError.value = ''
-  return true
-}
-
 const contactByPhone = ref(false)
 const contactByEmail = ref(false)
 const contactByWhatsApp = ref(false)
@@ -378,6 +319,21 @@ const submitForm = () => {
   }
 }
 
+const validatePhone = () => {
+  const digits = phone.value.replace(/\D/g, '')
+  if (!digits) {
+    phoneError.value = 'Телефон обязателен для заполнения'
+    return false
+  }
+
+  if (digits.length < 10) {
+    phoneError.value = 'Введите корректный номер телефона'
+    return false
+  }
+  phoneError.value = ''
+  return true
+}
+
 watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   if (contactByPhone.value || contactByEmail.value || contactByWhatsApp.value) {
     contactError.value = '';
@@ -387,15 +343,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 <style scoped>
 .background-yellow {
   background: linear-gradient(135.26deg, #FFDEB0 17.41%, #FFC472 51.02%);
-}
-
-.background-paint {
-  background: url("");
-}
-
-.background-blur {
-  background: #FFFFFFBF;
-  backdrop-filter: blur(17px)
 }
 
 .popup-comp {
@@ -431,12 +378,23 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   color: #C3C3C3;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   pointer-events: none;
+  @media (max-width: 576px) {
+    font-size: 8px;
+    top: 12px;
+    left: 13px;
+  }
 }
 
 .popup-input:focus-visible ~ .popup-label,
 .popup-input:not(:placeholder-shown) ~ .popup-label {
   top: 10px;
   font-size: 24px;
+  @media (max-width: 576px) {
+    @media (max-width: 576px) {
+      font-size: 5px;
+      top: 7px;
+    }
+  }
 }
 
 .popup-body {
@@ -446,31 +404,41 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   margin-bottom: 180px;
   position: relative;
   z-index: 2;
+  @media (max-width: 576px) {
+    padding: 20px 14px 8px;
+    border-radius: 6px;
+  }
 }
 
 .popup-header {
   color: #C75454;
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 51px;
   line-height: 100%;
   vertical-align: middle;
+  @media (max-width: 576px) {
+    font-size: 14px;
+    vertical-align: middle;
+  }
 }
 
 .popup-line {
   border-bottom: 6px solid #C75454;
   width: 525px;
   margin: 10px 0 47px;
-}
-
-.header-white {
-  color: #FFFFFF;
+  @media (max-width: 576px) {
+    display: none;
+  }
 }
 
 .popup-inputs {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 10px;
+  @media (max-width: 576px) {
+    gap: 5px;
+  }
 }
 
 .popup-input {
@@ -486,6 +454,12 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 26px;
   line-height: 100%;
   vertical-align: middle;
+
+  @media (max-width: 576px) {
+    height: 32px;
+    border-radius: 6px;
+    padding: 16px 8px;
+  }
 }
 
 .popup-input.error {
@@ -498,6 +472,11 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 14px;
   margin-top: 5px;
   font-weight: 500;
+  @media (max-width: 576px) {
+    font-size: 8px;
+    top: 12px;
+    left: 13px;
+  }
 }
 
 .popup-questions {
@@ -507,6 +486,11 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   line-height: 100%;
   vertical-align: middle;
   margin-top: 20px;
+  @media (max-width: 576px) {
+    font-weight: 700;
+    font-size: 8px;
+    margin-top: 10px;
+  }
 }
 
 .popup-checkbox {
@@ -515,6 +499,10 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   margin-top: 20px;
   width: 98%;
   justify-content: space-between;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 9px;
+  }
 }
 
 .popup-button {
@@ -535,6 +523,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   cursor: pointer;
   @media (max-width: 1650px) {
     width: 502px;
+  }
+  @media  (max-width: 576px) {
+    width: 100%;
   }
 }
 
@@ -557,6 +548,11 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+  @media (max-width: 576px) {
+    width: 19px;
+    height: 19px;
+    border-radius: 6px;
+  }
 }
 
 .popup-checkbox input[type="checkbox"]:checked + label::after {
@@ -574,6 +570,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   display: flex;
   gap: 20px;
   align-items: center;
+  @media (max-width: 576px) {
+    gap: 6px;
+  }
 }
 
 .popup-notification {
@@ -640,6 +639,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   color: #FFFFFF;
   @media (max-width: 1650px) {
     font-size: 18px;
+  }
+  @media (max-width: 576px) {
+    font-size: 8px;
   }
 }
 

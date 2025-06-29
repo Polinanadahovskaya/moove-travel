@@ -28,18 +28,21 @@
 </template>
 
 <script setup>
-// Логика для header
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .header {
   background-color: #3E3E3E;
   border-bottom: 1px solid #e5e7eb;
-  padding: 13px 182px 32px;
+  padding: 30px 20px;
+  @media (min-width: 768px) {
+    padding: 13px 182px 32px;
+  }
 }
 
 .container {
   max-width: 1920px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
@@ -51,6 +54,10 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .nav-list {
@@ -59,29 +66,35 @@
   margin: 0;
   padding: 0;
   gap: 32px;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 13px;
+    align-items: flex-end;
+  }
 }
 
 .nav-link {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 20px;
   line-height: 100%;
   color: #FFFFFF;
   text-decoration: none;
   transition: color 0.2s;
-}
-
-.nav-link:hover {
-
+  @media (max-width: 576px) {
+    font-size: 12px;
+  }
 }
 
 .nav-link.router-link-active {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
   color: #FFFFFF;
   border-bottom: 3px solid #C75454;
+  @media (max-width: 576px) {
+    border: none;
+    font-size: 12px;
+  }
 }
 
 .logo-moove {
@@ -89,6 +102,12 @@
   height: 107px;
   background: url('/src/assets/images/logoMoov.svg') no-repeat center;
   background-size: contain;
+  @media (max-width: 576px) {
+    width: 62px;
+    height: 55px;
+    //width: 42px;
+    //height: 35px;
+  }
 }
 
 .logo-text {
@@ -97,5 +116,12 @@
   background: url('/src/assets/images/mooveTravel.svg') no-repeat center;
   background-size: contain;
   margin-top: 20px;
+  @media (max-width: 576px) {
+    width: 85px;
+    height: 35px;
+    margin-top: 5px;
+    //width: 55px;
+    //height: 15px;
+  }
 }
 </style> 

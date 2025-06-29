@@ -42,21 +42,27 @@ const props = defineProps({
   border-radius: 34px;
   background: #FFFFFF;
   position: relative;
+  @media (max-width: 576px) {
+    padding: 47px 24px 18px;
+  }
 }
 
 .team-round {
   border: 25px solid #FFC472;
   border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  max-width: 305px;
-  max-height: 305px;
+  width: 305px;
+  height: 305px;
   border-width: 25px;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   background-size: cover;
+  @media (max-width: 576px) {
+    width: 77px;
+    height: 77px;
+    border-width: 2px;
+  }
 }
 
 .team-name{
@@ -68,6 +74,12 @@ const props = defineProps({
   margin-bottom: 29px;
   @media (max-width: 1650px) {
     font-size: 43px;
+  }
+  @media (max-width: 576px) {
+    font-size: 10px;
+    vertical-align: bottom;
+    margin-bottom: 8px;
+
   }
 }
 
@@ -81,6 +93,11 @@ const props = defineProps({
   @media (max-width: 1650px) {
     font-size: 20px;
   }
+  @media (max-width: 576px) {
+    font-size: 8px;
+    vertical-align: bottom;
+    margin-bottom: 8px;
+  }
 }
 
 .name-text{
@@ -91,6 +108,11 @@ const props = defineProps({
 
   @media (max-width: 1650px) {
     font-size: 22px;
+  }
+  @media (max-width: 576px) {
+    font-weight: 400;
+    font-size: 8px;
+    vertical-align: bottom;
   }
 }
 </style>
