@@ -105,7 +105,7 @@ onMounted(() => {
   flex-direction: column;
   gap: 140px;
   margin-bottom: 140px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     gap: 40px;
     margin-bottom: 40px;
   }
@@ -115,7 +115,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     gap: 10px;
   }
 }
@@ -128,7 +128,10 @@ onMounted(() => {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    height: 102px;
+  }
+  @media (max-width: 768px) {
     height: 82px;
   }
 }
@@ -143,7 +146,11 @@ onMounted(() => {
   margin-top: 8px;
   position: relative;
   right: 10%;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    font-size: 18px;
+    margin-top: 0;
+  }
+  @media (max-width: 768px) {
     font-size: 12px;
     margin-top: 0;
   }
@@ -157,9 +164,13 @@ onMounted(() => {
   align-items: flex-start;
   height: 100%;
   padding: 40px 0px 83px 187px;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    height: 102px;
+    padding: 30px 5% 60px;
+  }
+  @media (max-width: 768px) {
     height: 82px;
-    padding: 20px 5% 40px;
+    padding: 20px 3% 40px;
   }
 }
 
@@ -183,7 +194,7 @@ onMounted(() => {
 .loyar-info {
   font-size: 17px;
   margin-bottom: 12px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 8px;
   }
 }
@@ -196,7 +207,7 @@ onMounted(() => {
   line-height: 1.6;
   list-style-type: disc;
   margin-left: 0;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 8px;
   }
 }
