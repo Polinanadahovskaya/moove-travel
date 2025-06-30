@@ -1,6 +1,6 @@
 <template>
   <div class="popup-comp" :class="{'popup-comp-background': route.path === '/blog'}">
-    <div v-if="route.path !== '/Travel-gids'" class="popup-body"
+    <div class="popup-body"
          :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/', 'blur-background': route.path === '/blog', 'blog-popup': route.path === '/blog'}">
       <div v-if="route.path === '/'" class="popup-darken"></div>
       <div class="header-popup">

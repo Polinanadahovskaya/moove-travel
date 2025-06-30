@@ -85,43 +85,11 @@ const formatPrice = (price) => {
   @media (max-width: 576px) {
     font-size: 12px;
     border-radius: 6px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .variant-tittle,
-  .variant-price {
-    font-size: 28px;
-  }
-  
-  .variant-text {
-    font-size: 24px;
-  }
-  
-  .variant-button {
-    font-size: 28px;
-    padding: 25px;
-  }
-}
-
-@media (max-width: 768px) {
-  .variant-body {
-    padding: 30px;
-    min-height: 300px;
-  }
-  
-  .variant-tittle,
-  .variant-price {
-    font-size: 24px;
-  }
-  
-  .variant-text {
-    font-size: 20px;
-  }
-  
-  .variant-button {
-    font-size: 24px;
-    padding: 20px;
+    height: 37px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>
