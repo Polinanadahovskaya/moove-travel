@@ -28,7 +28,6 @@
   </div>
 </template>
 <script setup>
-import gidCoutryTab from '~/components/gidCoutryTab.vue'
 defineOptions({
   name: "pageGid",
 })
