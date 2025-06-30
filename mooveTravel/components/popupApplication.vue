@@ -3,13 +3,15 @@
     <div class="popup-body"
          :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/', 'blur-background': route.path === '/blog', 'blog-popup': route.path === '/blog'}">
       <div v-if="route.path === '/'" class="popup-darken"></div>
-      <div class="header-popup">
-        <div v-if="route.path !== '/blog'" class="popup-header" :class="{'text': route.path === '/'}"><span>ОСТАВЬ ЗАЯВКУ </span>НА
+      <div class="header-popup" :class="{'left': isMobile && route.path === '/Travel-gids'}">
+        <div v-if="route.path !== '/blog'" class="popup-header" :class="{'text': route.path === '/', 'desp-none':  route.path === '/Travel-gids' && isMobile }"><span>ОСТАВЬ ЗАЯВКУ </span>НА
           ПОДБОР ТУРА
           <div class="popup-line" :class="{'line-white': route.path === '/'}"></div>
         </div>
         <div v-if="route.path === '/blog'" class="popup-header header-blog"><span>НУЖНА ПОМОЩЬ </span>С ПОДБОРОМ ТУРА?
           <div class="popup-line"></div>
+        </div>
+        <div v-if="isMobile && route.path === '/Travel-gids'" class="popup-header header-blog" :class="{'color-red':isMobile && route.path === '/Travel-gids'}">ПОДБЕРЕМ ТУР ДЛЯ ВАС
         </div>
       </div>
       <div class="popup-inputs">
@@ -89,9 +91,9 @@
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
       <div class="popup-giv-button">
-        <div v-if="isMobile" class="giv-lid" :class="{'color-black': route.path === '/about', 'text-white': route.path === '/blog'}">
+        <div v-if="isMobile" class="giv-lid" :class="{'color-black': route.path === '/about' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
           Нажимая «Оставить заявку» вы даёте согласие <br/> на <a
-            :class="{'color-link': route.path === '/about', 'text-white': route.path === '/blog'}" class="giv-lid-href">
+            :class="{'color-link': route.path === '/about' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
           обработку<br/> персональных данных.</a></div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку
         </div>
@@ -116,6 +118,8 @@ import IMask from 'imask'
 defineOptions({
   name: "popupApplication",
 })
+
+
 const windowWidth = ref(0)
 
 const updateWindowWidth = () => {
@@ -281,6 +285,7 @@ const handlePhoneInput = (event) => {
 const phoneInput = ref(null)
 
 const route = useRoute()
+console.log(route.path, 'route.path')
 
 const contactByPhone = ref(false)
 const contactByEmail = ref(false)
@@ -363,6 +368,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 });
 </script>
 <style scoped>
+.left{
+  justify-content: flex-start !important;
+}
 .background-yellow {
   background: linear-gradient(135.26deg, #FFDEB0 17.41%, #FFC472 51.02%);
 }
@@ -446,6 +454,13 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 .header-blog{
   @media (max-width: 576px) {
     color: #FFFFFF;
+  }
+}
+
+.color-red{
+  @media (max-width: 576px) {
+    color: #C75454;
+
   }
 }
 
@@ -752,5 +767,8 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     justify-content: space-between;
     margin-top: 10px;
   }
+}
+.desp-none{
+  display: none;
 }
 </style>
