@@ -29,6 +29,14 @@ import './src/assets/css/main.css'
   margin: 0 auto;
 }
 
+@media (max-width: 1400px) {
+  .main-content {
+    width: calc(100vw - 80px);
+    margin: 0 40px;
+    padding: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .main-content {
     width: calc(100vw - 40px);
