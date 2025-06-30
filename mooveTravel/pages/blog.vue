@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="article-filter">
-          <div>
+          <div class="one-filter">
             <div class="filter-name">По странам</div>
             <div v-for="pair in filterPairs" :key="pair[0]" style="display: flex; gap: 20px; margin-bottom: 10px;">
               <div v-for="filter in pair" :key="filter" class="filter-element">{{ filter }}</div>
@@ -44,7 +44,7 @@ import PopupArticle from "../components/popupArticle.vue";
 import TubCountry from '../components/tubCountry.vue'
 import {computed, onMounted, ref} from 'vue'
 
-const filters = Array.from({length: 20}, (_, i) => `Фильтр ${i + 1}`)
+const filters = Array.from({length: 10}, (_, i) => `Фильтр ${i + 1}`)
 
 const filterPairs = computed(() => {
   const pairs = []
@@ -211,6 +211,15 @@ onMounted(() => {
     flex-basis: 30%;
     max-width: 30%;
   }
+  @media (max-width: 576px) {
+    padding: 13px 9px;
+  }
+}
+
+.one-filter{
+  @media (max-width: 576px) {
+    display: flex;
+  }
 }
 
 .filter-name {
@@ -218,6 +227,9 @@ onMounted(() => {
   font-size: 36px;
   line-height: 100%;
   vertical-align: middle;
+  @media (max-width: 576px) {
+    font-size: 12px;
+  }
 }
 
 .filter-element {
@@ -226,17 +238,5 @@ onMounted(() => {
   padding: 5px 30px;
   border: 1px solid #D9D9D9;
   background: #FFFFFF;
-}
-
-@media (max-width: 768px) {
-  .blog-tittle {
-    font-size: 48px;
-  }
-}
-
-@media (max-width: 480px) {
-  .blog-tittle {
-    font-size: 36px;
-  }
 }
 </style> 

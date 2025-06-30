@@ -401,7 +401,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   color: #C3C3C3;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   pointer-events: none;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     font-size: 8px;
     top: 12px;
     left: 13px;
@@ -412,7 +412,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 .popup-input:not(:placeholder-shown) ~ .popup-label {
   top: 10px;
   font-size: 24px;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
       font-size: 5px;
       top: 7px;
   }
@@ -425,7 +425,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   margin-bottom: 180px;
   position: relative;
   z-index: 2;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     padding: 20px 14px 8px;
     border-radius: 6px;
     margin-bottom: 40px;
@@ -438,13 +438,13 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 51px;
   line-height: 100%;
   vertical-align: middle;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     font-size: 14px;
     vertical-align: middle;
   }
 }
 .header-blog{
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     color: #FFFFFF;
   }
 }
@@ -453,7 +453,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   border-bottom: 6px solid #C75454;
   width: 525px;
   margin: 10px 0 47px;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     display: none;
   }
 }
@@ -463,7 +463,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   flex-direction: column;
   gap: 15px;
   margin-top: 10px;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     gap: 5px;
   }
 }
@@ -476,13 +476,12 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   background: #FFFFFF;
   border: none;
   transition: border-color 0.3s ease;
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 26px;
   line-height: 100%;
   vertical-align: middle;
 
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     height: 32px;
     border-radius: 6px;
     padding: 16px 8px;
@@ -498,7 +497,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 14px;
   margin-top: 5px;
   font-weight: 500;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     font-size: 8px;
     top: 12px;
     left: 13px;
@@ -511,7 +510,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   line-height: 100%;
   vertical-align: middle;
   margin-top: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     font-weight: 700;
     font-size: 8px;
     margin-top: 10px;
@@ -524,7 +523,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   margin-top: 20px;
   width: 98%;
   justify-content: space-between;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     flex-direction: column;
     gap: 9px;
   }
@@ -548,7 +547,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 1650px) {
     width: 502px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     gap: 10px;
     border-radius: 6px;
     padding: 0px;
@@ -602,7 +601,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   display: flex;
   gap: 20px;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     gap: 6px;
   }
 }
@@ -680,7 +679,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 1650px) {
     font-size: 18px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     font-size: 8px;
   }
 }
@@ -704,7 +703,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     font-size: 14px;
     top: -45px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     font-size: 8px;
   }
 }
@@ -748,7 +747,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 }
 
 .popup-giv-button{
-  @media (max-width: 768px) {
+  @media (max-width: 576px) {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
