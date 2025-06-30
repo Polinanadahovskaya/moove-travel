@@ -2,7 +2,7 @@
   <div>
     <div class="back-country">
       <div class="header-content">
-        <h1>Правовые документы</h1>
+        <h1>Правовые<br v-if="isMobile"/> документы</h1>
         <button class="back-btn" @click="router.back()">← Назад</button>
       </div>
     </div>
@@ -11,8 +11,7 @@
         <div class="info-loyar">
           <h2 class="loyar-header">{{ arr.header }}</h2>
           <div class="loyar-info" v-if="arr.id === 1" v-html="arr.text"></div>
-          <div class="loyar-info" v-else-if="arr.id === 2" v-html="arr.text"></div>
-          <div class="loyar-info" v-else>{{ arr.text }}</div>
+          <div class="loyar-info" v-if="arr.id === 2" v-html="arr.text"></div>
         </div>
       </div>
     </div>
@@ -20,6 +19,7 @@
 </template>
 <script setup>
 import {useRouter} from "#app";
+import {computed, onMounted, ref} from "vue";
 
 defineOptions({
   name: "loyarInformation"
@@ -68,19 +68,56 @@ const arrInformation = [
         '<br/><br/>Настоящее согласие дается на срок действия настоящего договора и продолжает действовать в течение 5 (пять) лет с момента прекращения действия настоящего Договора и может быть в любой момент отозвано мной, а в части, касающейся конкретного лица, субъекта персональных данных, указанного в Заявке, указанным лицом, путем направления письменного заявления в адрес Агента и Туроператора по почте'
   },
 ]
+
+const windowWidth = ref(0)
+
+const updateWindowWidth = () => {
+  if (typeof window !== 'undefined') {
+    windowWidth.value = window.innerWidth
+    console.log('Window width:', windowWidth.value, 'isMobile:', isMobile.value)
+  }
+}
+
+const isMobile = computed(() => {
+
+  if (typeof window === 'undefined') {
+    return false
+  }
+  return windowWidth.value <= 576 && windowWidth.value > 0
+})
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    windowWidth.value = window.innerWidth
+  }
+
+  updateWindowWidth()
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', updateWindowWidth)
+  }
+})
+
+
 </script>
 <style scoped lang="scss">
 .info {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 140px;
   margin-bottom: 140px;
+  @media (max-width: 576px) {
+    gap: 40px;
+    margin-bottom: 40px;
+  }
 }
 
 .info-loyar {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  @media (max-width: 576px) {
+    gap: 10px;
+  }
 }
 
 .back-country {
@@ -106,6 +143,10 @@ const arrInformation = [
   margin-top: 8px;
   position: relative;
   right: 10%;
+  @media (max-width: 576px) {
+    font-size: 12px;
+    margin-top: 0;
+  }
 }
 
 .header-content {
@@ -116,6 +157,10 @@ const arrInformation = [
   align-items: flex-start;
   height: 100%;
   padding: 40px 0px 83px 187px;
+  @media (max-width: 576px) {
+    height: 82px;
+    padding: 20px 5% 40px;
+  }
 }
 
 .header-content h1 {
@@ -134,6 +179,15 @@ const arrInformation = [
   margin: 24px 0 24px 64px;
   padding: 0;
 }
+
+.loyar-info {
+  font-size: 17px;
+  margin-bottom: 12px;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
+}
+
 .loyar-info ul li {
   color: #222;
   text-decoration: none;
@@ -142,5 +196,8 @@ const arrInformation = [
   line-height: 1.6;
   list-style-type: disc;
   margin-left: 0;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 </style>
