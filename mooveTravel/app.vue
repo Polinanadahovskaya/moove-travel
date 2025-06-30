@@ -37,7 +37,6 @@ import './src/assets/css/main.css'
   }
 }
 
-/* Глобальные стили для шрифта */
 * {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
