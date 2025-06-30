@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="popup-inputs">
-        <div class="pop-in">
+        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || route.path === '/article'}">
           <input
               class="popup-input"
               :class="{'error' : nameError}"
@@ -28,7 +28,7 @@
           <label class="popup-label" for="userName">Имя</label>
           <div v-if="nameError" class="error-message">{{ nameError }}</div>
         </div>
-        <div class="pop-in">
+        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || route.path === '/article'}">
           <input
               ref="phoneInput"
               class="popup-input"
@@ -44,7 +44,7 @@
           <label class="popup-label" for="userTel">Номер телефона </label>
           <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
         </div>
-        <div class="pop-in">
+        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || route.path === '/article'}">
           <input
               class="popup-input"
               :class="{ 'error': emailError }"
@@ -66,7 +66,7 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone"
                  v-model="contactByPhone" @change="validateForm"/>
           <label for="checkbox-phone"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Звонок
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || route.path === '/article'}">Звонок
             по телефону
           </div>
         </div>
@@ -74,7 +74,7 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email"
                  v-model="contactByEmail" @change="validateForm"/>
           <label for="checkbox-email"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Письмо
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || route.path === '/article'}">Письмо
             на электронную почту
           </div>
         </div>
@@ -82,7 +82,7 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats"
                  v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog'}">
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || route.path === '/article'}">
             Сообщение в WhatsApp
           </div>
         </div>
@@ -733,5 +733,14 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   -webkit-backdrop-filter: blur(17.3px);
   background: rgba(255, 255, 255, 0.7);
   margin-bottom: 0;
+}
+
+.mobile-border{
+  border: 0.5px solid #C3C3C3;
+  border-radius: 6px;
+}
+
+.text-black{
+  color: #1E1E1E;
 }
 </style>
