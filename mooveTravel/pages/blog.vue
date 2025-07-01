@@ -58,16 +58,6 @@
 import TubCountry from '../components/tubCountry.vue'
 import {computed, onMounted, ref} from 'vue'
 
-const filters = Array.from({length: 10}, (_, i) => `Фильтр ${i + 1}`)
-
-const filterPairs = computed(() => {
-  const pairs = []
-  for (let i = 0; i < filters.length; i += 2) {
-    pairs.push(filters.slice(i, i + 2))
-  }
-  return pairs
-})
-
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
 const typeFilters = Array.from({length: 6}, () => 'Фильтр')
 const authorFilters = Array.from({length: 4}, () => 'Фильтр')
@@ -78,7 +68,6 @@ const windowWidth = ref(0)
 const updateWindowWidth = () => {
   if (typeof window !== 'undefined') {
     windowWidth.value = window.innerWidth
-    console.log('Window width:', windowWidth.value, 'isMobile:', isMobile.value)
   }
 }
 
@@ -112,6 +101,10 @@ onMounted(() => {
     margin-top: 17px;
     gap: 7px;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    margin-top: 40px;
+    gap: 10px;
+  }
 }
 
 .tab-art {
@@ -120,6 +113,10 @@ onMounted(() => {
   @media (max-width: 576px) {
     flex-direction: column-reverse;
     gap: 20px;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    flex-direction: column-reverse;
+    gap: 30px;
   }
 }
 
@@ -130,6 +127,10 @@ onMounted(() => {
     flex-basis: 70%;
     max-width: 70%;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
 
 .blog-border {
@@ -137,6 +138,9 @@ onMounted(() => {
   width: 294px;
   @media (max-width: 576px) {
     width: 103px;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    width: 180px;
   }
 }
 
@@ -147,6 +151,10 @@ onMounted(() => {
   justify-self: end;
   @media (max-width: 576px) {
     display: none;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    width: 350px;
+    margin: 25px 0;
   }
 }
 
@@ -164,6 +172,10 @@ onMounted(() => {
   @media (max-width: 576px) {
     font-size: 8px;
     margin: 17px 0 40px;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    font-size: 18px;
+    margin: 30px 0;
   }
 }
 
@@ -183,6 +195,12 @@ onMounted(() => {
     gap: 8px;
     padding: 0;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    width: 100%;
+    padding: 0 10px;
+  }
 }
 
 .blog-item {
@@ -191,13 +209,18 @@ onMounted(() => {
   @media (min-width: 768px) {
     min-height: 200px;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    min-height: 120px;
+  }
 }
-
 
 .all-article {
   margin: 110px auto 180px;
   @media (max-width: 576px) {
     margin: 40px auto;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    margin: 60px auto 80px;
   }
 }
 
@@ -207,12 +230,19 @@ onMounted(() => {
   @media (max-width: 576px) {
     margin-bottom: 40px;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
 }
 
 .article-article {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  @media (min-width: 577px) and (max-width: 1450px) {
+    gap: 16px;
+  }
 }
 
 .article-search {
@@ -233,10 +263,13 @@ onMounted(() => {
     display: flex;
     align-items: center;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 }
 
 .article-filter {
-
   border-radius: 30px;
   padding: 40px;
   @media (min-width: 768px) {
@@ -251,6 +284,10 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    padding: 18px 10px;
+    gap: 18px;
+  }
 }
 
 .article-filter-body {
@@ -259,11 +296,8 @@ onMounted(() => {
   @media (max-width: 576px) {
     border-radius: 6px;
   }
-}
-
-.one-filter {
-  @media (max-width: 576px) {
-    display: flex;
+  @media (min-width: 577px) and (max-width: 1450px) {
+    border-radius: 12px;
   }
 }
 
@@ -275,6 +309,10 @@ onMounted(() => {
   @media (max-width: 576px) {
     font-size: 12px;
     width: 20%;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    font-size: 16px;
+    width: 30%;
   }
 }
 
@@ -295,6 +333,12 @@ onMounted(() => {
     height: 14px;
     border-radius: 2px;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    padding: 2px 12px;
+    font-size: 12px;
+    height: 22px;
+    border-radius: 3px;
+  }
 }
 
 .filter-section {
@@ -309,6 +353,12 @@ onMounted(() => {
     justify-content: space-between;
     width: 101%;
   }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    flex-direction: row;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+  }
 }
 
 .filter-list {
@@ -322,6 +372,12 @@ onMounted(() => {
   }
   @media (max-width: 576px) {
     flex-direction: row;
+    width: 70%;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
     width: 70%;
   }
 }

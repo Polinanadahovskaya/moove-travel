@@ -34,14 +34,17 @@ defineOptions({
     aspect-ratio: 502/354;
     min-height: 200px;
   }
-  @media (max-width: 576px){
+  @media (max-width: 900px){
+    border-radius: 12px;
+    height: 135px;
+  }
+  @media (max-width: 768px){
     border-radius: 6px;
     height: 115px;
   }
 }
 
 .country-text{
-  font-family: Montserrat;
   font-weight: 700;
   font-size: clamp(18px, 3vw, 36px);
   line-height: 100%;
@@ -49,17 +52,8 @@ defineOptions({
   vertical-align: middle;
   color: #1E1E1E;
   text-decoration: none;
-  @media (max-width: 576px){
+  @media (max-width: 768px){
     font-size: 12px;
   }
-}
-
-.travel-background {
-  width: 100%;
-  height: 200px;
-  padding: 18px 0;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
 }
 </style>
