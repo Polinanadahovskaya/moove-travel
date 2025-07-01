@@ -481,8 +481,18 @@ const pluses = [
 .panel {
   display: flex;
   gap: 33px;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    width: 100%;
     flex-direction: column;
+    gap: 40px;
+  }
+  @media (max-width: 900px) {
+    gap: 20px;
+  }
+  @media (max-width: 768px) {
+    gap: 14px;
+  }
+  @media (max-width: 576px) {
     gap: 8px;
   }
 }
@@ -492,9 +502,18 @@ const pluses = [
   flex-direction: column;
   gap: 90px;
   width: 50%;
+  @media (max-width: 1200px) {
+    width: 100%;
+    gap: 40px;
+  }
+  @media (max-width: 900px) {
+    gap: 20px;
+  }
+  @media (max-width: 768px) {
+    gap: 14px;
+  }
   @media (max-width: 576px) {
     gap: 8px;
-    width: 100%;
   }
 }
 
@@ -523,6 +542,15 @@ const pluses = [
   font-size: 24px;
   line-height: 100%;
   vertical-align: middle;
+  @media (max-width: 1200px) {
+    font-size: 22px;
+  }
+  @media (max-width: 900px) {
+    font-size: 18px;
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
   @media (max-width: 576px) {
     font-size: 8px;
   }

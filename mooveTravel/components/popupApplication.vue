@@ -108,9 +108,6 @@
     <div v-if="notification" :class="['popup-notification', notificationType]">
       {{ notification }}
     </div>
-    <div>windowWidth: {{ windowWidth }}</div>
-    <div>isMobile: {{ isMobile }}</div>
-    <div>isTablet: {{ isTablet }}</div>
   </div>
 </template>
 <script setup>
