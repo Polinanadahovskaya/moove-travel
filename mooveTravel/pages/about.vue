@@ -253,6 +253,24 @@ const aboutTeam = [
   margin-left: auto;
   margin-right: auto;
   align-items: stretch;
+  @media (max-width: 1800px) {
+    gap: 107px;
+    margin-top: 200px;
+  }
+  @media (max-width: 1300px) {
+    gap: 80px;
+    margin-top: 150px;
+  }
+  @media (max-width: 1070px) {
+    gap: 60px;
+    margin-top: 180px;
+  }
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    gap: 107px;
+    margin-top: 50px;
+  }
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -285,6 +303,9 @@ const aboutTeam = [
   @media (max-width: 1650px) {
     font-size: 55px;
   }
+  @media (max-width: 1500px) {
+    font-size: 45px;
+  }
   @media (max-width: 768px) {
     font-size: 12px;
     margin-bottom: 5px;
@@ -297,6 +318,10 @@ const aboutTeam = [
   line-height: 100%;
   vertical-align: middle;
   margin-bottom: 65px;
+  @media (max-width: 1500px) {
+    font-size: 22px;
+    margin-bottom: 45px;
+  }
   @media (max-width: 576px) {
     font-size: 8px;
     margin-bottom: 0;
@@ -333,6 +358,9 @@ const aboutTeam = [
   font-size: 36px;
   line-height: 100%;
   vertical-align: middle;
+  @media (max-width: 1500px) {
+    font-size: 22px;
+  }
   @media (max-width: 768px) {
     font-size: 8px;
   }
@@ -387,7 +415,19 @@ const aboutTeam = [
   margin-right: -50vw;
   padding: 70px 182px 150px;
   margin-bottom: 180px;
-  @media (max-width: 768px) {
+  @media (max-width: 1550px) {
+    padding: 50px 150px 90px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 1300px) {
+    padding: 40px 90px 70px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 1070px) {
+    padding: 30px 70px 50px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 900px) {
     padding: 16px 20px 30px;
     margin-bottom: 40px;
   }

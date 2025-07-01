@@ -42,8 +42,17 @@ const props = defineProps({
   border-radius: 34px;
   background: #FFFFFF;
   position: relative;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    padding: 97px 30px 38px;
+    border-radius: 22px;
+  }
+  @media (max-width: 900px) {
+    padding: 57px 28px 28px;
+    border-radius: 12px;
+  }
+  @media (max-width: 768px) {
     padding: 47px 24px 18px;
+    border-radius: 6px;
   }
 }
 
@@ -52,13 +61,22 @@ const props = defineProps({
   border-radius: 50%;
   width: 305px;
   height: 305px;
-  border-width: 25px;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   background-size: cover;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    width: 150px;
+    height: 150px;
+    border-width: 6px;
+  }
+  @media (max-width: 900px) {
+    width: 110px;
+    height: 110px;
+    border-width: 6px;
+  }
+  @media (max-width: 768px) {
     width: 77px;
     height: 77px;
     border-width: 2px;
@@ -66,7 +84,6 @@ const props = defineProps({
 }
 
 .team-name{
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 48px;
   line-height: 100%;
@@ -75,7 +92,10 @@ const props = defineProps({
   @media (max-width: 1650px) {
     font-size: 43px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
+    font-size: 33px;
+  }
+  @media (max-width: 768px) {
     font-size: 10px;
     vertical-align: bottom;
     margin-bottom: 8px;
@@ -93,7 +113,10 @@ const props = defineProps({
   @media (max-width: 1650px) {
     font-size: 20px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
+    font-size: 18px;
+  }
+  @media (max-width: 768px) {
     font-size: 8px;
     vertical-align: bottom;
     margin-bottom: 8px;
@@ -109,7 +132,10 @@ const props = defineProps({
   @media (max-width: 1650px) {
     font-size: 22px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
+    font-size: 20px;
+  }
+  @media (max-width: 768px) {
     font-weight: 400;
     font-size: 8px;
     vertical-align: bottom;

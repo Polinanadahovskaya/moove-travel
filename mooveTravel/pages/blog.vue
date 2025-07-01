@@ -117,6 +117,7 @@ onMounted(() => {
   @media (min-width: 577px) and (max-width: 1450px) {
     flex-direction: column-reverse;
     gap: 30px;
+    width: 100%;
   }
 }
 
@@ -130,6 +131,7 @@ onMounted(() => {
   @media (min-width: 577px) and (max-width: 1450px) {
     flex-basis: 100%;
     max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -221,6 +223,8 @@ onMounted(() => {
   }
   @media (min-width: 577px) and (max-width: 1450px) {
     margin: 60px auto 80px;
+    max-width: 900px;
+    padding: 0 10px;
   }
 }
 
@@ -242,6 +246,7 @@ onMounted(() => {
   gap: 28px;
   @media (min-width: 577px) and (max-width: 1450px) {
     gap: 16px;
+    width: 100%;
   }
 }
 
@@ -287,6 +292,7 @@ onMounted(() => {
   @media (min-width: 577px) and (max-width: 1450px) {
     padding: 18px 10px;
     gap: 18px;
+    width: 100%;
   }
 }
 
@@ -298,6 +304,8 @@ onMounted(() => {
   }
   @media (min-width: 577px) and (max-width: 1450px) {
     border-radius: 12px;
+    width: 100%;
+    margin-top: 10px;
   }
 }
 
@@ -379,6 +387,16 @@ onMounted(() => {
     flex-wrap: wrap;
     gap: 8px;
     width: 70%;
+  }
+}
+
+.blog-page {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  @media (min-width: 577px) and (max-width: 1450px) {
+    max-width: 900px;
+    padding: 0 10px;
   }
 }
 </style> 

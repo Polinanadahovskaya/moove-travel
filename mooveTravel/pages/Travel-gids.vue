@@ -149,13 +149,13 @@ defineOptions({
 }
 
 .none-art{
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 }
 .none-desk{
   display: none;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
     display: block;
   }
 }
