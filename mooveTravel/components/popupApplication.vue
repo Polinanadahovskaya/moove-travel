@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="lid-container">
-        <div v-if="!isMobile || !isTablet" class="giv-lid"
+        <div v-if="!isMobile && !isTablet" class="giv-lid"
              :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/>
           вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}"
                                   class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
@@ -108,6 +108,9 @@
     <div v-if="notification" :class="['popup-notification', notificationType]">
       {{ notification }}
     </div>
+    <div>windowWidth: {{ windowWidth }}</div>
+    <div>isMobile: {{ isMobile }}</div>
+    <div>isTablet: {{ isTablet }}</div>
   </div>
 </template>
 <script setup>
@@ -119,40 +122,25 @@ defineOptions({
   name: "popupApplication",
 })
 
-
-const windowWidth = ref(0)
+const windowWidth = ref(
+  typeof window !== 'undefined' ? window.innerWidth : 1201 // desktop по умолчанию для SSR
+);
 
 const updateWindowWidth = () => {
   if (typeof window !== 'undefined') {
-    windowWidth.value = window.innerWidth
+    windowWidth.value = window.innerWidth;
   }
-}
+};
 
-const isMobile = computed(() => {
-
-  if (typeof window === 'undefined') {
-    return false
-  }
-  return windowWidth.value <= 576 && windowWidth.value > 0
-})
-
-const isTablet = computed(() => {
-  if (typeof window === 'undefined') {
-    return false
-  }
-  return windowWidth.value <= 1200 && windowWidth.value > 0
-})
+const isMobile = computed(() => windowWidth.value <= 576);
+const isTablet = computed(() => windowWidth.value > 576 && windowWidth.value <= 1200);
 
 console.log(isTablet.value,'isTablet')
 console.log(isMobile.value,'isMobile')
 onMounted(() => {
+  updateWindowWidth();
   if (typeof window !== 'undefined') {
-    windowWidth.value = window.innerWidth
-  }
-
-  updateWindowWidth()
-  if (typeof window !== 'undefined') {
-    window.addEventListener('resize', updateWindowWidth)
+    window.addEventListener('resize', updateWindowWidth);
   }
 
   // Инициализация IMask для телефона
@@ -193,7 +181,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (typeof window !== 'undefined') {
-    window.removeEventListener('resize', updateWindowWidth)
+    window.removeEventListener('resize', updateWindowWidth);
   }
 })
 
@@ -373,6 +361,16 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   if (contactByPhone.value || contactByEmail.value || contactByWhatsApp.value) {
     contactError.value = '';
   }
+});
+
+watch(windowWidth, (val) => {
+  console.log('windowWidth changed:', val);
+});
+watch(isMobile, (val) => {
+  console.log('isMobile changed:', val);
+});
+watch(isTablet, (val) => {
+  console.log('isTablet changed:', val);
 });
 </script>
 <style scoped>

@@ -382,7 +382,7 @@ const aboutTeam = [
     -webkit-mask-size: 19px 19px;
     margin-right: 10px;
   }
-}
+}r4
 
 .map {
   width: 724px;

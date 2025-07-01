@@ -157,7 +157,24 @@ const pluses = [
   position: relative;
   background-size: cover;
   @media (max-width: 1640px) {
+    height: 500px;
+  }
+  @media (max-width: 1400px) {
+    height: 450px;
+  }
+  @media (max-width: 1200px) {
+    height: 400px;
+  }
+  @media (max-width: 1050px) {
+    height: 350px;
     background-size: contain;
+  }
+  @media (max-width: 900px) {
+    height: 250px;
+    background-size: cover;
+  }
+  @media (max-width: 768px) {
+    height: 250px;
   }
   @media (max-width: 576px) {
     height: 131px;
@@ -180,6 +197,15 @@ const pluses = [
   background: #C75454;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 1400px) {
+    padding: 50px;
+  }
+  @media (max-width: 900px) {
+    padding: 40px;
+  }
+  @media (max-width: 768px) {
+    padding: 30px;
+  }
   @media (max-width: 576px) {
     padding: 20px;
   }
@@ -193,6 +219,21 @@ const pluses = [
   border-bottom: 6px solid #FFFFFF;
   margin-top: 40px;
   width: 315px;
+  @media (max-width: 1200px) {
+    width: 295px;
+    margin-top: 30px;
+    border-width: 5px;
+  }
+  @media (max-width: 900px) {
+    width: 265px;
+    margin-top: 20px;
+    border-width: 4px;
+  }
+  @media (max-width: 768px) {
+    width: 150px;
+    margin-top: 10px;
+    border-width: 2px;
+  }
   @media (max-width: 576px) {
     width: 103px;
     border-width: 1px;
@@ -221,6 +262,24 @@ const pluses = [
     height: 106px;
     font-size: 30px;
   }
+  @media (max-width: 1200px) {
+    width: 295px;
+    height: 85px;
+    border-radius: 13px;
+    font-size: 20px;
+  }
+  @media (max-width: 900px) {
+    width: 265px;
+    height: 55px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 45px;
+    border-radius: 7px;
+    font-size: 12px;
+  }
   @media (max-width: 576px) {
     width: 104px;
     height: 32px;
@@ -240,6 +299,21 @@ const pluses = [
   border-bottom: 6px solid #C75454;
   margin: 16px 0 80px;
   width: 295px;
+  @media (max-width: 900px) {
+    border-width: 5px;
+    width: 250px;
+    margin: 14px 0 40px;
+  }
+  @media (max-width: 900px) {
+    border-width: 4px;
+    width: 200px;
+    margin: 12px 0 40px;
+  }
+  @media (max-width: 768px) {
+    border-width: 3px;
+    width: 143px;
+    margin: 9px 0 16px;
+  }
   @media (max-width: 576px) {
     border-width: 2px;
     width: 103px;
@@ -254,10 +328,10 @@ const pluses = [
   display: flex;
   justify-content: space-between;
   padding: 45px 45px 0;
-  @media (min-width: 768px) {
+  @media (min-width: 1300px) {
     height: 608px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
     flex-direction: column-reverse;
     border-radius: 6px;
     padding: 20px 15px;
@@ -275,6 +349,12 @@ const pluses = [
   border-radius: 34px;
   z-index: 0;
   background-size: cover;
+  @media (max-width: 1200px) {
+    border-radius: 15px;
+  }
+  @media (max-width: 900px) {
+    border-radius: 10px;
+  }
   @media (max-width: 576px) {
     border-radius: 6px;
   }
@@ -297,6 +377,14 @@ const pluses = [
   line-height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  @media (max-width: 900px) {
+    border-radius: 18px;
+    padding: 8px 10px;
+    font-size: 20px;
+    height: 80px;
+    width: 250px;
+  }
   @media (max-width: 576px) {
     width: 82px;
     height: 27px;
@@ -311,7 +399,7 @@ const pluses = [
   align-self: end;
   margin-bottom: 41px;
   text-decoration: none;
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
     align-self: center;
     margin-bottom: 0;
     margin-top: 20px;
@@ -327,8 +415,23 @@ const pluses = [
   align-items: center;
   background: #ffff;
   box-shadow: 0px 0px 60px 0px #0000001A;
-  @media (min-width: 786px) {
+  @media (min-width: 1300px) {
     height: 152px;
+  }
+  @media (max-width: 1300px) {
+    padding: 30px 36px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+  @media (max-width: 900px) {
+    padding: 20px 26px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+  @media (max-width: 786px) {
+    padding: 12px 18px;
+    gap: 10px;
+    border-radius: 8px;
   }
   @media (max-width: 576px) {
     gap: 6px;
@@ -343,6 +446,15 @@ const pluses = [
   line-height: 100%;
   font-variant: small-caps;
   color: #C75454;
+  @media (max-width: 1300px) {
+    font-size: 64px;
+  }
+  @media (max-width: 900px) {
+    font-size: 44px;
+  }
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
   @media (max-width: 576px) {
     font-size: 24px;
   }
@@ -353,7 +465,7 @@ const pluses = [
   flex-direction: column;
   gap: 33px;
   width: 55%;
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
     width: 100%;
     gap: 10px;
   }
@@ -433,6 +545,18 @@ const pluses = [
   position: relative;
   width: 20px;
   height: 20px;
+  @media (max-width: 1200px) {
+    width: 5px;
+    height: 14px;
+  }
+  @media (max-width: 900px) {
+    width: 8px;
+    height: 8px;
+  }
+  @media (max-width: 768px) {
+    width: 8px;
+    height: 4px;
+  }
   @media (max-width: 576px) {
     width: 8px;
     height: 8px;
@@ -450,12 +574,27 @@ const pluses = [
   top: 5px;
   left: 5px;
   border-radius: 3px;
-
+  @media (max-width: 1200px) {
+    width: 18px;
+    height: 18px;
+    border-width: 7px;
+  }
+  @media (max-width: 900px) {
+    width: 13px;
+    height: 13px;
+    border-width: 6px;
+    left: 20px;
+  }
+  @media (max-width: 768px) {
+    width: 10px;
+    height: 10px;
+    border-width: 5px;
+    left: 30px;
+  }
   @media (max-width: 576px) {
     width: 8px;
     height: 8px;
-    border-right: 3px solid white;
-    border-bottom: 3px solid white;
+    border-width: 3px;
     top: 0px;
     left: 40px;
     border-radius: 1px;
@@ -490,6 +629,15 @@ const pluses = [
   font-variant: small-caps;
   @media (max-width: 1850px) {
     font-size: 16px;
+  }
+  @media (max-width: 1300px) {
+    font-size: 14px;
+  }
+  @media (max-width: 900px) {
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    font-size: 10px;
   }
   @media (max-width: 576px) {
     font-size: 8px;
