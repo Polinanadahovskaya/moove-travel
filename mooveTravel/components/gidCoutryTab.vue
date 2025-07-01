@@ -2,18 +2,25 @@
   <div>
     <div class="gid-country_tub">
       <div class="gid-country_inf">
-        <div class="gid-country_img"></div>
+        <div class="gid-country_img mobile-none"></div>
         <div class="gid-country_art">
-          <div class="gid-country_tittle">Заголовок</div>
+          <div class="gid-header-mobile">
+            <div class="gid-country_tittle">Заголовок</div>
+            <div class="gid-country_price desc-none">
+              <div class="old-price">{{ formatPrice(1990) }} ₽</div>
+              <div class="fix-price">{{ formatPrice(1990) }} ₽</div>
+            </div>
+          </div>
           <div class="gid-country_text">Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
             Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
             Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
           </div>
         </div>
+        <div class="gid-country_img desc-none"></div>
       </div>
-      <div class="gid-country_price">
-        <div class="old-price">{{ formatPrice(1990)}} ₽</div>
-        <div class="fix-price">{{ formatPrice(1990)}} ₽</div>
+      <div class="gid-country_price mobile-none">
+        <div class="old-price">{{ formatPrice(1990) }} ₽</div>
+        <div class="fix-price">{{ formatPrice(1990) }} ₽</div>
       </div>
     </div>
   </div>
@@ -22,22 +29,25 @@
 defineOptions({
   name: "gidCoutryTab"
 })
-const formatPrice = (price)=> {
+const formatPrice = (price) => {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .gid-country_tub {
   width: 100%;
   height: 381px;
   border-radius: 34px;
-  box-shadow: 0px 0px 60px 0px #0000001A;
+  box-shadow: 0 0 60px 0 #0000001A;
   background: #FFFFFF;
   display: flex;
-  //gap: 141px;
   padding: 40px 45px;
   justify-content: space-between;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    height: 100%;
+  }
 }
 
 .gid-country_art {
@@ -47,14 +57,15 @@ const formatPrice = (price)=> {
 }
 
 .gid-country_tittle {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 48px;
   line-height: 100%;
+  @media (max-width: 576px) {
+    font-size: 12px;
+  }
 }
 
 .gid-country_text {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
@@ -67,6 +78,9 @@ const formatPrice = (price)=> {
 .gid-country_inf {
   display: flex;
   gap: 37px;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
 }
 
 .gid-country_img {
@@ -75,6 +89,9 @@ const formatPrice = (price)=> {
   border-radius: 24px;
   background: #D9D9D9;
   flex-shrink: 0;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 }
 
 .gid-country_price {
@@ -85,21 +102,48 @@ const formatPrice = (price)=> {
 }
 
 .old-price {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 30px;
   line-height: 100%;
   vertical-align: middle;
   text-decoration: line-through;
   color: #CFCFCF;
+  @media (max-width: 1600px) {
+    font-size: 24px;
+  }
+  @media (max-width: 576px) {
+    font-size: 18px;
+  }
 }
 
 .fix-price{
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 64px;
   line-height: 100%;
   vertical-align: middle;
-color: #1E1E1E;
+  @media (max-width: 1600px) {
+    font-size: 44px;
+  }
+  @media (max-width: 576px) {
+    font-size: 24px;
+  }
+}
+
+
+.gid-header-mobile{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile-none {
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.desc-none {
+  @media (min-width: 1200px) {
+    display: none;
+  }
 }
 </style>

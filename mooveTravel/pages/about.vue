@@ -322,6 +322,18 @@ const aboutTeam = [
     font-size: 22px;
     margin-bottom: 45px;
   }
+  @media (max-width: 1200px) {
+    font-size: 18px;
+    margin-bottom: 35px;
+  }
+  @media (max-width: 900px) {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+  @media (max-width: 768px) {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
   @media (max-width: 576px) {
     font-size: 8px;
     margin-bottom: 0;
@@ -382,7 +394,7 @@ const aboutTeam = [
     -webkit-mask-size: 19px 19px;
     margin-right: 10px;
   }
-}r4
+}
 
 .map {
   width: 724px;
@@ -394,6 +406,10 @@ const aboutTeam = [
   background-size: cover;
   @media (max-width: 1650px) {
     width: 524px;
+    height: 416px;
+  }
+  @media (max-width: 1200px) {
+    width: 324px;
     height: 416px;
   }
   @media (max-width: 768px) {

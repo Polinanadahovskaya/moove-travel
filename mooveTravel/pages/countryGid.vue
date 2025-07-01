@@ -36,10 +36,14 @@ const router = useRouter()
   display: flex;
   flex-direction: column;
   background: linear-gradient(273.87deg, #D27A00 3.64%, #F89C1D 76.11%);
+  @media (max-width: 768px) {
+    height: 82px;
+    padding: 20px 20px 30px;
+    justify-content: flex-end;
+  }
 }
 
 .gid_tittle{
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 66px;
   line-height: 100%;
@@ -47,10 +51,12 @@ const router = useRouter()
   display: flex;
   align-items: center;
   flex: 1;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .gid_back{
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
@@ -59,6 +65,9 @@ const router = useRouter()
   align-self: flex-end;
   cursor: pointer;
   margin-top: 30px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 }
 
 .gid-tabs{

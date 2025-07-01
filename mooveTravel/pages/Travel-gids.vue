@@ -25,18 +25,20 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onUnmounted} from 'vue';
+import {ref, onMounted, onUnmounted, computed} from 'vue';
 import BestVariant from '~/components/BestVariant.vue';
 import TubCountry from '~/components/tubCountry.vue';
 import PopupTravelGid from '~/components/popupTravelGid.vue';
 import PopupApplication from "~/components/PopupApplication";
 
 const isMobile = ref(false);
+const isTablet = ref(false);
 const countryCount = ref(9);
 
 function handleResize() {
   isMobile.value = window.innerWidth <= 576;
-  countryCount.value = isMobile.value ? 6 : 9;
+  isTablet.value = window.innerWidth > 576 && window.innerWidth <= 1200;
+  countryCount.value = isMobile.value || isTablet.value ? 6 : 9;
 }
 
 onMounted(() => {
@@ -100,11 +102,14 @@ defineOptions({
   grid-template-columns: repeat(3, 1fr);
   gap: 75px;
   margin: 80px auto 110px;
+  @media (max-width: 1650px) {
+    gap: 20px;
+  }
   @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
     gap: 40px;
   }
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
     gap: 30px;
   }
   @media (max-width: 576px) {
@@ -115,7 +120,7 @@ defineOptions({
 }
 
 .gid-trav{
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
@@ -149,6 +154,7 @@ defineOptions({
 }
 
 .none-art{
+  margin-top: 80px;
   @media (max-width: 1200px) {
     display: none;
   }

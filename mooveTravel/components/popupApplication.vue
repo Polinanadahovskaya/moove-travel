@@ -92,17 +92,17 @@
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
       <div class="popup-giv-button">
         <div v-if="isMobile || isTablet" class="giv-lid" :class="{'color-black': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
-          Нажимая «Оставить заявку» вы даёте согласие <br/> на <a
+          Нажимая «Оставить заявку» вы даёте согласие <br/> на <NuxtLink to="/loyarInformation"
             :class="{'color-link': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
-          обработку<br/> персональных данных.</a></div>
+          обработку<br/> персональных данных.</NuxtLink></div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку
         </div>
       </div>
       <div class="lid-container">
         <div v-if="!isMobile && !isTablet" class="giv-lid"
              :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/>
-          вы даёте согласие на <a :class="{'color-link': route.path === '/about' || route.path === '/blog'}"
-                                  class="giv-lid-href"> обработку<br/> персональных данных.</a></div>
+          вы даёте согласие на <NuxtLink to="/loyarInformation" :class="{'color-link': route.path === '/about' || route.path === '/blog'}"
+                                  class="giv-lid-href"> обработку<br/> персональных данных.</NuxtLink></div>
       </div>
     </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
@@ -629,13 +629,16 @@ watch(isTablet, (val) => {
   @media (max-width: 1650px) {
     width: 502px;
   }
+  @media (max-width: 1200px) and (min-width: 900px){
+    margin: 30px;
+  }
   @media (max-width: 900px) {
     width: 100%;
     height: 80px;
     font-size: 24px;
     border-radius: 18px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     gap: 10px;
     border-radius: 6px;
     padding: 0;
@@ -799,6 +802,16 @@ watch(isTablet, (val) => {
     right: 20px;
   }
   @media (max-width: 1650px) {
+    right: -25px;
+    font-size: 14px;
+    top: -45px;
+  }
+  @media (max-width: 1200px) {
+    left: 0;
+    top: 153px;
+  }
+
+  @media (max-width: 800px) {
     right: -25px;
     font-size: 14px;
     top: -45px;
