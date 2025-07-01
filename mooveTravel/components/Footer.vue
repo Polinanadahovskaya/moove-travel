@@ -44,6 +44,9 @@
   height: 107px;
   background: url('/src/assets/images/logoMoov.svg') no-repeat center;
   background-size: contain;
+  @media (max-width: 1300px) {
+    display: none;
+  }
 }
 
 .logo-text {
@@ -52,6 +55,9 @@
   background: url('/src/assets/images/mooveTravel.svg') no-repeat center;
   background-size: contain;
   margin-top: 20px;
+  @media (max-width: 1300px) {
+    display: none;
+  }
 }
 
 .logo-link{
@@ -65,9 +71,12 @@
 .footer {
   background-color: #1f2937;
   color: #ffffff;
-  padding: 97px 0 76px;
+  padding: 47px 0 30px;
   margin-top: auto;
   height: 337px;
+  @media (min-width: 1300px) {
+    padding: 97px 0 76px;
+  }
 }
 
 .container {
@@ -90,7 +99,6 @@
 }
 
 .footer-section h4 {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 24px;
   line-height: 100%;
@@ -121,7 +129,6 @@
 
 .footer-link_ur {
   color: #d1d5db;
-  font-family: Montserrat;
   font-weight: 400;
   font-style: italic;
   font-size: 18px;

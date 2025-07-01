@@ -114,10 +114,15 @@ const aboutTeam = [
   margin-right: -50vw;
 
   @media (min-width: 786px) {
-
     padding: 90px 182px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1300px) {
+    padding: 90px 70px;
+  }
+  @media (max-width: 900px) {
+    padding: 50px 40px;
+  }
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     background-size: cover;
@@ -136,7 +141,17 @@ const aboutTeam = [
   @media (max-width: 1650px) {
     width: 165px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    border-width: 8px;
+    margin: 10px 0 50px;
+    width: 200px;
+  }
+  @media (max-width: 900px) {
+    border-width: 6px;
+    margin: 8px 0 40px;
+    width: 179px;
+  }
+  @media (max-width: 768px) {
     border-width: 2px;
     margin: 2px 0 12px;
     width: 139px;
@@ -147,6 +162,9 @@ const aboutTeam = [
   display: flex;
   flex-direction: column;
   gap: 77px;
+  @media (max-width: 900px) {
+    gap: 44px;
+  }
   @media (max-width: 576px) {
     gap: 14px;
   }
@@ -175,13 +193,21 @@ const aboutTeam = [
   line-height: 100%;
   text-align: center;
   vertical-align: middle;
-
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    font-size: 44px;
+  }
+  @media (max-width: 1080px) {
+    font-size: 34px;
+    width: 81px;
+    height: 81px;
+    border-radius: 12px;
+    margin-right: 20px;
+  }
+  @media (max-width: 768px) {
     width: 31px;
     height: 31px;
-    border-radius: 6px;
-    padding: 10px 24px;
     font-size: 14px;
+    border-radius: 6px;
     margin-right: 10px;
   }
 }
@@ -192,9 +218,20 @@ const aboutTeam = [
   line-height: 100%;
   vertical-align: middle;
   color: #FFFFFF;
-
   @media (max-width: 1650px) {
     font-size: 28px;
+  }
+  @media (max-width: 1200px) {
+    font-size: 24px;
+  }
+  @media (max-width: 1080px) {
+    font-size: 18px;
+  }
+  @media (max-width: 820px) {
+    font-size: 16px;
+  }
+  @media (max-width: 760px) {
+    font-size: 14px;
   }
   @media (max-width: 576px) {
     font-size: 8px;
@@ -203,7 +240,7 @@ const aboutTeam = [
 
 .about-office {
   margin: 110px 0;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     margin: 40px 0;
   }
 }
@@ -216,7 +253,7 @@ const aboutTeam = [
   margin-left: auto;
   margin-right: auto;
   align-items: stretch;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     gap: 57px;
@@ -240,7 +277,6 @@ const aboutTeam = [
 }
 
 .location {
-  font-family: Montserrat;
   font-weight: 700;
   font-size: 66px;
   line-height: 100%;
@@ -249,14 +285,13 @@ const aboutTeam = [
   @media (max-width: 1650px) {
     font-size: 55px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 12px;
     margin-bottom: 5px;
   }
 }
 
 .location-text {
-  font-family: Montserrat;
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
@@ -270,7 +305,7 @@ const aboutTeam = [
 
 .location-phone {
   display: flex;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     align-items: center;
   }
 }
@@ -284,7 +319,7 @@ const aboutTeam = [
   width: 50px;
   height: 50px;
   margin-right: 30px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 19px;
     height: 19px;
     mask-size: 19px 19px;
@@ -298,7 +333,7 @@ const aboutTeam = [
   font-size: 36px;
   line-height: 100%;
   vertical-align: middle;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 8px;
   }
 }
@@ -312,7 +347,7 @@ const aboutTeam = [
   width: 50px;
   height: 50px;
   margin-right: 30px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 19px;
     height: 19px;
     mask-size: 19px 19px;
@@ -333,7 +368,7 @@ const aboutTeam = [
     width: 524px;
     height: 416px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 50%;
     height: 116px;
     border-width: 6px;
@@ -352,7 +387,7 @@ const aboutTeam = [
   margin-right: -50vw;
   padding: 70px 182px 150px;
   margin-bottom: 180px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     padding: 16px 20px 30px;
     margin-bottom: 40px;
   }
@@ -362,7 +397,7 @@ const aboutTeam = [
   display: flex;
   gap: 23px;
   flex-direction: column;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     display: flex;
     gap: 10px;
     flex-direction: column;

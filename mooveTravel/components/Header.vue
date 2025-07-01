@@ -35,7 +35,7 @@
   background-color: #3E3E3E;
   border-bottom: 1px solid #e5e7eb;
   padding: 30px 20px;
-  @media (min-width: 768px) {
+  @media (min-width: 1300px) {
     padding: 13px 182px 32px;
   }
 }
@@ -54,7 +54,7 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  @media (max-width: 576px) {
+  @media (max-width: 870px) {
     flex-direction: column;
     justify-content: center;
   }
@@ -66,7 +66,7 @@
   margin: 0;
   padding: 0;
   gap: 32px;
-  @media (max-width: 576px) {
+  @media (max-width: 870px) {
     flex-direction: column;
     gap: 13px;
     align-items: flex-end;
@@ -80,7 +80,7 @@
   color: #FFFFFF;
   text-decoration: none;
   transition: color 0.2s;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 12px;
   }
 }
@@ -91,7 +91,7 @@
   line-height: 100%;
   color: #FFFFFF;
   border-bottom: 3px solid #C75454;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     border: none;
     font-size: 12px;
   }
@@ -102,11 +102,9 @@
   height: 107px;
   background: url('/src/assets/images/logoMoov.svg') no-repeat center;
   background-size: contain;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 62px;
     height: 55px;
-    //width: 42px;
-    //height: 35px;
   }
 }
 
@@ -116,12 +114,10 @@
   background: url('/src/assets/images/mooveTravel.svg') no-repeat center;
   background-size: contain;
   margin-top: 20px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 85px;
     height: 35px;
     margin-top: 5px;
-    //width: 55px;
-    //height: 15px;
   }
 }
 </style> 

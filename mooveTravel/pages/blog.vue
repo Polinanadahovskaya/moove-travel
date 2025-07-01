@@ -25,11 +25,26 @@
             </div>
           </div>
         </div>
-        <div class="article-filter">
-          <div class="one-filter">
-            <div class="filter-name">По странам</div>
-            <div v-for="pair in filterPairs" :key="pair[0]" style="display: flex; gap: 20px; margin-bottom: 10px;">
-              <div v-for="filter in pair" :key="filter" class="filter-element">{{ filter }}</div>
+        <div class="article-filter-body">
+          <div v-if="isMobile" class="article-search">Поиск</div>
+          <div class="article-filter">
+            <div class="filter-section">
+              <div class="filter-name">По странам</div>
+              <div class="filter-list">
+                <div v-for="filter in countryFilters" :key="filter" class="filter-element">{{ filter }}</div>
+              </div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-name">По типам отдыха</div>
+              <div class="filter-list">
+                <div v-for="filter in typeFilters" :key="filter" class="filter-element">{{ filter }}</div>
+              </div>
+            </div>
+            <div class="filter-section">
+              <div class="filter-name">Автор</div>
+              <div class="filter-list">
+                <div v-for="filter in authorFilters" :key="filter" class="filter-element">{{ filter }}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -40,7 +55,6 @@
 </template>
 
 <script setup>
-import PopupArticle from "../components/popupArticle.vue";
 import TubCountry from '../components/tubCountry.vue'
 import {computed, onMounted, ref} from 'vue'
 
@@ -53,6 +67,12 @@ const filterPairs = computed(() => {
   }
   return pairs
 })
+
+const countryFilters = Array.from({length: 6}, () => 'Фильтр')
+const typeFilters = Array.from({length: 6}, () => 'Фильтр')
+const authorFilters = Array.from({length: 4}, () => 'Фильтр')
+
+
 const windowWidth = ref(0)
 
 const updateWindowWidth = () => {
@@ -99,6 +119,7 @@ onMounted(() => {
   gap: 45px;
   @media (max-width: 576px) {
     flex-direction: column-reverse;
+    gap: 20px;
   }
 }
 
@@ -201,22 +222,46 @@ onMounted(() => {
   font-size: 24px;
   line-height: 100%;
   color: #C3C3C3;
+  @media (max-width: 576px) {
+    height: 23px;
+    padding: 4px 5px;
+    border-radius: 6px;
+    border: 1px solid #D9D9D9A6;
+    font-size: 8px;
+    margin-bottom: 0;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .article-filter {
-  background: #EBEBEB;
+
   border-radius: 30px;
   padding: 40px;
   @media (min-width: 768px) {
     flex-basis: 30%;
-    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
   }
   @media (max-width: 576px) {
     padding: 13px 9px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
   }
 }
 
-.one-filter{
+.article-filter-body {
+  background: #EBEBEB;
+  border-radius: 30px;
+  @media (max-width: 576px) {
+    border-radius: 6px;
+  }
+}
+
+.one-filter {
   @media (max-width: 576px) {
     display: flex;
   }
@@ -229,6 +274,7 @@ onMounted(() => {
   vertical-align: middle;
   @media (max-width: 576px) {
     font-size: 12px;
+    width: 20%;
   }
 }
 
@@ -238,5 +284,45 @@ onMounted(() => {
   padding: 5px 30px;
   border: 1px solid #D9D9D9;
   background: #FFFFFF;
+  @media (min-width: 576px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 576px) {
+    padding: 2px 10px;
+    font-size: 8px;
+    height: 14px;
+    border-radius: 2px;
+  }
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 576px) {
+    gap: 20px;
+  }
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 101%;
+  }
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 576px) {
+    flex-direction: row;
+    width: 70%;
+  }
 }
 </style> 
