@@ -60,5 +60,11 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 
 <sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
 
+docker build -t moov-travel-cms .
+
+docker run -p 1337:1337 -v $(pwd)/public/uploads:/app/public/uploads -v $(pwd)/.tmp:/app/.tmp my-strapi-cms
+
+docker run -p 1337:1337 -v D:/moove-travel/cms/public/uploads:/app/public/uploads -v D:/moove-travel/cms/.tmp:/app/.tmp my-strapi-cms
+
 mercurial-team@yandex.ru
 QazZaq321
