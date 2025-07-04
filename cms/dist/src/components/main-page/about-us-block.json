@@ -1,0 +1,42 @@
+{
+    "collectionName": "components_main_page_about_us_blocks",
+    "info": {
+        "displayName": "aboutUsBlock",
+        "icon": "question"
+    },
+    "options": {},
+    "attributes": {
+        "firstNumber": {
+            "type": "string"
+        },
+        "firstText": {
+            "type": "text"
+        },
+        "secondNumber": {
+            "type": "string"
+        },
+        "secondText": {
+            "type": "text"
+        },
+        "thirdNumber": {
+            "type": "string"
+        },
+        "thirdText": {
+            "type": "text"
+        },
+        "buttonLink": {
+            "type": "string"
+        },
+        "backgroundImage": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        }
+    },
+    "config": {}
+}

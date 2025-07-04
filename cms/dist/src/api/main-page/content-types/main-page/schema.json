@@ -1,0 +1,23 @@
+{
+    "kind": "singleType",
+    "collectionName": "main_pages",
+    "info": {
+        "singularName": "main-page",
+        "pluralName": "main-pages",
+        "displayName": "mainPage"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "aboutUs": {
+            "type": "component",
+            "component": "main-page.about-us-block",
+            "repeatable": false
+        }
+    }
+}
