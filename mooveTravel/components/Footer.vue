@@ -23,11 +23,22 @@
           <p class="footer-link">Телефон: +7 (999) 123-45-67</p>
           <p class="footer-link">1245, Moscow, Russia</p>
         </div>
-
         <div class="footer-section">
-          <p class="footer-link_ur">ИП</p>
-          <p class="footer-link_ur">ОГРН</p>
-          <p class="footer-link_ur">Другая юридическая ифнормация</p>
+          <h4>Социальные сети</h4>
+          <div class="social-media">
+            <a href="https://ru.pinterest.com/MOOVTRAVEL/?invite_code=b18aaee1b8564aba8c9e2e7a941e5ca3&sender=1101693265004231226" class="footer-mask pinterest"></a>
+            <a href="https://www.instagram.com/moov.travel" class="footer-mask instagram"></a>
+            <a href="https://t.me/moovtravel" class="footer-mask tg"></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <p class="footer-link_ur">ОГРН 1257700185412</p>
+          <p class="footer-link_ur">Правовая информация</p>
+          <p class="footer-link_ur loy-inform">Представленная на сайте
+            информация носит
+            справочный характер
+            и не является
+            публичной офертой</p>
         </div>
       </div>
     </div>
@@ -86,9 +97,8 @@
 }
 
 .footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  display: flex;
+  gap: 10%;
   margin-bottom: 2rem;
 }
 
@@ -144,5 +154,52 @@
   margin-bottom: 0.5rem;
 }
 
+.social-media{
+  display: flex;
+  gap: 24px;
+}
 
+h4{
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 24px;
+  leading-trim: NONE;
+  line-height: 100%;
+  text-wrap: nowrap;
+}
+
+.loy-inform{
+  font-weight: 400;
+  font-style: Italic;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 100%;
+}
+
+.footer-mask{
+  width: 40px;
+  height: 40px;
+  mask-size: 32px 32px;
+  -webkit-mask-size: 32px 32px;
+  text-decoration: none;
+  color: #FFFFFF;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.pinterest{
+  mask: url(/src/assets/images/icons/pinterest.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/pinterest.svg) no-repeat center/contain;
+}
+
+.instagram{
+  mask: url(/src/assets/images/icons/instagram.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/instagram.svg) no-repeat center/contain;
+}
+
+.tg{
+  mask: url(/src/assets/images/icons/tg.svg) no-repeat center/contain;
+  -webkit-mask: url(/src/assets/images/icons/tg.svg) no-repeat center/contain;
+}
 </style> 

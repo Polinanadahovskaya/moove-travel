@@ -531,6 +531,14 @@ const aboutArray = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1200px) {
+    width: 100px;
+    height: 100px;
+  }
+  @media (max-width: 900px) {
+    width: 70px;
+    height: 70px;
+  }
   @media (max-width: 576px) {
     width: 40px;
     height: 40px;
@@ -638,6 +646,14 @@ const aboutArray = computed(() => {
   background-color: #C75454;
   width: 100px;
   height: 100px;
+  @media (max-width: 1200px) {
+    width: 85px;
+    height: 85px;
+  }
+  @media (max-width: 900px) {
+    width: 55px;
+    height: 55px;
+  }
   @media (max-width: 576px) {
     width: 25px;
     height: 25px;

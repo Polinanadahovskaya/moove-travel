@@ -93,7 +93,7 @@
       <div class="popup-giv-button">
         <div v-if="isMobile || isTablet" class="giv-lid" :class="{'color-black': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
           Нажимая «Оставить заявку» вы даёте согласие <br/> на <NuxtLink to="/loyarInformation"
-            :class="{'color-link': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
+            :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
           обработку<br/> персональных данных.</NuxtLink></div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку
         </div>
@@ -868,5 +868,9 @@ watch(isTablet, (val) => {
 }
 .desp-none{
   display: none;
+}
+
+.color-link-start{
+  color: #FFFFFF;
 }
 </style>
