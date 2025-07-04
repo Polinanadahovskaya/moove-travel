@@ -1,39 +1,39 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, getRequestURL, getResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, createError, getRouterParam, getResponseStatusText } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { escapeHtml } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/@vue/shared/dist/shared.cjs.js';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, joinRelativeURL } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/ufo/dist/index.mjs';
-import { renderToString } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/vue/server-renderer/index.mjs';
-import destr, { destr as destr$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/destr/dist/index.mjs';
-import { createHooks } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/node-mock-http/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unstorage/drivers/fs.mjs';
-import { digest } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/ohash/dist/index.mjs';
-import { klona } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/defu/dist/defu.mjs';
-import { snakeCase } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/scule/dist/index.mjs';
-import { getContext } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unctx/dist/index.mjs';
-import { toRouteMatcher, createRouter } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/radix3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, getRequestURL, getResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, createError, getRouterParam, getResponseStatusText } from 'file://D:/moove-travel/mooveTravel/node_modules/h3/dist/index.mjs';
+import { escapeHtml } from 'file://D:/moove-travel/mooveTravel/node_modules/@vue/shared/dist/shared.cjs.js';
+import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://D:/moove-travel/mooveTravel/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, joinRelativeURL } from 'file://D:/moove-travel/mooveTravel/node_modules/ufo/dist/index.mjs';
+import { renderToString } from 'file://D:/moove-travel/mooveTravel/node_modules/vue/server-renderer/index.mjs';
+import { klona } from 'file://D:/moove-travel/mooveTravel/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file://D:/moove-travel/mooveTravel/node_modules/defu/dist/defu.mjs';
+import destr, { destr as destr$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/destr/dist/index.mjs';
+import { snakeCase } from 'file://D:/moove-travel/mooveTravel/node_modules/scule/dist/index.mjs';
+import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://D:/moove-travel/mooveTravel/node_modules/unhead/dist/server.mjs';
+import { stringify, uneval } from 'file://D:/moove-travel/mooveTravel/node_modules/devalue/index.js';
+import { isVNode, toValue, isRef } from 'file://D:/moove-travel/mooveTravel/node_modules/vue/index.mjs';
+import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file://D:/moove-travel/mooveTravel/node_modules/unhead/dist/plugins.mjs';
+import { createHooks } from 'file://D:/moove-travel/mooveTravel/node_modules/hookable/dist/index.mjs';
+import { createFetch, Headers as Headers$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/ofetch/dist/node.mjs';
+import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://D:/moove-travel/mooveTravel/node_modules/node-mock-http/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file://D:/moove-travel/mooveTravel/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://D:/moove-travel/mooveTravel/node_modules/unstorage/drivers/fs.mjs';
+import { digest } from 'file://D:/moove-travel/mooveTravel/node_modules/ohash/dist/index.mjs';
+import { toRouteMatcher, createRouter } from 'file://D:/moove-travel/mooveTravel/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
-import consola, { consola as consola$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/youch-core/build/index.js';
-import { Youch } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/source-map/source-map.js';
+import consola, { consola as consola$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/consola/dist/index.mjs';
+import { ErrorParser } from 'file://D:/moove-travel/mooveTravel/node_modules/youch-core/build/index.js';
+import { Youch } from 'file://D:/moove-travel/mooveTravel/node_modules/youch/build/index.js';
+import { SourceMapConsumer } from 'file://D:/moove-travel/mooveTravel/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { stringify, uneval } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/devalue/index.js';
-import { captureRawStackTrace, parseRawStackTrace } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/errx/dist/index.js';
-import { isVNode, toValue, isRef } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/vue/index.mjs';
-import { createHead as createHead$1, propsToString, renderSSRHead } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unhead/dist/server.mjs';
-import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unhead/dist/plugins.mjs';
-import { walkResolver } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unhead/dist/utils.mjs';
+import { getContext } from 'file://D:/moove-travel/mooveTravel/node_modules/unctx/dist/index.mjs';
+import { captureRawStackTrace, parseRawStackTrace } from 'file://D:/moove-travel/mooveTravel/node_modules/errx/dist/index.js';
+import { walkResolver } from 'file://D:/moove-travel/mooveTravel/node_modules/unhead/dist/utils.mjs';
 
-const serverAssets = [{"baseName":"server","dir":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"D:/moove-travel/mooveTravel/server/assets"}];
 
 const assets = createStorage();
 
@@ -45,11 +45,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel","watchOptions":{"ignored":[null]}}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/server","watchOptions":{"ignored":[null]}}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.data/kv"}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:/moove-travel/mooveTravel","watchOptions":{"ignored":[null]}}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:/moove-travel/mooveTravel/server","watchOptions":{"ignored":[null]}}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:/moove-travel/mooveTravel/.nuxt"}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:/moove-travel/mooveTravel/.nuxt/cache"}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"D:/moove-travel/mooveTravel/.data/kv"}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -690,11 +690,6 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
   }
 });
 
-getContext("nitro-app", {
-  asyncContext: false,
-  AsyncLocalStorage: void 0
-});
-
 const config = useRuntimeConfig();
 const _routeRulesMatcher = toRouteMatcher(
   createRouter({ routes: config.nitro.routeRules })
@@ -1010,13 +1005,13 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _Da66Z8t6Ddyjhh3GvY8ylDRY4UZZHLznNyXYPVxjiKs = (function(nitro) {
+const _16L6AquKi9o0KzAo_YjggwMfiBz4xpbtolCCXpOvD9o = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
-const rootDir = "/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel";
+const rootDir = "D:/moove-travel/mooveTravel";
 
 const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"format-detection","content":"telephone=no"},{"name":"description","content":"Moov Travel - профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления. Работаем без выходных, ведём клиентов до конца путешествия."},{"name":"keywords","content":"туристическое агентство, туры, отдых, путешествия, Турция, Египет, ОАЭ, Таиланд, Мальдивы, семейный отдых, бронирование туров"},{"name":"author","content":"Moov Travel"},{"name":"robots","content":"index, follow"},{"name":"language","content":"ru"},{"property":"og:title","content":"Moov Travel - Туристическое агентство"},{"property":"og:description","content":"Профессиональное туристическое агентство. Подбираем туры как себе - с учётом всех ваших пожеланий и бюджета."},{"property":"og:type","content":"website"},{"property":"og:url","content":"https://moov-travel.ru"},{"property":"og:image","content":"/src/assets/images/logoMoov.svg"},{"property":"og:image:width","content":"1200"},{"property":"og:image:height","content":"630"},{"property":"og:site_name","content":"Moov Travel"},{"property":"og:locale","content":"ru_RU"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:title","content":"Moov Travel - Туристическое агентство"},{"name":"twitter:description","content":"Профессиональное туристическое агентство. Подбираем туры как себе - с учётом всех ваших пожеланий и бюджета."},{"name":"twitter:image","content":"/src/assets/images/logoMoov.svg"},{"name":"theme-color","content":"#C75454"},{"name":"msapplication-TileColor","content":"#C75454"},{"name":"apple-mobile-web-app-capable","content":"yes"},{"name":"apple-mobile-web-app-status-bar-style","content":"default"},{"name":"apple-mobile-web-app-title","content":"Moov Travel"},{"name":"application-name","content":"Moov Travel"},{"name":"mobile-web-app-capable","content":"yes"},{"name":"geo.region","content":"RU"},{"name":"geo.placename","content":"Москва"},{"name":"business:contact_data:street_address","content":"Скоро откроемся!"},{"name":"business:contact_data:phone_number","content":"+7 903 173-77-88"},{"name":"business:contact_data:email","content":"Sputnik@moov-travel.ru"}],"link":[{"rel":"canonical","href":"https://moov-travel.ru"},{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"},{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"},{"rel":"apple-touch-icon","sizes":"180x180","href":"/src/assets/images/logoMoov.svg"},{"rel":"icon","type":"image/png","sizes":"32x32","href":"/src/assets/images/logoMoov.svg"},{"rel":"icon","type":"image/png","sizes":"16x16","href":"/src/assets/images/logoMoov.svg"},{"rel":"manifest","href":"/site.webmanifest"}],"style":[],"script":[{"type":"application/ld+json","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"TravelAgency\",\"name\":\"Moov Travel\",\"description\":\"Профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления.\",\"url\":\"https://moov-travel.ru\",\"logo\":\"https://moov-travel.ru/src/assets/images/logoMoov.svg\",\"image\":\"https://moov-travel.ru/src/assets/images/logoMoov.svg\",\"telephone\":\"+7 903 173-77-88\",\"email\":\"Sputnik@moov-travel.ru\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Москва\",\"addressCountry\":\"RU\"},\"openingHours\":\"Mo-Su 00:00-23:59\",\"priceRange\":\"$$\",\"areaServed\":[\"RU\"],\"serviceType\":[\"Туристические услуги\",\"Бронирование туров\",\"Организация путешествий\"],\"hasOfferCatalog\":{\"@type\":\"OfferCatalog\",\"name\":\"Туристические направления\",\"itemListElement\":[{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Турцию\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Египет\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в ОАЭ\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Таиланд\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры на Мальдивы\"}}]}}"}],"noscript":[],"title":"Moov Travel - Туристическое агентство | Отпуск, после которого хочется ещё"};
 
@@ -1035,7 +1030,7 @@ const devReducers = {
   URL: (data) => data instanceof URL ? data.toString() : void 0
 };
 const asyncContext = getContext("nuxt-dev", { asyncContext: true, AsyncLocalStorage });
-const _FrIm6uF8DREGtKSSzedkqWLZvWQe4bAv_PdhxI_K_HI = (nitroApp) => {
+const _ONCT6LZLzRmVEoOHV1qcBo4PKFdXu9A1jwtcxoiZpw = (nitroApp) => {
   const handler = nitroApp.h3App.handler;
   nitroApp.h3App.handler = (event) => {
     return asyncContext.callAsync({ logs: [], event }, () => handler(event));
@@ -1105,8 +1100,8 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _Da66Z8t6Ddyjhh3GvY8ylDRY4UZZHLznNyXYPVxjiKs,
-_FrIm6uF8DREGtKSSzedkqWLZvWQe4bAv_PdhxI_K_HI
+  _16L6AquKi9o0KzAo_YjggwMfiBz4xpbtolCCXpOvD9o,
+_ONCT6LZLzRmVEoOHV1qcBo4PKFdXu9A1jwtcxoiZpw
 ];
 
 const VueResolver = (_, value) => {
@@ -1180,8 +1175,8 @@ function publicAssetsURL(...path) {
 
 const APP_ROOT_OPEN_TAG = `<${appRootTag}${propsToString(appRootAttrs)}>`;
 const APP_ROOT_CLOSE_TAG = `</${appRootTag}>`;
-const getServerEntry = () => import('file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
-const getClientManifest = () => import('file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file://D:/moove-travel/mooveTravel/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file://D:/moove-travel/mooveTravel/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   if (!manifest) {
@@ -1427,12 +1422,12 @@ async function getIslandContext(event) {
   return ctx;
 }
 
-const _lazy_aY8hHE = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_mgPqYH = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_aY8hHE, lazy: true, middleware: false, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_mgPqYH, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_aY8hHE, lazy: true, middleware: false, method: undefined }
+  { route: '/**', handler: _lazy_mgPqYH, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
