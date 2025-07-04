@@ -1,3 +1,29 @@
-/*
- * The app doesn't have any components yet.
- */
+import type { Schema, Struct } from '@strapi/strapi';
+
+export interface MainPageAboutUsBlock extends Struct.ComponentSchema {
+  collectionName: 'components_main_page_about_us_blocks';
+  info: {
+    displayName: 'aboutUsBlock';
+    icon: 'question';
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    buttonLink: Schema.Attribute.String;
+    firstNumber: Schema.Attribute.String;
+    firstText: Schema.Attribute.Text;
+    secondNumber: Schema.Attribute.String;
+    secondText: Schema.Attribute.Text;
+    thirdNumber: Schema.Attribute.String;
+    thirdText: Schema.Attribute.Text;
+  };
+}
+
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
+      'main-page.about-us-block': MainPageAboutUsBlock;
+    }
+  }
+}

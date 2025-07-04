@@ -467,6 +467,35 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMainPageMainPage extends Struct.SingleTypeSchema {
+  collectionName: 'main_pages';
+  info: {
+    displayName: 'mainPage';
+    pluralName: 'main-pages';
+    singularName: 'main-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aboutUs: Schema.Attribute.Component<'main-page.about-us-block', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::main-page.main-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTravelGuideTravelGuide extends Struct.CollectionTypeSchema {
   collectionName: 'travel_guides';
   info: {
@@ -1012,6 +1041,7 @@ declare module '@strapi/strapi' {
       'api::article-tag.article-tag': ApiArticleTagArticleTag;
       'api::article.article': ApiArticleArticle;
       'api::country.country': ApiCountryCountry;
+      'api::main-page.main-page': ApiMainPageMainPage;
       'api::travel-guide.travel-guide': ApiTravelGuideTravelGuide;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
