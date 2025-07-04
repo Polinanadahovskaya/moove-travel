@@ -77,6 +77,20 @@
         </div>
       </div>
     </div>
+    <div class="articles-block">
+      <h2>Статьи (Временный блок)</h2>
+      <div v-if="loading">Загрузка статей...</div>
+      <div v-else-if="error">Ошибка: {{ error }}</div>
+      <div v-else>
+        <div v-if="getArticles.length === 0">Нет статей для отображения.</div>
+        <ul v-else>
+          <li v-for="article in getArticles" :key="article.id">
+            <h3>{{ article.Title }}</h3>
+            <p>{{ article.Description }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
     <popup-application id="application"/>
   </div>
 </template>
@@ -84,8 +98,14 @@
 <script setup>
 import {onMounted} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
+import { useArticlesStore } from '~/src/store/articles'
+import { storeToRefs } from 'pinia'
 
-onMounted(() => {
+const articlesStore = useArticlesStore()
+const { getArticles, loading, error } = storeToRefs(articlesStore)
+
+onMounted(async () => {
+  await articlesStore.fetchArticles()
   if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {
     const script = document.createElement('script')
     script.type = 'text/javascript'
