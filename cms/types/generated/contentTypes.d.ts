@@ -479,6 +479,7 @@ export interface ApiMainPageMainPage extends Struct.SingleTypeSchema {
   };
   attributes: {
     aboutUs: Schema.Attribute.Component<'main-page.about-us-block', false>;
+    advantages: Schema.Attribute.Component<'main-page.advantages', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

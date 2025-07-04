@@ -18,6 +18,11 @@
       "type": "component",
       "component": "main-page.about-us-block",
       "repeatable": false
+    },
+    "advantages": {
+      "type": "component",
+      "component": "main-page.advantages",
+      "repeatable": true
     }
   }
 }

@@ -20,10 +20,24 @@ export interface MainPageAboutUsBlock extends Struct.ComponentSchema {
   };
 }
 
+export interface MainPageAdvantages extends Struct.ComponentSchema {
+  collectionName: 'components_main_page_advantages';
+  info: {
+    displayName: 'advantages';
+    icon: 'alien';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'main-page.about-us-block': MainPageAboutUsBlock;
+      'main-page.advantages': MainPageAdvantages;
     }
   }
 }
