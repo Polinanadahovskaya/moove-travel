@@ -91,6 +91,18 @@
         </ul>
       </div>
     </div>
+    <div class="main-page-block">
+      <h2>Главная страница (main-page)</h2>
+      <div v-if="loadingPage">Загрузка данных главной страницы...</div>
+      <div v-else-if="errorPage">Ошибка: {{ errorPage }}</div>
+      <div v-else-if="mainPage">
+        <h3>{{ mainPage.attributes.title }}</h3>
+        <div v-if="mainPage.attributes.aboutUs">
+          <h4>О нас</h4>
+          <pre>{{ mainPage.attributes.aboutUs }}</pre>
+        </div>
+      </div>
+    </div>
     <popup-application id="application"/>
   </div>
 </template>
@@ -99,13 +111,19 @@
 import {onMounted} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
+import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
 
 const articlesStore = useArticlesStore()
+const pagesStore = usePagesStore()
 const { getArticles, loading, error } = storeToRefs(articlesStore)
+const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
 
 onMounted(async () => {
-  await articlesStore.fetchArticles()
+  await Promise.all([
+    articlesStore.fetchArticles(),
+    pagesStore.fetchMainPage()
+  ])
   if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {
     const script = document.createElement('script')
     script.type = 'text/javascript'
