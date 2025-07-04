@@ -1,6 +1,6 @@
 <template>
   <div class="tub-country-container">
-    <NuxtLink to="/countryArticle" style="text-decoration: none;">
+    <NuxtLink :to="id === 'gid' ? '/countryGid' : '/countryArticle'" style="text-decoration: none;">
       <div class="country-background">
         <div class="country-text">Страна</div>
       </div>
@@ -11,6 +11,13 @@
 defineOptions({
   name: "tubCountry",
 })
+defineProps({
+  id: {
+    type: String,
+    required: false
+  }
+})
+
 </script>
 <style scoped>
 .tub-country-container {

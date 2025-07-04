@@ -15,7 +15,7 @@
       <h2 class="travel-country">Страны</h2>
       <div class="travel-grid gid-trav">
         <div v-for="a in countryCount" :key="a">
-          <tub-country/>
+          <tub-country id="gid"/>
         </div>
       </div>
       <popupTravelGid class="none-art"/>

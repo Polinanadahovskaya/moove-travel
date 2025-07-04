@@ -5,10 +5,10 @@
         <div class="variant-tittle">Название</div>
         <div class="variant-text">Описание</div>
       </div>
-      <div>
+      <NuxtLink to="/pageGid" style="text-decoration: none; color: #1E1E1E">
         <div class="variant-price">{{ formatPrice(1990) }} ₽</div>
         <div class="variant-button">Купить</div>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

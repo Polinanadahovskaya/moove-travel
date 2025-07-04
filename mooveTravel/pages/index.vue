@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="main-header_tittle">
-      <h1>Куда поедем<br/>
-        отдыхать?
+      <h1 class="main-tittle-header">
+        {{mainPage?.title}}
       </h1>
     </div>
     <div class="tv-search-form" data-tv-moduleid="9971497"></div>
@@ -31,13 +31,13 @@
         <div class="about-border"></div>
       </div>
       <div class="about-block">
-        <NuxtLink to="about" class="link-button">
+        <NuxtLink :to="mainPage?.aboutUs?.buttonLink" class="link-button">
           <div class="block-button">Подробнее</div>
         </NuxtLink>
         <div class="numbers">
-          <div v-for="arr in aboutArray" :key="arr">
+          <div v-for="arr in aboutArray" :key="arr.number">
             <div class="block-tab">
-              <div class="tub-number">{{ arr.id }}</div>
+              <div class="tub-number">{{ arr.number }}</div>
               <div class="block-text">{{ arr.text }}</div>
             </div>
           </div>
@@ -52,54 +52,28 @@
       <div>
         <div class="panel">
           <div class="panel-column">
-            <div v-for="arr in pluses.slice(0, 2)" :key="arr">
+            <div v-for="arr in mainPage?.advantages.slice(0, 2)" :key="arr">
               <div class="tab-panel">
                 <div class="tab">
-                  <div class="mask" :class="{'time-mask': arr.id === 'time', 'end-mask': arr.id === 'end' }"></div>
+                  <div class="mask" :class="{'time-mask': arr.id === 9, 'end-mask': arr.id === 10 }"></div>
                 </div>
-                <div class="tab-text"><span class="bold">{{ arr.boldText }}</span> {{ arr.text }}
+                <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{ arr.description }}
                 </div>
               </div>
             </div>
           </div>
           <div class="panel-column">
-            <div v-for="arr in pluses.slice(2, 4)" :key="arr">
+            <div v-for="arr in mainPage?.advantages.slice(2, 4)" :key="arr">
               <div class="tab-panel">
                 <div class="tab">
                   <div class="mask"
-                       :class="{'self-mask': arr.id === 'self', 'ticket-mask': arr.id === 'ticket' }"></div>
+                       :class="{'self-mask': arr.id === 11, 'ticket-mask': arr.id === 12 }"></div>
                 </div>
-                <div class="tab-text"><span class="bold">{{ arr.boldText }}</span> {{ arr.text }}
+                <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{arr.description }}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="articles-block">
-      <h2>Статьи (Временный блок)</h2>
-      <div v-if="loading">Загрузка статей...</div>
-      <div v-else-if="error">Ошибка: {{ error }}</div>
-      <div v-else>
-        <div v-if="getArticles.length === 0">Нет статей для отображения.</div>
-        <ul v-else>
-          <li v-for="article in getArticles" :key="article.id">
-            <h3>{{ article.Title }}</h3>
-            <p>{{ article.Description }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="main-page-block">
-      <h2>Главная страница (main-page)</h2>
-      <div v-if="loadingPage">Загрузка данных главной страницы...</div>
-      <div v-else-if="errorPage">Ошибка: {{ errorPage }}</div>
-      <div v-else-if="mainPage">
-        <h3>{{ mainPage.attributes.title }}</h3>
-        <div v-if="mainPage.attributes.aboutUs">
-          <h4>О нас</h4>
-          <pre>{{ mainPage.attributes.aboutUs }}</pre>
         </div>
       </div>
     </div>
@@ -138,44 +112,30 @@ onMounted(async () => {
   }
 })
 
-const aboutArray = [
-  {
-    id: '01',
-    text: "Мы запустили агентство, потому что устали от шаблонного сервиса. Здесь нет случайных туров и формального подхода. Честный подбор, внимание к деталям и уважение к чужому отпуску."
-  },
-  {
-    id: '02',
-    text: "Не впариваем. Не торопим. Слушаем. Подбираем тур под вас, а не под акции. Мы за комфорт, разум и человеческое отношение — без скриптов и маркетинговых фокусов."
-  },
-  {
-    id: '03',
-    text: "Мы не гонимся за количеством. Нам важно, чтобы вы вернулись — и привели тех, кто дорог и вам. Потому что хороший отдых начинается с тех, кто вас к нему ведёт."
-  }]
-const pluses = [
-  {
-    id: 'time',
-    boldText: 'Работаем без выходных',
-    text: ' — всегда на связи, когда удобно вам.'
-  },
-  {
-    id: 'end',
-    boldText: 'Ведём до конца',
-    text: ' — остаёмся на связи до вашего возвращения.'
-  },
-  {
-    id: 'self',
-    boldText: 'Подбираем, как себе',
-    text: '— учитываем желания, бюджет и нюансы.'
-  },
-  {
-    id: 'ticket',
-    boldText: 'Создаем лучшие тревел-гиды',
-    text: '— изучаем маршруты и отели не по вебинарам, а своими ногами.'
-  }
-]
+const aboutArray = computed(() => {
+  if (!mainPage.value?.aboutUs) return []
+  return [
+    { number: mainPage.value.aboutUs.firstNumber, text: mainPage.value.aboutUs.firstText },
+    { number: mainPage.value.aboutUs.secondNumber, text: mainPage.value.aboutUs.secondText },
+    { number: mainPage.value.aboutUs.thirdNumber, text: mainPage.value.aboutUs.thirdText }
+  ]
+})
 </script>
 
 <style scoped lang="scss">
+.main-tittle-header{
+  width: 60%;
+ @media (max-width: 1400px) {
+   width: 40%;
+ }
+  @media (max-width: 1200px) {
+    width: 35%;
+  }
+  @media (max-width: 450px) {
+    width: 40%;
+  }
+}
+
 .main-header_tittle {
   margin: 90px auto 33px;
   @media (max-width: 576px) {
@@ -205,6 +165,8 @@ const pluses = [
   }
   @media (max-width: 1050px) {
     height: 350px;
+  }
+  @media (max-width: 1000px) {
     background-size: contain;
   }
   @media (max-width: 900px) {
@@ -213,6 +175,9 @@ const pluses = [
   }
   @media (max-width: 768px) {
     height: 250px;
+  }
+  @media (max-width: 700px) {
+    background-size: contain;
   }
   @media (max-width: 576px) {
     height: 131px;

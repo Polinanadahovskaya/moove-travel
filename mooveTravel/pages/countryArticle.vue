@@ -55,6 +55,15 @@ const router = useRouter()
   }
   @media (max-width: 576px) {
     height: 82px;
+    background-size: cover;
+    width: 100%;
+    position: static;
+    margin-left: 0;
+    margin-right: 0;
+    left: unset;
+    right: unset;
+    background-position-y: center;
+    box-sizing: border-box;
   }
 }
 
@@ -69,6 +78,12 @@ const router = useRouter()
   text-shadow: 0 2px 8px #0006;
   position: relative;
   right: 10%;
+  @media (max-width: 576px) {
+    font-size: 18px;
+    margin-top: 0;
+    right: 0;
+    padding: 4px 8px;
+  }
 }
 
 .header-content {
@@ -79,6 +94,12 @@ const router = useRouter()
   align-items: flex-start;
   height: 100%;
   padding: 40px 48px 0 48px;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px 0 16px;
+    gap: 8px;
+  }
 }
 
 .header-content h1 {
@@ -90,6 +111,12 @@ const router = useRouter()
     left: 7.4%;
     position: relative;
     bottom: -38%;
+  }
+  @media (max-width: 576px) {
+    font-size: 22px;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 4px;
   }
 }
 </style>

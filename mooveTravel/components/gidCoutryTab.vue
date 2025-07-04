@@ -48,6 +48,14 @@ const formatPrice = (price) => {
     flex-direction: column;
     height: 100%;
   }
+  @media (max-width: 900px) {
+    padding: 30px 20px 30px;
+    border-radius: 9px;
+  }
+  @media (max-width: 576px) {
+    padding: 25px 10px 10px;
+    border-radius: 6px;
+  }
 }
 
 .gid-country_art {
@@ -60,6 +68,15 @@ const formatPrice = (price) => {
   font-weight: 700;
   font-size: 48px;
   line-height: 100%;
+  @media (max-width: 1200px) {
+    font-size: 36px;
+  }
+  @media (max-width: 900px) {
+    font-size: 24px;
+  }
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
   @media (max-width: 576px) {
     font-size: 12px;
   }
@@ -73,6 +90,18 @@ const formatPrice = (price) => {
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  @media (max-width: 1200px) {
+    font-size: 18px;
+  }
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
 .gid-country_inf {
@@ -91,6 +120,22 @@ const formatPrice = (price) => {
   flex-shrink: 0;
   @media (max-width: 1200px) {
     width: 100%;
+  }
+  @media (max-width: 1200px) {
+    height: 250px;
+    border-radius: 20px;
+  }
+  @media (max-width: 900px) {
+    height: 200px;
+    border-radius: 14px;
+  }
+  @media (max-width: 768px) {
+    height: 150px;
+    border-radius: 9px;
+  }
+  @media (max-width: 576px) {
+    height: 80px;
+    border-radius: 6px;
   }
 }
 
@@ -111,12 +156,21 @@ const formatPrice = (price) => {
   @media (max-width: 1600px) {
     font-size: 24px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
     font-size: 18px;
+  }
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+  @media (max-width: 576px) {
+    font-size: 8px;
   }
 }
 
-.fix-price{
+.fix-price {
   font-weight: 700;
   font-size: 64px;
   line-height: 100%;
@@ -124,14 +178,24 @@ const formatPrice = (price) => {
   @media (max-width: 1600px) {
     font-size: 44px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
+    font-size: 36px;
+  }
+  @media (max-width: 900px) {
     font-size: 24px;
+  }
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+  @media (max-width: 576px) {
+    font-size: 12px;
   }
 }
 
 
-.gid-header-mobile{
+.gid-header-mobile {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 

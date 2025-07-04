@@ -36,6 +36,10 @@ const router = useRouter()
   display: flex;
   flex-direction: column;
   background: linear-gradient(273.87deg, #D27A00 3.64%, #F89C1D 76.11%);
+  @media (max-width: 1200px) {
+    height: 182px;
+    padding: 40px;
+  }
   @media (max-width: 768px) {
     height: 82px;
     padding: 20px 20px 30px;
@@ -51,6 +55,9 @@ const router = useRouter()
   display: flex;
   align-items: center;
   flex: 1;
+  @media (max-width: 1200px) {
+    font-size: 38px;
+  }
   @media (max-width: 768px) {
     font-size: 18px;
   }
@@ -75,5 +82,11 @@ const router = useRouter()
   flex-direction: column;
   gap: 30px;
   margin: 70px auto 160px;
+  @media (max-width: 900px) {
+    gap: 25px;
+  }
+  @media (max-width: 768px) {
+    gap: 21px;
+  }
 }
 </style>
