@@ -101,7 +101,7 @@
       <div class="lid-container">
         <div v-if="!isMobile && !isTablet" class="giv-lid"
              :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/>
-          вы даёте согласие на <NuxtLink to="/loyarInformation" :class="{'color-link': route.path === '/about' || route.path === '/blog'}"
+          вы даёте согласие на <NuxtLink to="/loyarInformation" :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || route.path === '/blog'}"
                                   class="giv-lid-href"> обработку<br/> персональных данных.</NuxtLink></div>
       </div>
     </div>
@@ -798,13 +798,20 @@ watch(isTablet, (val) => {
   @media (min-width: 576px) {
     position: absolute;
   }
-  @media (max-width: 1840px) {
+  @media (max-width: 2000px) {
     right: 20px;
+  }
+  @media (max-width: 1840px) {
+    right: -20px;
   }
   @media (max-width: 1650px) {
     right: -25px;
     font-size: 14px;
     top: -45px;
+  }
+  @media (max-width: 1500px) {
+    right: -13px;
+    top: -4px;
   }
   @media (max-width: 1200px) {
     left: 0;
