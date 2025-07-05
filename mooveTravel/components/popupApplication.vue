@@ -818,7 +818,7 @@ watch(isTablet, (val) => {
     top: 153px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     right: -25px;
     font-size: 14px;
     top: -45px;
@@ -867,7 +867,7 @@ watch(isTablet, (val) => {
 }
 
 .popup-giv-button{
-  @media (max-width: 576px) {
+  @media (max-width: 900px) {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
