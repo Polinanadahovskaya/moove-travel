@@ -2,9 +2,9 @@
   <div class="team-tab-root">
     <div class="team-body">
       <div class="team-round" :style="{ backgroundImage: `url('${props.imgUrl}')` }"></div>
-      <div class="team-name">{{ element.name }}</div>
-      <div class="name-first-text">{{element.firstText}}</div>
-      <div class="name-text">{{element.text}}</div>
+      <div class="team-name">{{ element.fio }}</div>
+      <div class="name-first-text">{{element.position}}</div>
+      <div class="name-text">{{element.description}}</div>
     </div>
   </div>
 </template>

@@ -1,9 +1,8 @@
 <template>
   <div>
     <div>
-      <div class="about-baner">
-        <h1 style="color: #FFFFFF">Moov Travel — отпуск,<br/>
-          после которого хочется ещё</h1>
+      <div class="about-baner"   :style="getAboutUsPage?.banner?.backgroundImage?.url ? { backgroundImage: `url('${getAboutUsPage.banner.backgroundImage.url}')` } : {backgroundImage: `url('${planeImg}')`}">
+        <h1 style="color: #FFFFFF">{{getAboutUsPage?.title}}</h1>
         <div class="about-border"></div>
         <div class="about-points">
           <div v-for="arr in aboutMoove">
@@ -20,23 +19,23 @@
         <div class="about-location">
           <div class="contacts">
            <div>
-             <div class="location">Скоро откроемся!</div>
-             <div class="location-text">Временно работаем онлайн
+             <div class="location">{{getAboutUsPage?.office?.title}}</div>
+             <div class="location-text">{{getAboutUsPage?.office?.description}}
            </div>
             </div>
             <div class="contacts-phone">
               <div class="location">Контакты</div>
               <div class="location-phone">
                 <div class="phone"></div>
-                <div class="number">+7 903 173-77-88</div>
+                <div class="number">{{getAboutUsPage?.office?.phone}}</div>
               </div>
               <div class="location-phone">
                 <div class="mail"></div>
-                <div class="number">Sputnik@moov-travel.ru</div>
+                <div class="number">{{getAboutUsPage?.office?.email}}</div>
               </div>
             </div>
           </div>
-          <div class="map"></div>
+          <div class="map" :style="getAboutUsPage?.office?.image?.url ? { backgroundImage: `url('${getAboutUsPage?.office?.image.url}')` } : {backgroundImage: `url('${officeImg}')`}"></div>
         </div>
       </div>
       <div class="team">
@@ -45,9 +44,9 @@
           <div class="about-border"></div>
         </div>
         <div class="blog-grid">
-          <div v-for="arr in aboutTeam" class="team-card">
+          <div v-for="arr in getAboutUsPage.personal" class="team-card">
             <team-tab
-                :imgUrl="arr.img"
+                :imgUrl="arr.image.url"
                 :element="arr"/>
           </div>
         </div>
@@ -62,6 +61,8 @@ import PopupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
 import tanyaImg from '/src/assets/images/tanya.png'
 import andrewImg from '/src/assets/images/andrew.png'
+import planeImg from '~/src/assets/images/Plane.svg'
+import officeImg from '~/src/assets/images/fastOpen.png'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
@@ -76,21 +77,14 @@ const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
 onMounted(() => {
   pagesStore.fetchAboutUsPage()
 })
-
-const aboutMoove = [
-  {
-    id: '01',
-    text: 'Подбираем тур как себе — учтём всё: даты, бюджеты, детские <br>клубы, лавандовые подушки в номере'
-  },
-  {
-    id: '02',
-    text: 'Топ-направления — Турция, Египет, ОАЭ, Таиланд, Мальдивы — <br>и ещё в запасе'
-  },
-  {
-    id: '03',
-    text: 'На связи с клиентами без выходных'
-  }
-]
+const aboutMoove = computed(() => {
+  if (!getAboutUsPage.value?.banner) return []
+  return [
+    { id: getAboutUsPage.value?.banner.firstNumber, text: getAboutUsPage.value?.banner.firstText },
+    { id: getAboutUsPage.value?.banner.secondNumber, text: getAboutUsPage.value?.banner.secondText },
+    { id: getAboutUsPage.value?.banner.thirdNumber, text: getAboutUsPage.value?.banner.thirdText }
+  ]
+})
 const aboutTeam = [
   {
     id: 1,
@@ -112,7 +106,6 @@ const aboutTeam = [
 
 <style scoped>
 .about-baner {
-  background: url("/src/assets/images/Plane.svg") no-repeat;
   width: 100vw;
   position: relative;
   display: flex;
