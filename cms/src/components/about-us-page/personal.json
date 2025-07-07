@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_about_us_page_personals",
+  "info": {
+    "displayName": "personal"
+  },
+  "options": {},
+  "attributes": {
+    "fio": {
+      "type": "string"
+    },
+    "position": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

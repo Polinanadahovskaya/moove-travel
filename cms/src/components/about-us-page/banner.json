@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_about_us_page_banners",
+  "info": {
+    "displayName": "banner"
+  },
+  "options": {},
+  "attributes": {
+    "firstNumber": {
+      "type": "string"
+    },
+    "firstText": {
+      "type": "text"
+    },
+    "secondNumber": {
+      "type": "string"
+    },
+    "secondText": {
+      "type": "text"
+    },
+    "thirdNumber": {
+      "type": "string"
+    },
+    "thirdText": {
+      "type": "text"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

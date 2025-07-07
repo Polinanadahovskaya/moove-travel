@@ -62,9 +62,19 @@ import PopupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
 import tanyaImg from '/src/assets/images/tanya.png'
 import andrewImg from '/src/assets/images/andrew.png'
+import { usePagesStore } from '~/src/store/pages'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
 defineOptions({
   name: "About",
+})
+
+const pagesStore = usePagesStore()
+const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
+
+onMounted(() => {
+  pagesStore.fetchAboutUsPage()
 })
 
 const aboutMoove = [
