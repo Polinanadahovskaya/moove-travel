@@ -68,7 +68,7 @@ const articlesStore = useArticlesStore()
 const usersStore = useUsersStore()
 
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
-const typeFilters = computed(() => articlesStore.getArticleTags.map(tag => tag.attributes?.name || ''))
+const typeFilters = computed(() => articlesStore.getArticleTags.map(tag => tag?.name || ''))
 const authorFilters = Array.from({length: 4}, () => 'Фильтр')
 
 
