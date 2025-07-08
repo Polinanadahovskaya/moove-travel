@@ -98,7 +98,7 @@ const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeT
 
 onMounted(async () => {
   await Promise.all([
-    articlesStore.fetchArticles(),
+    articlesStore.fetchArticleByLink('tailand'),
     pagesStore.fetchMainPage()
   ])
   if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {
