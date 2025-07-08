@@ -5,6 +5,7 @@ import { useRuntimeConfig } from '#app'
 export const useArticlesStore = defineStore('articles', {
   state: () => ({
     articles: [] as any[],
+    articleTags: [] as any[],
     loading: false as boolean,
     error: null as string | null,
   }),
@@ -14,7 +15,7 @@ export const useArticlesStore = defineStore('articles', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/articles', {
+        const response = await axios.get('http://localhost:1337/api/articles?populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*', {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -47,8 +48,26 @@ export const useArticlesStore = defineStore('articles', {
         this.loading = false
       }
     },
+    async fetchArticleTags() {
+      this.loading = true
+      this.error = null
+      try {
+        const config = useRuntimeConfig()
+        const response = await axios.get('http://localhost:1337/api/article-tags', {
+          headers: {
+            Authorization: `Bearer ${config.public.apiToken}`,
+          },
+        })
+        this.articleTags = response.data.data
+      } catch (e: any) {
+        this.error = e.message || 'Ошибка при получении тегов статей'
+      } finally {
+        this.loading = false
+      }
+    },
   },
   getters: {
     getArticles: (state) => state.articles,
+    getArticleTags: (state) => state.articleTags,
   },
 }) 

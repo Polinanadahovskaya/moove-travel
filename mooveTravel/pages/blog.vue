@@ -59,12 +59,16 @@ import TubCountry from '../components/tubCountry.vue'
 import {computed, onMounted, ref} from 'vue'
 import { useCountriesStore } from '../src/store/countries'
 import { usePagesStore } from '../src/store/pages'
+import { useArticlesStore } from '../src/store/articles'
+import { useUsersStore } from '../src/store/users'
 
 const countriesStore = useCountriesStore()
 const pagesStore = usePagesStore()
+const articlesStore = useArticlesStore()
+const usersStore = useUsersStore()
 
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
-const typeFilters = Array.from({length: 6}, () => 'Фильтр')
+const typeFilters = computed(() => articlesStore.getArticleTags.map(tag => tag.attributes?.name || ''))
 const authorFilters = Array.from({length: 4}, () => 'Фильтр')
 
 
@@ -97,6 +101,9 @@ onMounted(() => {
   }
   pagesStore.fetchBlogPage()
   countriesStore.fetchCountries()
+  articlesStore.fetchArticles()
+  articlesStore.fetchArticleTags()
+  usersStore.fetchUsers()
 
 })
 </script>
