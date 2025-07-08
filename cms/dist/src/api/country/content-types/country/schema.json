@@ -15,6 +15,9 @@
             "type": "string",
             "required": true
         },
+        "link": {
+            "type": "string"
+        },
         "image": {
             "type": "media",
             "multiple": false,

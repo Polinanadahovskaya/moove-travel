@@ -8,6 +8,7 @@ export const usePagesStore = defineStore('pages', {
     loading: false as boolean,
     error: null as string | null,
     aboutUsPage: null as any,
+    blogPage: null as any,
   }),
   actions: {
     async fetchMainPage() {
@@ -44,9 +45,27 @@ export const usePagesStore = defineStore('pages', {
         this.loading = false
       }
     },
+    async fetchBlogPage() {
+      this.loading = true
+      this.error = null
+      try {
+        const config = useRuntimeConfig()
+        const response = await axios.get('http://localhost:1337/api/blog?populate=*', {
+          headers: {
+            Authorization: `Bearer ${config.public.apiToken}`,
+          },
+        })
+        this.blogPage = response.data.data
+      } catch (e: any) {
+        this.error = e.message || 'Ошибка при получении данных страницы блога'
+      } finally {
+        this.loading = false
+      }
+    },
   },
   getters: {
     getMainPage: (state) => state.mainPage,
     getAboutUsPage: (state) => state.aboutUsPage,
+    getBlogPage: (state) => state.blogPage,
   },
 }) 

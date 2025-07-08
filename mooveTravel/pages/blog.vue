@@ -57,6 +57,11 @@
 <script setup>
 import TubCountry from '../components/tubCountry.vue'
 import {computed, onMounted, ref} from 'vue'
+import { useCountriesStore } from '../src/store/countries'
+import { usePagesStore } from '../src/store/pages'
+
+const countriesStore = useCountriesStore()
+const pagesStore = usePagesStore()
 
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
 const typeFilters = Array.from({length: 6}, () => 'Фильтр')
@@ -79,6 +84,8 @@ const isMobile = computed(() => {
   return windowWidth.value <= 576 && windowWidth.value > 0
 })
 
+const blogData = computed(() => pagesStore.getBlogPage)
+
 onMounted(() => {
   if (typeof window !== 'undefined') {
     windowWidth.value = window.innerWidth
@@ -88,6 +95,9 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWindowWidth)
   }
+  pagesStore.fetchBlogPage()
+  countriesStore.fetchCountries()
+
 })
 </script>
 
