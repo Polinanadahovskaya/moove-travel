@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="about-baner"   :style="getAboutUsPage?.banner?.backgroundImage?.url ? { backgroundImage: `url('${getAboutUsPage.banner.backgroundImage.url}')` } : {backgroundImage: `url('${planeImg}')`}">
+      <div class="about-baner"   :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
         <h1 style="color: #FFFFFF">{{getAboutUsPage?.title}}</h1>
         <div class="about-border"></div>
         <div class="about-points">
@@ -44,7 +44,7 @@
           <div class="about-border"></div>
         </div>
         <div class="blog-grid">
-          <div v-for="arr in getAboutUsPage.personal" class="team-card">
+          <div v-for="arr in getAboutUsPage?.personal" class="team-card">
             <team-tab
                 :imgUrl="arr.image.url"
                 :element="arr"/>
@@ -101,6 +101,13 @@ const aboutTeam = [
     img: andrewImg
   },
 ]
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
 
 </script>
 
