@@ -46,7 +46,7 @@
         <div class="blog-grid">
           <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
             <team-tab
-                :imgUrl="arr.personal"
+                :imgUrl="getImageUrl(arr?.image?.url)"
                 :element="arr"/>
           </div>
         </div>
