@@ -11,14 +11,14 @@
     },
     "pluginOptions": {},
     "attributes": {
-        "Title": {
+        "title": {
             "type": "string",
             "required": true
         },
-        "Description": {
+        "description": {
             "type": "text"
         },
-        "Link": {
+        "link": {
             "type": "string",
             "required": true
         },
@@ -47,10 +47,10 @@
             "relation": "oneToMany",
             "target": "api::article-tag.article-tag"
         },
-        "PublishDate": {
+        "publishDate": {
             "type": "date"
         },
-        "Content": {
+        "content": {
             "type": "richtext"
         }
     }
