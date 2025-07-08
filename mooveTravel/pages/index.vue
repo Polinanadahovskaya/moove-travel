@@ -30,7 +30,7 @@
         <h2 class="about-tittle">О НАС</h2>
         <div class="about-border"></div>
       </div>
-      <div class="about-block">
+      <div class="about-block" :style="{ backgroundImage: `url('${getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')`}">
         <NuxtLink :to="mainPage?.aboutUs?.buttonLink" class="link-button">
           <div class="block-button">Подробнее</div>
         </NuxtLink>
@@ -55,7 +55,9 @@
             <div v-for="arr in mainPage?.advantages.slice(0, 2)" :key="arr">
               <div class="tab-panel">
                 <div class="tab">
-                  <div class="mask" :class="{'time-mask': arr.id === 9, 'end-mask': arr.id === 10 }"></div>
+                  <div class="mask"
+                       :style="{ mask: `url('${getImageUrl(arr?.image?.url)}')` }"
+                  ></div>
                 </div>
                 <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{ arr.description }}
                 </div>
@@ -67,7 +69,7 @@
               <div class="tab-panel">
                 <div class="tab">
                   <div class="mask"
-                       :class="{'self-mask': arr.id === 11, 'ticket-mask': arr.id === 12 }"></div>
+                       :style="{ mask: `url('${getImageUrl(arr?.image?.url)}')` }"></div>
                 </div>
                 <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{arr.description }}
                 </div>
@@ -87,6 +89,7 @@ import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
+import planeImg from "~/src/assets/images/Plane.svg";
 
 const articlesStore = useArticlesStore()
 const pagesStore = usePagesStore()
@@ -120,6 +123,13 @@ const aboutArray = computed(() => {
     { number: mainPage.value.aboutUs.thirdNumber, text: mainPage.value.aboutUs.thirdText }
   ]
 })
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
 </script>
 
 <style scoped lang="scss">

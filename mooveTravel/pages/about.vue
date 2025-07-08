@@ -35,7 +35,7 @@
               </div>
             </div>
           </div>
-          <div class="map" :style="getAboutUsPage?.office?.image?.url ? { backgroundImage: `url('${getAboutUsPage?.office?.image.url}')` } : {backgroundImage: `url('${officeImg}')`}"></div>
+          <div class="map" :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
         </div>
       </div>
       <div class="team">
@@ -44,9 +44,9 @@
           <div class="about-border"></div>
         </div>
         <div class="blog-grid">
-          <div v-for="arr in getAboutUsPage?.personal" class="team-card">
+          <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
             <team-tab
-                :imgUrl="arr.image.url"
+                :imgUrl="arr.personal"
                 :element="arr"/>
           </div>
         </div>
