@@ -4,9 +4,7 @@
       <h1 class="blog-tittle">Блог</h1>
       <div class="blog-border"></div>
     </div>
-    <div class="blog-text">Пишем о путешествиях, в которых сами были,<br/>
-      делимся личным опытом, полезными советами<br/>
-      и маршрутами, которые действительно работают
+    <div class="blog-text">{{blogData?.description}}
     </div>
     <div class="blog-grid">
       <div v-for="a in 6" :key="a" class="blog-item">
@@ -20,8 +18,8 @@
         <div class="article-tab-first">
           <div v-if="!isMobile" class="article-search">Поиск</div>
           <div class="article-article">
-            <div v-for="a in 3">
-              <tub-article/>
+            <div v-for="(link, idx) in links" :key="link" @click="goToArticle(link)">
+              <tub-article :link="link" />
             </div>
           </div>
         </div>
@@ -61,12 +59,20 @@ import { useCountriesStore } from '../src/store/countries'
 import { usePagesStore } from '../src/store/pages'
 import { useArticlesStore } from '../src/store/articles'
 import { useUsersStore } from '../src/store/users'
+import { useRouter } from 'vue-router'
+import tubArticle from '~/components/tubArticle.vue'
 
 const countriesStore = useCountriesStore()
 const pagesStore = usePagesStore()
 const articlesStore = useArticlesStore()
 const usersStore = useUsersStore()
+const router = useRouter()
 
+const links = ['turkey', 'second', 'third']
+
+function goToArticle(link) {
+  router.push(`/article/${link}`)
+}
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
 const typeFilters = computed(() => articlesStore.getArticleTags.map(tag => tag?.name || ''))
 const authorFilters = Array.from({length: 4}, () => 'Фильтр')

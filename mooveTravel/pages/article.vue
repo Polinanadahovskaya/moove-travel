@@ -5,17 +5,20 @@
       <h1 class="article_tittle">НАЗВАНИЕ СТАТЬИ</h1>
     </div>
     <div class="article_body">
-      <div>
-        <h2 class="art_tittle">Заголовок</h2>
-        <div class="art_text">Есть над чем задуматься: базовые сценарии поведения пользователей, вне зависимости от их уровня, должны быть функционально разнесены на независимые элементы. Равным образом, консультация с широким активом обеспечивает широкому кругу (специалистов) участие в формировании новых принципов формирования материально-технической и кадровой базы.
-          Не следует, однако, забывать, что постоянное информационно-пропагандистское обеспечение нашей деятельности не оставляет шанса для направлений прогрессивного развития. Учитывая ключевые сценарии поведения, существующая теория является качественно новой ступенью соответствующих условий активизации.
-          Прежде всего, дальнейшее развитие различных форм деятельности напрямую зависит от анализа существующих паттернов поведения. Таким образом, перспективное планирование требует от нас анализа стандартных подходов.
-          Имеется спорная точка зрения, гласящая примерно следующее: многие известные личности преданы социально-демократической анафеме. Безусловно, экономическая повестка сегодняшнего дня позволяет выполнить важные задания по разработке анализа существующих паттернов поведения.</div>
+      <div class="art-user">
+        <div>
+          <h2 class="art_tittle">Заголовок</h2>
+          <div class="art_text" v-html="compiledMarkdown"></div>
+        </div>
+        <div class="user">
+          <div></div>
+          <div></div>
+        </div>
       </div>
       <div class="none-art" >
         <div class="article_images">
-          <div v-for="a in 2">
-            <div class="article_image"></div>
+          <div v-for="img in article?.articlePhotos?.slice(0, 2)" :key="img.id">
+            <div class="article_image" :style="{backgroundImage: `url('${getImageUrl(img.url)}')`}"></div>
           </div>
         </div>
       </div>
@@ -27,10 +30,34 @@
 <script setup>
 import PopupArticle from "~/components/PopupArticle";
 import PopupApplication from "~/components/PopupApplication";
+import {useArticlesStore} from "~/src/store/articles.js";
+import {onMounted} from "vue";
+import { useRoute } from 'vue-router'
+import planeImg from "~/src/assets/images/Plane.svg";
+import { marked } from 'marked';
+
+const compiledMarkdown = computed(() => marked(article?.value.content));
 
 defineOptions({
   name: "article",
 })
+const route = useRoute()
+const link = route.params.link
+const articlesStore = useArticlesStore()
+const article = computed(() => articlesStore.getArticlesLink)
+onMounted(async () => {
+  await Promise.all([
+    articlesStore.fetchArticleByLink(link),
+  ])
+})
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
+
 </script>
 <style scoped>
 .article_header{
@@ -54,6 +81,16 @@ defineOptions({
     margin-bottom: 40px;
   }
 }
+
+.art-user{
+  display: flex;
+  flex-direction: column;
+}
+
+.user{
+  display: flex;
+}
+
 .article_tittle{
   line-height: 100%;
   color:white;
@@ -85,6 +122,15 @@ defineOptions({
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
+  @media (max-width: 1500px) {
+    font-size: 18px;
+  }
+  @media (max-width: 1200px) {
+    font-size: 16px;
+  }
+  @media (max-width: 900px) {
+    font-size: 14px;
+  }
   @media (max-width: 576px) {
     font-size: 12px;
   }
@@ -100,8 +146,18 @@ defineOptions({
   width: 555px;
   height: 440px;
   border-radius: 34px;
-  background: #D9D9D9;
+  background-repeat: no-repeat;
+  background-size: cover;
   flex-shrink: 0;
+  @media (max-width: 1500px) {
+    width: 450px;
+  }
+  @media (max-width: 1200px) {
+    width: 400px;
+  }
+  @media (max-width: 900px) {
+    width: 350px;
+  }
 }
 
 .article_back{

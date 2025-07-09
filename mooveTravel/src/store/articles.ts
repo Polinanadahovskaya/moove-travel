@@ -8,6 +8,7 @@ export const useArticlesStore = defineStore('articles', {
     articleTags: [] as any[],
     loading: false as boolean,
     error: null as string | null,
+    articlesLink: [] as any[],
   }),
   actions: {
     async fetchArticles() {
@@ -40,6 +41,7 @@ export const useArticlesStore = defineStore('articles', {
           }
         )
         // Если статья найдена, возвращаем первую (или null)
+        this.articlesLink = response.data.data[0]
         return response.data.data[0] || null
       } catch (e: any) {
         this.error = e.message || 'Ошибка при получении статьи по link'
@@ -69,5 +71,6 @@ export const useArticlesStore = defineStore('articles', {
   getters: {
     getArticles: (state) => state.articles,
     getArticleTags: (state) => state.articleTags,
+    getArticlesLink: (state) => state.articlesLink,
   },
 }) 
