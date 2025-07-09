@@ -358,7 +358,6 @@ const getImageUrl = (url) => {
   top: 0;
   width: 100%;
   height: 100%;
-  background: url("/src/assets/images/aboutBackground.png") no-repeat;
   border-radius: 34px;
   z-index: 0;
   background-size: cover;
