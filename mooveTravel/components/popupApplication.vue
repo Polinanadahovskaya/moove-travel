@@ -371,7 +371,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 }
 
 .popup-comp-background {
-  @media (min-width: 1200px) {
+  @media (min-width: 900px) {
     background: url("/src/assets/images/popupBack.png");
     padding: 176px 182px;
     width: 100vw;
@@ -728,7 +728,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 }
 
 .blog-popup{
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     background: url("/src/assets/images/popupBack.png") !important;
     margin-bottom: 40px !important;
   }
@@ -783,7 +783,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
-  @media (min-width: 576px) {
+  @media (min-width: 768px) {
     position: absolute;
   }
   @media (max-width: 2000px) {
@@ -809,9 +809,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 900px) {
     right: -25px;
     font-size: 14px;
-    top: -45px;
+    top: 0;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 8px;
   }
 }

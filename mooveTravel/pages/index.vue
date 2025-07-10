@@ -658,14 +658,20 @@ const getImageUrl = (url) => {
   @media (max-width: 1200px) {
     width: 85px;
     height: 85px;
+    mask-size: 85px 85px !important;
+    -webkit-mask-size: 85px 85px !important;
   }
   @media (max-width: 900px) {
     width: 55px;
     height: 55px;
+    mask-size: 55px 55px !important;
+    -webkit-mask-size: 55px 55px !important;
   }
   @media (max-width: 576px) {
     width: 25px;
     height: 25px;
+    mask-size: 25px 25px !important;
+    -webkit-mask-size: 25px 25px !important;
   }
 }
 

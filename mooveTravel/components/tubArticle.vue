@@ -3,10 +3,10 @@
     <div class="article-tab">
       <div class="article-information">
         <div class="article-inf">
-          <div class="article-profile-img"></div>
+          <div class="article-profile-img" :style="{background: `url('${getImageUrl(article.user.photo.url)}')`, backgroundSize: 'cover' }"></div>
         <div class="tab-header">
-          <div class="article-profile-name">Имя Фамилия</div>
-          <div class="article-profile-date">Дата</div>
+          <div class="article-profile-name">{{article.user.fio}}</div>
+          <div class="article-profile-date">{{article.createdAt}}</div>
         </div>
         </div>
         <div class="article-text" v-html="compiledArticle"></div>
@@ -16,13 +16,14 @@
         </div>
       </div>
       </div>
-      <div class="article-img"></div>
+      <div class="article-img" :style="{background: `url('${getImageUrl(article?.articlePhotos[0]?.url)}')`, backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' }"></div>
     </div>
   </div>
 </template>
 <script setup>
 import { useRoute } from '#app'
 import { marked } from 'marked';
+import planeImg from "~/src/assets/images/Plane.svg";
 
 defineOptions({
   name: 'tubArticle',
@@ -37,6 +38,14 @@ const props = defineProps({
 
 const compiledArticle = computed(() => marked(props.article?.content || ''));
 const route = useRoute()
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
+
 </script>
 <style scoped lang="scss">
 .article-tab{
@@ -48,7 +57,7 @@ const route = useRoute()
   display: flex;
   gap: 41px;
   padding: 20px 30px;
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
       flex-direction: column;
       height: auto;
       padding: 15px 20px;
@@ -79,7 +88,7 @@ const route = useRoute()
   @media (max-width: 1650px) {
     width: 265px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     width: 100%;
     height: 200px;
   }
@@ -93,6 +102,9 @@ const route = useRoute()
   display: flex;
   flex-direction: column;
   gap: 41px;
+  @media (min-width: 900px) {
+    width: 58%;
+  }
   @media (max-width: 768px) {
       gap: 20px;
   }
@@ -110,7 +122,14 @@ const route = useRoute()
   width: 82px;
   height: 82px;
   border-radius: 50%;
-  background: #D9D9D9;
+  @media (max-width: 1600px) {
+    width: 70px;
+    height: 65px;
+  }
+  @media (max-width: 1200px) {
+    width: 50px;
+    height: 50px;
+  }
   @media (max-width: 576px) {
     width: 31px;
     height: 31px;
