@@ -6,13 +6,13 @@
           <div class="article-profile-img" :style="{background: `url('${getImageUrl(article.user.photo.url)}')`, backgroundSize: 'cover' }"></div>
         <div class="tab-header">
           <div class="article-profile-name">{{article.user.fio}}</div>
-          <div class="article-profile-date">{{article.createdAt}}</div>
+          <div class="article-profile-date">{{ formatDate(article.createdAt) }}</div>
         </div>
         </div>
         <div class="article-text" v-html="compiledArticle"></div>
       <div class="article-filters">
-        <div v-for="a in 3" :key="a">
-          <div class="article-filter" v-if="route.path === '/blog'">Фильтр</div>
+        <div v-for="art in article.article_tags" :key="a">
+          <div class="article-filter" v-if="route.path === '/blog'">{{art.name}}</div>
         </div>
       </div>
       </div>
@@ -44,6 +44,15 @@ const getImageUrl = (url) => {
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
+}
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
 }
 
 </script>
@@ -176,7 +185,6 @@ const getImageUrl = (url) => {
 }
 
 .article-filter{
-  max-width: 170px;
   width: fit-content;
   height: 39px;
   padding: 5px 30px;
@@ -192,7 +200,6 @@ const getImageUrl = (url) => {
     font-size: 18px;
   }
   @media (max-width: 576px) {
-    max-width: 61px;
     height: 14px;
     border-radius: 2px;
     font-size: 8px;

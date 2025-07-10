@@ -397,6 +397,11 @@ const getImageUrl = (url) => {
   width: 50px;
   height: 50px;
   margin-right: 30px;
+  @media (max-width: 900px) {
+    mask-size: 41px 41px;
+    -webkit-mask-size: 41px 41px;
+    margin-right: 10px;
+  }
   @media (max-width: 768px) {
     width: 19px;
     height: 19px;
