@@ -1,22 +1,35 @@
 <template>
   <div class="tub-country-container">
     <NuxtLink :to="id === 'gid' ? '/countryGid' : '/countryArticle'" style="text-decoration: none;">
-      <div class="country-background">
-        <div class="country-text">Страна</div>
+      <div class="country-background" :style="{backgroundImage: `url('${getImageUrl(country?.image?.url)}')`}">
+        <div class="country-text">{{country.name}}</div>
       </div>
     </NuxtLink>
   </div>
 </template>
 <script setup>
+import planeImg from "~/src/assets/images/Plane.svg";
+
 defineOptions({
   name: "tubCountry",
 })
+
 defineProps({
   id: {
     type: String,
     required: false
+  },
+  country: {
+    required: false
   }
 })
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
 
 </script>
 <style scoped>
@@ -31,7 +44,8 @@ defineProps({
   height: 100%;
   padding: 18px;
   border-radius: 34px;
-  background: #D9D9D9;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   align-items: flex-end;
   justify-content: center;

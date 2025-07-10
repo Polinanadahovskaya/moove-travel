@@ -132,8 +132,6 @@ const updateWindowWidth = () => {
 const isMobile = computed(() => windowWidth.value <= 576);
 const isTablet = computed(() => windowWidth.value > 576 && windowWidth.value <= 1200);
 
-console.log(isTablet.value,'isTablet')
-console.log(isMobile.value,'isMobile')
 onMounted(() => {
   updateWindowWidth();
   if (typeof window !== 'undefined') {
@@ -278,7 +276,6 @@ const handlePhoneInput = (event) => {
 const phoneInput = ref(null)
 
 const route = useRoute()
-console.log(route.path, 'route.path')
 
 const contactByPhone = ref(false)
 const contactByEmail = ref(false)
@@ -360,15 +357,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   }
 });
 
-watch(windowWidth, (val) => {
-  console.log('windowWidth changed:', val);
-});
-watch(isMobile, (val) => {
-  console.log('isMobile changed:', val);
-});
-watch(isTablet, (val) => {
-  console.log('isTablet changed:', val);
-});
 </script>
 <style scoped>
 .left{

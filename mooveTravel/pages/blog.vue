@@ -7,8 +7,8 @@
     <div class="blog-text">{{blogData?.description}}
     </div>
     <div class="blog-grid">
-      <div v-for="a in 6" :key="a" class="blog-item">
-        <tub-country/>
+      <div v-for="arr in popularCountry" :key="arr?.id" class="blog-item" @click="goToArticleCountry(arr?.link)">
+        <tub-country :country="arr"/>
       </div>
     </div>
     <div class="blog-border line"></div>
@@ -18,8 +18,8 @@
         <div class="article-tab-first">
           <div v-if="!isMobile" class="article-search">Поиск</div>
           <div class="article-article">
-            <div v-for="(link, idx) in links" :key="link" @click="goToArticle(link)">
-              <tub-article :link="link" />
+            <div v-for="(art, idx) in articles.slice(0,3)" :key="art.link" @click="goToArticle(art.link)">
+              <tub-article :article="art"/>
             </div>
           </div>
         </div>
@@ -68,14 +68,22 @@ const articlesStore = useArticlesStore()
 const usersStore = useUsersStore()
 const router = useRouter()
 
+
+const articles = computed(() => articlesStore.getArticles)
 const links = ['turkey', 'second', 'third']
 
 function goToArticle(link) {
   router.push(`/article/${link}`)
 }
+
+function goToArticleCountry(link) {
+  router.push(`/countryArticle/${link}`)
+}
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
 const typeFilters = computed(() => articlesStore.getArticleTags.map(tag => tag?.name || ''))
 const authorFilters = Array.from({length: 4}, () => 'Фильтр')
+
+const popularCountry = computed(() => countriesStore.getCountries)
 
 
 const windowWidth = ref(0)

@@ -74,7 +74,6 @@ const windowWidth = ref(0)
 const updateWindowWidth = () => {
   if (typeof window !== 'undefined') {
     windowWidth.value = window.innerWidth
-    console.log('Window width:', windowWidth.value, 'isMobile:', isMobile.value)
   }
 }
 

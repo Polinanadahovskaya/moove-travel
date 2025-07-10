@@ -9,7 +9,7 @@
           <div class="article-profile-date">Дата</div>
         </div>
         </div>
-        <div class="article-text">Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи... Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи Краткий текст статьи...</div>
+        <div class="article-text" v-html="compiledArticle"></div>
       <div class="article-filters">
         <div v-for="a in 3" :key="a">
           <div class="article-filter" v-if="route.path === '/blog'">Фильтр</div>
@@ -22,9 +22,20 @@
 </template>
 <script setup>
 import { useRoute } from '#app'
+import { marked } from 'marked';
+
 defineOptions({
   name: 'tubArticle',
 })
+
+const props = defineProps({
+  article: {
+    type: Object,
+    required: false
+  }
+})
+
+const compiledArticle = computed(() => marked(props.article?.content || ''));
 const route = useRoute()
 </script>
 <style scoped lang="scss">
