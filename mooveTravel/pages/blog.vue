@@ -18,7 +18,7 @@
         <div class="article-tab-first">
           <div v-if="!isMobile" class="article-search">Поиск</div>
           <div class="article-article">
-            <div v-for="(art, idx) in articles.slice(0,3)" :key="art.link" @click="goToArticle(art.link)">
+            <div v-for="(art, idx) in filteredArticles.slice(0,3)" :key="art.link" @click="goToArticle(art.link)">
               <tub-article :article="art"/>
             </div>
           </div>
@@ -29,19 +29,19 @@
             <div class="filter-section">
               <div class="filter-name">По странам</div>
               <div class="filter-list">
-                <div v-for="filter in countryFilters" :key="filter" class="filter-element">{{ filter }}</div>
+                <div v-for="filter in countryFilters" :key="filter" class="filter-element" :class="{ selected: selectedCountry.includes(filter) }" @click="selectCountry(filter)">{{ filter }}</div>
               </div>
             </div>
             <div class="filter-section">
               <div class="filter-name">По типам отдыха</div>
               <div class="filter-list">
-                <div v-for="filter in typeFilters" :key="filter" class="filter-element">{{ filter }}</div>
+                <div v-for="filter in typeFilters" :key="filter" class="filter-element" :class="{ selected: selectedType.includes(filter) }" @click="selectType(filter)">{{ filter }}</div>
               </div>
             </div>
             <div class="filter-section">
               <div class="filter-name">Автор</div>
               <div class="filter-list">
-                <div v-for="filter in authorFilters" :key="filter" class="filter-element">{{ filter }}</div>
+                <div v-for="filter in authorFilters" :key="filter" class="filter-element" :class="{ selected: selectedAuthor.includes(filter) }" @click="selectAuthor(filter)">{{ filter }}</div>
               </div>
             </div>
           </div>
@@ -85,6 +85,38 @@ const authorFilters = Array.from({length: 4}, () => 'Фильтр')
 
 const popularCountry = computed(() => countriesStore.getCountries)
 
+const selectedCountry = ref([])
+const selectedType = ref([])
+const selectedAuthor = ref([])
+
+function selectCountry(filter) {
+  const idx = selectedCountry.value.indexOf(filter)
+  if (idx === -1) selectedCountry.value.push(filter)
+  else selectedCountry.value.splice(idx, 1)
+}
+function selectType(filter) {
+  const idx = selectedType.value.indexOf(filter)
+  if (idx === -1) selectedType.value.push(filter)
+  else selectedType.value.splice(idx, 1)
+}
+function selectAuthor(filter) {
+  const idx = selectedAuthor.value.indexOf(filter)
+  if (idx === -1) selectedAuthor.value.push(filter)
+  else selectedAuthor.value.splice(idx, 1)
+}
+
+const filteredArticles = computed(() => {
+  return articles.value.filter(art => {
+    let match = true
+    if (selectedCountry.value.length && !selectedCountry.value.includes(art.country)) match = false
+    if (
+      selectedType.value.length &&
+      !(art.article_tags || []).some(tag => selectedType.value.includes(tag?.name))
+    ) match = false
+    if (selectedAuthor.value.length && !selectedAuthor.value.includes(art.author)) match = false
+    return match
+  })
+})
 
 const windowWidth = ref(0)
 
@@ -356,7 +388,7 @@ onMounted(() => {
 }
 
 .filter-element {
-  height: 39px;
+  cursor: pointer;
   border-radius: 5px;
   padding: 5px 30px;
   border: 1px solid #D9D9D9;
@@ -378,6 +410,12 @@ onMounted(() => {
     height: 22px;
     border-radius: 3px;
   }
+}
+
+.filter-element.selected {
+  background: #C75454;
+  color: #fff;
+  border-color: #C75454;
 }
 
 .filter-section {

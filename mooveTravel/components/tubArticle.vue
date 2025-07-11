@@ -196,6 +196,9 @@ const formatDate = (dateStr) => {
   display: flex;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 1700px){
+    font-size: 20px;
+  }
   @media (max-width: 1650px){
     font-size: 18px;
   }
