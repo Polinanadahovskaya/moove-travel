@@ -3,16 +3,16 @@
     <div class="article-tab">
       <div class="article-information">
         <div class="article-inf">
-          <div class="article-profile-img" :style="{background: `url('${getImageUrl(article.user.photo.url)}')`, backgroundSize: 'cover' }"></div>
+          <div class="article-profile-img" :style="{background: `url('${getImageUrl(article?.user?.photo?.url)}')`, backgroundSize: 'cover' }"></div>
         <div class="tab-header">
-          <div class="article-profile-name">{{article.user.fio}}</div>
-          <div class="article-profile-date">{{ formatDate(article.createdAt) }}</div>
+          <div class="article-profile-name">{{article?.user?.fio}}</div>
+          <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
         </div>
         </div>
         <div class="article-text" v-html="compiledArticle"></div>
       <div class="article-filters">
-        <div v-for="art in article.article_tags" :key="a">
-          <div class="article-filter" v-if="route.path === '/blog'">{{art.name}}</div>
+        <div v-for="art in article?.article_tags" :key="a">
+          <div class="article-filter" v-if="route.path === '/blog'">{{art?.name}}</div>
         </div>
       </div>
       </div>
@@ -66,6 +66,7 @@ const formatDate = (dateStr) => {
   display: flex;
   gap: 41px;
   padding: 20px 30px;
+  justify-content: space-between;
   @media (max-width: 900px) {
       flex-direction: column;
       height: auto;
