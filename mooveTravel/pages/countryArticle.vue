@@ -50,8 +50,11 @@ const router = useRouter()
   @media (max-width: 1900px) {
     background-size: 100% 160%, cover;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 768px)  and (max-width: 2000px) {
     margin-bottom: -10%;
+  }
+  @media (min-width: 2000px){
+    margin-bottom: -5%;
   }
   @media (max-width: 576px) {
     height: 82px;
