@@ -16,7 +16,14 @@
       <h2 class="article-tittle">Все статьи</h2>
       <div class="tab-art">
         <div class="article-tab-first">
-          <div v-if="!isMobile" class="article-search">Поиск</div>
+          <div v-if="!isMobile" class="article-search">
+            <input 
+              v-model="searchQuery" 
+              type="text" 
+              placeholder="Поиск"
+              class="search-input"
+            />
+          </div>
           <div class="article-article">
             <div v-for="(art, idx) in filteredArticles.slice(0,3)" :key="art.link" @click="goToArticle(art.link)">
               <tub-article :article="art"/>
@@ -24,7 +31,14 @@
           </div>
         </div>
         <div class="article-filter-body">
-          <div v-if="isMobile" class="article-search">Поиск</div>
+          <div v-if="isMobile" class="article-search">
+            <input 
+              v-model="searchQuery" 
+              type="text" 
+              placeholder="Поиск"
+              class="search-input"
+            />
+          </div>
           <div class="article-filter">
             <div class="filter-section">
               <div class="filter-name">По странам</div>
@@ -68,6 +82,7 @@ const articlesStore = useArticlesStore()
 const usersStore = useUsersStore()
 const router = useRouter()
 
+const searchQuery = ref('')
 
 const articles = computed(() => articlesStore.getArticles)
 const links = ['turkey', 'second', 'third']
@@ -108,12 +123,24 @@ function selectAuthor(filter) {
 const filteredArticles = computed(() => {
   return articles.value.filter(art => {
     let match = true
+
+    if (searchQuery.value.trim()) {
+      const title = art.title?.toLowerCase() || ''
+      const query = searchQuery.value.toLowerCase()
+      if (!title.includes(query)) {
+        match = false
+      }
+    }
+
     if (selectedCountry.value.length && !selectedCountry.value.includes(art.country)) match = false
+
     if (
       selectedType.value.length &&
       !(art.article_tags || []).some(tag => selectedType.value.includes(tag?.name))
     ) match = false
+
     if (selectedAuthor.value.length && !selectedAuthor.value.includes(art.author)) match = false
+    
     return match
   })
 })
@@ -318,8 +345,61 @@ onMounted(() => {
   margin-bottom: 32px;
   font-weight: 500;
   font-size: 24px;
+  @media (max-width: 576px) {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  @media (min-width: 577px) and (max-width: 1450px) {
+    margin-bottom: 10px;
+
+  }
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #C3C3C3;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 100%;
+  color: #1E1E1E;
+  background: #FFFFFF;
+  outline: none;
+  transition: border-color 0.3s ease;
+  
+  &::placeholder {
+    color: #C3C3C3;
+    font-weight: 500;
+  }
+  
+  &:focus {
+    border-color: #C75454;
+  }
+  
+  @media (max-width: 576px) {
+    height: 23px;
+    padding: 4px 5px;
+    border-radius: 6px;
+    border: 1px solid #D9D9D9A6;
+    font-size: 8px;
+    background: #FFFFFF;
+  }
+  
+  @media (min-width: 577px) and (max-width: 1450px) {
+    font-size: 14px;
+  }
+}
+
+.search-input {
+  width: 100%;
+  padding: 5px 10px;
+  border:none;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 24px;
   line-height: 100%;
   color: #C3C3C3;
+  background: #FFFFFF;
   @media (max-width: 576px) {
     height: 23px;
     padding: 4px 5px;
