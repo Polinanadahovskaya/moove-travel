@@ -80,7 +80,7 @@
             </div>
           </div>
           <div v-if="contactError" class="error-message">{{ contactError }}</div>
-         <div class="link-text">Нажимая «Оставить заявку» вы даёте согласие <br/> на <a class="popup-link"> обработку персональных данных.</a></div>
+          <div class="link-text">Нажимая «Оставить заявку» вы даёте согласие <br/> на <NuxtLink to="/loyarInformation" class="popup-link"> обработку персональных данных.</NuxtLink></div>
         </div>
       </div>
     </div>
@@ -522,10 +522,12 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 18px;
   line-height: 100%;
   margin-top: 13px;
+  color: #FFFFFF;
 }
 
 .popup-link{
-  color: #C75454;
+  color: #FFFFFF;
   text-decoration: underline;
+  cursor: pointer;
 }
 </style>

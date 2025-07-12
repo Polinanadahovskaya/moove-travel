@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="article_header">
-      <NuxtLink to="/blog" class="article_back">← Назад</NuxtLink>
+      <NuxtLink  @click="router.back()" class="article_back">← Назад</NuxtLink>
       <h1 class="article_tittle">НАЗВАНИЕ СТАТЬИ</h1>
     </div>
     <div class="article_body">
@@ -35,6 +35,9 @@ import {onMounted} from "vue";
 import { useRoute } from 'vue-router'
 import planeImg from "~/src/assets/images/Plane.svg";
 import { marked } from 'marked';
+import {useRouter} from '#app'
+
+const router = useRouter()
 
 const compiledMarkdown = computed(() => marked(article?.value.content));
 
@@ -73,10 +76,15 @@ const getImageUrl = (url) => {
   padding-right: 182px;
   display: flex;
   flex-direction: column;
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     height: 245px;
+    padding-top: 37px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 1500px) {
+    padding: 40px 30px;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 900px) {
     padding: 16px 20px 30px;
     margin-bottom: 40px;
   }
@@ -97,7 +105,7 @@ const getImageUrl = (url) => {
   display: flex;
   align-items: center;
   flex: 1;
-  @media (min-width: 768px) {
+  @media (min-width: 1500px) {
     font-weight: 700;
     font-size: 66px;
   }
@@ -167,19 +175,25 @@ const getImageUrl = (url) => {
   color:white;
   text-decoration: none;
   align-self: flex-end;
+  @media (max-width: 1200px) {
+    font-size: 28px;
+  }
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
   @media (max-width: 576px) {
     font-size: 12px;
   }
 }
 
 .none-art{
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 }
 .none-desk{
   display: none;
-  @media (max-width: 576px) {
+  @media (max-width: 1200px) {
     display: block;
   }
 }
