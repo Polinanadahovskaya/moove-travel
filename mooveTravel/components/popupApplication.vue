@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="popup-inputs">
-        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path === '/article'}">
+        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
           <input
               class="popup-input"
               :class="{'error' : nameError}"
@@ -30,7 +30,7 @@
           <label class="popup-label" for="userName">Имя</label>
           <div v-if="nameError" class="error-message">{{ nameError }}</div>
         </div>
-        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path === '/article'}">
+        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
           <input
               ref="phoneInput"
               class="popup-input"
@@ -46,7 +46,7 @@
           <label class="popup-label" for="userTel">Номер телефона </label>
           <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
         </div>
-        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path === '/article'}">
+        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
           <input
               class="popup-input"
               :class="{ 'error': emailError }"
@@ -68,7 +68,7 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone"
                  v-model="contactByPhone" @change="validateForm"/>
           <label for="checkbox-phone"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path === '/article','text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">Звонок
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">Звонок
             по телефону
           </div>
         </div>
@@ -76,7 +76,7 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email"
                  v-model="contactByEmail" @change="validateForm"/>
           <label for="checkbox-email"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids' || route.path === '/article','text-white': route.path === '/blog' && isTablet || route.path === '/blog' && isMobile}">Письмо
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isTablet || route.path === '/blog' && isMobile}">Письмо
             на электронную почту
           </div>
         </div>
@@ -84,16 +84,16 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats"
                  v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path === '/article','text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">
+          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">
             Сообщение в WhatsApp
           </div>
         </div>
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
       <div class="popup-giv-button">
-        <div v-if="isMobile || isTablet" class="giv-lid" :class="{'color-black': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
+        <div v-if="isMobile || isTablet" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
           Нажимая «Оставить заявку» вы даёте согласие <br/> на <NuxtLink to="/loyarInformation"
-            :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
+            :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
           обработку<br/> персональных данных.</NuxtLink></div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку
         </div>
