@@ -1,10 +1,6 @@
 <template>
   <div class="popup-comp">
-    <div style="z-index: 10;
-    position: relative;">
-      <div class="popup-header" style="color: #1E1E1E; text-align: justify;">ПОДБЕРЕМ ТУР ДЛЯ ВАС</div>
-      <div class="popup-line" style="width: 294px"></div>
-      <div style="display: flex; justify-content: space-between;">
+    <div>
         <div class="popup-width">
           <div class="popup-inputs">
             <div class="pop-in">
@@ -55,39 +51,9 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="popup-questions" style="font-size: 24px">Предпочтительный формат связи</div>
-          <div class="popup-checkbox" style="flex-direction: column">
-            <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone"
-                     v-model="contactByPhone" @change="validateForm"/>
-              <label for="checkbox-phone"></label>
-              <div class="checkbox-text">Звонок по телефону</div>
-            </div>
-            <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email"
-                     v-model="contactByEmail" @change="validateForm"/>
-              <label for="checkbox-email"></label>
-              <div class="checkbox-text">Письмо на электронную почту</div>
-            </div>
-            <div class="checkbox-element">
-              <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats"
-                     v-model="contactByWhatsApp" @change="validateForm"/>
-              <label for="checkbox-whats"></label>
-              <div class="checkbox-text">Сообщение в WhatsApp</div>
-            </div>
-          </div>
-          <div v-if="contactError" class="error-message">{{ contactError }}</div>
-          <div class="popup-button" @click="submitForm">Оставить заявку</div>
-          <div class="link-text">Нажимая «Оставить заявку» вы даёте согласие <br/> на <a class="popup-link"> обработку персональных данных.</a></div>
-        </div>
       </div>
-    </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
       {{ notification }}
-    </div>
-    <div v-if="showThankYouPopup" class="modal-overlay" @click.self="showThankYouPopup = false">
-      <popupThankYou @close="showThankYouPopup = false" />
     </div>
   </div>
 </template>
@@ -95,10 +61,9 @@
 import {ref, onMounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
 import IMask from 'imask'
-import popupThankYou from './popupThankYou.vue'
 
 defineOptions({
-  name: "popupTravelGid",
+  name: 'popupBeforePay',
 })
 
 const email = ref('')
@@ -281,7 +246,6 @@ const validateForm = () => {
 
 const notification = ref("");
 const notificationType = ref(""); // success или error
-const showThankYouPopup = ref(false)
 
 const submitForm = () => {
   let data = {
@@ -290,7 +254,6 @@ const submitForm = () => {
     name: name.value,
   }
   if (validateForm()) {
-    showThankYouPopup.value = true;
     fetch('https://example.com/api/data', {
       method: 'POST',
       headers: {
@@ -300,9 +263,8 @@ const submitForm = () => {
     })
         .then(res => res.json())
         .then(() => {
-
-          notification.value = '';
-          notificationType.value = '';
+          notification.value = 'Заявка отправлена!';
+          notificationType.value = 'success';
         })
         .catch(() => {
           notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
@@ -359,12 +321,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   }
 }
 
-.popup-line {
-  border-bottom: 6px solid #C75454;
-  width: 525px;
-  margin: 10px 0 47px;
-}
-
 .popup-inputs {
   display: flex;
   flex-direction: column;
@@ -399,51 +355,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-weight: 500;
 }
 
-.popup-questions {
-  font-family: Montserrat;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 100%;
-  vertical-align: middle;
-}
-
-.popup-checkbox {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  justify-content: space-between;
-}
-
-.popup-button {
-  height: 101px;
-  border-radius: 17px;
-  padding: 48px 126px;
-  margin-top: 13px;
-  background: #C75454;
-  font-family: Montserrat;
-  font-weight: 700;
-  font-size: 31px;
-  line-height: 100%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  cursor: pointer;
-  @media (max-width: 1650px) {
-    width: 502px;
-    font-size: 27px;
-  }
-  @media (max-width: 1500px) {
-    width: 433px;
-    font-size: 22px;
-    padding: 28px 100px;
-  }
-}
-
-.checkbox-input {
-  display: none;
-}
 
 .popup-checkbox label {
   display: inline-block;
@@ -465,12 +376,6 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   border: solid #C75454;
   border-width: 0 6px 6px 0;
   transform: rotate(45deg);
-}
-
-.checkbox-element {
-  display: flex;
-  gap: 20px;
-  align-items: center;
 }
 
 .popup-notification {
@@ -500,42 +405,5 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 .popup-body > *:not(.popup-darken) {
   position: relative;
   z-index: 2;
-}
-
-.checkbox-text {
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 100%;
-  vertical-align: middle;
-  color: #1E1E1E;
-  @media (max-width: 1650px) {
-    font-size: 18px;
-  }
-}
-
-.link-text{
-  font-weight: 400;
-  font-style: italic;
-  font-size: 18px;
-  line-height: 100%;
-  margin-top: 13px;
-}
-
-.popup-link{
-  color: #C75454;
-  text-decoration: underline;
-}
-
-.modal-overlay {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 30, 30, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>

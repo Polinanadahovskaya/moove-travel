@@ -18,6 +18,8 @@ interface _GlobalComponents {
     'GidCoutryTab': typeof import("../components/gidCoutryTab.vue")['default']
     'PopupApplication': typeof import("../components/popupApplication.vue")['default']
     'PopupArticle': typeof import("../components/popupArticle.vue")['default']
+    'PopupBeforePay': typeof import("../components/popupBeforePay.vue")['default']
+    'PopupThankYou': typeof import("../components/popupThankYou.vue")['default']
     'PopupTravelGid': typeof import("../components/popupTravelGid.vue")['default']
     'TeamTab': typeof import("../components/teamTab.vue")['default']
     'TubArticle': typeof import("../components/tubArticle.vue")['default']
@@ -53,6 +55,8 @@ interface _GlobalComponents {
     'LazyGidCoutryTab': LazyComponent<typeof import("../components/gidCoutryTab.vue")['default']>
     'LazyPopupApplication': LazyComponent<typeof import("../components/popupApplication.vue")['default']>
     'LazyPopupArticle': LazyComponent<typeof import("../components/popupArticle.vue")['default']>
+    'LazyPopupBeforePay': LazyComponent<typeof import("../components/popupBeforePay.vue")['default']>
+    'LazyPopupThankYou': LazyComponent<typeof import("../components/popupThankYou.vue")['default']>
     'LazyPopupTravelGid': LazyComponent<typeof import("../components/popupTravelGid.vue")['default']>
     'LazyTeamTab': LazyComponent<typeof import("../components/teamTab.vue")['default']>
     'LazyTubArticle': LazyComponent<typeof import("../components/tubArticle.vue")['default']>
@@ -94,6 +98,8 @@ export const BestVariant: typeof import("../components/bestVariant.vue")['defaul
 export const GidCoutryTab: typeof import("../components/gidCoutryTab.vue")['default']
 export const PopupApplication: typeof import("../components/popupApplication.vue")['default']
 export const PopupArticle: typeof import("../components/popupArticle.vue")['default']
+export const PopupBeforePay: typeof import("../components/popupBeforePay.vue")['default']
+export const PopupThankYou: typeof import("../components/popupThankYou.vue")['default']
 export const PopupTravelGid: typeof import("../components/popupTravelGid.vue")['default']
 export const TeamTab: typeof import("../components/teamTab.vue")['default']
 export const TubArticle: typeof import("../components/tubArticle.vue")['default']
@@ -129,6 +135,8 @@ export const LazyBestVariant: LazyComponent<typeof import("../components/bestVar
 export const LazyGidCoutryTab: LazyComponent<typeof import("../components/gidCoutryTab.vue")['default']>
 export const LazyPopupApplication: LazyComponent<typeof import("../components/popupApplication.vue")['default']>
 export const LazyPopupArticle: LazyComponent<typeof import("../components/popupArticle.vue")['default']>
+export const LazyPopupBeforePay: LazyComponent<typeof import("../components/popupBeforePay.vue")['default']>
+export const LazyPopupThankYou: LazyComponent<typeof import("../components/popupThankYou.vue")['default']>
 export const LazyPopupTravelGid: LazyComponent<typeof import("../components/popupTravelGid.vue")['default']>
 export const LazyTeamTab: LazyComponent<typeof import("../components/teamTab.vue")['default']>
 export const LazyTubArticle: LazyComponent<typeof import("../components/tubArticle.vue")['default']>

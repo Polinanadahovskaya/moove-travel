@@ -2,7 +2,7 @@
   <div class="tub-country-container">
     <NuxtLink :to="id === 'gid' ? '/countryGid' : '/countryArticle'" style="text-decoration: none;">
       <div class="country-background" :style="{backgroundImage: `url('${getImageUrl(country?.image?.url)}')`}">
-        <div class="country-text">{{country.name}}</div>
+        <div class="country-text">{{country?.name}}</div>
       </div>
     </NuxtLink>
   </div>

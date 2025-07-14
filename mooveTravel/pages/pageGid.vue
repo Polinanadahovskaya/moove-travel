@@ -19,7 +19,10 @@
             <div class="old-price">{{ formatPrice(1990)}} ₽</div>
             <div class="fix-price">{{ formatPrice(1990)}} ₽</div>
           </div>
-          <div class="article-button">Купить</div>
+          <div class="article-button" @click="showBeforePayPopup = true">Купить</div>
+            <div v-if="showBeforePayPopup" class="modal-overlay" @click.self="showBeforePayPopup = false">
+              <popupBeforePay @close="showBeforePayPopup = false" />
+            </div>
           </div>
         </div>
         <div class="article-img mobile-none"></div>
@@ -28,6 +31,9 @@
   </div>
 </template>
 <script setup>
+import { ref } from 'vue'
+import popupBeforePay from './popupBeforePay.vue'
+
 defineOptions({
   name: "pageGid",
 })
@@ -36,8 +42,22 @@ const formatPrice = (price)=> {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
+
+const showBeforePayPopup = ref(false)
 </script>
 <style scoped>
+.modal-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 30, 30, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .gid-header{
   width: 100vw;
   position: relative;

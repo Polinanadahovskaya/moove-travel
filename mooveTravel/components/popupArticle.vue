@@ -87,12 +87,16 @@
     <div v-if="notification" :class="['popup-notification', notificationType]">
       {{ notification }}
     </div>
+    <div v-if="showThankYouPopup" class="modal-overlay" @click.self="showThankYouPopup = false">
+      <popupThankYou @close="showThankYouPopup = false" />
+    </div>
   </div>
 </template>
 <script setup>
 import {ref, onMounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
 import IMask from 'imask'
+import popupThankYou from './popupThankYou.vue'
 
 defineOptions({
   name: "popupTravelGid",
@@ -278,6 +282,7 @@ const validateForm = () => {
 
 const notification = ref("");
 const notificationType = ref(""); // success или error
+const showThankYouPopup = ref(false)
 
 const submitForm = () => {
   let data = {
@@ -295,8 +300,9 @@ const submitForm = () => {
     })
         .then(res => res.json())
         .then(() => {
-          notification.value = 'Заявка отправлена!';
-          notificationType.value = 'success';
+          showThankYouPopup.value = true;
+          notification.value = '';
+          notificationType.value = '';
         })
         .catch(() => {
           notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
@@ -529,5 +535,18 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   color: #FFFFFF;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 30, 30, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
