@@ -1,57 +1,64 @@
 <template>
   <div class="popup-comp">
+    <div class="close-btn" @click="$emit('close')">×</div>
     <div>
-        <div class="popup-width">
-          <div class="popup-inputs">
-            <div class="pop-in">
-              <input
-                  class="popup-input"
-                  :class="{'error' : nameError}"
-                  type="text"
-                  id="userName"
-                  name="userName"
-                  placeholder=" "
-                  v-model="name"
-                  @input="handleNameInput"
-                  @blur="validateName"
-              >
-              <label class="popup-label" for="userName">Имя</label>
-              <div v-if="nameError" class="error-message">{{ nameError }}</div>
-            </div>
-            <div class="pop-in">
-              <input
-                  ref="phoneInput"
-                  class="popup-input"
-                  :class="{'error': phoneError}"
-                  v-model="phone"
-                  type="tel"
-                  id="userTel"
-                  @blur="validatePhone"
-                  @input="handlePhoneInput"
-                  name="userTel"
-                  placeholder=" "
-              >
-              <label class="popup-label" for="userTel">Номер телефона </label>
-              <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
-            </div>
-            <div class="pop-in">
-              <input
-                  class="popup-input"
-                  :class="{ 'error': emailError }"
-                  type="email"
-                  id="emailId"
-                  name="emailId"
-                  placeholder=" "
-                  v-model="email"
-                  @blur="validateEmail"
-                  @input="handleEmailInput"
-              >
-              <label class="popup-label" for="emailId">Email</label>
-              <div v-if="emailError" class="error-message">{{ emailError }}</div>
-            </div>
+      <div class="popup-width">
+        <div class="popup-inputs">
+          <div class="pop-in">
+            <input
+                class="popup-input"
+                :class="{'error' : nameError}"
+                type="text"
+                id="userName"
+                name="userName"
+                placeholder=" "
+                v-model="name"
+                @input="handleNameInput"
+                @blur="validateName"
+            >
+            <label class="popup-label" for="userName">Имя</label>
+            <div v-if="nameError" class="error-message">{{ nameError }}</div>
+          </div>
+          <div class="pop-in">
+            <input
+                ref="phoneInput"
+                class="popup-input"
+                :class="{'error': phoneError}"
+                v-model="phone"
+                type="tel"
+                id="userTel"
+                @blur="validatePhone"
+                @input="handlePhoneInput"
+                name="userTel"
+                placeholder=" "
+            >
+            <label class="popup-label" for="userTel">Номер телефона </label>
+            <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
+          </div>
+          <div class="pop-in">
+            <input
+                class="popup-input"
+                :class="{ 'error': emailError }"
+                type="email"
+                id="emailId"
+                name="emailId"
+                placeholder=" "
+                v-model="email"
+                @blur="validateEmail"
+                @input="handleEmailInput"
+            >
+            <label class="popup-label" for="emailId">Email</label>
+            <div v-if="emailError" class="error-message">{{ emailError }}</div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="popup-pay">
+      <div class="prices">
+        <div class="fix-price">{{ formatPrice(1990)}} ₽</div>
+      </div>
+      <div class="button-pay" @click="submitForm">Купить</div>
+    </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
       {{ notification }}
     </div>
@@ -65,6 +72,8 @@ import IMask from 'imask'
 defineOptions({
   name: 'popupBeforePay',
 })
+
+defineEmits(['close'])
 
 const email = ref('')
 const emailError = ref('')
@@ -225,21 +234,7 @@ const bothRequired = computed(() => contactByEmail.value && (contactByPhone.valu
 
 const validateForm = () => {
   let valid = true
-  if (!contactByPhone.value && !contactByEmail.value && !contactByWhatsApp.value) {
-    contactError.value = 'Выберите хотя бы один способ связи';
-    valid = false;
-  } else {
-    contactError.value = '';
-  }
-  if (bothRequired.value) {
-    valid = validatePhone() & validateEmail() && valid
-  } else if (isPhoneRequired.value) {
-    valid = validatePhone() && valid
-    emailError.value = ''
-  } else if (isEmailRequired.value) {
-    valid = validateEmail() && valid
-    phoneError.value = ''
-  }
+  valid = validatePhone() & validateEmail() && valid
   valid = validateName() && valid
   return !!valid
 }
@@ -273,6 +268,11 @@ const submitForm = () => {
   }
 }
 
+const formatPrice = (price)=> {
+  const roundedPrice = Math.round(price);
+  return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
 watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   if (contactByPhone.value || contactByEmail.value || contactByWhatsApp.value) {
     contactError.value = '';
@@ -281,11 +281,72 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 </script>
 <style scoped>
 .popup-comp {
-  padding: 180px auto;
+  padding: 150px 110px 105px;
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(29px);
+  border-radius: 16px;
+  width: 65%;
+}
+
+.prices{
+  display: flex;
+  align-items: flex-end;
+}
+
+.fix-price{
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 100%;
+  vertical-align: middle;
+  @media (max-width: 1600px) {
+    font-size: 44px;
+  }
+  @media (max-width: 576px) {
+    font-size: 24px;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  color: #D36A6A;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #D36A6A;
+  transition: background 0.2s;
+}
+
+.button-pay{
+  width: 395px;
+  height: 134px;
+  opacity: 1;
+  border-radius: 24px;
+  padding: 48px 126px;
+  gap: 10px;
+  background: #C75454;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 36px;
+  line-height: 100%;
+  color: #FFFFFF;
+}
+
+.popup-pay {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 42px;
 }
 
 .popup-width {
-  width: 55%;
+  width: 100%;
 }
 
 .pop-in {

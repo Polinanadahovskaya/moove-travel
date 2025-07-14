@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import popupBeforePay from './popupBeforePay.vue'
+import popupBeforePay from './../components/popupBeforePay.vue'
 
 defineOptions({
   name: "pageGid",
@@ -53,7 +53,7 @@ const showBeforePayPopup = ref(false)
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(30, 30, 30, 0.65);
+  background: rgba(20, 20, 20, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
