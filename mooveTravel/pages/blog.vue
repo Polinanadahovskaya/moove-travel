@@ -43,7 +43,7 @@
             <div class="filter-section">
               <div class="filter-name">По странам</div>
               <div class="filter-list">
-                <div v-for="filter in countryFilters" :key="filter" class="filter-element" :class="{ selected: selectedCountry.includes(filter) }" @click="selectCountry(filter)">{{ filter }}</div>
+                <div v-for="filter in typeCountry" :key="filter" class="filter-element" :class="{ selected: selectedCountry.includes(filter) }" @click="selectCountry(filter)">{{ filter }}</div>
               </div>
             </div>
             <div class="filter-section">
@@ -55,7 +55,7 @@
             <div class="filter-section">
               <div class="filter-name">Автор</div>
               <div class="filter-list">
-                <div v-for="filter in authorFilters" :key="filter" class="filter-element" :class="{ selected: selectedAuthor.includes(filter) }" @click="selectAuthor(filter)">{{ filter }}</div>
+                <div v-for="filter in typeAuthors" :key="filter" class="filter-element" :class="{ selected: selectedAuthor.includes(filter) }" @click="selectAuthor(filter)">{{ filter }}</div>
               </div>
             </div>
           </div>
@@ -95,7 +95,9 @@ function goToArticleCountry(link) {
   router.push(`/countryArticle/${link}`)
 }
 const countryFilters = Array.from({length: 6}, () => 'Фильтр')
-const typeFilters = computed(() => articlesStore.getArticleTags.map(tag => tag?.name || ''))
+const typeCountry = computed(() => articlesStore.getArticles?.map(tag => tag?.country?.name || ''))
+const typeAuthors = computed(() => articlesStore.getArticles?.map(tag => tag?.user?.fio || ''))
+const typeFilters= computed(() => articlesStore.getArticleTags.map(tag => tag?.name || ''))
 const authorFilters = Array.from({length: 4}, () => 'Фильтр')
 
 const popularCountry = computed(() => countriesStore.getCountries)
@@ -425,6 +427,8 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 60px;
+    justify-content: space-between;
+    height: 100%;
   }
   @media (max-width: 576px) {
     padding: 13px 9px;
