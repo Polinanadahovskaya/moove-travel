@@ -743,6 +743,18 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   text-align: center;
   width: 100%;
   box-sizing: border-box;
+  @media (max-width: 1200px) {
+    font-size: 18px;
+    padding: 15px 25px;
+  }
+  @media (max-width: 768px) {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  @media (max-width: 576px) {
+    font-size: 12px;
+    padding: 5px 15px;
+  }
 }
 
 .popup-notification.error {

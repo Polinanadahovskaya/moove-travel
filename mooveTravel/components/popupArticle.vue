@@ -487,11 +487,22 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   padding: 20px 30px;
   border-radius: 12px;
   font-size: 20px;
-  font-family: Montserrat;
   font-weight: 600;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
+  @media (max-width: 1200px) {
+    font-size: 18px;
+    padding: 15px 25px;
+  }
+  @media (max-width: 768px) {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  @media (max-width: 576px) {
+    font-size: 12px;
+    padding: 5px 15px;
+  }
 }
 
 .popup-notification.success {
