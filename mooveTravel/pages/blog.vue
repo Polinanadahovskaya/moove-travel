@@ -94,11 +94,10 @@ function goToArticle(link) {
 function goToArticleCountry(link) {
   router.push(`/countryArticle/${link}`)
 }
-const countryFilters = Array.from({length: 6}, () => 'Фильтр')
+
 const typeCountry = computed(() => articlesStore.getArticles?.map(tag => tag?.country?.name || ''))
 const typeAuthors = computed(() => articlesStore.getArticles?.map(tag => tag?.user?.fio || ''))
 const typeFilters= computed(() => articlesStore.getArticleTags.map(tag => tag?.name || ''))
-const authorFilters = Array.from({length: 4}, () => 'Фильтр')
 
 const popularCountry = computed(() => countriesStore.getCountries)
 
@@ -107,8 +106,13 @@ const selectedType = ref([])
 const selectedAuthor = ref([])
 
 function selectCountry(filter) {
+  console.log(filter, 'selectCountry =>')
   const idx = selectedCountry.value.indexOf(filter)
-  if (idx === -1) selectedCountry.value.push(filter)
+  console.log(idx, 'selectCountry idx =>')
+  if (idx === -1) {
+    selectedCountry.value.push(filter)
+    console.log(selectedType.value, 'selectedType.value 1 =>')
+  }
   else selectedCountry.value.splice(idx, 1)
 }
 function selectType(filter) {
@@ -134,7 +138,9 @@ const filteredArticles = computed(() => {
       }
     }
 
-    if (selectedCountry.value.length && !selectedCountry.value.includes(art.country)) match = false
+    if (
+        selectedCountry.value.length && !(selectedCountry.value.includes(art.country.name))
+    ) match = false
 
     if (
       selectedType.value.length &&
