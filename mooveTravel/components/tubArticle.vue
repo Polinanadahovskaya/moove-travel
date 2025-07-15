@@ -234,7 +234,6 @@ function renderBlock(block) {
 
 .article-filter{
   width: fit-content;
-  height: 39px;
   padding: 5px 30px;
   border-radius: 5px;
   font-weight: 400;

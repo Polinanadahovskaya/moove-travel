@@ -147,8 +147,10 @@ const filteredArticles = computed(() => {
       !(art.article_tags || []).some(tag => selectedType.value.includes(tag?.name))
     ) match = false
 
-    if (selectedAuthor.value.length && !selectedAuthor.value.includes(art.author)) match = false
-    
+    if (
+        selectedAuthor.value.length && !(selectedAuthor.value.includes(art.user.fio))
+    ) match = false
+
     return match
   })
 })
