@@ -35,7 +35,11 @@ defineOptions({
   overflow: hidden;
   @media (max-width: 1800px) {
     width: 50%;
-    height: 30%;
+    height: 70%;
+  }
+  @media (max-width: 1150px) {
+    width: 80%;
+    height: 80%;
   }
   @media (max-width: 600px) {
     width: 95vw;
@@ -93,6 +97,9 @@ defineOptions({
   color: #333;
   margin-top: 0;
   line-height: 1.4;
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 }
 
 .plane-path {
@@ -107,7 +114,7 @@ defineOptions({
 
 .plane-img {
   position: absolute;
-  top: 80px;
+  top: 317px;
   right: -40px;
   transform: rotate(0deg);
   width: 500px;
@@ -115,10 +122,31 @@ defineOptions({
   @media (max-width: 2200px) {
     width: 400px;
     height: 800px;
+    top: 150px;
+  }
+  @media (max-width: 1800px) {
+    width: 300px;
+    height: 400px;
+    top: 130px;
   }
   @media (max-width: 1450px) {
-    width: 300px;
-    height: 500px;
+    width: 200px;
+    height: 400px;
+  }
+  @media (max-width: 1205px) {
+    width: 250px;
+    height: 300px;
+    top: 71px;
+  }
+  @media (max-width: 705px) {
+    width: 150px;
+    height: 300px;
+    top: 71px;
+  }
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 210px;
+    top: 71px;
   }
 }
 

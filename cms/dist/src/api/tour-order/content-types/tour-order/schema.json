@@ -18,7 +18,11 @@
             "type": "string"
         },
         "email": {
-            "type": "email"
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 255,
+            "regex": "^(|\\S+@\\S+\\.\\S+)$",
+            "required": false
         },
         "byPhone": {
             "type": "boolean"
