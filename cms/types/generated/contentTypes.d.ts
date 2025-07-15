@@ -562,6 +562,42 @@ export interface ApiMainPageMainPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiTourOrderTourOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'tour_orders';
+  info: {
+    displayName: 'tourOrder';
+    pluralName: 'tour-orders';
+    singularName: 'tour-order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    byEmail: Schema.Attribute.Boolean;
+    byPhone: Schema.Attribute.Boolean;
+    byWhatsUp: Schema.Attribute.Boolean;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tour-order.tour-order'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    orderStatus: Schema.Attribute.Enumeration<
+      ['in progress', 'finish', 'cancelled']
+    >;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTravelGuideTravelGuide extends Struct.CollectionTypeSchema {
   collectionName: 'travel_guides';
   info: {
@@ -1111,6 +1147,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::country.country': ApiCountryCountry;
       'api::main-page.main-page': ApiMainPageMainPage;
+      'api::tour-order.tour-order': ApiTourOrderTourOrder;
       'api::travel-guide.travel-guide': ApiTravelGuideTravelGuide;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

@@ -1,0 +1,41 @@
+{
+    "kind": "collectionType",
+    "collectionName": "tour_orders",
+    "info": {
+        "singularName": "tour-order",
+        "pluralName": "tour-orders",
+        "displayName": "tourOrder"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "email": {
+            "type": "email"
+        },
+        "byPhone": {
+            "type": "boolean"
+        },
+        "byEmail": {
+            "type": "boolean"
+        },
+        "byWhatsUp": {
+            "type": "boolean"
+        },
+        "orderStatus": {
+            "type": "enumeration",
+            "enum": [
+                "in progress",
+                "finish",
+                "cancelled"
+            ]
+        }
+    }
+}
