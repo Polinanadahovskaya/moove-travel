@@ -32,7 +32,7 @@ import { onMounted, computed } from 'vue'
 import { useRoute, useRouter } from '#app'
 
 defineOptions({
-  name: 'countryArticle',
+  name: 'country',
 })
 
 const articlesStore = useArticlesStore()
@@ -50,7 +50,7 @@ const activeArticle = computed(() =>
 
 function goToArticle(link) {
   if (link !== route.params.link) {
-    router.push({ path: `/countryArticle/${link}` })
+    router.push({ path: `/country/${link}` })
   }
 }
 

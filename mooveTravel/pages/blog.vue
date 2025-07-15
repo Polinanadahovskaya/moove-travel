@@ -92,7 +92,7 @@ function goToArticle(link) {
 }
 
 function goToArticleCountry(link) {
-  router.push(`/countryArticle/${link}`)
+  router.push(`/country/${link}`)
 }
 
 const typeCountry = computed(() => articlesStore.getArticles?.map(tag => tag?.country?.name || ''))
