@@ -67,6 +67,28 @@ export const useArticlesStore = defineStore('articles', {
         this.loading = false
       }
     },
+    async fetchArticlesByCountryLink(countryLink: string) {
+      this.loading = true
+      this.error = null
+      try {
+        const config = useRuntimeConfig()
+        const response = await axios.get(
+          `http://localhost:1337/api/articles?filters[country][link][$eq]=${encodeURIComponent(countryLink)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*`,
+          {
+            headers: {
+              Authorization: `Bearer ${config.public.apiToken}`,
+            },
+          }
+        )
+        this.articles = response.data.data
+        return response.data.data
+      } catch (e: any) {
+        this.error = e.message || 'Ошибка при получении статей по country.link'
+        return []
+      } finally {
+        this.loading = false
+      }
+    },
   },
   getters: {
     getArticles: (state) => state.articles,
