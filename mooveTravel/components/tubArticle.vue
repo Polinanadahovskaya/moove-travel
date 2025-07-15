@@ -9,7 +9,12 @@
           <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
         </div>
         </div>
-        <div class="article-text" v-html="compiledArticle"></div>
+        <div class="article-text">
+          <h3 class="article-title" v-if="article?.title">{{ article.title }}</h3>
+          <template v-for="(block, idx) in article?.content?.filter(b => b.type === 'paragraph').slice(0,5)" :key="idx">
+            <component :is="renderBlock(block)" />
+          </template>
+        </div>
       <div class="article-filters">
         <div v-for="art in article?.article_tags" :key="a">
           <div class="article-filter" v-if="route.path === '/blog'">{{art?.name}}</div>
@@ -55,6 +60,40 @@ const formatDate = (dateStr) => {
   return `${day}.${month}.${year}`;
 }
 
+function renderBlock(block) {
+  if (block.type === 'heading') {
+    return h(
+      `h${block.level}`,
+      { class: 'art_heading' },
+      block.children?.map(child => child.text).join('')
+    );
+  }
+  if (block.type === 'paragraph') {
+    return h(
+      'p',
+      { class: 'art_paragraph' },
+      block.children?.map(child => child.text).join('')
+    );
+  }
+  if (block.type === 'image') {
+    return h(
+      'div',
+      { class: 'art_image-block' },
+      [
+        h('img', {
+          src: getImageUrl(block.image.url),
+          alt: block.image.alternativeText || '',
+          class: 'art_image',
+        }),
+        block.image.caption
+          ? h('span', { class: 'art_image-caption' }, block.image.caption)
+          : null,
+      ]
+    );
+  }
+  return null;
+}
+
 </script>
 <style scoped lang="scss">
 .article-tab{
@@ -67,6 +106,7 @@ const formatDate = (dateStr) => {
   gap: 41px;
   padding: 20px 30px;
   justify-content: space-between;
+  cursor:pointer;
   @media (max-width: 900px) {
       flex-direction: column;
       height: auto;
@@ -111,6 +151,7 @@ const formatDate = (dateStr) => {
 .article-information {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 41px;
   @media (min-width: 900px) {
     width: 58%;
@@ -183,6 +224,12 @@ const formatDate = (dateStr) => {
   @media (max-width: 576px) {
     font-size: 8px;
   }
+}
+
+.article-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .article-filter{

@@ -2,13 +2,17 @@
   <div>
     <div class="article_header">
       <NuxtLink  @click="router.back()" class="article_back">← Назад</NuxtLink>
-      <h1 class="article_tittle">НАЗВАНИЕ СТАТЬИ</h1>
+      <h1 class="article_tittle">{{article?.title}}</h1>
     </div>
     <div class="article_body">
       <div class="art-user">
         <div>
-          <h2 class="art_tittle">Заголовок</h2>
-          <div class="art_text" v-html="compiledMarkdown"></div>
+<!--          <h2 class="art_tittle">Заголовок</h2>-->
+          <div class="art_text">
+            <template v-for="(block, idx) in article?.content" :key="idx">
+              <component :is="renderBlock(block)" />
+            </template>
+          </div>
         </div>
         <div class="user">
           <div></div>
@@ -39,7 +43,39 @@ import {useRouter} from '#app'
 
 const router = useRouter()
 
-const compiledMarkdown = computed(() => marked(article?.value.content));
+function renderBlock(block) {
+  if (block.type === 'heading') {
+    return h(
+      `h${block.level}`,
+      { class: 'art_heading' },
+      block.children?.map(child => child.text).join('')
+    );
+  }
+  if (block.type === 'paragraph') {
+    return h(
+      'p',
+      { class: 'art_paragraph' },
+      block.children?.map(child => child.text).join('')
+    );
+  }
+  if (block.type === 'image') {
+    return h(
+      'div',
+      { class: 'art_image-block' },
+      [
+        h('img', {
+          src: getImageUrl(block.image.url),
+          alt: block.image.alternativeText || '',
+          class: 'art_image',
+        }),
+        block.image.caption
+          ? h('span', { class: 'art_image-caption' }, block.image.caption)
+          : null,
+      ]
+    );
+  }
+  return null;
+}
 
 defineOptions({
   name: "article",
@@ -62,7 +98,7 @@ const getImageUrl = (url) => {
 }
 
 </script>
-<style scoped>
+<style scoped lang="scss">
 .article_header{
   background: linear-gradient(63.23deg, #C75454 7.95%, #A21D1D 179.25%);
   margin-bottom: 65px;
@@ -142,6 +178,30 @@ const getImageUrl = (url) => {
   @media (max-width: 576px) {
     font-size: 12px;
   }
+}
+
+.art_heading {
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+.art_paragraph {
+  margin-bottom: 12px;
+  min-height: 24px;
+}
+.art_image-block {
+  margin: 24px 0;
+  text-align: center;
+}
+.art_image {
+  max-width: 100%;
+  border-radius: 16px;
+}
+.art_image-caption {
+  display: block;
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
 }
 
 .article_images {

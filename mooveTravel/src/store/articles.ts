@@ -33,7 +33,7 @@ export const useArticlesStore = defineStore('articles', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get(`http://localhost:1337/api/articles?filters[link][$eq]=${encodeURIComponent(link)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*`,
+        const response = await axios.get(`http://localhost:1337/api/articles?filters[link][$eq]=${encodeURIComponent(link)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*&populeta[content]`,
           {
             headers: {
               Authorization: `Bearer ${config.public.apiToken}`,

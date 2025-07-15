@@ -451,7 +451,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    content: Schema.Attribute.RichText;
+    content: Schema.Attribute.Blocks;
     country: Schema.Attribute.Relation<'oneToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
