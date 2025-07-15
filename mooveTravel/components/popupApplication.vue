@@ -781,6 +781,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     background: url("/src/assets/images/popupBack.png") !important;
     margin-bottom: 40px !important;
   }
+  @media (max-width: 900px) {
+    margin-bottom: 20px !important;
+  }
 }
 
 .popup-darken {
