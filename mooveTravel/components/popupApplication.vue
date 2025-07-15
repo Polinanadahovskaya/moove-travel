@@ -3,19 +3,26 @@
     <div class="popup-body"
          :class="{'background-yellow': route.path === '/about', 'index-popup': route.path === '/', 'blur-background': route.path === '/blog', 'blog-popup': route.path === '/blog'}">
       <div v-if="route.path === '/'" class="popup-darken"></div>
-      <div class="header-popup" :class="{'left': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids'}">
-        <div v-if="route.path !== '/blog'" class="popup-header" :class="{'text': route.path === '/', 'desp-none':  route.path === '/Travel-gids' && isMobile ||route.path === '/Travel-gids' && isTablet }"><span>ОСТАВЬ ЗАЯВКУ </span>НА
+      <div class="header-popup"
+           :class="{'left': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids'}">
+        <div v-if="route.path !== '/blog'" class="popup-header"
+             :class="{'text': route.path === '/', 'desp-none':  route.path === '/Travel-gids' && isMobile ||route.path === '/Travel-gids' && isTablet }">
+          <span>ОСТАВЬ ЗАЯВКУ </span>НА
           ПОДБОР ТУРА
           <div class="popup-line" :class="{'line-white': route.path === '/'}"></div>
         </div>
         <div v-if="route.path === '/blog'" class="popup-header header-blog"><span>НУЖНА ПОМОЩЬ </span>С ПОДБОРОМ ТУРА?
           <div class="popup-line"></div>
         </div>
-        <div v-if="isMobile && route.path === '/Travel-gids'|| isTablet && route.path === '/Travel-gids'" class="popup-header header-blog" :class="{'color-red':isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids'}">ПОДБЕРЕМ ТУР ДЛЯ ВАС
+        <div v-if="isMobile && route.path === '/Travel-gids'|| isTablet && route.path === '/Travel-gids'"
+             class="popup-header header-blog"
+             :class="{'color-red':isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids'}">
+          ПОДБЕРЕМ ТУР ДЛЯ ВАС
         </div>
       </div>
       <div class="popup-inputs">
-        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
+        <div class="pop-in"
+             :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
           <input
               class="popup-input"
               :class="{'error' : nameError}"
@@ -30,7 +37,8 @@
           <label class="popup-label" for="userName">Имя</label>
           <div v-if="nameError" class="error-message">{{ nameError }}</div>
         </div>
-        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
+        <div class="pop-in"
+             :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
           <input
               ref="phoneInput"
               class="popup-input"
@@ -46,7 +54,8 @@
           <label class="popup-label" for="userTel">Номер телефона </label>
           <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
         </div>
-        <div class="pop-in" :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
+        <div class="pop-in"
+             :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
           <input
               class="popup-input"
               :class="{ 'error': emailError }"
@@ -62,13 +71,18 @@
           <div v-if="emailError" class="error-message">{{ emailError }}</div>
         </div>
       </div>
-      <div class="popup-questions" :class="{'text': route.path === '/', 'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">Предпочтительный формат связи</div>
+      <div class="popup-questions"
+           :class="{'text': route.path === '/', 'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">
+        Предпочтительный формат связи
+      </div>
       <div class="popup-checkbox">
         <div class="checkbox-element">
           <input class="checkbox-input" type="checkbox" id="checkbox-phone" name="checkbox-phone"
                  v-model="contactByPhone" @change="validateForm"/>
           <label for="checkbox-phone"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">Звонок
+          <div class="checkbox-text"
+               :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">
+            Звонок
             по телефону
           </div>
         </div>
@@ -76,7 +90,9 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-email" name="checkbox-email"
                  v-model="contactByEmail" @change="validateForm"/>
           <label for="checkbox-email"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isTablet || route.path === '/blog' && isMobile}">Письмо
+          <div class="checkbox-text"
+               :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isTablet && route.path === '/Travel-gids' || isMobile && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isTablet || route.path === '/blog' && isMobile}">
+            Письмо
             на электронную почту
           </div>
         </div>
@@ -84,38 +100,49 @@
           <input class="checkbox-input" type="checkbox" id="checkbox-whats" name="checkbox-whats"
                  v-model="contactByWhatsApp" @change="validateForm"/>
           <label for="checkbox-whats"></label>
-          <div class="checkbox-text" :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">
+          <div class="checkbox-text"
+               :class="{'color-black': route.path === '/about' || route.path === '/blog', 'text-black': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article'),'text-white': route.path === '/blog' && isMobile || route.path === '/blog' && isTablet}">
             Сообщение в WhatsApp
           </div>
         </div>
       </div>
       <div v-if="contactError" class="error-message">{{ contactError }}</div>
       <div class="popup-giv-button">
-        <div v-if="isMobile || isTablet" class="giv-lid" :class="{'color-black': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
-          Нажимая «Оставить заявку» вы даёте согласие <br/> на <NuxtLink to="/loyarInformation"
-            :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}" class="giv-lid-href">
-          обработку<br/> персональных данных.</NuxtLink></div>
+        <div v-if="isMobile || isTablet" class="giv-lid"
+             :class="{'color-black': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
+          Нажимая «Оставить заявку» вы даёте согласие <br/> на
+          <NuxtLink to="/loyarInformation"
+                    :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}"
+                    class="giv-lid-href">
+            обработку<br/> персональных данных.
+          </NuxtLink>
+        </div>
         <div class="popup-button" :class="{'button-blog': route.path === '/blog'}" @click="submitForm">Оставить заявку
         </div>
       </div>
       <div class="lid-container">
         <div v-if="!isMobile && !isTablet" class="giv-lid"
              :class="{'color-black': route.path === '/about' || route.path === '/blog'}">Нажимая «Оставить заявку» <br/>
-          вы даёте согласие на <NuxtLink to="/loyarInformation" :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || route.path === '/blog'}"
-                                  class="giv-lid-href"> обработку<br/> персональных данных.</NuxtLink></div>
+          вы даёте согласие на
+          <NuxtLink to="/loyarInformation"
+                    :class="{'color-link-start': route.path === '/','color-link': route.path === '/about' || route.path === '/blog'}"
+                    class="giv-lid-href"> обработку<br/> персональных данных.
+          </NuxtLink>
+        </div>
       </div>
     </div>
     <div v-if="notification" :class="['popup-notification', notificationType]">
       {{ notification }}
     </div>
     <div v-if="showThankYouPopup" class="modal-overlay" @click.self="showThankYouPopup = false">
-      <popupThankYou @close="showThankYouPopup = false" />
+      <popupThankYou @close="showThankYouPopup = false"/>
     </div>
   </div>
 </template>
 <script setup>
 import {ref, onMounted, onUnmounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
+import {useTourOrderStore} from "~/src/store/tourOrder.js";
 import IMask from 'imask'
 import popupThankYou from './popupThankYou.vue'
 
@@ -123,8 +150,10 @@ defineOptions({
   name: "popupApplication",
 })
 
+const tourStore = useTourOrderStore()
+
 const windowWidth = ref(
-  typeof window !== 'undefined' ? window.innerWidth : 1201 // desktop по умолчанию для SSR
+    typeof window !== 'undefined' ? window.innerWidth : 1201 // desktop по умолчанию для SSR
 );
 
 const updateWindowWidth = () => {
@@ -317,19 +346,16 @@ const showThankYouPopup = ref(false)
 
 const submitForm = () => {
   let data = {
+    name: name.value,
     phone: phone.value,
     email: email.value,
-    name: name.value,
+    byPhone: contactByPhone.value,
+    byEmail: contactByEmail.value,
+    byWhatsUp: contactByWhatsApp.value,
+    orderStatus: "in progress"
   }
   if (validateForm()) {
-    fetch('https://example.com/api/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-        .then(res => res.json())
+    tourStore.createTourOrder(data)
         .then(() => {
           showThankYouPopup.value = true;
           notification.value = '';
@@ -365,9 +391,10 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 
 </script>
 <style scoped>
-.left{
+.left {
   justify-content: flex-start !important;
 }
+
 .background-yellow {
   background: linear-gradient(135.26deg, #FFDEB0 17.41%, #FFC472 51.02%);
 }
@@ -426,16 +453,16 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   top: 10px;
   font-size: 24px;
   @media (max-width: 1200px) {
-      font-size: 24px;
-      top: 7px;
+    font-size: 12px;
+    top: 7px;
   }
   @media (max-width: 768px) {
-      font-size: 14px;
-      top: 7px;
+    font-size: 14px;
+    top: 7px;
   }
   @media (max-width: 576px) {
-      font-size: 5px;
-      top: 7px;
+    font-size: 5px;
+    top: 7px;
   }
 }
 
@@ -482,13 +509,14 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     vertical-align: middle;
   }
 }
-.header-blog{
+
+.header-blog {
   @media (max-width: 1200px) {
     color: #FFFFFF;
   }
 }
 
-.color-red{
+.color-red {
   @media (max-width: 1200px) {
     color: #C75454;
 
@@ -533,16 +561,19 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     height: 52px;
     border-radius: 10px;
     padding: 16px 15px;
+    font-size: 15px;
   }
   @media (max-width: 768px) {
     height: 42px;
     border-radius: 8px;
-    padding: 16px 10px;
+    padding: 25px 14px;
+    font-size: 13px;
   }
   @media (max-width: 576px) {
     height: 32px;
     border-radius: 6px;
-    padding: 16px 8px;
+    padding: 16px 13px;
+    font-size: 8px;
   }
 }
 
@@ -623,7 +654,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   @media (max-width: 1650px) {
     width: 502px;
   }
-  @media (max-width: 1200px) and (min-width: 900px){
+  @media (max-width: 1200px) and (min-width: 900px) {
     margin: 30px;
   }
   @media (max-width: 900px) {
@@ -645,10 +676,10 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 
 
 .button-blog {
-@media (min-width: 1200px) {
-  background: #F89C1D;
-  color: #1E1E1E;
-}
+  @media (min-width: 1200px) {
+    background: #F89C1D;
+    color: #1E1E1E;
+  }
 }
 
 .checkbox-input {
@@ -733,7 +764,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   overflow: hidden;
 }
 
-.blog-popup{
+.blog-popup {
   @media (max-width: 900px) {
     background: url("/src/assets/images/popupBack.png") !important;
     margin-bottom: 40px !important;
@@ -847,33 +878,35 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   margin-bottom: 0;
 }
 
-.mobile-border{
+.mobile-border {
   border: 0.5px solid #C3C3C3;
   border-radius: 6px;
 }
 
-.text-black{
+.text-black {
   color: #1E1E1E;
 }
 
-.text-white{
+.text-white {
   color: #FFFFFF;
 }
 
-.popup-giv-button{
+.popup-giv-button {
   @media (max-width: 900px) {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
   }
 }
-.desp-none{
+
+.desp-none {
   display: none;
 }
 
-.color-link-start{
+.color-link-start {
   color: #FFFFFF;
 }
+
 .modal-overlay {
   position: fixed;
   z-index: 9999;

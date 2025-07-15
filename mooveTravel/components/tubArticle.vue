@@ -41,7 +41,6 @@ const props = defineProps({
   }
 })
 
-const compiledArticle = computed(() => marked(props.article?.content || ''));
 const route = useRoute()
 
 const getImageUrl = (url) => {
@@ -230,6 +229,12 @@ function renderBlock(block) {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+  @media (max-width: 576px) {
+    font-size: 12px;
+  }
 }
 
 .article-filter{
