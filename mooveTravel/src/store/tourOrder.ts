@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useRuntimeConfig } from '#app'
+import axios from 'axios'
 
 export const useTourOrderStore = defineStore('tourOrder', {
   state: () => ({
@@ -18,18 +19,17 @@ export const useTourOrderStore = defineStore('tourOrder', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const res = await fetch('http://localhost:1337/api/tour-order', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
-          },
-          body: JSON.stringify({ data: payload }),
-        })
-        if (!res.ok) throw new Error('Ошибка при создании заказа')
-        const data = await res.json()
-        this.order = data
-        return data
+        const res = await axios.post('http://localhost:1337/api/tour-orders',
+          { data: payload },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
+            },
+          }
+        )
+        this.order = res.data
+        return res.data
       } catch (e: any) {
         this.error = e.message || 'Неизвестная ошибка'
         throw e
