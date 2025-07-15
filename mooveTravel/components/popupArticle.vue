@@ -97,6 +97,7 @@ import {ref, onMounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
 import IMask from 'imask'
 import popupThankYou from './popupThankYou.vue'
+import {useTourOrderStore} from "~/src/store/tourOrder.js";
 
 defineOptions({
   name: "popupTravelGid",
@@ -284,21 +285,20 @@ const notification = ref("");
 const notificationType = ref(""); // success или error
 const showThankYouPopup = ref(false)
 
+const tourStore = useTourOrderStore()
+
 const submitForm = () => {
   let data = {
+    name: name.value,
     phone: phone.value,
     email: email.value,
-    name: name.value,
+    byPhone: contactByPhone.value,
+    byEmail: contactByEmail.value,
+    byWhatsUp: contactByWhatsApp.value,
+    orderStatus: "in progress"
   }
   if (validateForm()) {
-    fetch('https://example.com/api/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-        .then(res => res.json())
+    tourStore.createTourOrder(data)
         .then(() => {
           showThankYouPopup.value = true;
           notification.value = '';
