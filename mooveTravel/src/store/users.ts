@@ -9,7 +9,8 @@ export const useUsersStore = defineStore('users', {
     error: null as string | null,
   }),
   actions: {
-    async fetchUsers() {
+    async fetchUsers(force = false) {
+      if (this.users.length && !force) return;
       this.loading = true
       this.error = null
       try {

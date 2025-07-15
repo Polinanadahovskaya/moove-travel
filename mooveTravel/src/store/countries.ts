@@ -10,7 +10,8 @@ export const useCountriesStore = defineStore('countries', {
     currentCountry: null as any | null,
   }),
   actions: {
-    async fetchCountries() {
+    async fetchCountries(force = false) {
+      if (this.countries.length && !force) return;
       this.loading = true
       this.error = null
       try {
@@ -27,7 +28,8 @@ export const useCountriesStore = defineStore('countries', {
         this.loading = false
       }
     },
-    async fetchCountryByLink(link: string) {
+    async fetchCountryByLink(link: string, force = false) {
+      if (this.currentCountry && this.currentCountry.link === link && !force) return this.currentCountry;
       this.loading = true
       this.error = null
       try {

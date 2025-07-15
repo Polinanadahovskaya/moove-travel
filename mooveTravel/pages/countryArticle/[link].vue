@@ -7,9 +7,20 @@
           <button class="back-btn" @click="router.back()">← Назад</button>
         </div>
       </div>
-      <div v-for="art in articles" :key="art.id">
-        <tub-article :article="art"/>
-      </div>
+<!--      <div class="tabs">-->
+<!--        <div-->
+<!--          v-for="art in articles"-->
+<!--          :key="art.id"-->
+<!--          :class="['tab', { active: art.link === route.params.link }]"-->
+<!--          @click="goToArticle(art.link)"-->
+<!--        >-->
+<!--          {{ art.title }}-->
+<!--        </div>-->
+<!--      </div>-->
+      <tub-article
+        v-if="activeArticle"
+        :article="activeArticle"
+      />
     </div>
   </div>
 </template>
@@ -20,6 +31,10 @@ import { useCountriesStore } from '~/src/store/countries'
 import { onMounted, computed } from 'vue'
 import { useRoute, useRouter } from '#app'
 
+defineOptions({
+  name: 'countryArticle',
+})
+
 const articlesStore = useArticlesStore()
 const countriesStore = useCountriesStore()
 const route = useRoute()
@@ -29,13 +44,19 @@ const countryLink = computed(() => route.params.link)
 const articles = computed(() => articlesStore.getArticles)
 const country = computed(() => countriesStore.getCurrentCountry)
 
+const activeArticle = computed(() =>
+  articles.value.find(a => a.link === route.params.link)
+)
+
+function goToArticle(link) {
+  if (link !== route.params.link) {
+    router.push({ path: `/countryArticle/${link}` })
+  }
+}
+
 onMounted(async () => {
   await countriesStore.fetchCountryByLink(countryLink.value)
   await articlesStore.fetchArticlesByCountryLink(countryLink.value)
-})
-
-defineOptions({
-  name: 'CountryArticle',
 })
 </script>
 <style scoped>
@@ -68,6 +89,18 @@ defineOptions({
   }
   @media (min-width: 768px) {
     margin-bottom: -10%;
+  }
+  @media (min-width: 900px) {
+    margin-bottom: -17%;
+  }
+  @media (min-width: 1200px) {
+    margin-bottom: -12%;
+  }
+  @media (min-width: 1700px) {
+    margin-bottom: -10%;
+  }
+  @media (min-width: 2000px) {
+    margin-bottom: -7%;
   }
   @media (max-width: 576px) {
     height: 82px;
@@ -134,5 +167,22 @@ defineOptions({
     left: 0;
     margin-bottom: 4px;
   }
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tab.active {
+  background: #ffc472;
+  font-weight: bold;
 }
 </style>

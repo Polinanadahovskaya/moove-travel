@@ -11,7 +11,8 @@ export const usePagesStore = defineStore('pages', {
     blogPage: null as any,
   }),
   actions: {
-    async fetchMainPage() {
+    async fetchMainPage(force = false) {
+      if (this.mainPage && !force) return;
       this.loading = true
       this.error = null
       try {
@@ -28,7 +29,8 @@ export const usePagesStore = defineStore('pages', {
         this.loading = false
       }
     },
-    async fetchAboutUsPage() {
+    async fetchAboutUsPage(force = false) {
+      if (this.aboutUsPage && !force) return;
       this.loading = true
       this.error = null
       try {
@@ -45,7 +47,8 @@ export const usePagesStore = defineStore('pages', {
         this.loading = false
       }
     },
-    async fetchBlogPage() {
+    async fetchBlogPage(force = false) {
+      if (this.blogPage && !force) return;
       this.loading = true
       this.error = null
       try {
