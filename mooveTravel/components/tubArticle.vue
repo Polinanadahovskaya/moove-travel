@@ -243,6 +243,8 @@ function renderBlock(block) {
   display: flex;
   align-items: center;
   cursor: pointer;
+  height: auto;
+  min-height: 100%;
   @media (max-width: 1700px){
     font-size: 20px;
   }
@@ -260,6 +262,7 @@ function renderBlock(block) {
 .article-filters{
   display: flex;
   gap: 10px;
+  align-items: stretch;
 }
 
 
