@@ -65,6 +65,8 @@ declare module 'nuxt/schema' {
   }
   interface PublicRuntimeConfig {
    apiToken: string,
+
+   API_ORDER_TOKEN: string,
   }
 }
 declare module 'vue' {

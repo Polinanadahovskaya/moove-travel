@@ -163,6 +163,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiToken: process.env.API_TOKEN,
+      API_ORDER_TOKEN: process.env.API_ORDER_TOKEN, // добавлено для авторизации заказов туров
     },
   },
 })
