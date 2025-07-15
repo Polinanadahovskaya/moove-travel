@@ -3,24 +3,40 @@
     <div class="country-block">
       <div class="back-country">
         <div class="header-content">
-          <h1>ЕГИПЕТ</h1>
+          <h1>{{ country?.name || '...' }}</h1>
           <button class="back-btn" @click="router.back()">← Назад</button>
         </div>
       </div>
-      <div v-for="a in 3" :key="a">
-        <tub-article/>
+      <div v-for="art in articles" :key="art.id">
+        <tub-article :article="art"/>
       </div>
     </div>
   </div>
 </template>
 <script setup>
 import TubArticle from "~/components/tubArticle.vue";
-import {useRouter} from '#app'
+import { useArticlesStore } from '~/src/store/articles'
+import { useCountriesStore } from '~/src/store/countries'
+import { onMounted, computed } from 'vue'
+import { useRoute, useRouter } from '#app'
+
+const articlesStore = useArticlesStore()
+const countriesStore = useCountriesStore()
+const route = useRoute()
+const router = useRouter()
+
+const countryLink = computed(() => route.params.link)
+const articles = computed(() => articlesStore.getArticles)
+const country = computed(() => countriesStore.getCurrentCountry)
+
+onMounted(async () => {
+  await countriesStore.fetchCountryByLink(countryLink.value)
+  await articlesStore.fetchArticlesByCountryLink(countryLink.value)
+})
 
 defineOptions({
   name: 'CountryArticle',
 })
-const router = useRouter()
 </script>
 <style scoped>
 .country-block {
