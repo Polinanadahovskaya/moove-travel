@@ -5,11 +5,11 @@
         <h1 class="travel-tittle">TRAVEL-ГИДЫ</h1>
         <div class="travel-border"></div>
       </div>
-      <div class="travel-text">{{guidePage.description}}</div>
+      <div class="travel-text">{{guidePage?.description}}</div>
       <h2 class="travel-tittle travel-country">Лучшие предложения</h2>
       <div class="travel-grid">
-        <div v-for="a in 3" :key="a">
-          <best-variant/>
+        <div v-for="arr in guidePage?.bestGuides" :key="arr?.id">
+          <best-variant :info="arr?.travel_guide"/>
         </div>
       </div>
       <h2 class="travel-country">Страны</h2>

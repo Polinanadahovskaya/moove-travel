@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import popupBeforePay from './../components/popupBeforePay.vue'
+import popupBeforePay from '../../components/popupBeforePay.vue'
 
 defineOptions({
   name: "pageGid",

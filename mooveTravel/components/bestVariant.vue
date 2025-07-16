@@ -1,25 +1,48 @@
 <template>
-  <div>
-    <div class="variant-body">
+  <div @click="goToArticlePageGid(info?.link)">
+    <div class="variant-body" :style="{ backgroundImage: `url('${getImageUrl(info?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
       <div>
-        <div class="variant-tittle">Название</div>
-        <div class="variant-text">Описание</div>
+        <div class="variant-tittle">{{ info?.title }}</div>
+        <div class="variant-text">{{info?.description}}</div>
       </div>
-      <NuxtLink to="/pageGid" style="text-decoration: none; color: #1E1E1E">
-        <div class="variant-price">{{ formatPrice(1990) }} ₽</div>
+      <div  style="text-decoration: none; color: #1E1E1E">
+        <div class="variant-price">{{ formatPrice(info.price) }} ₽</div>
         <div class="variant-button">Купить</div>
-      </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
+import planeImg from "~/src/assets/images/Plane.svg";
+import {useRouter} from "#vue-router";
+
 defineOptions({
   name: 'bestVariant',
 })
+
+const router = useRouter()
+
 const formatPrice = (price) => {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
+
+function goToArticlePageGid(link) {
+  router.push(`/pageGid/${link}`)
+}
+
+defineProps({
+  info: {
+    required: false,
+  }
+})
 </script>
 <style scoped>
 .variant-body {
@@ -55,6 +78,11 @@ const formatPrice = (price) => {
   font-size: 30px;
   line-height: 120%;
   vertical-align: middle;
+  margin: 0;
+  -webkit-line-clamp: 8;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   @media (max-width: 576px) {
     font-size: 8px;
   }
