@@ -63,7 +63,7 @@ onUnmounted(() => {
 const popularCountry = computed(() => countriesStore.getCountries)
 
 function goToCountryGid(link) {
-  router.push(`/country-guide/${link}`)
+  router.push(`/country-guide/country-${link}`)
 }
 defineOptions({
   name: 'Travel-Gids',
