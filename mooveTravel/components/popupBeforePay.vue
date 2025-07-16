@@ -55,7 +55,7 @@
     </div>
     <div class="popup-pay">
       <div class="prices">
-        <div class="fix-price">{{ formatPrice(1990)}} ₽</div>
+        <div class="fix-price">{{ formatPrice(price)}} ₽</div>
       </div>
       <div class="button-pay" @click="submitForm">Купить</div>
     </div>
@@ -74,6 +74,12 @@ defineOptions({
 })
 
 defineEmits(['close'])
+
+defineProps({
+  price: {
+
+  }
+})
 
 const email = ref('')
 const emailError = ref('')

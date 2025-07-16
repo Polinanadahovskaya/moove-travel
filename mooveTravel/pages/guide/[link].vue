@@ -8,39 +8,63 @@
       <div class="gid-articles">
         <div class="article-information">
           <div class="article">
-            <div class="article-tittle">Заголовок</div>
-            <div class="article-text">Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
-              Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
-            </div>
-            <div class="article-img desctop-none"></div>
+            <div class="article-tittle">{{ourGuid?.travel_guide?.title}}</div>
+            <div class="article-text">{{ourGuid?.travel_guide?.description}}</div>
+            <div :style="{backgroundImage: `url('${getImageUrl(ourGuid?.travel_guide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
           </div>
           <div class="article-elements">
           <div class="gid-country_price">
             <div class="old-price">{{ formatPrice(1990)}} ₽</div>
-            <div class="fix-price">{{ formatPrice(1990)}} ₽</div>
+            <div class="fix-price">{{ formatPrice(ourGuid?.travel_guide?.price)}} ₽</div>
           </div>
           <div class="article-button" @click="showBeforePayPopup = true">Купить</div>
             <div v-if="showBeforePayPopup" class="modal-overlay" @click.self="showBeforePayPopup = false">
-              <popupBeforePay @close="showBeforePayPopup = false" />
+              <popupBeforePay @close="showBeforePayPopup = false" :price="formatPrice(ourGuid?.travel_guide?.price)"/>
             </div>
           </div>
         </div>
-        <div class="article-img mobile-none"></div>
+        <div :style="{backgroundImage: `url('${getImageUrl(ourGuid?.travel_guide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none"></div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import popupBeforePay from '../../components/popupBeforePay.vue'
+import {storeToRefs} from "pinia";
+import {usePagesStore} from "~/src/store/pages.js";
+import {useRoute} from "#vue-router";
+import planeImg from "~/src/assets/images/Plane.svg";
 
 defineOptions({
   name: "guide",
 })
 
+const route = useRoute()
+const link = route.params.link.replace(/^guide-/, '')
+
+const pagesStore = usePagesStore()
 const formatPrice = (price)=> {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+const ourGuid = computed(() =>
+  guidePage.value?.bestGuides?.find(el => el.travel_guide.link === link)
+)
+
+
+const { guidePage, loading, error } = storeToRefs(pagesStore)
+
+onMounted(() => {
+  pagesStore.fetchGuidePage()
+});
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
 }
 
 const showBeforePayPopup = ref(false)
@@ -155,7 +179,6 @@ const showBeforePayPopup = ref(false)
   height: 789px;
   flex-shrink: 0;
   border-radius: 34px;
-  background: #0070f3;
   @media (min-width: 576px) and (max-width: 1400px) {
     margin: 40px auto;
   }
