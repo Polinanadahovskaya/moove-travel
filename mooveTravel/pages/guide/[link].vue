@@ -43,6 +43,7 @@ defineOptions({
 const route = useRoute()
 const link = route.params.link.replace(/^guide-/, '')
 
+
 const pagesStore = usePagesStore()
 const formatPrice = (price)=> {
   const roundedPrice = Math.round(price);

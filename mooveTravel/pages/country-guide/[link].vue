@@ -15,15 +15,28 @@
 </template>
 <script setup>
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
-import {useRouter} from '#app'
+import { useRouter, useRoute } from '#app'
+import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
+import { onMounted } from 'vue'
+
+const router = useRouter()
+const route = useRoute()
+const travelGuidesStore = useTravelGuidesStore()
+
+const link = route.params.link
+
+const cleanLink = link.replace(/^country-/, '')
+
+onMounted(() => {
+  travelGuidesStore.fetchGuidesByCountrySlug(cleanLink)
+})
 
 defineOptions({
   name: "country-guide",
 })
-const router = useRouter()
 </script>
 <style scoped>
-.gid-header{
+.gid-header {
   width: 100vw;
   position: relative;
   left: 50%;
@@ -47,11 +60,11 @@ const router = useRouter()
   }
 }
 
-.gid_tittle{
+.gid_tittle {
   font-weight: 700;
   font-size: 66px;
   line-height: 100%;
-  color:white;
+  color: white;
   display: flex;
   align-items: center;
   flex: 1;
@@ -63,11 +76,11 @@ const router = useRouter()
   }
 }
 
-.gid_back{
+.gid_back {
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
-  color:white;
+  color: white;
   text-decoration: none;
   align-self: flex-end;
   cursor: pointer;
@@ -77,7 +90,7 @@ const router = useRouter()
   }
 }
 
-.gid-tabs{
+.gid-tabs {
   display: flex;
   flex-direction: column;
   gap: 30px;
