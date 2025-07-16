@@ -26,13 +26,23 @@
   </div>
 </template>
 <script setup>
+import {useRouter} from "#vue-router";
+
 defineOptions({
   name: "gidCoutryTab"
 })
+
+const router = useRouter()
+
 const formatPrice = (price) => {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
+
+function goToArticlePageGid(link) {
+  router.push(`/guide/${link}`)
+}
+
 </script>
 <style scoped lang="scss">
 .gid-country_tub {

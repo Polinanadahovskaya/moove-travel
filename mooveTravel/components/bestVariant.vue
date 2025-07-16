@@ -35,7 +35,7 @@ const getImageUrl = (url) => {
 }
 
 function goToArticlePageGid(link) {
-  router.push(`/pageGid/${link}`)
+  router.push(`/guide/${link}`)
 }
 
 defineProps({

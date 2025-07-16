@@ -35,7 +35,7 @@ import { ref } from 'vue'
 import popupBeforePay from '../../components/popupBeforePay.vue'
 
 defineOptions({
-  name: "pageGid",
+  name: "guide",
 })
 
 const formatPrice = (price)=> {

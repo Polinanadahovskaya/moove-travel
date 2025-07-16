@@ -14,8 +14,8 @@
       </div>
       <h2 class="travel-country">Страны</h2>
       <div class="travel-grid gid-trav">
-        <div v-for="a in countryCount" :key="a">
-          <tub-country id="gid"/>
+        <div v-for="arr in popularCountry.slice(0, 9)" :key="arr?.id">
+          <tub-country :country="arr" id="gid"/>
         </div>
       </div>
       <popupTravelGid class="none-art"/>
@@ -32,8 +32,9 @@ import PopupTravelGid from '~/components/popupTravelGid.vue';
 import PopupApplication from "~/components/PopupApplication";
 import { storeToRefs } from 'pinia'
 import { usePagesStore } from '@/src/store/pages'
-import popupBeforePay from './../components/popupBeforePay.vue'
+import { useCountriesStore } from '../src/store/countries'
 
+const countriesStore = useCountriesStore()
 const pagesStore = usePagesStore()
 const { guidePage, loading, error } = storeToRefs(pagesStore)
 
@@ -50,11 +51,15 @@ function handleResize() {
 onMounted(() => {
   handleResize();
   window.addEventListener('resize', handleResize);
+  countriesStore.fetchCountries();
   pagesStore.fetchGuidePage()
 });
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
+
+const popularCountry = computed(() => countriesStore.getCountries)
+
 
 defineOptions({
   name: 'Travel-Gids',
