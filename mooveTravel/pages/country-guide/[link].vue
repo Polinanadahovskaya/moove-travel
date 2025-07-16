@@ -18,7 +18,7 @@ import gidCoutryTab from '~/components/gidCoutryTab.vue'
 import {useRouter} from '#app'
 
 defineOptions({
-  name: "CountryGid",
+  name: "country-guide",
 })
 const router = useRouter()
 </script>

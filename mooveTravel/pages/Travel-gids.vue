@@ -14,7 +14,7 @@
       </div>
       <h2 class="travel-country">Страны</h2>
       <div class="travel-grid gid-trav">
-        <div v-for="arr in popularCountry.slice(0, 9)" :key="arr?.id">
+        <div v-for="arr in popularCountry.slice(0, 9)" :key="arr?.id" @click="goToCountryGid(arr?.link)">
           <tub-country :country="arr" id="gid"/>
         </div>
       </div>
@@ -33,7 +33,9 @@ import PopupApplication from "~/components/PopupApplication";
 import { storeToRefs } from 'pinia'
 import { usePagesStore } from '@/src/store/pages'
 import { useCountriesStore } from '../src/store/countries'
+import {useRouter} from "#app";
 
+const router = useRouter()
 const countriesStore = useCountriesStore()
 const pagesStore = usePagesStore()
 const { guidePage, loading, error } = storeToRefs(pagesStore)
@@ -60,7 +62,9 @@ onUnmounted(() => {
 
 const popularCountry = computed(() => countriesStore.getCountries)
 
-
+function goToCountryGid(link) {
+  router.push(`/country-guide/${link}`)
+}
 defineOptions({
   name: 'Travel-Gids',
 })
