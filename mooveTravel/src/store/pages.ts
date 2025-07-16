@@ -9,6 +9,7 @@ export const usePagesStore = defineStore('pages', {
     error: null as string | null,
     aboutUsPage: null as any,
     blogPage: null as any,
+    guidePage: null as any, // добавлено для guide-page
   }),
   actions: {
     async fetchMainPage(force = false) {
@@ -65,10 +66,29 @@ export const usePagesStore = defineStore('pages', {
         this.loading = false
       }
     },
+    async fetchGuidePage(force = false) {
+      if (this.guidePage && !force) return;
+      this.loading = true
+      this.error = null
+      try {
+        const config = useRuntimeConfig()
+        const response = await axios.get('http://localhost:1337/api/guide-page?populate=*', {
+          headers: {
+            Authorization: `Bearer ${config.public.apiToken}`,
+          },
+        })
+        this.guidePage = response.data.data
+      } catch (e: any) {
+        this.error = e.message || 'Ошибка при получении данных страницы гайда'
+      } finally {
+        this.loading = false
+      }
+    },
   },
   getters: {
     getMainPage: (state) => state.mainPage,
     getAboutUsPage: (state) => state.aboutUsPage,
     getBlogPage: (state) => state.blogPage,
+    getGuidePage: (state) => state.guidePage, // добавлен геттер для guide-page
   },
 }) 

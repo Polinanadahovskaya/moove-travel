@@ -30,6 +30,12 @@ import BestVariant from '~/components/BestVariant.vue';
 import TubCountry from '~/components/tubCountry.vue';
 import PopupTravelGid from '~/components/popupTravelGid.vue';
 import PopupApplication from "~/components/PopupApplication";
+import { storeToRefs } from 'pinia'
+import { usePagesStore } from '@/src/store/pages'
+import popupBeforePay from './../components/popupBeforePay.vue'
+
+const pagesStore = usePagesStore()
+const { guidePage, loading, error } = storeToRefs(pagesStore)
 
 const isMobile = ref(false);
 const isTablet = ref(false);
@@ -44,6 +50,7 @@ function handleResize() {
 onMounted(() => {
   handleResize();
   window.addEventListener('resize', handleResize);
+  pagesStore.fetchGuidePage()
 });
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);

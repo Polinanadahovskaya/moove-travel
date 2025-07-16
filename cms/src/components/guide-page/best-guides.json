@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_guide_page_best_guides",
+  "info": {
+    "displayName": "best-guides"
+  },
+  "options": {},
+  "attributes": {
+    "travel_guide": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::travel-guide.travel-guide"
+    }
+  },
+  "config": {}
+}

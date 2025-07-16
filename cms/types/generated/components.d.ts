@@ -47,6 +47,19 @@ export interface AboutUsPagePersonal extends Struct.ComponentSchema {
   };
 }
 
+export interface GuidePageBestGuides extends Struct.ComponentSchema {
+  collectionName: 'components_guide_page_best_guides';
+  info: {
+    displayName: 'best-guides';
+  };
+  attributes: {
+    travel_guide: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::travel-guide.travel-guide'
+    >;
+  };
+}
+
 export interface MainPageAboutUsBlock extends Struct.ComponentSchema {
   collectionName: 'components_main_page_about_us_blocks';
   info: {
@@ -86,6 +99,7 @@ declare module '@strapi/strapi' {
       'about-us-page.banner': AboutUsPageBanner;
       'about-us-page.office': AboutUsPageOffice;
       'about-us-page.personal': AboutUsPagePersonal;
+      'guide-page.best-guides': GuidePageBestGuides;
       'main-page.about-us-block': MainPageAboutUsBlock;
       'main-page.advantages': MainPageAdvantages;
     }

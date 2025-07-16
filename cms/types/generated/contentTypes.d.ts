@@ -532,6 +532,35 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
+  collectionName: 'guide_pages';
+  info: {
+    displayName: 'guidePage';
+    pluralName: 'guide-pages';
+    singularName: 'guide-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bestGuides: Schema.Attribute.Component<'guide-page.best-guides', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::guide-page.guide-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMainPageMainPage extends Struct.SingleTypeSchema {
   collectionName: 'main_pages';
   info: {
@@ -613,7 +642,7 @@ export interface ApiTravelGuideTravelGuide extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    country: Schema.Attribute.String & Schema.Attribute.Required;
+    country: Schema.Attribute.Relation<'oneToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1150,6 +1179,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::blog.blog': ApiBlogBlog;
       'api::country.country': ApiCountryCountry;
+      'api::guide-page.guide-page': ApiGuidePageGuidePage;
       'api::main-page.main-page': ApiMainPageMainPage;
       'api::tour-order.tour-order': ApiTourOrderTourOrder;
       'api::travel-guide.travel-guide': ApiTravelGuideTravelGuide;

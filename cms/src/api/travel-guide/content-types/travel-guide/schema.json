@@ -20,8 +20,9 @@
       "required": true
     },
     "country": {
-      "type": "string",
-      "required": true
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
     },
     "images": {
       "type": "media",
