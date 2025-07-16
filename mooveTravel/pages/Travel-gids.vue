@@ -5,7 +5,7 @@
         <h1 class="travel-tittle">TRAVEL-ГИДЫ</h1>
         <div class="travel-border"></div>
       </div>
-      <div class="travel-text">Путеводители, которые сэкономят вам <br/> нервы, деньги и время</div>
+      <div class="travel-text">{{guidePage.description}}</div>
       <h2 class="travel-tittle travel-country">Лучшие предложения</h2>
       <div class="travel-grid">
         <div v-for="a in 3" :key="a">
@@ -98,9 +98,11 @@ defineOptions({
   line-height: 120%;
   vertical-align: middle;
   margin-bottom: 180px;
+  width: 90%;
   @media (max-width: 576px) {
     font-size: 8px;
     margin-bottom: 40px;
+    width: 70%;
   }
 }
 
