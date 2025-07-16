@@ -649,6 +649,7 @@ export interface ApiTravelGuideTravelGuide extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text & Schema.Attribute.Required;
     guide: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
     images: Schema.Attribute.Media<'images', true>;
+    link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

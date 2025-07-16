@@ -12,7 +12,7 @@ export default factories.createCoreController('api::guide-page.guide-page', ({ s
         bestGuides: {
           populate: {
             travel_guide: {
-              populate: ['images', 'country', 'guide']
+              populate: ['images', 'country']
             }
           }
         },

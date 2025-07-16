@@ -72,7 +72,7 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/guide-page?populate=*', {
+        const response = await axios.get('http://localhost:1337/api/guide-page', {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
