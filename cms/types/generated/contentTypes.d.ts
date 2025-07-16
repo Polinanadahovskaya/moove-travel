@@ -634,7 +634,7 @@ export interface ApiTourOrderTourOrder extends Struct.CollectionTypeSchema {
 export interface ApiTravelGuideTravelGuide extends Struct.CollectionTypeSchema {
   collectionName: 'travel_guides';
   info: {
-    displayName: 'Travel guide';
+    displayName: 'TravelGuide';
     pluralName: 'travel-guides';
     singularName: 'travel-guide';
   };

@@ -4,7 +4,7 @@
     "info": {
         "singularName": "travel-guide",
         "pluralName": "travel-guides",
-        "displayName": "Travel guide"
+        "displayName": "TravelGuide"
     },
     "options": {
         "draftAndPublish": true
