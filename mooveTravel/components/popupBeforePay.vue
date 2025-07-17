@@ -80,7 +80,8 @@ defineEmits(['close'])
 const props = defineProps({
   price: {
     required: true,
-  }
+  },
+  currentGuide:{},
 })
 
 const email = ref('')
@@ -260,11 +261,15 @@ const submitForm = async () => {
   if (validateForm()) {
     const orderData = {
       amount: Math.round(props.price * 100),
-      orderNumber: Date.now().toString(),
       returnUrl: window.location.origin + '/payment-callback',
-      description: `Оплата заказа для ${name.value}`,
+      description: `Оплата заказа для ${name.value} Гайд: ${props.currentGuide.name}`,
+      name: name.value,
+      phone: phone.value,
+      email: email.value,
     };
-
+    if (props.currentGuide && props.currentGuide.id) {
+      orderData.travel_guide = props.currentGuide.documentId;
+    }
     try {
       const response = await axios.post('http://localhost:1337/api/tour-order/alfa-register', orderData, {
         headers: {

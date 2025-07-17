@@ -42,12 +42,29 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
 
   async registerAlfaOrder(ctx) {
     try {
-      const { amount, orderNumber, returnUrl, description } = ctx.request.body as {
+      const { amount, returnUrl, description, name, phone, email, travel_guide } = ctx.request.body as {
         amount: number;
-        orderNumber: string;
         returnUrl: string;
         description: string;
+        name?: string;
+        phone?: string;
+        email?: string;
+        travel_guide?: number;
       };
+      // 1. Создаём запись в guide-orders
+      const guideOrderData: any = {
+        name,
+        phone,
+        email,
+        amount: amount/100,
+        payment_status: 'in_progress',
+        emailSend: false,
+        travel_guide: { documentId: travel_guide },
+      };
+      //if (travel_guide) guideOrderData.travel_guide = { id: travel_guide };
+      const guideOrder = await strapi.entityService.create('api::guide-order.guide-order', { data: guideOrderData });
+      // 2. Используем id как orderNumber
+      const orderNumber = guideOrder.id.toString();
       const params = {
         userName: 'r-id65022_u_on-api',
         password: 'r-id65022_u_on*?1',
