@@ -84,7 +84,26 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
                 orderId,
             };
             const response = await axios_1.default.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
-            ctx.send(response.data);
+            const result = response.data;
+            // Если оплата успешна, обновляем guide-order
+            if (result.orderNumber) {
+                const orderNumber = result.orderNumber;
+                // Пытаемся найти guide-order по id (orderNumber)
+                const guideOrder = await strapi.entityService.findOne('api::guide-order.guide-order', orderNumber);
+                if (guideOrder) {
+                    if (result.orderStatus === 2) {
+                        await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                            data: { payment_status: 'paid', emailSend: true },
+                        });
+                    }
+                    else {
+                        await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                            data: { payment_status: 'payment_failed' },
+                        });
+                    }
+                }
+            }
+            ctx.send(result);
         }
         catch (e) {
             ctx.status = 500;
