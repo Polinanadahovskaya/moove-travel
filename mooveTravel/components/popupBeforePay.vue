@@ -68,6 +68,7 @@
 import {ref, onMounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
 import IMask from 'imask'
+import axios from 'axios'
 
 defineOptions({
   name: 'popupBeforePay',
@@ -75,7 +76,7 @@ defineOptions({
 
 defineEmits(['close'])
 
-defineProps({
+const props = defineProps({
   price: {
     required: true,
   }
@@ -248,29 +249,41 @@ const validateForm = () => {
 const notification = ref("");
 const notificationType = ref(""); // success или error
 
-const submitForm = () => {
+const submitForm = async () => {
   let data = {
     phone: phone.value,
     email: email.value,
     name: name.value,
   }
   if (validateForm()) {
-    fetch('https://example.com/api/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-        .then(res => res.json())
-        .then(() => {
-          notification.value = 'Заявка отправлена!';
-          notificationType.value = 'success';
-        })
-        .catch(() => {
-          notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
-          notificationType.value = 'error';
-        });
+    // 1. Создаём заказ в Альфа-Банке
+    const orderData = {
+      amount: Math.round(props.price * 100), // сумма в копейках
+      orderNumber: Date.now().toString(), // уникальный номер заказа
+      returnUrl: window.location.origin + '/payment-callback', // страница для возврата после оплаты
+      description: `Оплата заказа для ${name.value}`,
+      // customerDetails, email, phone и т.д. — по документации банка
+    };
+
+    try {
+      const response = await axios.post('https://alfa.rbsuat.com/payment/rest/register.do', null, {
+        params: {
+          ...orderData,
+          userName: 'r-id65022_u_on-api',
+          password: 'r-id65022_u_on*?1',
+        }
+      });
+      const result = response.data;
+      if (result.formUrl) {
+        window.location.href = result.formUrl;
+      } else {
+        notification.value = 'Ошибка при создании заказа: ' + (result.errorMessage || 'Неизвестная ошибка');
+        notificationType.value = 'error';
+      }
+    } catch (e) {
+      notification.value = 'Ошибка при соединении с банком';
+      notificationType.value = 'error';
+    }
   }
 }
 
