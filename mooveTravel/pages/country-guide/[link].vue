@@ -6,8 +6,8 @@
         <div class="gid_tittle">СТРАНА</div>
       </div>
       <div class="gid-tabs">
-        <div v-for="a in 3">
-          <gid-coutry-tab/>
+        <div v-for="guid in currentGuides.slice(0, 3)">
+          <gid-coutry-tab :guid="guid"/>
         </div>
       </div>
     </div>
@@ -25,6 +25,7 @@ const travelGuidesStore = useTravelGuidesStore()
 
 const link = route.params.link
 
+const currentGuides = computed(() => travelGuidesStore.getGuides)
 onMounted(() => {
   travelGuidesStore.fetchGuidesByCountrySlug(link)
 })

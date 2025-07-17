@@ -5,22 +5,20 @@
         <div class="gid-country_img mobile-none"></div>
         <div class="gid-country_art">
           <div class="gid-header-mobile">
-            <div class="gid-country_tittle">Заголовок</div>
+            <div class="gid-country_tittle">{{guid.title}}</div>
             <div class="gid-country_price desc-none">
               <div class="old-price">{{ formatPrice(1990) }} ₽</div>
-              <div class="fix-price">{{ formatPrice(1990) }} ₽</div>
+              <div class="fix-price">{{ formatPrice(guid.price) }} ₽</div>
             </div>
           </div>
-          <div class="gid-country_text">Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
-            Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
-            Описание гайда Описание гайда Описание гайда Описание гайда Описание гайда
+          <div class="gid-country_text">{{guid.description}}
           </div>
         </div>
         <div class="gid-country_img desc-none"></div>
       </div>
       <div class="gid-country_price mobile-none">
         <div class="old-price">{{ formatPrice(1990) }} ₽</div>
-        <div class="fix-price">{{ formatPrice(1990) }} ₽</div>
+        <div class="fix-price">{{ formatPrice(guid.price) }} ₽</div>
       </div>
     </div>
   </div>
@@ -30,6 +28,12 @@ import {useRouter} from "#vue-router";
 
 defineOptions({
   name: "gidCoutryTab"
+})
+
+defineProps({
+  guid: {
+    required: false
+  }
 })
 
 const router = useRouter()

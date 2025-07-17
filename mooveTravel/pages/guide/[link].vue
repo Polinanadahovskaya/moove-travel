@@ -31,8 +31,6 @@
 <script setup>
 import {onMounted, ref} from 'vue'
 import popupBeforePay from '../../components/popupBeforePay.vue'
-import {storeToRefs} from "pinia";
-import {usePagesStore} from "~/src/store/pages.js";
 import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
@@ -47,22 +45,14 @@ const link = route.params.link
 
 const travelGuidesStore = useTravelGuidesStore()
 
-
-const pagesStore = usePagesStore()
 const formatPrice = (price)=> {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-const ourGuid = computed(() =>
-  guidePage.value?.bestGuides?.find(el => el.travel_guide.link === link)
-)
 
-
-const { guidePage, loading, error } = storeToRefs(pagesStore)
 const currentGuide = computed(() => travelGuidesStore.getGuide)
 onMounted(() => {
-  pagesStore.fetchGuidePage()
   travelGuidesStore.fetchGuideBySlug(link)
 });
 
