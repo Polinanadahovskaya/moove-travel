@@ -98,31 +98,40 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
                         });
                         // Отправляем файл гида на email пользователя
                         if (guideOrder.travel_guide && guideOrder.travel_guide.id) {
+                            // Получаем travel_guide с файлом guide
                             const travelGuide = await strapi.entityService.findOne('api::travel-guide.travel-guide', guideOrder.travel_guide.id, { populate: ['guide'] });
-                            if (travelGuide && travelGuide.guide && travelGuide.guide.url) {
-                                const fileUrl = travelGuide.guide.url;
-                                const fileName = travelGuide.guide.name || path.basename(travelGuide.guide.url);
-                                // Скачиваем файл как буфер
-                                const fileResponse = await axios_1.default.get(fileUrl, { responseType: 'arraybuffer' });
-                                const fileBuffer = fileResponse.data;
-                                // Отправляем email с вложением
-                                await strapi.plugin('email').service('email').send({
-                                    to: guideOrder.email,
-                                    subject: 'Ваш гид',
-                                    text: `Спасибо что выбрали нас! Ваш гид во вложении.`,
-                                    html: `<p>Спасибо что выбрали нас! Ваш гид во вложении.</p>`,
-                                    attachments: [
-                                        {
-                                            filename: fileName,
-                                            content: fileBuffer,
-                                        },
-                                    ],
-                                });
-                                // После успешной отправки письма обновляем emailSend
-                                await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
-                                    data: { emailSend: true },
-                                });
+                            let guideFile = travelGuide.guide;
+                            if (Array.isArray(guideFile)) {
+                                guideFile = guideFile[0];
                             }
+                            console.log('guideFile:', guideFile);
+                            if (!guideFile || !guideFile.url) {
+                                throw new Error('Файл guide не найден или не содержит url');
+                            }
+                            const fileUrl = guideFile.url.startsWith('http')
+                                ? guideFile.url
+                                : `${strapi.config.get('server.url', 'http://localhost:1337')}${guideFile.url}`;
+                            const fileName = guideFile.name || path.basename(guideFile.url);
+                            // Скачиваем файл как буфер
+                            const fileResponse = await axios_1.default.get(fileUrl, { responseType: 'arraybuffer' });
+                            const fileBuffer = fileResponse.data;
+                            // Отправляем email с вложением
+                            await strapi.plugin('email').service('email').send({
+                                to: guideOrder.email,
+                                subject: 'Ваш гид',
+                                text: `Спасибо что выбрали нас! Ваш гид во вложении.`,
+                                html: `<p>Спасибо что выбрали нас! Ваш гид во вложении.</p>`,
+                                attachments: [
+                                    {
+                                        filename: fileName,
+                                        content: fileBuffer,
+                                    },
+                                ],
+                            });
+                            // После успешной отправки письма обновляем emailSend
+                            await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                                data: { emailSend: true },
+                            });
                         }
                     }
                     else {
