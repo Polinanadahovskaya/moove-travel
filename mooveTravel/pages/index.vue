@@ -32,12 +32,14 @@
         <h2 class="about-tittle">О НАС</h2>
         <div class="about-border"></div>
       </div>
-      <div class="about-block" :style="{ backgroundImage: `url('${getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')`}" >
-        <NuxtLink v-if="!loadingPage" :to="mainPage?.aboutUs?.buttonLink" class="link-button">
+      <div class="about-block" :style="{ backgroundImage: aboutImageLoaded ? `url('${getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')` : 'none' }">
+        <SkeletonBlock v-if="!aboutImageLoaded" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
+        <img v-if="mainPage?.aboutUs?.backgroundImage?.url" :src="getImageUrl(mainPage.aboutUs.backgroundImage.url)" @load="onAboutImageLoad" style="display:none;" />
+        <NuxtLink v-if="!loadingPage" :to="mainPage?.aboutUs?.buttonLink" class="link-button" style="position:relative;z-index:2;">
           <div class="block-button">Подробнее</div>
         </NuxtLink>
         <SkeletonBlock v-else width="120px" height="36px" style="margin-bottom: 16px;" />
-        <div class="numbers">
+        <div class="numbers" style="position:relative;z-index:2;">
           <template v-if="loadingPage">
             <SkeletonBlock v-for="n in 3" :key="n" width="80px" height="48px" style="margin: 0 16px 0 0;" />
           </template>
@@ -66,10 +68,12 @@
             <template v-else>
               <div v-for="arr in mainPage?.advantages.slice(0, 2)" :key="arr">
                 <div class="tab-panel">
-                  <div class="tab">
+                  <div class="tab" style="position:relative;">
+                    <SkeletonBlock v-if="!advantageImagesLoaded[arr?.image?.url]" width="64px" height="64px" borderRadius="16px" style="position:absolute;top:0;left:0;z-index:1;" />
                     <div class="mask"
-                         :style="{ mask: `url('${getImageUrl(arr?.image?.url)}')` }"
+                         :style="{ mask: advantageImagesLoaded[arr?.image?.url] ? `url('${getImageUrl(arr?.image?.url)}')` : 'none' }"
                     ></div>
+                    <img v-if="arr?.image?.url" :src="getImageUrl(arr.image.url)" @load="() => onAdvantageImageLoad(arr.image.url)" style="display:none;" />
                   </div>
                   <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{ arr.description }}
                   </div>
@@ -84,9 +88,12 @@
             <template v-else>
               <div v-for="arr in mainPage?.advantages.slice(2, 4)" :key="arr">
                 <div class="tab-panel">
-                  <div class="tab">
+                  <div class="tab" style="position:relative;">
+                    <SkeletonBlock v-if="!advantageImagesLoaded[arr?.image?.url]" width="64px" height="64px" borderRadius="16px" style="position:absolute;top:0;left:0;z-index:1;" />
                     <div class="mask"
-                         :style="{ mask: `url('${getImageUrl(arr?.image?.url)}')` }"></div>
+                         :style="{ mask: advantageImagesLoaded[arr?.image?.url] ? `url('${getImageUrl(arr?.image?.url)}')` : 'none' }"
+                    ></div>
+                    <img v-if="arr?.image?.url" :src="getImageUrl(arr.image.url)" @load="() => onAdvantageImageLoad(arr.image.url)" style="display:none;" />
                   </div>
                   <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{arr.description }}
                   </div>
@@ -102,18 +109,23 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onMounted, computed} from 'vue'
+import {onBeforeMount, onMounted, computed, ref, reactive} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
-import planeImg from "~/src/assets/images/Plane.svg";
+import placeholderImg from "~/src/assets/images/placeholder.svg";
 import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 const articlesStore = useArticlesStore()
 const pagesStore = usePagesStore()
 const { getArticles, loading, error } = storeToRefs(articlesStore)
 const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
+
+const aboutImageLoaded = ref(false)
+function onAboutImageLoad() { aboutImageLoaded.value = true }
+const advantageImagesLoaded = reactive({})
+function onAdvantageImageLoad(url) { advantageImagesLoaded[url] = true }
 
 onBeforeMount(async() => {
   await Promise.all([
@@ -147,7 +159,7 @@ const aboutArray = computed(() => {
 })
 
 const getImageUrl = (url) => {
-  if (!url) return planeImg
+  if (!url) return placeholderImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`

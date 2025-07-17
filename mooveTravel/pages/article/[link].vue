@@ -49,7 +49,7 @@ import PopupApplication from "~/components/PopupApplication";
 import {useArticlesStore} from "~/src/store/articles.js";
 import {onBeforeMount, onMounted} from "vue";
 import { useRoute } from 'vue-router'
-import planeImg from "~/src/assets/images/Plane.svg";
+import placeholderImg from "~/src/assets/images/placeholder.svg";
 import {useRouter} from '#app'
 import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
@@ -104,7 +104,7 @@ onBeforeMount(async() => {
 })
 
 const getImageUrl = (url) => {
-  if (!url) return planeImg
+  if (!url) return placeholderImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`

@@ -1,8 +1,10 @@
 <template>
   <div>
     <div>
-      <div class="about-baner"   :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
-        <h1 style="color: #FFFFFF">
+      <div class="about-baner" :style="{ backgroundImage: imageLoadedBanner ? `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')` : 'none' }">
+        <SkeletonBlock v-if="!imageLoadedBanner" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
+        <img v-if="getAboutUsPage?.banner?.backgroundImage?.url" :src="getImageUrl(getAboutUsPage.banner.backgroundImage.url)" @load="onImageLoadBanner" style="display:none;" />
+        <h1 style="color: #FFFFFF; position:relative;z-index:2;">
           <SkeletonBlock v-if="loading" height="48px" width="40%" style="margin-bottom: 16px;" />
           <template v-else>{{getAboutUsPage?.title}}</template>
         </h1>
@@ -54,8 +56,9 @@
               </div>
             </div>
           </div>
-          <div class="map" :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` }">
-            <SkeletonBlock v-if="loading" width="100%" height="180px" />
+          <div class="map" :style="{ backgroundImage: imageLoadedMap ? `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` : 'none' }">
+            <SkeletonBlock v-if="!imageLoadedMap" width="100%" height="180px" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
+            <img v-if="getAboutUsPage?.office?.image?.url" :src="getImageUrl(getAboutUsPage.office.image.url)" @load="onImageLoadMap" style="display:none;" />
           </div>
         </div>
       </div>
@@ -87,11 +90,11 @@ import PopupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
 import tanyaImg from '/src/assets/images/tanya.png'
 import andrewImg from '/src/assets/images/andrew.png'
-import planeImg from '~/src/assets/images/Plane.svg'
+import placeholderImg from '~/src/assets/images/placeholder.svg'
 import officeImg from '~/src/assets/images/fastOpen.png'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
-import {onBeforeMount, onMounted} from 'vue'
+import {onBeforeMount, onMounted, ref} from 'vue'
 import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 defineOptions({
@@ -100,6 +103,11 @@ defineOptions({
 
 const pagesStore = usePagesStore()
 const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
+
+const imageLoadedBanner = ref(false)
+const imageLoadedMap = ref(false)
+function onImageLoadBanner() { imageLoadedBanner.value = true }
+function onImageLoadMap() { imageLoadedMap.value = true }
 
 
 onBeforeMount(() => {
@@ -132,7 +140,7 @@ const aboutTeam = [
 ]
 
 const getImageUrl = (url) => {
-  if (!url) return planeImg
+  if (!url) return placeholderImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`

@@ -5,18 +5,23 @@
         <NuxtLink to="/Travel-gids" class="gid_back">← Назад</NuxtLink>
         <div class="gid_tittle">
           <SkeletonBlock v-if="travelGuidesStore.loading" height="40px" width="60%" style="margin-bottom: 16px;" />
-          <template v-else>{{currentGuide?.title}}</template>
+          <template v-else>ТЕМА</template>
         </div>
       </div>
       <div class="gid-articles">
         <div class="article-information">
           <div class="article">
+            <div class="article-tittle">
+              <SkeletonBlock v-if="travelGuidesStore.loading" height="32px" width="60%" style="margin-bottom: 16px;" />
+              <template v-else>{{currentGuide?.title}}</template>
+            </div>
             <div class="article-text">
               <SkeletonBlock v-if="travelGuidesStore.loading" height="24px" width="80%" style="margin-bottom: 16px;" />
               <template v-else>{{currentGuide?.description}}</template>
             </div>
-            <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none">
-              <SkeletonBlock v-if="travelGuidesStore.loading" width="100%" height="180px" />
+            <div :style="{backgroundImage: imageLoadedMain ? `url('${getImageUrl(currentGuide?.images[0]?.url)}')` : 'none', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none">
+              <SkeletonBlock v-if="!imageLoadedMain" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
+              <img v-if="currentGuide?.images && currentGuide.images[0]?.url" :src="getImageUrl(currentGuide.images[0].url)" @load="onImageLoadMain" style="display:none;" />
             </div>
           </div>
           <div class="article-elements">
@@ -36,8 +41,9 @@
             </div>
           </div>
         </div>
-        <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none">
-          <SkeletonBlock v-if="travelGuidesStore.loading" width="100%" height="180px" />
+        <div :style="{backgroundImage: imageLoadedMain ? `url('${getImageUrl(currentGuide?.images[0]?.url)}')` : 'none', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none">
+          <SkeletonBlock v-if="!imageLoadedMain" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
+          <img v-if="currentGuide?.images && currentGuide.images[0]?.url" :src="getImageUrl(currentGuide.images[0].url)" @load="onImageLoadMain" style="display:none;" />
         </div>
       </div>
     </div>
@@ -47,7 +53,7 @@
 import {onBeforeMount, ref} from 'vue'
 import popupBeforePay from '../../components/popupBeforePay.vue'
 import {useRoute} from "#vue-router";
-import planeImg from "~/src/assets/images/Plane.svg";
+import placeholderImg from "~/src/assets/images/placeholder.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
 import SkeletonBlock from '~/components/SkeletonBlock.vue'
 import { useCountriesStore } from '~/src/store/countries'
@@ -79,13 +85,18 @@ onBeforeMount(() => {
 
 
 const getImageUrl = (url) => {
-  if (!url) return planeImg
+  if (!url) return placeholderImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
 }
 
 const showBeforePayPopup = ref(false)
+
+const imageLoadedMain = ref(false)
+const onImageLoadMain = () => {
+  imageLoadedMain.value = true
+}
 </script>
 <style scoped>
 .modal-overlay {

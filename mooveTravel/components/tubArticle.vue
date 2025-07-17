@@ -3,11 +3,14 @@
     <div class="article-tab">
       <div class="article-information">
         <div class="article-inf">
-          <div class="article-profile-img" :style="{background: `url('${getImageUrl(article?.user?.photo?.url)}')`, backgroundSize: 'cover' }"></div>
-        <div class="tab-header">
-          <div class="article-profile-name">{{article?.user?.fio}}</div>
-          <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
-        </div>
+          <div class="article-profile-img" :style="{background: imageLoadedProfile ? `url('${getImageUrl(article?.user?.photo?.url)}')` : '#D9D9D9', backgroundSize: 'cover' }">
+            <SkeletonBlock v-if="!imageLoadedProfile" width="100%" height="100%" borderRadius="50%" style="position:absolute;top:0;left:0;z-index:1;" />
+            <img v-if="article?.user?.photo?.url" :src="getImageUrl(article.user.photo.url)" @load="onImageLoadProfile" style="display:none;" />
+          </div>
+          <div class="tab-header">
+            <div class="article-profile-name">{{article?.user?.fio}}</div>
+            <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
+          </div>
         </div>
         <div class="article-text">
           <h3 class="article-title" v-if="article?.title">{{ article.title }}</h3>
@@ -15,20 +18,27 @@
             <component :is="renderBlock(block)" />
           </template>
         </div>
-      <div class="article-filters">
-        <div v-for="art in article?.article_tags" :key="a">
-          <div class="article-filter" v-if="route.path === '/blog'">{{art?.name}}</div>
+        <div class="article-filters">
+          <div v-for="art in article?.article_tags" :key="a">
+            <div class="article-filter" v-if="route.path === '/blog'">{{art?.name}}</div>
+          </div>
         </div>
       </div>
+      <div class="article-img" :style="{background: imageLoadedMain ? `url('${getImageUrl(article?.articlePhotos[0]?.url)}')` : '#D9D9D9', backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' }">
+        <SkeletonBlock v-if="!imageLoadedMain" width="100%" height="100%" borderRadius="24px" style="position:absolute;top:0;left:0;z-index:1;" />
+        <img v-if="article?.articlePhotos && article.articlePhotos[0]?.url" :src="getImageUrl(article.articlePhotos[0].url)" @load="onImageLoadMain" style="display:none;" />
       </div>
-      <div class="article-img" :style="{background: `url('${getImageUrl(article?.articlePhotos[0]?.url)}')`, backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' }"></div>
     </div>
   </div>
 </template>
 <script setup>
 import { useRoute } from '#app'
 import { marked } from 'marked';
-import planeImg from "~/src/assets/images/Plane.svg";
+import placeholderImg from "~/src/assets/images/placeholder.svg";
+import SkeletonBlock from '~/components/SkeletonBlock.vue'
+import {ref} from 'vue'
+const imageLoadedProfile = ref(false)
+const imageLoadedMain = ref(false)
 
 defineOptions({
   name: 'tubArticle',
@@ -44,7 +54,7 @@ const props = defineProps({
 const route = useRoute()
 
 const getImageUrl = (url) => {
-  if (!url) return planeImg
+  if (!url) return placeholderImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
@@ -92,6 +102,9 @@ function renderBlock(block) {
   }
   return null;
 }
+
+function onImageLoadProfile() { imageLoadedProfile.value = true }
+function onImageLoadMain() { imageLoadedMain.value = true }
 
 </script>
 <style scoped lang="scss">
