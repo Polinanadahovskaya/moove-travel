@@ -8,6 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
 const axios_1 = __importDefault(require("axios"));
+const path = require('path');
 exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-order', ({ strapi }) => ({
     async createAndSend(ctx) {
         const { body } = ctx.request;
@@ -39,7 +40,21 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
     },
     async registerAlfaOrder(ctx) {
         try {
-            const { amount, orderNumber, returnUrl, description } = ctx.request.body;
+            const { amount, returnUrl, description, name, phone, email, travel_guide } = ctx.request.body;
+            // 1. Создаём запись в guide-orders
+            const guideOrderData = {
+                name,
+                phone,
+                email,
+                amount: amount / 100,
+                payment_status: 'in_progress',
+                emailSend: false,
+                travel_guide: { documentId: travel_guide },
+            };
+            //if (travel_guide) guideOrderData.travel_guide = { id: travel_guide };
+            const guideOrder = await strapi.entityService.create('api::guide-order.guide-order', { data: guideOrderData });
+            // 2. Используем id как orderNumber
+            const orderNumber = guideOrder.id;
             const params = {
                 userName: 'r-id65022_u_on-api',
                 password: 'r-id65022_u_on*?1',
@@ -54,6 +69,83 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
         catch (e) {
             ctx.status = 500;
             ctx.send({ error: 'Ошибка при обращении к Альфа-Банку', details: e.message });
+        }
+    },
+    async getAlfaOrderStatus(ctx) {
+        try {
+            const { orderId } = ctx.request.query;
+            if (!orderId) {
+                ctx.status = 400;
+                ctx.send({ error: 'orderId is required' });
+                return;
+            }
+            const params = {
+                userName: 'r-id65022_u_on-api',
+                password: 'r-id65022_u_on*?1',
+                orderId,
+            };
+            const response = await axios_1.default.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
+            let result = response.data;
+            // Если оплата успешна, обновляем guide-order
+            if (result.orderNumber) {
+                const orderNumber = result.orderNumber;
+                // Пытаемся найти guide-order по id (orderNumber)
+                const guideOrder = await strapi.entityService.findOne('api::guide-order.guide-order', orderNumber, { populate: ['travel_guide'] });
+                if (guideOrder) {
+                    if (result.orderStatus === 2) {
+                        await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                            data: { payment_status: 'paid' },
+                        });
+                        // Отправляем файл гида на email пользователя
+                        if (guideOrder.travel_guide && guideOrder.travel_guide.id) {
+                            // Получаем travel_guide с файлом guide
+                            const travelGuide = await strapi.entityService.findOne('api::travel-guide.travel-guide', guideOrder.travel_guide.id, { populate: ['guide'] });
+                            let guideFile = travelGuide.guide;
+                            if (Array.isArray(guideFile)) {
+                                guideFile = guideFile[0];
+                            }
+                            console.log('guideFile:', guideFile);
+                            if (!guideFile || !guideFile.url) {
+                                throw new Error('Файл guide не найден или не содержит url');
+                            }
+                            const fileUrl = guideFile.url.startsWith('http')
+                                ? guideFile.url
+                                : `${strapi.config.get('server.url', 'http://localhost:1337')}${guideFile.url}`;
+                            const fileName = guideFile.name || path.basename(guideFile.url);
+                            // Скачиваем файл как буфер
+                            const fileResponse = await axios_1.default.get(fileUrl, { responseType: 'arraybuffer' });
+                            const fileBuffer = fileResponse.data;
+                            // Отправляем email с вложением
+                            await strapi.plugin('email').service('email').send({
+                                to: guideOrder.email,
+                                subject: 'Ваш гид',
+                                text: `Спасибо что выбрали нас! Ваш гид во вложении.`,
+                                html: `<p>Спасибо что выбрали нас! Ваш гид во вложении.</p>`,
+                                attachments: [
+                                    {
+                                        filename: fileName,
+                                        content: fileBuffer,
+                                    },
+                                ],
+                            });
+                            // После успешной отправки письма обновляем emailSend
+                            await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                                data: { emailSend: true },
+                            });
+                        }
+                    }
+                    else {
+                        await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                            data: { payment_status: 'payment_failed' },
+                        });
+                    }
+                }
+            }
+            ctx.send(result);
+        }
+        catch (e) {
+            ctx.status = 500;
+            ctx.send({ error: 'Ошибка при получении статуса заказа', details: e.message });
         }
     },
 }));

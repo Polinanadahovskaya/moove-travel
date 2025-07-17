@@ -9,8 +9,8 @@ exports.default = () => ({
                 port: 587,
                 secure: false, // STARTTLS
                 auth: {
-                    user: 'jadyn.walsh@ethereal.email',
-                    pass: 'NeJujUnFcqGcUmCv31',
+                    user: 'jerad.cronin@ethereal.email',
+                    pass: '22HAXk4GZZ2fGSzb9f',
                 },
                 requireTLS: true,
             },
