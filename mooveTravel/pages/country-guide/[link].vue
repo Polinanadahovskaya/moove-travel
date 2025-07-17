@@ -3,7 +3,7 @@
     <div>
       <div class="gid-header">
         <div class="gid_back" @click="router.back()">← Назад</div>
-        <div class="gid_tittle">СТРАНА</div>
+        <div class="gid_tittle">{{ country?.name || '...' }}</div>
       </div>
       <div class="gid-tabs">
         <div v-for="guid in currentGuides.slice(0, 3)">
@@ -17,17 +17,22 @@
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
 import { useRouter, useRoute } from '#app'
 import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
+import { useCountriesStore } from '~/src/store/countries'
 import { onMounted } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 const travelGuidesStore = useTravelGuidesStore()
+const countriesStore = useCountriesStore()
 
 const link = route.params.link
 
+const country = computed(() => countriesStore.getCurrentCountry)
+
 const currentGuides = computed(() => travelGuidesStore.getGuides)
-onMounted(() => {
-  travelGuidesStore.fetchGuidesByCountrySlug(link)
+onMounted(async () => {
+  await countriesStore.fetchCountryByLink(link)
+  await travelGuidesStore.fetchGuidesByCountrySlug(link)
 })
 
 defineOptions({

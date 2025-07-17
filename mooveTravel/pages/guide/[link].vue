@@ -3,18 +3,18 @@
     <div>
       <div class="gid-header">
         <NuxtLink to="/Travel-gids" class="gid_back">← Назад</NuxtLink>
-        <div class="gid_tittle">ТЕМА</div>
+        <div class="gid_tittle">{{currentGuide?.title}}</div>
       </div>
       <div class="gid-articles">
         <div class="article-information">
           <div class="article">
-            <div class="article-tittle">{{currentGuide?.title}}</div>
+<!--            <div class="article-tittle"></div>-->
             <div class="article-text">{{currentGuide?.description}}</div>
             <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
           </div>
           <div class="article-elements">
           <div class="gid-country_price">
-            <div class="old-price">{{ formatPrice(1990)}} ₽</div>
+            <div class="old-price">{{ formatPrice(currentGuide?.priceBase)}} ₽</div>
             <div class="fix-price">{{ formatPrice(currentGuide?.price)}} ₽</div>
           </div>
           <div class="article-button" @click="showBeforePayPopup = true">Купить</div>
@@ -34,6 +34,8 @@ import popupBeforePay from '../../components/popupBeforePay.vue'
 import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
+import { useCountriesStore } from '~/src/store/countries'
+
 
 defineOptions({
   name: "guide",
@@ -44,6 +46,7 @@ const link = route.params.link
 
 
 const travelGuidesStore = useTravelGuidesStore()
+const countriesStore = useCountriesStore()
 
 const formatPrice = (price)=> {
   const roundedPrice = Math.round(price);
@@ -51,8 +54,9 @@ const formatPrice = (price)=> {
 }
 
 
+
 const currentGuide = computed(() => travelGuidesStore.getGuide)
-onMounted(() => {
+onMounted(async () => {
   travelGuidesStore.fetchGuideBySlug(link)
 });
 
@@ -251,6 +255,7 @@ const showBeforePayPopup = ref(false)
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   @media (max-width: 1680px) {
     width: 50%;
     height: 100px;

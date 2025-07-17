@@ -354,6 +354,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 36px;
   line-height: 100%;
   color: #FFFFFF;
+  cursor:pointer;
 }
 
 .popup-pay {
