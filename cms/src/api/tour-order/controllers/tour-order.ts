@@ -4,6 +4,7 @@
 
 import { factories } from '@strapi/strapi';
 import axios from 'axios';
+const path = require('path');
 
 export default factories.createCoreController('api::tour-order.tour-order', ({ strapi }) => ({
   async createAndSend(ctx) {
@@ -64,7 +65,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
       //if (travel_guide) guideOrderData.travel_guide = { id: travel_guide };
       const guideOrder = await strapi.entityService.create('api::guide-order.guide-order', { data: guideOrderData });
       // 2. Используем id как orderNumber
-      const orderNumber = guideOrder.id.toString();
+      const orderNumber = guideOrder.id;
       const params = {
         userName: 'r-id65022_u_on-api',
         password: 'r-id65022_u_on*?1',
@@ -95,17 +96,46 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
         orderId,
       };
       const response = await axios.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
-      const result = response.data;
+      let result = response.data;
       // Если оплата успешна, обновляем guide-order
       if (result.orderNumber) {
         const orderNumber = result.orderNumber;
         // Пытаемся найти guide-order по id (orderNumber)
-        const guideOrder = await strapi.entityService.findOne('api::guide-order.guide-order', orderNumber);
+        const guideOrder: any = await strapi.entityService.findOne('api::guide-order.guide-order', orderNumber, { populate: ['travel_guide'] });
         if (guideOrder) {
           if (result.orderStatus === 2) {
             await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
-              data: { payment_status: 'paid', emailSend: true },
+              data: { payment_status: 'paid' },
             });
+            // Отправляем файл гида на email пользователя
+            if (guideOrder.travel_guide && guideOrder.travel_guide.id) {
+              const travelGuide: any = await strapi.entityService.findOne('api::travel-guide.travel-guide', guideOrder.travel_guide.id, { populate: ['guide'] });
+
+              if (travelGuide && travelGuide.guide && travelGuide.guide.url) {
+                const fileUrl = travelGuide.guide.url;
+                const fileName = travelGuide.guide.name || path.basename(travelGuide.guide.url);
+                // Скачиваем файл как буфер
+                const fileResponse = await axios.get(fileUrl, { responseType: 'arraybuffer' });
+                const fileBuffer = fileResponse.data;
+                // Отправляем email с вложением
+                await strapi.plugin('email').service('email').send({
+                  to: guideOrder.email,
+                  subject: 'Ваш гид',
+                  text: `Спасибо что выбрали нас! Ваш гид во вложении.`,
+                  html: `<p>Спасибо что выбрали нас! Ваш гид во вложении.</p>`,
+                  attachments: [
+                    {
+                      filename: fileName,
+                      content: fileBuffer,
+                    },
+                  ],
+                });
+                // После успешной отправки письма обновляем emailSend
+                await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
+                  data: { emailSend: true },
+                });
+              }
+            }
           } else {
             await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
               data: { payment_status: 'payment_failed' },
