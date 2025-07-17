@@ -532,6 +532,45 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGuideOrderGuideOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'guide_orders';
+  info: {
+    displayName: 'guideOrder';
+    pluralName: 'guide-orders';
+    singularName: 'guide-order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amount: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String;
+    emailSend: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::guide-order.guide-order'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    payment_status: Schema.Attribute.Enumeration<
+      ['in_progress', 'paid', 'payment_failed', 'canceled']
+    >;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    travel_guide: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::travel-guide.travel-guide'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
   collectionName: 'guide_pages';
   info: {
@@ -1181,6 +1220,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::blog.blog': ApiBlogBlog;
       'api::country.country': ApiCountryCountry;
+      'api::guide-order.guide-order': ApiGuideOrderGuideOrder;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
       'api::main-page.main-page': ApiMainPageMainPage;
       'api::tour-order.tour-order': ApiTourOrderTourOrder;
