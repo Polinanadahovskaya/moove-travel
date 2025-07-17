@@ -14,6 +14,7 @@ type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}
 interface _GlobalComponents {
       'Footer': typeof import("../components/Footer.vue")['default']
     'Header': typeof import("../components/Header.vue")['default']
+    'SkeletonBlock': typeof import("../components/SkeletonBlock.vue")['default']
     'BestVariant': typeof import("../components/bestVariant.vue")['default']
     'GidCoutryTab': typeof import("../components/gidCoutryTab.vue")['default']
     'PopupApplication': typeof import("../components/popupApplication.vue")['default']
@@ -51,6 +52,7 @@ interface _GlobalComponents {
     'NuxtRouteAnnouncer': IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
       'LazyFooter': LazyComponent<typeof import("../components/Footer.vue")['default']>
     'LazyHeader': LazyComponent<typeof import("../components/Header.vue")['default']>
+    'LazySkeletonBlock': LazyComponent<typeof import("../components/SkeletonBlock.vue")['default']>
     'LazyBestVariant': LazyComponent<typeof import("../components/bestVariant.vue")['default']>
     'LazyGidCoutryTab': LazyComponent<typeof import("../components/gidCoutryTab.vue")['default']>
     'LazyPopupApplication': LazyComponent<typeof import("../components/popupApplication.vue")['default']>
@@ -94,6 +96,7 @@ declare module 'vue' {
 
 export const Footer: typeof import("../components/Footer.vue")['default']
 export const Header: typeof import("../components/Header.vue")['default']
+export const SkeletonBlock: typeof import("../components/SkeletonBlock.vue")['default']
 export const BestVariant: typeof import("../components/bestVariant.vue")['default']
 export const GidCoutryTab: typeof import("../components/gidCoutryTab.vue")['default']
 export const PopupApplication: typeof import("../components/popupApplication.vue")['default']
@@ -131,6 +134,7 @@ export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components
 export const NuxtRouteAnnouncer: IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
 export const LazyFooter: LazyComponent<typeof import("../components/Footer.vue")['default']>
 export const LazyHeader: LazyComponent<typeof import("../components/Header.vue")['default']>
+export const LazySkeletonBlock: LazyComponent<typeof import("../components/SkeletonBlock.vue")['default']>
 export const LazyBestVariant: LazyComponent<typeof import("../components/bestVariant.vue")['default']>
 export const LazyGidCoutryTab: LazyComponent<typeof import("../components/gidCoutryTab.vue")['default']>
 export const LazyPopupApplication: LazyComponent<typeof import("../components/popupApplication.vue")['default']>

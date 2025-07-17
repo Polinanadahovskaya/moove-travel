@@ -3,37 +3,57 @@
     <div>
       <div class="gid-header">
         <NuxtLink to="/Travel-gids" class="gid_back">← Назад</NuxtLink>
-        <div class="gid_tittle">ТЕМА</div>
+        <div class="gid_tittle">
+          <SkeletonBlock v-if="travelGuidesStore.loading" height="40px" width="60%" style="margin-bottom: 16px;" />
+          <template v-else>ТЕМА</template>
+        </div>
       </div>
       <div class="gid-articles">
         <div class="article-information">
           <div class="article">
-            <div class="article-tittle">{{currentGuide?.title}}</div>
-            <div class="article-text">{{currentGuide?.description}}</div>
-            <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
+            <div class="article-tittle">
+              <SkeletonBlock v-if="travelGuidesStore.loading" height="32px" width="60%" style="margin-bottom: 16px;" />
+              <template v-else>{{currentGuide?.title}}</template>
+            </div>
+            <div class="article-text">
+              <SkeletonBlock v-if="travelGuidesStore.loading" height="24px" width="80%" style="margin-bottom: 16px;" />
+              <template v-else>{{currentGuide?.description}}</template>
+            </div>
+            <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none">
+              <SkeletonBlock v-if="travelGuidesStore.loading" width="100%" height="180px" />
+            </div>
           </div>
           <div class="article-elements">
-          <div class="gid-country_price">
-            <div class="old-price">{{ formatPrice(1990)}} ₽</div>
-            <div class="fix-price">{{ formatPrice(currentGuide?.price)}} ₽</div>
-          </div>
-          <div class="article-button" @click="showBeforePayPopup = true">Купить</div>
+            <div class="gid-country_price">
+              <SkeletonBlock v-if="travelGuidesStore.loading" width="80px" height="24px" style="margin-right: 8px;" />
+              <template v-else>
+                <div class="old-price">{{ formatPrice(1990)}} ₽</div>
+                <div class="fix-price">{{ formatPrice(currentGuide?.price)}} ₽</div>
+              </template>
+            </div>
+            <div class="article-button" @click="showBeforePayPopup = true">
+              <SkeletonBlock v-if="travelGuidesStore.loading" width="120px" height="36px" />
+              <template v-else>Купить</template>
+            </div>
             <div v-if="showBeforePayPopup" class="modal-overlay" @click.self="showBeforePayPopup = false">
               <popupBeforePay @close="showBeforePayPopup = false" :price="currentGuide?.price"/>
             </div>
           </div>
         </div>
-        <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none"></div>
+        <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none">
+          <SkeletonBlock v-if="travelGuidesStore.loading" width="100%" height="180px" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onBeforeMount, ref} from 'vue'
 import popupBeforePay from '../../components/popupBeforePay.vue'
 import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
+import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 defineOptions({
   name: "guide",
@@ -52,9 +72,11 @@ const formatPrice = (price)=> {
 
 
 const currentGuide = computed(() => travelGuidesStore.getGuide)
-onMounted(() => {
+
+onBeforeMount(() => {
   travelGuidesStore.fetchGuideBySlug(link)
-});
+})
+
 
 const getImageUrl = (url) => {
   if (!url) return planeImg

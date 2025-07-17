@@ -2,15 +2,23 @@
   <div>
     <div>
       <div class="about-baner"   :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
-        <h1 style="color: #FFFFFF">{{getAboutUsPage?.title}}</h1>
+        <h1 style="color: #FFFFFF">
+          <SkeletonBlock v-if="loading" height="48px" width="40%" style="margin-bottom: 16px;" />
+          <template v-else>{{getAboutUsPage?.title}}</template>
+        </h1>
         <div class="about-border"></div>
         <div class="about-points">
-          <div v-for="arr in aboutMoove">
-            <div style="display: flex;     align-items: center;">
-              <div class="point-number">{{ arr.id }}</div>
-              <div class="point-text" v-html="arr.text"></div>
+          <template v-if="loading">
+            <SkeletonBlock v-for="n in 3" :key="n" width="80px" height="48px" style="margin: 0 16px 0 0;" />
+          </template>
+          <template v-else>
+            <div v-for="arr in aboutMoove">
+              <div style="display: flex;     align-items: center;">
+                <div class="point-number">{{ arr.id }}</div>
+                <div class="point-text" v-html="arr.text"></div>
+              </div>
             </div>
-          </div>
+          </template>
         </div>
       </div>
       <div class="about-office">
@@ -19,23 +27,36 @@
         <div class="about-location">
           <div class="contacts">
            <div>
-             <div class="location">{{getAboutUsPage?.office?.title}}</div>
-             <div class="location-text">{{getAboutUsPage?.office?.description}}
+             <div class="location">
+               <SkeletonBlock v-if="loading" width="120px" height="24px" />
+               <template v-else>{{getAboutUsPage?.office?.title}}</template>
+             </div>
+             <div class="location-text">
+               <SkeletonBlock v-if="loading" width="180px" height="20px" />
+               <template v-else>{{getAboutUsPage?.office?.description}}</template>
+             </div>
            </div>
-            </div>
             <div class="contacts-phone">
               <div class="location">Контакты</div>
               <div class="location-phone">
                 <div class="phone"></div>
-                <div class="number">{{getAboutUsPage?.office?.phone}}</div>
+                <div class="number">
+                  <SkeletonBlock v-if="loading" width="120px" height="20px" />
+                  <template v-else>{{getAboutUsPage?.office?.phone}}</template>
+                </div>
               </div>
               <div class="location-phone">
                 <div class="mail"></div>
-                <div class="number">{{getAboutUsPage?.office?.email}}</div>
+                <div class="number">
+                  <SkeletonBlock v-if="loading" width="120px" height="20px" />
+                  <template v-else>{{getAboutUsPage?.office?.email}}</template>
+                </div>
               </div>
             </div>
           </div>
-          <div class="map" :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
+          <div class="map" :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` }">
+            <SkeletonBlock v-if="loading" width="100%" height="180px" />
+          </div>
         </div>
       </div>
       <div class="team">
@@ -44,11 +65,16 @@
           <div class="about-border"></div>
         </div>
         <div class="blog-grid">
-          <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
-            <team-tab
-                :imgUrl="getImageUrl(arr?.image?.url)"
-                :element="arr"/>
-          </div>
+          <template v-if="loading">
+            <SkeletonBlock v-for="n in 3" :key="n" width="220px" height="320px" style="margin: 0 16px 0 0;" />
+          </template>
+          <template v-else>
+            <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
+              <team-tab
+                  :imgUrl="getImageUrl(arr?.image?.url)"
+                  :element="arr"/>
+            </div>
+          </template>
         </div>
       </div>
       <popup-application/>
@@ -65,7 +91,8 @@ import planeImg from '~/src/assets/images/Plane.svg'
 import officeImg from '~/src/assets/images/fastOpen.png'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
+import {onBeforeMount, onMounted} from 'vue'
+import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 defineOptions({
   name: "About",
@@ -74,9 +101,11 @@ defineOptions({
 const pagesStore = usePagesStore()
 const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
 
-onMounted(() => {
+
+onBeforeMount(() => {
   pagesStore.fetchAboutUsPage()
 })
+
 const aboutMoove = computed(() => {
   if (!getAboutUsPage.value?.banner) return []
   return [

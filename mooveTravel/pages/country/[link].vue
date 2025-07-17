@@ -3,7 +3,10 @@
     <div class="country-block">
       <div class="back-country">
         <div class="header-content">
-          <h1>{{ country?.name || '...' }}</h1>
+          <h1>
+            <SkeletonBlock v-if="countriesStore.loading" height="40px" width="40%" style="margin-bottom: 16px;" />
+            <template v-else>{{ country?.name || '...' }}</template>
+          </h1>
           <button class="back-btn" @click="router.back()">← Назад</button>
         </div>
       </div>
@@ -18,9 +21,10 @@
 <!--        </div>-->
 <!--      </div>-->
       <tub-article
-        v-if="activeArticle"
+        v-if="activeArticle && !articlesStore.loading"
         :article="activeArticle"
       />
+      <SkeletonBlock v-else width="100%" height="120px" style="margin-top: 24px;" />
     </div>
   </div>
 </template>
@@ -28,8 +32,9 @@
 import TubArticle from "~/components/tubArticle.vue";
 import { useArticlesStore } from '~/src/store/articles'
 import { useCountriesStore } from '~/src/store/countries'
-import { onMounted, computed } from 'vue'
+import {computed, onBeforeMount} from 'vue'
 import { useRoute, useRouter } from '#app'
+import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 defineOptions({
   name: 'country',
@@ -54,10 +59,11 @@ function goToArticle(link) {
   }
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await countriesStore.fetchCountryByLink(countryLink.value)
   await articlesStore.fetchArticlesByCountryLink(countryLink.value)
 })
+
 </script>
 <style scoped>
 .country-block {
