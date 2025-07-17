@@ -1,10 +1,7 @@
 <template>
   <div class="team-tab-root">
     <div class="team-body">
-      <div class="team-round" :style="{ backgroundImage: imageLoaded ? `url('${props.imgUrl}')` : 'none' }">
-        <SkeletonBlock v-if="!imageLoaded" width="100%" height="100%" borderRadius="50%" style="position:absolute;top:0;left:0;z-index:1;" />
-        <img v-if="props.imgUrl" :src="props.imgUrl" @load="onImageLoad" style="display:none;" />
-      </div>
+      <div class="team-round" :style="{ backgroundImage: `url('${props.imgUrl}')` }"></div>
       <div class="team-name">{{ element.fio }}</div>
       <div class="name-first-text">{{element.position}}</div>
       <div class="name-text">{{element.description}}</div>
@@ -26,10 +23,6 @@ const props = defineProps({
     required: false
   }
 })
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
-import {ref} from 'vue'
-const imageLoaded = ref(false)
-function onImageLoad() { imageLoaded.value = true }
 </script>
 <style scoped>
 .team-tab-root {

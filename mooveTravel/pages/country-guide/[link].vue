@@ -3,15 +3,17 @@
     <div>
       <div class="gid-header">
         <div class="gid_back" @click="router.back()">← Назад</div>
-        <div class="gid_tittle">{{ country?.name || '...' }}</div>
+        <div class="gid_tittle">СТРАНА</div>
       </div>
       <div class="gid-tabs">
-        <template v-if="travelGuidesStore.loading">
-          <SkeletonBlock v-for="n in 3" :key="n" width="100%" height="120px" style="margin-bottom: 16px;" />
-        </template>
-        <template v-else>
+        <template v-if="currentGuides.length > 0">
           <div v-for="guid in currentGuides.slice(0, 3)">
             <gid-coutry-tab :guid="guid"/>
+          </div>
+        </template>
+        <template v-else>
+          <div class="no-guides-message">
+            Путеводителей по этой стране пока нет, но мы обязательно подготовим для вас полезные советы и интересные маршруты!
           </div>
         </template>
       </div>
@@ -22,25 +24,18 @@
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
 import { useRouter, useRoute } from '#app'
 import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
-import {onBeforeMount} from 'vue'
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
-import { useCountriesStore } from '~/src/store/countries'
+import { onMounted } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 const travelGuidesStore = useTravelGuidesStore()
-const countriesStore = useCountriesStore()
 
 const link = route.params.link
 
-const country = computed(() => countriesStore.getCurrentCountry)
-
 const currentGuides = computed(() => travelGuidesStore.getGuides)
-onBeforeMount(async () => {
-  await countriesStore.fetchCountryByLink(link)
-  await travelGuidesStore.fetchGuidesByCountrySlug(link)
+onMounted(() => {
+  travelGuidesStore.fetchGuidesByCountrySlug(link)
 })
-
 
 defineOptions({
   name: "country-guide",
@@ -112,5 +107,12 @@ defineOptions({
   @media (max-width: 768px) {
     gap: 21px;
   }
+}
+.no-guides-message {
+  font-weight: bold;
+  color: #C75454;
+  text-align: center;
+  margin-top: 10%;
+  font-size: 20px;
 }
 </style>

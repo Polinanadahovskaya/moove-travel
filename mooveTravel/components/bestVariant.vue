@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="variant-body" :style="{ backgroundImage: imageLoaded ? `url('${getImageUrl(info?.images[0]?.url)}')` : 'none', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
-      <SkeletonBlock v-if="!imageLoaded" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
-      <img v-if="info?.images && info.images[0]?.url" :src="getImageUrl(info.images[0].url)" @load="onImageLoad" style="display:none;" />
-      <div style="position:relative;z-index:2;">
+    <div class="variant-body" :style="{ backgroundImage: `url('${getImageUrl(info?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
+      <div>
         <div class="variant-tittle">{{ info?.title }}</div>
         <div class="variant-text">{{info?.description}}</div>
       </div>
-      <div  style="text-decoration: none; color: #1E1E1E;position:relative;z-index:2;">
+      <div  style="text-decoration: none; color: #1E1E1E">
         <div class="variant-price">{{ formatPrice(info.price) }} ₽</div>
         <div class="variant-button" @click="goToArticlePageGid(info?.link)">Купить</div>
       </div>
@@ -15,10 +13,8 @@
   </div>
 </template>
 <script setup>
-import placeholderImg from "~/src/assets/images/placeholder.svg";
+import planeImg from "~/src/assets/images/Plane.svg";
 import {useRouter} from "#vue-router";
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
-import {ref} from 'vue'
 
 defineOptions({
   name: 'bestVariant',
@@ -32,7 +28,7 @@ const formatPrice = (price) => {
 }
 
 const getImageUrl = (url) => {
-  if (!url) return placeholderImg
+  if (!url) return planeImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
@@ -41,9 +37,6 @@ const getImageUrl = (url) => {
 function goToArticlePageGid(link) {
   router.push(`/guide/${link}`)
 }
-
-const imageLoaded = ref(false)
-function onImageLoad() { imageLoaded.value = true }
 
 defineProps({
   info: {

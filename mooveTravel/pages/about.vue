@@ -1,26 +1,16 @@
 <template>
   <div>
     <div>
-      <div class="about-baner" :style="{ backgroundImage: imageLoadedBanner ? `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')` : 'none' }">
-        <SkeletonBlock v-if="!imageLoadedBanner" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
-        <img v-if="getAboutUsPage?.banner?.backgroundImage?.url" :src="getImageUrl(getAboutUsPage.banner.backgroundImage.url)" @load="onImageLoadBanner" style="display:none;" />
-        <h1 style="color: #FFFFFF; position:relative;z-index:2;">
-          <SkeletonBlock v-if="loading" height="48px" width="40%" style="margin-bottom: 16px;" />
-          <template v-else>{{getAboutUsPage?.title}}</template>
-        </h1>
+      <div class="about-baner"   :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
+        <h1 style="color: #FFFFFF">{{getAboutUsPage?.title}}</h1>
         <div class="about-border"></div>
         <div class="about-points">
-          <template v-if="loading">
-            <SkeletonBlock v-for="n in 3" :key="n" width="80px" height="48px" style="margin: 0 16px 0 0;" />
-          </template>
-          <template v-else>
-            <div v-for="arr in aboutMoove">
-              <div style="display: flex;     align-items: center;">
-                <div class="point-number">{{ arr.id }}</div>
-                <div class="point-text" v-html="arr.text"></div>
-              </div>
+          <div v-for="arr in aboutMoove">
+            <div style="display: flex;     align-items: center;">
+              <div class="point-number">{{ arr.id }}</div>
+              <div class="point-text" v-html="arr.text"></div>
             </div>
-          </template>
+          </div>
         </div>
       </div>
       <div class="about-office">
@@ -29,37 +19,23 @@
         <div class="about-location">
           <div class="contacts">
            <div>
-             <div class="location">
-               <SkeletonBlock v-if="loading" width="120px" height="24px" />
-               <template v-else>{{getAboutUsPage?.office?.title}}</template>
-             </div>
-             <div class="location-text">
-               <SkeletonBlock v-if="loading" width="180px" height="20px" />
-               <template v-else>{{getAboutUsPage?.office?.description}}</template>
-             </div>
+             <div class="location">{{getAboutUsPage?.office?.title}}</div>
+             <div class="location-text">{{getAboutUsPage?.office?.description}}
            </div>
+            </div>
             <div class="contacts-phone">
               <div class="location">Контакты</div>
               <div class="location-phone">
                 <div class="phone"></div>
-                <div class="number">
-                  <SkeletonBlock v-if="loading" width="120px" height="20px" />
-                  <template v-else>{{getAboutUsPage?.office?.phone}}</template>
-                </div>
+                <div class="number">{{getAboutUsPage?.office?.phone}}</div>
               </div>
               <div class="location-phone">
                 <div class="mail"></div>
-                <div class="number">
-                  <SkeletonBlock v-if="loading" width="120px" height="20px" />
-                  <template v-else>{{getAboutUsPage?.office?.email}}</template>
-                </div>
+                <div class="number">{{getAboutUsPage?.office?.email}}</div>
               </div>
             </div>
           </div>
-          <div class="map" :style="{ backgroundImage: imageLoadedMap ? `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` : 'none' }">
-            <SkeletonBlock v-if="!imageLoadedMap" width="100%" height="180px" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
-            <img v-if="getAboutUsPage?.office?.image?.url" :src="getImageUrl(getAboutUsPage.office.image.url)" @load="onImageLoadMap" style="display:none;" />
-          </div>
+          <div class="map" :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
         </div>
       </div>
       <div class="team">
@@ -68,16 +44,11 @@
           <div class="about-border"></div>
         </div>
         <div class="blog-grid">
-          <template v-if="loading">
-            <SkeletonBlock v-for="n in 3" :key="n" width="220px" height="320px" style="margin: 0 16px 0 0;" />
-          </template>
-          <template v-else>
-            <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
-              <team-tab
-                  :imgUrl="getImageUrl(arr?.image?.url)"
-                  :element="arr"/>
-            </div>
-          </template>
+          <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
+            <team-tab
+                :imgUrl="getImageUrl(arr?.image?.url)"
+                :element="arr"/>
+          </div>
         </div>
       </div>
       <popup-application/>
@@ -90,12 +61,11 @@ import PopupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
 import tanyaImg from '/src/assets/images/tanya.png'
 import andrewImg from '/src/assets/images/andrew.png'
-import placeholderImg from '~/src/assets/images/placeholder.svg'
+import planeImg from '~/src/assets/images/Plane.svg'
 import officeImg from '~/src/assets/images/fastOpen.png'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
-import {onBeforeMount, onMounted, ref} from 'vue'
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
+import { onMounted } from 'vue'
 
 defineOptions({
   name: "About",
@@ -104,16 +74,9 @@ defineOptions({
 const pagesStore = usePagesStore()
 const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
 
-const imageLoadedBanner = ref(false)
-const imageLoadedMap = ref(false)
-function onImageLoadBanner() { imageLoadedBanner.value = true }
-function onImageLoadMap() { imageLoadedMap.value = true }
-
-
-onBeforeMount(() => {
+onMounted(() => {
   pagesStore.fetchAboutUsPage()
 })
-
 const aboutMoove = computed(() => {
   if (!getAboutUsPage.value?.banner) return []
   return [
@@ -140,7 +103,7 @@ const aboutTeam = [
 ]
 
 const getImageUrl = (url) => {
-  if (!url) return placeholderImg
+  if (!url) return planeImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`

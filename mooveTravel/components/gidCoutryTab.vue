@@ -2,10 +2,7 @@
   <div @click="goToArticlePageGid(guid?.link)">
     <div class="gid-country_tub">
       <div class="gid-country_inf">
-        <div :style="{backgroundImage: imageLoaded ? `url('${getImageUrl(guid?.images[0]?.url)}')` : 'none', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img mobile-none">
-          <SkeletonBlock v-if="!imageLoaded" width="100%" height="100%" borderRadius="24px" style="position:absolute;top:0;left:0;z-index:1;" />
-          <img v-if="guid?.images && guid.images[0]?.url" :src="getImageUrl(guid.images[0].url)" @load="onImageLoad" style="display:none;" />
-        </div>
+        <div :style="{backgroundImage: `url('${getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img mobile-none"></div>
         <div class="gid-country_art">
           <div class="gid-header-mobile">
             <div class="gid-country_tittle">{{guid?.title}}</div>
@@ -17,10 +14,7 @@
           <div class="gid-country_text">{{guid?.description}}
           </div>
         </div>
-        <div :style="{backgroundImage: imageLoaded ? `url('${getImageUrl(guid?.images[0]?.url)}')` : 'none', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img desc-none">
-          <SkeletonBlock v-if="!imageLoaded" width="100%" height="100%" borderRadius="24px" style="position:absolute;top:0;left:0;z-index:1;" />
-          <img v-if="guid?.images && guid.images[0]?.url" :src="getImageUrl(guid.images[0].url)" @load="onImageLoad" style="display:none;" />
-        </div>
+        <div :style="{backgroundImage: `url('${getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img desc-none"></div>
       </div>
       <div class="gid-country_price mobile-none">
         <div class="old-price">{{ formatPrice(guid?.priceBase) }} ₽</div>
@@ -31,11 +25,7 @@
 </template>
 <script setup>
 import {useRouter} from "#vue-router";
-import placeholderImg from "~/src/assets/images/placeholder.svg";
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
-import {ref} from 'vue'
-const imageLoaded = ref(false)
-function onImageLoad() { imageLoaded.value = true }
+import planeImg from "~/src/assets/images/Plane.svg";
 
 defineOptions({
   name: "gidCoutryTab"
@@ -50,7 +40,7 @@ defineProps({
 const router = useRouter()
 
 const getImageUrl = (url) => {
-  if (!url) return placeholderImg
+  if (!url) return planeImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
@@ -151,7 +141,6 @@ function goToArticlePageGid(link) {
   border-radius: 24px;
   background: #D9D9D9;
   flex-shrink: 0;
-  position: relative; /* Added for skeleton positioning */
   @media (max-width: 1200px) {
     width: 100%;
   }

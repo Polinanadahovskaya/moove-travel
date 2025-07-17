@@ -5,31 +5,18 @@
         <h1 class="travel-tittle">TRAVEL-ГИДЫ</h1>
         <div class="travel-border"></div>
       </div>
-      <div class="travel-text">
-        <SkeletonBlock v-if="loading" width="60%" height="32px" style="margin-bottom: 16px;" />
-        <template v-else>{{guidePage?.description}}</template>
-      </div>
+      <div class="travel-text">{{guidePage?.description}}</div>
       <h2 class="travel-tittle travel-country">Лучшие предложения</h2>
       <div class="travel-grid">
-        <template v-if="loading">
-          <SkeletonBlock v-for="n in 3" :key="n" width="100%" height="120px" style="margin-bottom: 16px;" />
-        </template>
-        <template v-else>
-          <div v-for="arr in guidePage?.bestGuides" :key="arr?.id">
-            <best-variant :info="arr?.travel_guide"/>
-          </div>
-        </template>
+        <div v-for="arr in guidePage?.bestGuides" :key="arr?.id">
+          <best-variant :info="arr?.travel_guide"/>
+        </div>
       </div>
       <h2 class="travel-country">Страны</h2>
       <div class="travel-grid gid-trav">
-        <template v-if="loading">
-          <SkeletonBlock v-for="n in 6" :key="n" width="100%" height="80px" style="margin-bottom: 16px;" />
-        </template>
-        <template v-else>
-          <div v-for="arr in popularCountry.slice(0, 9)" :key="arr?.id" @click="goToCountryGid(arr?.link)">
-            <tub-country :country="arr" id="gid"/>
-          </div>
-        </template>
+        <div v-for="arr in popularCountry.slice(0, 9)" :key="arr?.id" @click="goToCountryGid(arr?.link)">
+          <tub-country :country="arr" id="gid"/>
+        </div>
       </div>
       <popupTravelGid class="none-art"/>
       <popup-application class="none-desk"/>
@@ -38,8 +25,8 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onUnmounted, computed, onBeforeMount} from 'vue';
-import BestVariant from '~/components/bestVariant.vue';
+import {ref, onMounted, onBeforeMount, onUnmounted, computed} from 'vue';
+import BestVariant from '~/components/BestVariant.vue';
 import TubCountry from '~/components/tubCountry.vue';
 import PopupTravelGid from '~/components/popupTravelGid.vue';
 import PopupApplication from "~/components/PopupApplication";
@@ -47,7 +34,6 @@ import { storeToRefs } from 'pinia'
 import { usePagesStore } from '@/src/store/pages'
 import { useCountriesStore } from '../src/store/countries'
 import {useRouter} from "#app";
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 const router = useRouter()
 const countriesStore = useCountriesStore()
@@ -63,7 +49,6 @@ function handleResize() {
   isTablet.value = window.innerWidth > 576 && window.innerWidth <= 1200;
   countryCount.value = isMobile.value || isTablet.value ? 6 : 9;
 }
-
 onBeforeMount(() => {
   countriesStore.fetchCountries();
   pagesStore.fetchGuidePage()

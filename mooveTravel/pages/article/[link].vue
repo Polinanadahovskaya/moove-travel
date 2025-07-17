@@ -2,22 +2,15 @@
   <div>
     <div class="article_header">
       <NuxtLink  @click="router.back()" class="article_back">← Назад</NuxtLink>
-      <h1 class="article_tittle">
-        <SkeletonBlock v-if="articlesStore.loading" height="40px" width="60%" style="margin-bottom: 16px;" />
-        <template v-else>{{article?.title}}</template>
-      </h1>
+      <h1 class="article_tittle">{{article?.title}}</h1>
     </div>
     <div class="article_body">
       <div class="art-user">
         <div>
+          <!--          <h2 class="art_tittle">Заголовок</h2>-->
           <div class="art_text">
-            <template v-if="articlesStore.loading">
-              <SkeletonBlock v-for="n in 3" :key="n" width="100%" height="24px" style="margin-bottom: 12px;" />
-            </template>
-            <template v-else>
-              <template v-for="(block, idx) in article?.content" :key="idx">
-                <component :is="renderBlock(block)" />
-              </template>
+            <template v-for="(block, idx) in article?.content" :key="idx">
+              <component :is="renderBlock(block)" />
             </template>
           </div>
         </div>
@@ -28,14 +21,9 @@
       </div>
       <div class="none-art" >
         <div class="article_images">
-          <template v-if="articlesStore.loading">
-            <SkeletonBlock v-for="n in 2" :key="n" width="180px" height="120px" style="margin-right: 16px;" />
-          </template>
-          <template v-else>
-            <div v-for="img in article?.articlePhotos?.slice(0, 2)" :key="img.id">
-              <div class="article_image" :style="{backgroundImage: `url('${getImageUrl(img.url)}')`}"></div>
-            </div>
-          </template>
+          <div v-for="img in article?.articlePhotos?.slice(0, 2)" :key="img.id">
+            <div class="article_image" :style="{backgroundImage: `url('${getImageUrl(img.url)}')`}"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,11 +35,10 @@
 import PopupArticle from "~/components/PopupArticle";
 import PopupApplication from "~/components/PopupApplication";
 import {useArticlesStore} from "~/src/store/articles.js";
-import {onBeforeMount, onMounted} from "vue";
+import {onMounted} from "vue";
 import { useRoute } from 'vue-router'
-import placeholderImg from "~/src/assets/images/placeholder.svg";
+import planeImg from "~/src/assets/images/Plane.svg";
 import {useRouter} from '#app'
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
 
 const router = useRouter()
 
@@ -96,15 +83,14 @@ const route = useRoute()
 const link = route.params.link
 const articlesStore = useArticlesStore()
 const article = computed(() => articlesStore.getArticlesLink)
-
-onBeforeMount(async() => {
+onMounted(async () => {
   await Promise.all([
     articlesStore.fetchArticleByLink(link),
   ])
 })
 
 const getImageUrl = (url) => {
-  if (!url) return placeholderImg
+  if (!url) return planeImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`

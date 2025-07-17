@@ -1,20 +1,14 @@
 <template>
   <div class="tub-country-container">
     <NuxtLink :to="id === 'gid' ? '/countryGid' : `/country/${country?.link}`" style="text-decoration: none;">
-      <div class="country-background" :style="{backgroundImage: imageLoaded ? `url('${getImageUrl(country?.image?.url)}')` : 'none'}">
-        <SkeletonBlock v-if="!imageLoaded" width="100%" height="100%" borderRadius="34px" style="position:absolute;top:0;left:0;z-index:1;" />
-        <img v-if="country?.image?.url" :src="getImageUrl(country.image.url)" @load="onImageLoad" style="display:none;" />
-        <div class="country-text" style="position:relative;z-index:2;">{{country?.name}}</div>
+      <div class="country-background" :style="{backgroundImage: `url('${getImageUrl(country?.image?.url)}')`}">
+        <div class="country-text">{{country?.name}}</div>
       </div>
     </NuxtLink>
   </div>
 </template>
 <script setup>
-import placeholderImg from "~/src/assets/images/placeholder.svg";
-import SkeletonBlock from '~/components/SkeletonBlock.vue'
-import {ref} from 'vue'
-const imageLoaded = ref(false)
-function onImageLoad() { imageLoaded.value = true }
+import planeImg from "~/src/assets/images/Plane.svg";
 
 defineOptions({
   name: "tubCountry",
@@ -31,7 +25,7 @@ defineProps({
 })
 
 const getImageUrl = (url) => {
-  if (!url) return placeholderImg
+  if (!url) return planeImg
   if (url.startsWith('http')) return url
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
