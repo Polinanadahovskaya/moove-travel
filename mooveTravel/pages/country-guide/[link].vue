@@ -6,9 +6,14 @@
         <div class="gid_tittle">{{ country?.name || '...' }}</div>
       </div>
       <div class="gid-tabs">
-        <div v-for="guid in currentGuides.slice(0, 3)">
-          <gid-coutry-tab :guid="guid"/>
-        </div>
+        <template v-if="travelGuidesStore.loading">
+          <SkeletonBlock v-for="n in 3" :key="n" width="100%" height="120px" style="margin-bottom: 16px;" />
+        </template>
+        <template v-else>
+          <div v-for="guid in currentGuides.slice(0, 3)">
+            <gid-coutry-tab :guid="guid"/>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -17,8 +22,9 @@
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
 import { useRouter, useRoute } from '#app'
 import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
+import {onBeforeMount} from 'vue'
+import SkeletonBlock from '~/components/SkeletonBlock.vue'
 import { useCountriesStore } from '~/src/store/countries'
-import { onMounted } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -30,10 +36,11 @@ const link = route.params.link
 const country = computed(() => countriesStore.getCurrentCountry)
 
 const currentGuides = computed(() => travelGuidesStore.getGuides)
-onMounted(async () => {
+onBeforeMount(async () => {
   await countriesStore.fetchCountryByLink(link)
   await travelGuidesStore.fetchGuidesByCountrySlug(link)
 })
+
 
 defineOptions({
   name: "country-guide",

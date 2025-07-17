@@ -4,12 +4,19 @@
       <h1 class="blog-tittle">Блог</h1>
       <div class="blog-border"></div>
     </div>
-    <div class="blog-text">{{blogData?.description}}
+    <div class="blog-text">
+      <SkeletonBlock v-if="loading" width="60%" height="32px" style="margin-bottom: 16px;" />
+      <template v-else>{{blogData?.description}}</template>
     </div>
     <div class="blog-grid">
-      <div v-for="arr in popularCountry" :key="arr?.id" class="blog-item" @click="goToArticleCountry(arr?.link)">
-        <tub-country :country="arr"/>
-      </div>
+      <template v-if="loading">
+        <SkeletonBlock v-for="n in 6" :key="n" width="100%" height="120px" style="margin-bottom: 16px;" />
+      </template>
+      <template v-else>
+        <div v-for="arr in popularCountry" :key="arr?.id" class="blog-item" @click="goToArticleCountry(arr?.link)">
+          <tub-country :country="arr"/>
+        </div>
+      </template>
     </div>
     <div class="blog-border line"></div>
     <div class="all-article">
@@ -25,9 +32,14 @@
             />
           </div>
           <div class="article-article">
-            <div v-for="(art, idx) in filteredArticles.slice(0,3)" :key="art.link" @click="goToArticle(art.link)">
-              <tub-article :article="art"/>
-            </div>
+            <template v-if="loading">
+              <SkeletonBlock v-for="n in 3" :key="n" width="100%" height="80px" style="margin-bottom: 16px;" />
+            </template>
+            <template v-else>
+              <div v-for="(art, idx) in filteredArticles.slice(0,3)" :key="art.link" @click="goToArticle(art.link)">
+                <tub-article :article="art"/>
+              </div>
+            </template>
           </div>
         </div>
         <div class="article-filter-body">
@@ -43,19 +55,34 @@
             <div class="filter-section">
               <div class="filter-name">По странам</div>
               <div class="filter-list">
-                <div v-for="filter in typeCountry" :key="filter" class="filter-element" :class="{ selected: selectedCountry.includes(filter) }" @click="selectCountry(filter)">{{ filter }}</div>
+                <template v-if="loading">
+                  <SkeletonBlock v-for="n in 4" :key="n" width="80px" height="24px" style="margin: 0 8px 0 0;" />
+                </template>
+                <template v-else>
+                  <div v-for="filter in typeCountry" :key="filter" class="filter-element" :class="{ selected: selectedCountry.includes(filter) }" @click="selectCountry(filter)">{{ filter }}</div>
+                </template>
               </div>
             </div>
             <div class="filter-section">
               <div class="filter-name">По типам отдыха</div>
               <div class="filter-list">
-                <div v-for="filter in typeFilters" :key="filter" class="filter-element" :class="{ selected: selectedType.includes(filter) }" @click="selectType(filter)">{{ filter }}</div>
+                <template v-if="loading">
+                  <SkeletonBlock v-for="n in 4" :key="n" width="80px" height="24px" style="margin: 0 8px 0 0;" />
+                </template>
+                <template v-else>
+                  <div v-for="filter in typeFilters" :key="filter" class="filter-element" :class="{ selected: selectedType.includes(filter) }" @click="selectType(filter)">{{ filter }}</div>
+                </template>
               </div>
             </div>
             <div class="filter-section">
               <div class="filter-name">Автор</div>
               <div class="filter-list">
-                <div v-for="filter in typeAuthors" :key="filter" class="filter-element" :class="{ selected: selectedAuthor.includes(filter) }" @click="selectAuthor(filter)">{{ filter }}</div>
+                <template v-if="loading">
+                  <SkeletonBlock v-for="n in 4" :key="n" width="80px" height="24px" style="margin: 0 8px 0 0;" />
+                </template>
+                <template v-else>
+                  <div v-for="filter in typeAuthors" :key="filter" class="filter-element" :class="{ selected: selectedAuthor.includes(filter) }" @click="selectAuthor(filter)">{{ filter }}</div>
+                </template>
               </div>
             </div>
           </div>
@@ -68,13 +95,15 @@
 
 <script setup>
 import TubCountry from '../components/tubCountry.vue'
-import {computed, onMounted, ref} from 'vue'
+import {computed, onBeforeMount, onMounted, ref} from 'vue'
 import { useCountriesStore } from '../src/store/countries'
 import { usePagesStore } from '../src/store/pages'
 import { useArticlesStore } from '../src/store/articles'
 import { useUsersStore } from '../src/store/users'
 import { useRouter } from 'vue-router'
 import tubArticle from '~/components/tubArticle.vue'
+import SkeletonBlock from '~/components/SkeletonBlock.vue'
+import { storeToRefs } from 'pinia'
 
 const countriesStore = useCountriesStore()
 const pagesStore = usePagesStore()
@@ -172,6 +201,15 @@ const isMobile = computed(() => {
 })
 
 const blogData = computed(() => pagesStore.getBlogPage)
+const { loading } = storeToRefs(pagesStore)
+
+onBeforeMount(() => {
+  pagesStore.fetchBlogPage()
+  countriesStore.fetchCountries()
+  articlesStore.fetchArticles()
+  articlesStore.fetchArticleTags()
+  usersStore.fetchUsers()
+})
 
 onMounted(() => {
   if (typeof window !== 'undefined') {
@@ -182,12 +220,6 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWindowWidth)
   }
-  pagesStore.fetchBlogPage()
-  countriesStore.fetchCountries()
-  articlesStore.fetchArticles()
-  articlesStore.fetchArticleTags()
-  usersStore.fetchUsers()
-
 })
 </script>
 
