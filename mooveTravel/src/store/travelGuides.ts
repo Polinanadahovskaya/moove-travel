@@ -29,7 +29,7 @@ export const useTravelGuidesStore = defineStore('travelGuides', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get(`http://localhost:1337/api/travel-guide?filters[slug][$eq]=${slug}`,
+        const response = await axios.get(`http://localhost:1337/api/travel-guides?filters[link][$eq]=${slug}&populate[country][populate]=*&populate[images][populate]=*`,
           {
             headers: {
               Authorization: `Bearer ${config.public.apiToken}`,
@@ -48,7 +48,7 @@ export const useTravelGuidesStore = defineStore('travelGuides', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get(`http://localhost:1337/api/travel-guide?filters[country][slug][$eq]=${countrySlug}`,
+        const response = await axios.get(`http://localhost:1337/api/travel-guides?filters[country][link][$eq]=${countrySlug}&populate[country][populate]=*&populate[images][populate]=*`,
           {
             headers: {
               Authorization: `Bearer ${config.public.apiToken}`,
