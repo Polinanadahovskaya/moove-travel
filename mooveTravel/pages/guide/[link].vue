@@ -35,6 +35,7 @@ import {storeToRefs} from "pinia";
 import {usePagesStore} from "~/src/store/pages.js";
 import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
+import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
 
 defineOptions({
   name: "guide",
@@ -42,6 +43,9 @@ defineOptions({
 
 const route = useRoute()
 const link = route.params.link
+
+
+const travelGuidesStore = useTravelGuidesStore()
 
 
 const pagesStore = usePagesStore()
@@ -59,6 +63,7 @@ const { guidePage, loading, error } = storeToRefs(pagesStore)
 
 onMounted(() => {
   pagesStore.fetchGuidePage()
+    travelGuidesStore.fetchGuideBySlug(link)
 });
 
 const getImageUrl = (url) => {
