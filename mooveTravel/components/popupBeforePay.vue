@@ -69,6 +69,7 @@ import {ref, onMounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
 import IMask from 'imask'
 import axios from 'axios'
+import { useRuntimeConfig } from '#app'
 
 defineOptions({
   name: 'popupBeforePay',
@@ -178,6 +179,7 @@ const handlePhoneInput = (event) => {
 const phoneInput = ref(null)
 
 const route = useRoute()
+const config = useRuntimeConfig()
 
 onMounted(() => {
   if (phoneInput.value) {
@@ -256,22 +258,18 @@ const submitForm = async () => {
     name: name.value,
   }
   if (validateForm()) {
-    // 1. Создаём заказ в Альфа-Банке
     const orderData = {
-      amount: Math.round(props.price * 100), // сумма в копейках
-      orderNumber: Date.now().toString(), // уникальный номер заказа
-      returnUrl: window.location.origin + '/payment-callback', // страница для возврата после оплаты
+      amount: Math.round(props.price * 100),
+      orderNumber: Date.now().toString(),
+      returnUrl: window.location.origin + '/payment-callback',
       description: `Оплата заказа для ${name.value}`,
-      // customerDetails, email, phone и т.д. — по документации банка
     };
 
     try {
-      const response = await axios.post('https://alfa.rbsuat.com/payment/rest/register.do', null, {
-        params: {
-          ...orderData,
-          userName: 'r-id65022_u_on-api',
-          password: 'r-id65022_u_on*?1',
-        }
+      const response = await axios.post('http://localhost:1337/api/tour-order/alfa-register', orderData, {
+        headers: {
+          Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
+        },
       });
       const result = response.data;
       if (result.formUrl) {
@@ -281,7 +279,7 @@ const submitForm = async () => {
         notificationType.value = 'error';
       }
     } catch (e) {
-      notification.value = 'Ошибка при соединении с банком';
+      notification.value = 'Ошибка при соединении с сервером';
       notificationType.value = 'error';
     }
   }
