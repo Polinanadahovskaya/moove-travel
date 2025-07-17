@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="goToArticlePageGid(guid?.link)">
     <div class="gid-country_tub">
       <div class="gid-country_inf">
         <div :style="{backgroundImage: `url('${getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img mobile-none"></div>
