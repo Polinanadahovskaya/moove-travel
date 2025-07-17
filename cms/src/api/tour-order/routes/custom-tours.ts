@@ -9,5 +9,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: 'POST',
+      path: '/tour-order/alfa-register',
+      handler: 'tour-order.registerAlfaOrder',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 }; 
