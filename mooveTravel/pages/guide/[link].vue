@@ -41,7 +41,7 @@ defineOptions({
 })
 
 const route = useRoute()
-const link = route.params.link.replace(/^guide-/, '')
+const link = route.params.link
 
 
 const pagesStore = usePagesStore()

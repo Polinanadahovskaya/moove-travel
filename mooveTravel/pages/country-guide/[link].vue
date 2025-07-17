@@ -25,10 +25,8 @@ const travelGuidesStore = useTravelGuidesStore()
 
 const link = route.params.link
 
-const cleanLink = link.replace(/^country-/, '')
-
 onMounted(() => {
-  travelGuidesStore.fetchGuidesByCountrySlug(cleanLink)
+  travelGuidesStore.fetchGuidesByCountrySlug(link)
 })
 
 defineOptions({
