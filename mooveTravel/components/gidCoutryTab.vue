@@ -17,7 +17,7 @@
         <div :style="{backgroundImage: `url('${getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img desc-none"></div>
       </div>
       <div class="gid-country_price mobile-none">
-        <div class="old-price">{{ formatPrice(1990) }} ₽</div>
+        <div class="old-price">{{ formatPrice(guid?.priceBase) }} ₽</div>
         <div class="fix-price">{{ formatPrice(guid?.price) }} ₽</div>
       </div>
     </div>
@@ -66,6 +66,7 @@ function goToArticlePageGid(link) {
   display: flex;
   padding: 40px 45px;
   justify-content: space-between;
+  cursor:pointer;
   @media (max-width: 1200px) {
     flex-direction: column;
     height: 100%;

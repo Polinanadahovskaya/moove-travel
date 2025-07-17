@@ -38,6 +38,9 @@
       "type": "integer",
       "required": true
     },
+    "priceBase": {
+      "type": "integer"
+    },
     "guide": {
       "type": "media",
       "multiple": false,

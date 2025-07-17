@@ -2,8 +2,12 @@
 /**
  * tour-order controller
  */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
+const axios_1 = __importDefault(require("axios"));
 exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-order', ({ strapi }) => ({
     async createAndSend(ctx) {
         const { body } = ctx.request;
@@ -32,5 +36,24 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
         // const stubTransport = strapi.plugins['email'].provider;
         // console.log(stubTransport.sentMail);
         return entry;
+    },
+    async registerAlfaOrder(ctx) {
+        try {
+            const { amount, orderNumber, returnUrl, description } = ctx.request.body;
+            const params = {
+                userName: 'r-id65022_u_on-api',
+                password: 'r-id65022_u_on*?1',
+                amount,
+                orderNumber,
+                returnUrl,
+                description,
+            };
+            const response = await axios_1.default.post('https://alfa.rbsuat.com/payment/rest/register.do', null, { params });
+            ctx.send(response.data);
+        }
+        catch (e) {
+            ctx.status = 500;
+            ctx.send({ error: 'Ошибка при обращении к Альфа-Банку', details: e.message });
+        }
     },
 }));

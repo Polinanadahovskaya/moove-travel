@@ -68,6 +68,8 @@
 import {ref, onMounted, computed, watch} from 'vue'
 import {useRoute} from '#app'
 import IMask from 'imask'
+import axios from 'axios'
+import { useRuntimeConfig } from '#app'
 
 defineOptions({
   name: 'popupBeforePay',
@@ -75,7 +77,7 @@ defineOptions({
 
 defineEmits(['close'])
 
-defineProps({
+const props = defineProps({
   price: {
     required: true,
   }
@@ -177,6 +179,7 @@ const handlePhoneInput = (event) => {
 const phoneInput = ref(null)
 
 const route = useRoute()
+const config = useRuntimeConfig()
 
 onMounted(() => {
   if (phoneInput.value) {
@@ -248,29 +251,37 @@ const validateForm = () => {
 const notification = ref("");
 const notificationType = ref(""); // success или error
 
-const submitForm = () => {
+const submitForm = async () => {
   let data = {
     phone: phone.value,
     email: email.value,
     name: name.value,
   }
   if (validateForm()) {
-    fetch('https://example.com/api/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-        .then(res => res.json())
-        .then(() => {
-          notification.value = 'Заявка отправлена!';
-          notificationType.value = 'success';
-        })
-        .catch(() => {
-          notification.value = 'Ошибка при отправке заявки. Попробуйте позже.';
-          notificationType.value = 'error';
-        });
+    const orderData = {
+      amount: Math.round(props.price * 100),
+      orderNumber: Date.now().toString(),
+      returnUrl: window.location.origin + '/payment-callback',
+      description: `Оплата заказа для ${name.value}`,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:1337/api/tour-order/alfa-register', orderData, {
+        headers: {
+          Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
+        },
+      });
+      const result = response.data;
+      if (result.formUrl) {
+        window.location.href = result.formUrl;
+      } else {
+        notification.value = 'Ошибка при создании заказа: ' + (result.errorMessage || 'Неизвестная ошибка');
+        notificationType.value = 'error';
+      }
+    } catch (e) {
+      notification.value = 'Ошибка при соединении с сервером';
+      notificationType.value = 'error';
+    }
   }
 }
 
@@ -343,6 +354,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 36px;
   line-height: 100%;
   color: #FFFFFF;
+  cursor:pointer;
 }
 
 .popup-pay {

@@ -1,5 +1,5 @@
 <template>
-  <div @click="goToArticlePageGid(info?.link)">
+  <div>
     <div class="variant-body" :style="{ backgroundImage: `url('${getImageUrl(info?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
       <div>
         <div class="variant-tittle">{{ info?.title }}</div>
@@ -7,7 +7,7 @@
       </div>
       <div  style="text-decoration: none; color: #1E1E1E">
         <div class="variant-price">{{ formatPrice(info.price) }} ₽</div>
-        <div class="variant-button">Купить</div>
+        <div class="variant-button" @click="goToArticlePageGid(info?.link)">Купить</div>
       </div>
     </div>
   </div>

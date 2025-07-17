@@ -3,7 +3,7 @@
     <div>
       <div class="gid-header">
         <div class="gid_back" @click="router.back()">← Назад</div>
-        <div class="gid_tittle">СТРАНА</div>
+        <div class="gid_tittle">{{ country?.name || '...' }}</div>
       </div>
       <div class="gid-tabs">
         <template v-if="travelGuidesStore.loading">
@@ -24,17 +24,21 @@ import { useRouter, useRoute } from '#app'
 import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
 import {onBeforeMount} from 'vue'
 import SkeletonBlock from '~/components/SkeletonBlock.vue'
+import { useCountriesStore } from '~/src/store/countries'
 
 const router = useRouter()
 const route = useRoute()
 const travelGuidesStore = useTravelGuidesStore()
+const countriesStore = useCountriesStore()
 
 const link = route.params.link
 
-const currentGuides = computed(() => travelGuidesStore.getGuides)
+const country = computed(() => countriesStore.getCurrentCountry)
 
-onBeforeMount(() => {
-    travelGuidesStore.fetchGuidesByCountrySlug(link)
+const currentGuides = computed(() => travelGuidesStore.getGuides)
+onBeforeMount(async () => {
+  await countriesStore.fetchCountryByLink(link)
+  await travelGuidesStore.fetchGuidesByCountrySlug(link)
 })
 
 

@@ -5,16 +5,12 @@
         <NuxtLink to="/Travel-gids" class="gid_back">← Назад</NuxtLink>
         <div class="gid_tittle">
           <SkeletonBlock v-if="travelGuidesStore.loading" height="40px" width="60%" style="margin-bottom: 16px;" />
-          <template v-else>ТЕМА</template>
+          <template v-else>{{currentGuide?.title}}</template>
         </div>
       </div>
       <div class="gid-articles">
         <div class="article-information">
           <div class="article">
-            <div class="article-tittle">
-              <SkeletonBlock v-if="travelGuidesStore.loading" height="32px" width="60%" style="margin-bottom: 16px;" />
-              <template v-else>{{currentGuide?.title}}</template>
-            </div>
             <div class="article-text">
               <SkeletonBlock v-if="travelGuidesStore.loading" height="24px" width="80%" style="margin-bottom: 16px;" />
               <template v-else>{{currentGuide?.description}}</template>
@@ -27,7 +23,7 @@
             <div class="gid-country_price">
               <SkeletonBlock v-if="travelGuidesStore.loading" width="80px" height="24px" style="margin-right: 8px;" />
               <template v-else>
-                <div class="old-price">{{ formatPrice(1990)}} ₽</div>
+                <div class="old-price">{{ formatPrice(currentGuide?.priceBase)}} ₽</div>
                 <div class="fix-price">{{ formatPrice(currentGuide?.price)}} ₽</div>
               </template>
             </div>
@@ -54,6 +50,8 @@ import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
 import SkeletonBlock from '~/components/SkeletonBlock.vue'
+import { useCountriesStore } from '~/src/store/countries'
+
 
 defineOptions({
   name: "guide",
@@ -64,11 +62,13 @@ const link = route.params.link
 
 
 const travelGuidesStore = useTravelGuidesStore()
+const countriesStore = useCountriesStore()
 
 const formatPrice = (price)=> {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
+
 
 
 const currentGuide = computed(() => travelGuidesStore.getGuide)
@@ -273,6 +273,7 @@ const showBeforePayPopup = ref(false)
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   @media (max-width: 1680px) {
     width: 50%;
     height: 100px;
