@@ -8,22 +8,22 @@
       <div class="gid-articles">
         <div class="article-information">
           <div class="article">
-            <div class="article-tittle">{{ourGuid?.travel_guide?.title}}</div>
-            <div class="article-text">{{ourGuid?.travel_guide?.description}}</div>
-            <div :style="{backgroundImage: `url('${getImageUrl(ourGuid?.travel_guide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
+            <div class="article-tittle">{{currentGuide?.title}}</div>
+            <div class="article-text">{{currentGuide?.description}}</div>
+            <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
           </div>
           <div class="article-elements">
           <div class="gid-country_price">
             <div class="old-price">{{ formatPrice(1990)}} ₽</div>
-            <div class="fix-price">{{ formatPrice(ourGuid?.travel_guide?.price)}} ₽</div>
+            <div class="fix-price">{{ formatPrice(currentGuide?.price)}} ₽</div>
           </div>
           <div class="article-button" @click="showBeforePayPopup = true">Купить</div>
             <div v-if="showBeforePayPopup" class="modal-overlay" @click.self="showBeforePayPopup = false">
-              <popupBeforePay @close="showBeforePayPopup = false" :price="formatPrice(ourGuid?.travel_guide?.price)"/>
+              <popupBeforePay @close="showBeforePayPopup = false" :price="formatPrice(currentGuide?.price)"/>
             </div>
           </div>
         </div>
-        <div :style="{backgroundImage: `url('${getImageUrl(ourGuid?.travel_guide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none"></div>
+        <div :style="{backgroundImage: `url('${getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none"></div>
       </div>
     </div>
   </div>
@@ -60,10 +60,10 @@ const ourGuid = computed(() =>
 
 
 const { guidePage, loading, error } = storeToRefs(pagesStore)
-
+const currentGuide = computed(() => travelGuidesStore.getGuide)
 onMounted(() => {
   pagesStore.fetchGuidePage()
-    travelGuidesStore.fetchGuideBySlug(link)
+  travelGuidesStore.fetchGuideBySlug(link)
 });
 
 const getImageUrl = (url) => {
