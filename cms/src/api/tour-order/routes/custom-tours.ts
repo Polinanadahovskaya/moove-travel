@@ -18,5 +18,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: 'GET',
+      path: '/tour-order/alfa-status',
+      handler: 'tour-order.getAlfaOrderStatus',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 }; 

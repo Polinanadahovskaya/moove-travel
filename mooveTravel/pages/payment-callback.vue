@@ -16,18 +16,25 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from '#app'
 import axios from 'axios'
+import { useRuntimeConfig } from '#app'
 
 const status = ref(null)
 const route = useRoute()
+const config = useRuntimeConfig()
 
 onMounted(async () => {
   const orderId = route.query.orderId
   if (orderId) {
     try {
-      // Получаем заказ по id (orderId = id guide-order)
-      const response = await axios.get(`http://localhost:1337/api/guide-orders/${orderId}`)
-      const order = response.data.data
-      if (order && order.attributes.payment_status === 'paid') {
+      // Запрос к вашему Strapi-прокси
+      const response = await axios.get(`http://localhost:1337/api/tour-order/alfa-status`, {
+        params: { orderId },
+        headers: {
+          Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
+        },
+      })
+      const result = response.data
+      if (result.orderStatus === 2) {
         status.value = 'success'
       } else {
         status.value = 'fail'

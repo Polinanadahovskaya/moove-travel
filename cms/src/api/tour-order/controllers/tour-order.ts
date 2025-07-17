@@ -80,4 +80,25 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
       ctx.send({ error: 'Ошибка при обращении к Альфа-Банку', details: e.message });
     }
   },
+
+  async getAlfaOrderStatus(ctx) {
+    try {
+      const { orderId } = ctx.request.query;
+      if (!orderId) {
+        ctx.status = 400;
+        ctx.send({ error: 'orderId is required' });
+        return;
+      }
+      const params = {
+        userName: 'r-id65022_u_on-api',
+        password: 'r-id65022_u_on*?1',
+        orderId,
+      };
+      const response = await axios.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
+      ctx.send(response.data);
+    } catch (e: any) {
+      ctx.status = 500;
+      ctx.send({ error: 'Ошибка при получении статуса заказа', details: e.message });
+    }
+  },
 }));
