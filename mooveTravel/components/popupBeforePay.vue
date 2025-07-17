@@ -55,7 +55,7 @@
     </div>
     <div class="popup-pay">
       <div class="prices">
-        <div class="fix-price">{{ formatPrice(price)}} ₽</div>
+        <div class="fix-price">{{ formatPrice(price) }} ₽</div>
       </div>
       <div class="button-pay" @click="submitForm">Купить</div>
     </div>
@@ -77,7 +77,7 @@ defineEmits(['close'])
 
 defineProps({
   price: {
-
+    required: true,
   }
 })
 
@@ -274,7 +274,7 @@ const submitForm = () => {
   }
 }
 
-const formatPrice = (price)=> {
+const formatPrice = (price) => {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
@@ -294,12 +294,12 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   width: 65%;
 }
 
-.prices{
+.prices {
   display: flex;
   align-items: flex-end;
 }
 
-.fix-price{
+.fix-price {
   font-weight: 700;
   font-size: 64px;
   line-height: 100%;
@@ -330,7 +330,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   transition: background 0.2s;
 }
 
-.button-pay{
+.button-pay {
   width: 395px;
   height: 134px;
   opacity: 1;

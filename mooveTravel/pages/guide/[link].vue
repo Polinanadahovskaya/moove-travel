@@ -19,7 +19,7 @@
           </div>
           <div class="article-button" @click="showBeforePayPopup = true">Купить</div>
             <div v-if="showBeforePayPopup" class="modal-overlay" @click.self="showBeforePayPopup = false">
-              <popupBeforePay @close="showBeforePayPopup = false" :price="formatPrice(currentGuide?.price)"/>
+              <popupBeforePay @close="showBeforePayPopup = false" :price="currentGuide?.price"/>
             </div>
           </div>
         </div>
