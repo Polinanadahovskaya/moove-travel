@@ -7,8 +7,8 @@ export default () => ({
         port: 587,
         secure: false, // STARTTLS
         auth: {
-          user: 'jerad.cronin@ethereal.email',
-          pass: '22HAXk4GZZ2fGSzb9f',
+          user: 'mauricio.herzog55@ethereal.email',
+          pass: 'bHveQZm5yUTnWRHAp5',
         },
         requireTLS: true,
       },
