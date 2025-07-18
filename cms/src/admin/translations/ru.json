@@ -1,0 +1,13 @@
+{
+  "content-type.name.about-us-page": "О нас",
+  "content-type.name.article": "Статья",
+  "content-type.name.article-tag": "Тег статьи",
+  "content-type.name.blog": "Блог",
+  "content-type.name.country": "Страна",
+  "content-type.name.guide-order": "Заявка на гида",
+  "content-type.name.guide-page": "Страница гида",
+  "content-type.name.main-page": "Главная страница",
+  "content-type.name.tour-order": "Заявка на тур",
+  "content-type.name.travel-guide": "Путеводитель",
+  "content-type.name.user": "Пользователь"
+} 
