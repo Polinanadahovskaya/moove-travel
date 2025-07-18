@@ -96,6 +96,11 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
                 const guideOrder = await strapi.entityService.findOne('api::guide-order.guide-order', orderNumber, { populate: ['travel_guide'] });
                 console.log('guideOrder:', guideOrder);
                 if (guideOrder) {
+                    if (guideOrder.emailSend === true) {
+                        console.log('Email уже был отправлен, повторная отправка не требуется.');
+                        ctx.send(result);
+                        return;
+                    }
                     if (result.orderStatus === 2) {
                         await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
                             data: { payment_status: 'paid' },
