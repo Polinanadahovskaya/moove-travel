@@ -164,4 +164,56 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
             ctx.send({ error: 'Ошибка при получении статуса заказа', details: e.message });
         }
     },
+    async downloadGuideFile(ctx) {
+        try {
+            const { orderId } = ctx.request.query;
+            if (!orderId) {
+                ctx.status = 400;
+                ctx.send({ error: 'orderId is required' });
+                return;
+            }
+            // Находим заказ с вложенным гидом и файлом guide
+            const guideOrder = await strapi.entityService.findOne('api::guide-order.guide-order', Number(orderId), { populate: { travel_guide: { populate: ['guide'] } } });
+            if (!guideOrder) {
+                ctx.status = 404;
+                ctx.send({ error: 'Заказ не найден' });
+                return;
+            }
+            if (guideOrder.payment_status !== 'paid' || guideOrder.emailSend !== true) {
+                ctx.status = 403;
+                ctx.send({ error: 'Файл доступен только после успешной оплаты' });
+                return;
+            }
+            if (!guideOrder.travel_guide || !guideOrder.travel_guide.guide) {
+                ctx.status = 404;
+                ctx.send({ error: 'Гид или файл гида не найден' });
+                return;
+            }
+            let guideFile = guideOrder.travel_guide.guide;
+            if (Array.isArray(guideFile)) {
+                guideFile = guideFile[0];
+            }
+            if (!guideFile || !guideFile.url) {
+                ctx.status = 404;
+                ctx.send({ error: 'Файл гида не найден' });
+                return;
+            }
+            const fileUrl = guideFile.url.startsWith('http')
+                ? guideFile.url
+                : `${strapi.config.get('server.url', 'http://localhost:1337')}${guideFile.url}`;
+            const fileName = guideFile.name || require('path').basename(guideFile.url);
+            console.log('guideFile: ', guideFile);
+            console.log('fileUrl: ', fileUrl);
+            console.log('fileName: ', fileName);
+            // Скачиваем файл как буфер
+            const fileResponse = await require('axios').get(fileUrl, { responseType: 'arraybuffer' });
+            ctx.set('Content-disposition', `attachment; filename*=UTF-8''${encodeURIComponent(fileName)}`);
+            ctx.set('Content-type', guideFile.mime || 'application/octet-stream');
+            ctx.body = fileResponse.data;
+        }
+        catch (e) {
+            ctx.status = 500;
+            ctx.send({ error: 'Ошибка при скачивании файла', details: e.message });
+        }
+    },
 }));

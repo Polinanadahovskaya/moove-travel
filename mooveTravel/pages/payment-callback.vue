@@ -4,7 +4,8 @@
       <div class="icon success-icon">✔️</div>
       <h1>Оплата прошла успешно!</h1>
       <p>Ваш гид был отправлен на указанный вами email.</p>
-      <NuxtLink to="/" class="callback-btn">На главную</NuxtLink>
+      <button class="callback-btn" @click="downloadGuide">Скачать файл гида</button>
+      <NuxtLink to="/" class="callback-btn" style="margin-top: 12px;">На главную</NuxtLink>
     </div>
     <div v-else-if="status === 'fail'" class="callback-block fail">
       <div class="icon fail-icon">❌</div>
@@ -26,6 +27,38 @@ import axios from 'axios'
 const status = ref(null)
 const route = useRoute()
 const config = useRuntimeConfig()
+const orderNumber = ref(null)
+
+const downloadGuide = async () => {
+  if (!orderNumber.value) return
+  try {
+    const response = await axios.get('http://localhost:1337/api/tour-order/download-guide', {
+      params: { orderId: orderNumber.value },
+      responseType: 'blob',
+      headers: {
+        Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
+      },
+    })
+    const blob = new Blob([response.data])
+    // Пытаемся получить имя файла из заголовка
+    let fileName = 'guide.pdf'
+    const disposition = response.headers['content-disposition']
+    if (disposition) {
+      const match = disposition.match(/filename\*=UTF-8''(.+)/)
+      if (match && match[1]) {
+        fileName = decodeURIComponent(match[1])
+      }
+    }
+    const link = document.createElement('a')
+    link.href = window.URL.createObjectURL(blob)
+    link.download = fileName
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } catch (e) {
+    alert('Ошибка при скачивании файла')
+  }
+}
 
 onMounted(async () => {
   const orderId = route.query.orderId
@@ -42,6 +75,9 @@ onMounted(async () => {
         status.value = 'success'
       } else {
         status.value = 'fail'
+      }
+      if (result.orderNumber) {
+        orderNumber.value = result.orderNumber
       }
     } catch (e) {
       status.value = 'fail'
@@ -103,6 +139,7 @@ p {
   font-size: 1rem;
   text-decoration: none;
   transition: background 0.2s;
+  cursor: pointer;
 }
 .callback-btn:hover {
   background: #a13e3e;

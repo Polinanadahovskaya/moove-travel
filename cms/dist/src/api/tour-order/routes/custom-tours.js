@@ -29,5 +29,14 @@ exports.default = {
                 middlewares: [],
             },
         },
+        {
+            method: 'GET',
+            path: '/tour-order/download-guide',
+            handler: 'tour-order.downloadGuideFile',
+            config: {
+                policies: [],
+                middlewares: [],
+            },
+        },
     ],
 };
