@@ -1,0 +1,33 @@
+{
+    "kind": "singleType",
+    "collectionName": "about_us_pages",
+    "info": {
+        "singularName": "about-us-page",
+        "pluralName": "about-us-pages",
+        "displayName": "aboutUsPage"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "banner": {
+            "type": "component",
+            "component": "about-us-page.banner",
+            "repeatable": false
+        },
+        "office": {
+            "type": "component",
+            "component": "about-us-page.office",
+            "repeatable": false
+        },
+        "personal": {
+            "type": "component",
+            "component": "about-us-page.personal",
+            "repeatable": true
+        }
+    }
+}

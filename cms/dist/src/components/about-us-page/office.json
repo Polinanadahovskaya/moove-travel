@@ -1,0 +1,38 @@
+{
+    "collectionName": "components_about_us_page_offices",
+    "info": {
+        "displayName": "office"
+    },
+    "options": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "text"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "email": {
+            "type": "email"
+        },
+        "lon": {
+            "type": "decimal"
+        },
+        "lat": {
+            "type": "decimal"
+        },
+        "image": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        }
+    },
+    "config": {}
+}

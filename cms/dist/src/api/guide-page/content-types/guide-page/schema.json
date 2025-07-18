@@ -1,0 +1,23 @@
+{
+    "kind": "singleType",
+    "collectionName": "guide_pages",
+    "info": {
+        "singularName": "guide-page",
+        "pluralName": "guide-pages",
+        "displayName": "guidePage"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "description": {
+            "type": "string"
+        },
+        "bestGuides": {
+            "type": "component",
+            "component": "guide-page.best-guides",
+            "repeatable": true
+        }
+    }
+}
