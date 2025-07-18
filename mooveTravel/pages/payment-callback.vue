@@ -28,6 +28,7 @@ const status = ref(null)
 const route = useRoute()
 const config = useRuntimeConfig()
 const orderNumber = ref(null)
+const fileDescription = ref(null)
 
 const downloadGuide = async () => {
   if (!orderNumber.value) return
@@ -40,12 +41,12 @@ const downloadGuide = async () => {
       },
     })
     const blob = new Blob([response.data])
-    // Получаем имя файла из кастомного заголовка
-    let fileName = 'guide.pdf'
+    // Используем description как имя файла, если оно есть
+    let fileName = fileDescription.value || 'guide.pdf'
     const fileNameHeader = response.headers['x-file-name']
-    if (fileNameHeader) {
+    if (!fileDescription.value && fileNameHeader) {
       fileName = decodeURIComponent(fileNameHeader)
-    } else {
+    } else if (!fileDescription.value) {
       const disposition = response.headers['content-disposition']
       if (disposition) {
         const match = disposition.match(/filename\*=UTF-8''(.+)/)
@@ -83,6 +84,9 @@ onMounted(async () => {
       }
       if (result.orderNumber) {
         orderNumber.value = result.orderNumber
+      }
+      if (result.orderDescription) {
+        fileDescription.value = result.orderDescription
       }
     } catch (e) {
       status.value = 'fail'

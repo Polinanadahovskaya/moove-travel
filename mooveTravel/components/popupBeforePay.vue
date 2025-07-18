@@ -262,7 +262,7 @@ const submitForm = async () => {
     const orderData = {
       amount: Math.round(props.price * 100),
       returnUrl: window.location.origin + '/payment-callback',
-      description: `Оплата заказа для ${name.value} Гайд: ${props.currentGuide.name}`,
+      description: `Гайд: ${props.currentGuide.title}`,
       name: name.value,
       phone: phone.value,
       email: email.value,

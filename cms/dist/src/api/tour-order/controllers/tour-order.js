@@ -123,7 +123,7 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
                                 ? guideFile.url
                                 : `${strapi.config.get('server.url', 'http://localhost:1337')}${guideFile.url}`;
                             console.log('fileUrl:', fileUrl);
-                            const fileName = guideFile.name || path.basename(guideFile.url);
+                            const fileName = guideFile.description || guideFile.name || require('path').basename(guideFile.url);
                             console.log('fileName:', fileName);
                             // Скачиваем файл как буфер
                             const fileResponse = await axios_1.default.get(fileUrl, { responseType: 'arraybuffer' });
@@ -201,7 +201,7 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
             const fileUrl = guideFile.url.startsWith('http')
                 ? guideFile.url
                 : `${strapi.config.get('server.url', 'http://localhost:1337')}${guideFile.url}`;
-            const fileName = guideFile.name || require('path').basename(guideFile.url);
+            const fileName = guideFile.description || guideFile.name || require('path').basename(guideFile.url);
             console.log('guideFile: ', guideFile);
             console.log('fileUrl: ', fileUrl);
             console.log('fileName: ', fileName);
