@@ -40,13 +40,18 @@ const downloadGuide = async () => {
       },
     })
     const blob = new Blob([response.data])
-    // Пытаемся получить имя файла из заголовка
+    // Получаем имя файла из кастомного заголовка
     let fileName = 'guide.pdf'
-    const disposition = response.headers['content-disposition']
-    if (disposition) {
-      const match = disposition.match(/filename\*=UTF-8''(.+)/)
-      if (match && match[1]) {
-        fileName = decodeURIComponent(match[1])
+    const fileNameHeader = response.headers['x-file-name']
+    if (fileNameHeader) {
+      fileName = decodeURIComponent(fileNameHeader)
+    } else {
+      const disposition = response.headers['content-disposition']
+      if (disposition) {
+        const match = disposition.match(/filename\*=UTF-8''(.+)/)
+        if (match && match[1]) {
+          fileName = decodeURIComponent(match[1])
+        }
       }
     }
     const link = document.createElement('a')

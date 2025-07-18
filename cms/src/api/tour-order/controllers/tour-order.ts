@@ -224,6 +224,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
       const fileResponse = await require('axios').get(fileUrl, { responseType: 'arraybuffer' });
       ctx.set('Content-disposition', `attachment; filename*=UTF-8''${encodeURIComponent(fileName)}`);
       ctx.set('Content-type', guideFile.mime || 'application/octet-stream');
+      ctx.set('X-File-Name', encodeURIComponent(fileName));
       ctx.body = fileResponse.data;
     } catch (e) {
       ctx.status = 500;
