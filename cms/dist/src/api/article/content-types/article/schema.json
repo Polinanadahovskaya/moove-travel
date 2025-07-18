@@ -9,17 +9,36 @@
     "options": {
         "draftAndPublish": true
     },
-    "pluginOptions": {},
+    "pluginOptions": {
+        "i18n": {
+            "localized": true
+        }
+    },
     "attributes": {
         "title": {
             "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
             "required": true
         },
         "description": {
-            "type": "text"
+            "type": "text",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
         },
         "link": {
             "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
             "required": true
         },
         "user": {
@@ -29,6 +48,11 @@
         },
         "articlePhotos": {
             "type": "media",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
             "multiple": true,
             "allowedTypes": [
                 "images",
@@ -48,10 +72,20 @@
             "target": "api::article-tag.article-tag"
         },
         "publishDate": {
-            "type": "date"
+            "type": "date",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
         },
         "content": {
-            "type": "blocks"
+            "type": "blocks",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
         }
     }
 }
