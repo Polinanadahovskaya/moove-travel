@@ -4,7 +4,7 @@
     "info": {
         "singularName": "tour-order",
         "pluralName": "tour-orders",
-        "displayName": "tourOrder"
+        "displayName": "Заявки на подбор тура"
     },
     "options": {
         "draftAndPublish": true

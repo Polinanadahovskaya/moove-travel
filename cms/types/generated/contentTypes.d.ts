@@ -376,7 +376,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiAboutUsPageAboutUsPage extends Struct.SingleTypeSchema {
   collectionName: 'about_us_pages';
   info: {
-    displayName: 'aboutUsPage';
+    displayName: '\u0421\u0442\u0440\u043D\u0438\u0446\u0430 \u041E \u043D\u0430\u0441';
     pluralName: 'about-us-pages';
     singularName: 'about-us-page';
   };
@@ -407,7 +407,7 @@ export interface ApiAboutUsPageAboutUsPage extends Struct.SingleTypeSchema {
 export interface ApiArticleTagArticleTag extends Struct.CollectionTypeSchema {
   collectionName: 'article_tags';
   info: {
-    displayName: 'ArticleTag';
+    displayName: '\u0422\u0435\u0433 \u0441\u0442\u0430\u0442\u044C\u0438';
     pluralName: 'article-tags';
     singularName: 'article-tag';
   };
@@ -435,7 +435,7 @@ export interface ApiArticleTagArticleTag extends Struct.CollectionTypeSchema {
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
-    displayName: 'Article';
+    displayName: '\u0421\u0442\u0430\u0442\u044C\u0438';
     pluralName: 'articles';
     singularName: 'article';
   };
@@ -480,7 +480,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiBlogBlog extends Struct.SingleTypeSchema {
   collectionName: 'blogs';
   info: {
-    displayName: 'blog';
+    displayName: '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0411\u043B\u043E\u0433\u0430';
     pluralName: 'blogs';
     singularName: 'blog';
   };
@@ -505,7 +505,7 @@ export interface ApiBlogBlog extends Struct.SingleTypeSchema {
 export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
   collectionName: 'countries';
   info: {
-    displayName: 'Country';
+    displayName: '\u0421\u0442\u0440\u0430\u043D\u044B';
     pluralName: 'countries';
     singularName: 'country';
   };
@@ -535,7 +535,7 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
 export interface ApiGuideOrderGuideOrder extends Struct.CollectionTypeSchema {
   collectionName: 'guide_orders';
   info: {
-    displayName: 'guideOrder';
+    displayName: '\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u0433\u0438\u0434\u044B';
     pluralName: 'guide-orders';
     singularName: 'guide-order';
   };
@@ -574,7 +574,7 @@ export interface ApiGuideOrderGuideOrder extends Struct.CollectionTypeSchema {
 export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
   collectionName: 'guide_pages';
   info: {
-    displayName: 'guidePage';
+    displayName: '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0433\u0438\u0434\u043E\u0432';
     pluralName: 'guide-pages';
     singularName: 'guide-page';
   };
@@ -603,7 +603,7 @@ export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
 export interface ApiMainPageMainPage extends Struct.SingleTypeSchema {
   collectionName: 'main_pages';
   info: {
-    displayName: 'mainPage';
+    displayName: '\u0413\u043B\u0430\u0432\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430';
     pluralName: 'main-pages';
     singularName: 'main-page';
   };
@@ -633,7 +633,7 @@ export interface ApiMainPageMainPage extends Struct.SingleTypeSchema {
 export interface ApiTourOrderTourOrder extends Struct.CollectionTypeSchema {
   collectionName: 'tour_orders';
   info: {
-    displayName: 'tourOrder';
+    displayName: '\u0417\u0430\u044F\u0432\u043A\u0438 \u043D\u0430 \u043F\u043E\u0434\u0431\u043E\u0440 \u0442\u0443\u0440\u0430';
     pluralName: 'tour-orders';
     singularName: 'tour-order';
   };
@@ -673,7 +673,7 @@ export interface ApiTourOrderTourOrder extends Struct.CollectionTypeSchema {
 export interface ApiTravelGuideTravelGuide extends Struct.CollectionTypeSchema {
   collectionName: 'travel_guides';
   info: {
-    displayName: 'TravelGuide';
+    displayName: 'Travel \u0433\u0438\u0434\u044B';
     pluralName: 'travel-guides';
     singularName: 'travel-guide';
   };
@@ -1153,7 +1153,7 @@ export interface PluginUsersPermissionsUser
   collectionName: 'up_users';
   info: {
     description: '';
-    displayName: 'User';
+    displayName: '\u0410\u0432\u0442\u043E\u0440\u044B';
     name: 'user';
     pluralName: 'users';
     singularName: 'user';

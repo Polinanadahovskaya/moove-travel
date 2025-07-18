@@ -4,7 +4,7 @@
   "info": {
     "singularName": "guide-order",
     "pluralName": "guide-orders",
-    "displayName": "guideOrder"
+    "displayName": "Заявки на гиды"
   },
   "options": {
     "draftAndPublish": true

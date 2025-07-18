@@ -4,7 +4,7 @@
   "info": {
     "singularName": "article-tag",
     "pluralName": "article-tags",
-    "displayName": "ArticleTag"
+    "displayName": "Тег статьи"
   },
   "options": {
     "draftAndPublish": true
