@@ -3,7 +3,7 @@
     <div class="article-tab">
       <div class="article-information">
         <div class="article-inf">
-          <div class="article-profile-img" :style="{background: `url('${getImageUrl(article?.user?.photo?.url)}')`, backgroundSize: 'cover' }"></div>
+          <img :src="getImageUrl(article?.user?.photo?.url)" :alt="`Фотография автора ${article?.user?.fio || 'статьи'}`" class="article-profile-img">
         <div class="tab-header">
           <div class="article-profile-name">{{article?.user?.fio}}</div>
           <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
@@ -21,12 +21,13 @@
         </div>
       </div>
       </div>
-      <div class="article-img" :style="{background: `url('${getImageUrl(article?.articlePhotos[0]?.url)}')`, backgroundRepeat: 'no-repeat' , backgroundSize: 'cover' }"></div>
+      <img :src="getImageUrl(article?.articlePhotos[0]?.url)" :alt="article?.title" class="article-img">
     </div>
   </div>
 </template>
 <script setup>
 import { useRoute } from '#app'
+import { h } from 'vue'
 import { marked } from 'marked';
 import planeImg from "~/src/assets/images/Plane.svg";
 
@@ -172,6 +173,7 @@ function renderBlock(block) {
   width: 82px;
   height: 82px;
   border-radius: 50%;
+  object-fit: cover;
   @media (max-width: 1600px) {
     width: 70px;
     height: 65px;

@@ -1,7 +1,7 @@
 <template>
   <div class="team-tab-root">
     <div class="team-body">
-      <div class="team-round" :style="{ backgroundImage: `url('${props.imgUrl}')` }"></div>
+      <img :src="imgUrl" :alt="`Фотография сотрудника ${element.fio}`" class="team-round" />
       <div class="team-name">{{ element.fio }}</div>
       <div class="name-first-text">{{element.position}}</div>
       <div class="name-text">{{element.description}}</div>
@@ -19,7 +19,7 @@ const props = defineProps({
     required: true
   },
   element: {
-    type: Array,
+    type: Object,
     required: false
   }
 })
@@ -65,6 +65,7 @@ const props = defineProps({
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
+  object-fit: cover;
   background-size: cover;
   @media (max-width: 1200px) {
     width: 150px;
