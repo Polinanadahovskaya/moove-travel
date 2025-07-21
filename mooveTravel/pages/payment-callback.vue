@@ -2,20 +2,20 @@
   <div class="payment-callback">
     <div v-if="status === 'success'" class="callback-block success">
       <div class="icon success-icon">✔️</div>
-      <h1>Оплата прошла успешно!</h1>
+      <h2>Оплата прошла успешно!</h2>
       <p>Ваш гид был отправлен на указанный вами email.</p>
       <button class="callback-btn" @click="downloadGuide">Скачать файл гида</button>
       <NuxtLink to="/" class="callback-btn" style="margin-top: 12px;">На главную</NuxtLink>
     </div>
     <div v-else-if="status === 'fail'" class="callback-block fail">
       <div class="icon fail-icon">❌</div>
-      <h1>Оплата не удалась или отменена</h1>
+      <h2>Оплата не удалась или отменена</h2>
       <p>Проверьте данные и попробуйте снова.</p>
       <NuxtLink to="/" class="callback-btn">На главную</NuxtLink>
     </div>
     <div v-else class="callback-block loading">
       <div class="icon loading-icon">⏳</div>
-      <h1>Проверяем статус оплаты...</h1>
+      <h2>Проверяем статус оплаты...</h2>
     </div>
   </div>
 </template>
@@ -129,7 +129,7 @@ onMounted(async () => {
 .loading-icon {
   color: #888;
 }
-h1 {
+h2 {
   font-size: 2rem;
   margin-bottom: 12px;
   font-weight: 700;

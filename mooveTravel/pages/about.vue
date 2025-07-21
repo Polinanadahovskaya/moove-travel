@@ -66,6 +66,7 @@ import officeImg from '~/src/assets/images/fastOpen.png'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
+import { useHead } from '#imports'
 
 defineOptions({
   name: "About",
@@ -108,6 +109,21 @@ const getImageUrl = (url) => {
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
 }
+
+useHead({
+  title: 'О нас | Moov Travel',
+  meta: [
+    { name: 'description', content: 'Узнайте больше о туристическом агентстве Moov Travel, нашей команде и ценностях.' },
+    { property: 'og:title', content: 'О нас | Moov Travel' },
+    { property: 'og:description', content: 'Узнайте больше о туристическом агентстве Moov Travel, нашей команде и ценностях.' },
+    { property: 'og:image', content: '/src/assets/images/logoMoov.svg' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://moov-travel.ru/about' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://moov-travel.ru/about' }
+  ]
+})
 
 </script>
 

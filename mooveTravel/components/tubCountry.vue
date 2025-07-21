@@ -1,7 +1,8 @@
 <template>
   <div class="tub-country-container">
     <NuxtLink :to="id === 'gid' ? '/countryGid' : `/country/${country?.link}`" style="text-decoration: none;">
-      <div class="country-background" :style="{backgroundImage: `url('${getImageUrl(country?.image?.url)}')`}">
+      <div class="country-background" :style="{backgroundImage: `url('${getImageUrl(country?.image?.url)}')`}" role="img" :aria-label="country?.name ? `Фотография страны ${country.name}` : 'Фотография страны'">
+        <span class="visually-hidden">Фотография страны {{country?.name}}</span>
         <div class="country-text">{{country?.name}}</div>
       </div>
     </NuxtLink>
@@ -51,6 +52,7 @@ const getImageUrl = (url) => {
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
+  position: relative;
   @media (min-width: 768px) {
     aspect-ratio: 502/354;
     min-height: 200px;
@@ -76,5 +78,19 @@ const getImageUrl = (url) => {
   @media (max-width: 768px){
     font-size: 12px;
   }
+  position: relative;
+  z-index: 2;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>
