@@ -82,6 +82,7 @@ import { useArticlesStore } from '../src/store/articles'
 import { useUsersStore } from '../src/store/users'
 import { useRouter } from 'vue-router'
 import tubArticle from '~/components/tubArticle.vue'
+import { useHead } from '#imports'
 
 const countriesStore = useCountriesStore()
 const pagesStore = usePagesStore()
@@ -195,6 +196,21 @@ onMounted(() => {
   articlesStore.fetchArticleTags()
   usersStore.fetchUsers()
 
+})
+
+useHead({
+  title: 'Блог о путешествиях | Moov Travel',
+  meta: [
+    { name: 'description', content: 'Читайте интересные статьи, советы и новости из мира путешествий в нашем блоге.' },
+    { property: 'og:title', content: 'Блог о путешествиях | Moov Travel' },
+    { property: 'og:description', content: 'Читайте интересные статьи, советы и новости из мира путешествий в нашем блоге.' },
+    { property: 'og:image', content: '/src/assets/images/logoMoov.svg' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://moov-travel.ru/blog' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://moov-travel.ru/blog' }
+  ]
 })
 </script>
 

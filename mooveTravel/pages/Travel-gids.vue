@@ -26,14 +26,15 @@
 
 <script setup>
 import {ref, onMounted, onBeforeMount, onUnmounted, computed} from 'vue';
-import BestVariant from '~/components/BestVariant.vue';
-import TubCountry from '~/components/tubCountry.vue';
+import bestVariant from "~/components/bestVariant.vue";
+import tubCountry from "~/components/tubCountry.vue";
 import PopupTravelGid from '~/components/popupTravelGid.vue';
 import PopupApplication from "~/components/PopupApplication";
 import { storeToRefs } from 'pinia'
 import { usePagesStore } from '@/src/store/pages'
 import { useCountriesStore } from '../src/store/countries'
 import {useRouter} from "#app";
+import { useHead } from '#imports'
 
 const router = useRouter()
 const countriesStore = useCountriesStore()
@@ -69,6 +70,22 @@ function goToCountryGid(link) {
 defineOptions({
   name: 'Travel-Gids',
 })
+
+useHead({
+  title: 'Travel-гиды | Moov Travel',
+  meta: [
+    { name: 'description', content: 'Полезные travel-гиды по разным странам от команды Moov Travel.' },
+    { property: 'og:title', content: 'Travel-гиды | Moov Travel' },
+    { property: 'og:description', content: 'Полезные travel-гиды по разным странам от команды Moov Travel.' },
+    { property: 'og:image', content: '/src/assets/images/logoMoov.svg' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://moov-travel.ru/Travel-gids' },
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://moov-travel.ru/Travel-gids' }
+  ]
+})
+
 </script>
 
 <style scoped>

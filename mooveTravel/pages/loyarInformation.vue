@@ -20,6 +20,7 @@
 <script setup>
 import {useRouter} from "#app";
 import {computed, onMounted, ref} from "vue";
+import { useHead } from '#imports'
 
 defineOptions({
   name: "loyarInformation"
@@ -96,7 +97,16 @@ onMounted(() => {
   }
 })
 
-
+useHead({
+  title: 'Правовая информация | Moov Travel',
+  meta: [
+    { name: 'description', content: 'Правовая информация и документы туристического агентства Moov Travel.' },
+    { name: 'robots', content: 'noindex, nofollow' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://moov-travel.ru/loyarInformation' }
+  ]
+})
 </script>
 <style scoped lang="scss">
 .info {
