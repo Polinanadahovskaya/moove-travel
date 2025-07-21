@@ -32,11 +32,8 @@ import TubArticle from "~/components/tubArticle.vue";
 import { useArticlesStore } from '~/src/store/articles'
 import { useCountriesStore } from '~/src/store/countries'
 import { onMounted, computed } from 'vue'
-import { useRoute, useRouter } from '#app'
-
-defineOptions({
-  name: 'country',
-})
+import { useRoute, useRouter, useHead } from '#app'
+import planeImg from '~/src/assets/images/Plane.svg'
 
 const articlesStore = useArticlesStore()
 const countriesStore = useCountriesStore()
@@ -46,6 +43,28 @@ const router = useRouter()
 const countryLink = computed(() => route.params.link)
 const articles = computed(() => articlesStore.getArticles)
 const country = computed(() => countriesStore.getCurrentCountry)
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
+
+useHead(() => ({
+  title: country.value?.name ? `Туры в ${country.value.name} | Moov Travel` : 'Направления | Moov Travel',
+  meta: [
+    { name: 'description', content: country.value?.description || `Лучшие туры и предложения по направлению. Узнайте больше о путешествиях с Moov Travel.` },
+    { property: 'og:title', content: country.value?.name ? `Туры в ${country.value.name} | Moov Travel` : 'Направления | Moov Travel' },
+    { property: 'og:description', content: country.value?.description || `Лучшие туры и предложения по направлению. Узнайте больше о путешествиях с Moov Travel.` },
+    { property: 'og:image', content: getImageUrl(country.value?.mainPhoto?.url) },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: `https://moov-travel.ru/country/${countryLink.value}` },
+  ],
+  link: [
+    { rel: 'canonical', href: `https://moov-travel.ru/country/${countryLink.value}` }
+  ]
+}))
 
 const activeArticle = computed(() =>
   articles.value.find(a => a.link === route.params.link)

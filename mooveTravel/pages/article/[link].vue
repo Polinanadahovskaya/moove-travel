@@ -35,12 +35,19 @@
 import PopupArticle from "~/components/PopupArticle";
 import PopupApplication from "~/components/PopupApplication";
 import {useArticlesStore} from "~/src/store/articles.js";
-import {onMounted} from "vue";
+import {onMounted, computed, h} from "vue";
 import { useRoute } from 'vue-router'
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useRouter} from '#app'
 
 const router = useRouter()
+
+const getImageUrl = (url) => {
+  if (!url) return planeImg
+  if (url.startsWith('http')) return url
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:1337${url}`
+}
 
 function renderBlock(block) {
   if (block.type === 'heading') {
@@ -64,7 +71,7 @@ function renderBlock(block) {
         [
           h('img', {
             src: getImageUrl(block.image.url),
-            alt: block.image.alternativeText || '',
+            alt: block.image.alternativeText || article.value?.title || 'Изображение к статье',
             class: 'art_image',
           }),
           block.image.caption
@@ -76,25 +83,29 @@ function renderBlock(block) {
   return null;
 }
 
-defineOptions({
-  name: "article",
-})
 const route = useRoute()
 const link = route.params.link
 const articlesStore = useArticlesStore()
 const article = computed(() => articlesStore.getArticlesLink)
-onMounted(async () => {
-  await Promise.all([
-    articlesStore.fetchArticleByLink(link),
-  ])
-})
 
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
+useHead(() => ({
+  title: article.value?.title ? `${article.value.title} | Moov Travel` : 'Блог | Moov Travel',
+  meta: [
+    { name: 'description', content: article.value?.description || 'Читайте интересные статьи о путешествиях в блоге Moov Travel.' },
+    { property: 'og:title', content: article.value?.title ? `${article.value.title} | Moov Travel` : 'Блог | Moov Travel' },
+    { property: 'og:description', content: article.value?.description || 'Читайте интересные статьи о путешествиях в блоге Moov Travel.' },
+    { property: 'og:image', content:  getImageUrl(article.value?.articlePhotos?.[0]?.url) },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: `https://moov-travel.ru/article/${link}` },
+  ],
+  link: [
+    { rel: 'canonical', href: `https://moov-travel.ru/article/${link}` }
+  ]
+}))
+
+onMounted(async () => {
+  await articlesStore.fetchArticleByLink(link)
+})
 
 </script>
 <style scoped lang="scss">

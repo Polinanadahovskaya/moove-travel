@@ -29,15 +29,13 @@
   </div>
 </template>
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, computed} from 'vue'
 import popupBeforePay from '../../components/popupBeforePay.vue'
 import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
+import { useHead } from '#app'
 
-defineOptions({
-  name: "guide",
-})
 
 const route = useRoute()
 const link = route.params.link
@@ -52,9 +50,6 @@ const formatPrice = (price)=> {
 
 
 const currentGuide = computed(() => travelGuidesStore.getGuide)
-onMounted(() => {
-  travelGuidesStore.fetchGuideBySlug(link)
-});
 
 const getImageUrl = (url) => {
   if (!url) return planeImg
@@ -62,6 +57,27 @@ const getImageUrl = (url) => {
   const { protocol, hostname } = window.location
   return `${protocol}//${hostname}:1337${url}`
 }
+
+useHead(() => ({
+  title: currentGuide.value?.title ? `${currentGuide.value.title} | Moov Travel` : 'Гайды | Moov Travel',
+  meta: [
+    { name: 'description', content: currentGuide.value?.description || 'Подробные и полезные гайды для путешественников от Moov Travel.' },
+    { property: 'og:title', content: currentGuide.value?.title ? `${currentGuide.value.title} | Moov Travel` : 'Гайды | Moov Travel' },
+    { property: 'og:description', content: currentGuide.value?.description || 'Подробные и полезные гайды для путешественников от Moov Travel.' },
+    { property: 'og:image', content: getImageUrl(currentGuide.value?.images?.[0]?.url) },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: `https://moov-travel.ru/guide/${link}` },
+  ],
+  link: [
+    { rel: 'canonical', href: `https://moov-travel.ru/guide/${link}` }
+  ]
+}))
+
+
+onMounted(() => {
+  travelGuidesStore.fetchGuideBySlug(link)
+});
+
 
 const showBeforePayPopup = ref(false)
 </script>
