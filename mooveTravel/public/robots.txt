@@ -1,16 +1,20 @@
 User-agent: *
 Allow: /
 
-# Разрешаем индексацию всех страниц
+# Разрешаем индексацию основных страниц и вложенных маршрутов
 Allow: /about
 Allow: /blog
-Allow: /article
-Allow: /countryArticle
-Allow: /countryGid
-Allow: /pageGid
 Allow: /Travel-gids
+Allow: /country/
+Allow: /country/*
+Allow: /article/
+Allow: /article/*
+Allow: /guide/
+Allow: /guide/*
+Allow: /country-guide/
+Allow: /country-guide/*
 
-# Запрещаем индексацию служебных файлов
+# Запрещаем индексацию служебных файлов и директорий
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_nuxt/

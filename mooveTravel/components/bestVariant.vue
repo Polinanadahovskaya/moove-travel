@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="variant-body" :style="{ backgroundImage: `url('${$getImageUrl(info?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
-      <div>
-        <div class="variant-tittle">{{ info?.title }}</div>
-        <div class="variant-text">{{info?.description}}</div>
-      </div>
-      <div  style="text-decoration: none; color: #1E1E1E">
-        <div class="variant-price">{{ formatPrice(info.price) }} ₽</div>
-        <div class="variant-button" @click="goToArticlePageGid(info?.link)">Купить</div>
+      <div class="variant-content">
+        <div>
+          <div class="variant-tittle">{{ info?.title }}</div>
+          <div class="variant-text">{{info?.description}}</div>
+        </div>
+        <div  style="text-decoration: none; color: #1E1E1E">
+          <div class="variant-price">{{ formatPrice(info.price) }} ₽</div>
+          <div class="variant-button" @click="goToArticlePageGid(info?.link)">Купить</div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,11 +48,19 @@ defineProps({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @media (max-width: 576px) {
-    height: 160px;
-    border-radius: 6px;
-    padding: 12px 13px 7px;
-  }
+  position: relative;
+}
+.variant-body::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #D9D9D9A6 0%, #D9D9D9A6 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .variant-tittle {
@@ -111,5 +121,14 @@ defineProps({
     justify-content: center;
     align-items: center;
   }
+}
+
+.variant-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

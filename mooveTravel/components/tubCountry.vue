@@ -45,6 +45,7 @@ defineProps({
   cursor: pointer;
   box-sizing: border-box;
   position: relative;
+  /* Градиент поверх фона */
   @media (min-width: 768px) {
     aspect-ratio: 502/354;
     min-height: 200px;
@@ -57,6 +58,18 @@ defineProps({
     border-radius: 6px;
     height: 115px;
   }
+}
+.country-background::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 34px;
+  background: linear-gradient(180deg, #D9D9D9A6 0%, #D9D9D9A6 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .country-text{
