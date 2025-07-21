@@ -3,7 +3,7 @@
     <div>
       <div class="gid-header">
         <div class="gid_back" @click="router.back()">← Назад</div>
-        <div class="gid_tittle">СТРАНА</div>
+        <div class="gid_tittle">{{ country?.name || 'Страна' }}</div>
       </div>
       <div class="gid-tabs">
         <template v-if="currentGuides.length > 0">
@@ -22,24 +22,42 @@
 </template>
 <script setup>
 import gidCoutryTab from '~/components/gidCoutryTab.vue'
-import { useRouter, useRoute } from '#app'
+import { useRouter, useRoute, useHead } from '#app'
 import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
-import { onMounted } from 'vue'
+import { useCountriesStore } from '~/src/store/countries';
+import { onMounted, computed } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 const travelGuidesStore = useTravelGuidesStore()
+const countriesStore = useCountriesStore()
 
 const link = route.params.link
 
 const currentGuides = computed(() => travelGuidesStore.getGuides)
-onMounted(() => {
-  travelGuidesStore.fetchGuidesByCountrySlug(link)
+const country = computed(() => countriesStore.getCurrentCountry)
+
+useHead(() => ({
+  title: country.value?.name ? `Гайды ${country.value.name} | Moov Travel` : `Гайды по ${link} | Moov Travel`,
+  meta: [
+    { name: 'description', content: `Все гиды и полезные советы по направлению ${country.value?.name || link} от Moov Travel.` },
+    { property: 'og:title', content: country.value?.name ? `Гайды по ${country.value.name} | Moov Travel` : `Гайды по ${link} | Moov Travel` },
+    { property: 'og:description', content: `Все гиды и полезные советы по направлению ${country.value?.name || link} от Moov Travel.` },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: `https://moov-travel.ru/country-guide/${link}` },
+  ],
+  link: [
+    { rel: 'canonical', href: `https://moov-travel.ru/country-guide/${link}` }
+  ]
+}))
+
+onMounted(async () => {
+  await Promise.all([
+    travelGuidesStore.fetchGuidesByCountrySlug(link),
+    countriesStore.fetchCountryByLink(link)
+  ])
 })
 
-defineOptions({
-  name: "country-guide",
-})
 </script>
 <style scoped>
 .gid-header {
