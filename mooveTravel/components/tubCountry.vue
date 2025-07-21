@@ -1,6 +1,6 @@
 <template>
   <div class="tub-country-container">
-    <NuxtLink :to="id === 'gid' ? '/countryGid' : `/country/${country?.link}`" style="text-decoration: none;">
+    <NuxtLink :to="id === 'gid' ? `/country-guide/${country?.link}` : `/country/${country?.link}`" style="text-decoration: none;">
       <div class="country-background" :style="{backgroundImage: `url('${$getImageUrl(country?.image?.url)}')`}" role="img" :aria-label="country?.name ? `Фотография страны ${country.name}` : 'Фотография страны'">
         <span class="visually-hidden">Фотография страны {{country?.name}}</span>
         <div class="country-text">{{country?.name}}</div>

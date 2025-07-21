@@ -35,6 +35,7 @@ import { useArticlesStore } from '~/src/store/articles'
 import { useCountriesStore } from '~/src/store/countries'
 import { computed } from 'vue'
 import { useRoute, useRouter, useHead, useNuxtApp } from '#app'
+import { useAsyncData } from 'nuxt/app'
 
 const { $getImageUrl } = useNuxtApp()
 const articlesStore = useArticlesStore()
@@ -65,8 +66,8 @@ function goToArticle(link) {
   router.push({ path: `/article/${link}` })
 }
 
-await countriesStore.fetchCountryByLink(countryLink.value)
-await articlesStore.fetchArticlesByCountryLink(countryLink.value)
+await useAsyncData('country', () => countriesStore.fetchCountryByLink(countryLink.value))
+await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountryLink(countryLink.value))
 
 </script>
 <style scoped>

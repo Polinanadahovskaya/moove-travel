@@ -84,23 +84,22 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onMounted, computed} from 'vue'
+import {onMounted, computed} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
+import { useAsyncData } from 'nuxt/app'
 
 const articlesStore = useArticlesStore()
 const pagesStore = usePagesStore()
+
+// SEO-friendly загрузка данных на сервере
+await useAsyncData('mainPage', () => pagesStore.fetchMainPage())
+
+
 const { getArticles, loading, error } = storeToRefs(articlesStore)
 const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
-
-onBeforeMount(async() => {
-  await Promise.all([
-    articlesStore.fetchArticleByLink('tailand'),
-    pagesStore.fetchMainPage()
-  ])
-})
 
 onMounted(async () => {
   if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {

@@ -181,6 +181,14 @@ const isMobile = computed(() => {
 
 const blogData = computed(() => pagesStore.getBlogPage)
 
+// SEO-friendly загрузка данных на сервере
+import { useAsyncData } from 'nuxt/app'
+await useAsyncData('blogPage', () => pagesStore.fetchBlogPage())
+await useAsyncData('countries', () => countriesStore.fetchCountries())
+await useAsyncData('articles', () => articlesStore.fetchArticles())
+await useAsyncData('articleTags', () => articlesStore.fetchArticleTags())
+await useAsyncData('users', () => usersStore.fetchUsers())
+
 onMounted(() => {
   if (typeof window !== 'undefined') {
     windowWidth.value = window.innerWidth
@@ -190,12 +198,7 @@ onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', updateWindowWidth)
   }
-  pagesStore.fetchBlogPage()
-  countriesStore.fetchCountries()
-  articlesStore.fetchArticles()
-  articlesStore.fetchArticleTags()
-  usersStore.fetchUsers()
-
+  // Удалены вызовы загрузки данных для SEO
 })
 
 useHead({

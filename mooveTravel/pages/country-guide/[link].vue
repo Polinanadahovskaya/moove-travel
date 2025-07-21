@@ -26,6 +26,7 @@ import { useRouter, useRoute, useHead } from '#app'
 import { useTravelGuidesStore } from "~/src/store/travelGuides.js";
 import { useCountriesStore } from '~/src/store/countries';
 import { onMounted, computed } from 'vue'
+import { useAsyncData } from 'nuxt/app'
 
 const router = useRouter()
 const route = useRoute()
@@ -51,10 +52,8 @@ useHead(() => ({
   ]
 }))
 
-await Promise.all([
-  travelGuidesStore.fetchGuidesByCountrySlug(link),
-  countriesStore.fetchCountryByLink(link)
-])
+await useAsyncData('countryGuides', () => travelGuidesStore.fetchGuidesByCountrySlug(link))
+await useAsyncData('country', () => countriesStore.fetchCountryByLink(link))
 
 </script>
 <style scoped>

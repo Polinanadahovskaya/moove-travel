@@ -35,6 +35,7 @@ import {useRoute} from "#vue-router";
 import planeImg from "~/src/assets/images/Plane.svg";
 import {useTravelGuidesStore} from "~/src/store/travelGuides.js";
 import { useHead, useNuxtApp } from '#app'
+import { useAsyncData } from 'nuxt/app'
 
 const { $getImageUrl } = useNuxtApp()
 
@@ -65,7 +66,7 @@ useHead(() => ({
   ]
 }))
 
-await travelGuidesStore.fetchGuideBySlug(link)
+await useAsyncData('guide', () => travelGuidesStore.fetchGuideBySlug(link))
 
 const showBeforePayPopup = ref(false)
 </script>

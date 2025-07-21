@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="about-baner"   :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
+      <div class="about-baner"   :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
         <h1 style="color: #FFFFFF">{{getAboutUsPage?.title}}</h1>
         <div class="about-border"></div>
         <div class="about-points">
@@ -35,7 +35,7 @@
               </div>
             </div>
           </div>
-          <div class="map" :style="{ backgroundImage: `url('${getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
+          <div class="map" :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
         </div>
       </div>
       <div class="team">
@@ -46,7 +46,7 @@
         <div class="blog-grid">
           <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
             <team-tab
-                :imgUrl="getImageUrl(arr?.image?.url)"
+                :imgUrl="$getImageUrl(arr?.image?.url)"
                 :element="arr"/>
           </div>
         </div>
@@ -67,6 +67,8 @@ import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 import { useHead } from '#imports'
+import { useAsyncData } from 'nuxt/app'
+import { useNuxtApp } from '#app'
 
 defineOptions({
   name: "About",
@@ -75,9 +77,9 @@ defineOptions({
 const pagesStore = usePagesStore()
 const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
 
-onMounted(() => {
-  pagesStore.fetchAboutUsPage()
-})
+// SEO-friendly загрузка данных на сервере
+await useAsyncData('aboutUsPage', () => pagesStore.fetchAboutUsPage())
+
 const aboutMoove = computed(() => {
   if (!getAboutUsPage.value?.banner) return []
   return [
@@ -86,29 +88,9 @@ const aboutMoove = computed(() => {
     { id: getAboutUsPage.value?.banner.thirdNumber, text: getAboutUsPage.value?.banner.thirdText }
   ]
 })
-const aboutTeam = [
-  {
-    id: 1,
-    name: 'Таня Нагибина',
-    firstText: 'Сооснователь Moov Travel / Эксперт по семейным путешествиям',
-    text: 'Более 10 лет в туризме, сотни довольных клиентов и точно знаю: отпуск не должен быть "наугад". Я соберу для вас тур, в который вы влюбитесь — с учётом бюджета, целей и самых мелких деталей. Люблю сложные задачи и семейные маршруты.',
-    img: tanyaImg
-  },
-  {
-    id: 2,
-    name: 'Андрей Нагибин',
-    firstText: 'Сооснователь Moov Travel / Эксперт по Азии и отдыху «для двоих»',
-    text: 'Отвечаю за чёткую организацию поездок: от бронирования до вашего приземления. Я не просто оформляю тур — я гарантирую, что всё будет на высоте. В любой момент рядом, если потребуется поддержка. Даже ночью.',
-    img: andrewImg
-  },
-]
 
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
+const nuxtApp = useNuxtApp()
+const $getImageUrl = nuxtApp.$getImageUrl
 
 useHead({
   title: 'О нас | Moov Travel',

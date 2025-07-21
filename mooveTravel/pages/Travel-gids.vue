@@ -45,8 +45,9 @@ const isMobile = ref(false);
 const isTablet = ref(false);
 const countryCount = ref(9);
 
-await countriesStore.fetchCountries();
-await pagesStore.fetchGuidePage();
+// SEO-friendly загрузка данных на сервере
+await useAsyncData('countries', () => countriesStore.fetchCountries())
+await useAsyncData('guidePage', () => pagesStore.fetchGuidePage())
 
 function handleResize() {
   isMobile.value = window.innerWidth <= 576;
