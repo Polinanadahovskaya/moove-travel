@@ -30,7 +30,7 @@
         <h2 class="about-tittle">О НАС</h2>
         <div class="about-border"></div>
       </div>
-      <div class="about-block" :style="{ backgroundImage: `url('${getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')`}">
+      <div class="about-block" :style="{ backgroundImage: `url('${$getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')`}">
         <NuxtLink :to="mainPage?.aboutUs?.buttonLink" class="link-button">
           <div class="block-button">Подробнее</div>
         </NuxtLink>
@@ -56,7 +56,7 @@
               <div class="tab-panel">
                 <div class="tab">
                   <div class="mask"
-                       :style="{ mask: `url('${getImageUrl(arr?.image?.url)}')` }"
+                       :style="{ mask: `url('${$getImageUrl(arr?.image?.url)}')` }"
                   ></div>
                 </div>
                 <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{ arr.description }}
@@ -69,7 +69,7 @@
               <div class="tab-panel">
                 <div class="tab">
                   <div class="mask"
-                       :style="{ mask: `url('${getImageUrl(arr?.image?.url)}')` }"></div>
+                       :style="{ mask: `url('${$getImageUrl(arr?.image?.url)}')` }"></div>
                 </div>
                 <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{arr.description }}
                 </div>
@@ -84,12 +84,11 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onMounted} from 'vue'
+import {onBeforeMount, onMounted, computed} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'
-import planeImg from "~/src/assets/images/Plane.svg";
 
 const articlesStore = useArticlesStore()
 const pagesStore = usePagesStore()
@@ -127,12 +126,6 @@ const aboutArray = computed(() => {
   ]
 })
 
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
 </script>
 
 <style scoped lang="scss">

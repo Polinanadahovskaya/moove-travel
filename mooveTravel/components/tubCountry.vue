@@ -1,7 +1,7 @@
 <template>
   <div class="tub-country-container">
     <NuxtLink :to="id === 'gid' ? '/countryGid' : `/country/${country?.link}`" style="text-decoration: none;">
-      <div class="country-background" :style="{backgroundImage: `url('${getImageUrl(country?.image?.url)}')`}" role="img" :aria-label="country?.name ? `Фотография страны ${country.name}` : 'Фотография страны'">
+      <div class="country-background" :style="{backgroundImage: `url('${$getImageUrl(country?.image?.url)}')`}" role="img" :aria-label="country?.name ? `Фотография страны ${country.name}` : 'Фотография страны'">
         <span class="visually-hidden">Фотография страны {{country?.name}}</span>
         <div class="country-text">{{country?.name}}</div>
       </div>
@@ -9,7 +9,6 @@
   </div>
 </template>
 <script setup>
-import planeImg from "~/src/assets/images/Plane.svg";
 
 defineOptions({
   name: "tubCountry",
@@ -24,13 +23,6 @@ defineProps({
     required: false
   }
 })
-
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
 
 </script>
 <style scoped>

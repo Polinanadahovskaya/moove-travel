@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onBeforeMount, onUnmounted, computed} from 'vue';
+import {ref, onMounted, onUnmounted, computed} from 'vue';
 import bestVariant from "~/components/bestVariant.vue";
 import tubCountry from "~/components/tubCountry.vue";
 import PopupTravelGid from '~/components/popupTravelGid.vue';
@@ -45,15 +45,15 @@ const isMobile = ref(false);
 const isTablet = ref(false);
 const countryCount = ref(9);
 
+await countriesStore.fetchCountries();
+await pagesStore.fetchGuidePage();
+
 function handleResize() {
   isMobile.value = window.innerWidth <= 576;
   isTablet.value = window.innerWidth > 576 && window.innerWidth <= 1200;
   countryCount.value = isMobile.value || isTablet.value ? 6 : 9;
 }
-onBeforeMount(() => {
-  countriesStore.fetchCountries();
-  pagesStore.fetchGuidePage()
-})
+
 onMounted(() => {
   handleResize();
   window.addEventListener('resize', handleResize);

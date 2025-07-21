@@ -22,7 +22,7 @@
       <div class="none-art" >
         <div class="article_images">
           <div v-for="img in article?.articlePhotos?.slice(0, 2)" :key="img.id">
-            <div class="article_image" :style="{backgroundImage: `url('${getImageUrl(img.url)}')`}"></div>
+            <div class="article_image" :style="{backgroundImage: `url('${$getImageUrl(img.url)}')`}"></div>
           </div>
         </div>
       </div>
@@ -35,19 +35,12 @@
 import PopupArticle from "~/components/PopupArticle";
 import PopupApplication from "~/components/PopupApplication";
 import {useArticlesStore} from "~/src/store/articles.js";
-import {onMounted, computed, h} from "vue";
+import {computed, h} from "vue";
 import { useRoute } from 'vue-router'
-import planeImg from "~/src/assets/images/Plane.svg";
-import {useRouter} from '#app'
+import {useRouter, useHead, useNuxtApp} from '#app'
 
+const { $getImageUrl } = useNuxtApp()
 const router = useRouter()
-
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
 
 function renderBlock(block) {
   if (block.type === 'heading') {
@@ -70,7 +63,7 @@ function renderBlock(block) {
         { class: 'art_image-block' },
         [
           h('img', {
-            src: getImageUrl(block.image.url),
+            src: $getImageUrl(block.image.url),
             alt: block.image.alternativeText || article.value?.title || 'Изображение к статье',
             class: 'art_image',
           }),
@@ -94,7 +87,7 @@ useHead(() => ({
     { name: 'description', content: article.value?.description || 'Читайте интересные статьи о путешествиях в блоге Moov Travel.' },
     { property: 'og:title', content: article.value?.title ? `${article.value.title} | Moov Travel` : 'Блог | Moov Travel' },
     { property: 'og:description', content: article.value?.description || 'Читайте интересные статьи о путешествиях в блоге Moov Travel.' },
-    { property: 'og:image', content:  getImageUrl(article.value?.articlePhotos?.[0]?.url) },
+    { property: 'og:image', content:  $getImageUrl(article.value?.articlePhotos?.[0]?.url) },
     { property: 'og:type', content: 'article' },
     { property: 'og:url', content: `https://moov-travel.ru/article/${link}` },
   ],
@@ -103,9 +96,7 @@ useHead(() => ({
   ]
 }))
 
-onMounted(async () => {
-  await articlesStore.fetchArticleByLink(link)
-})
+await articlesStore.fetchArticleByLink(link)
 
 </script>
 <style scoped lang="scss">
@@ -245,6 +236,7 @@ onMounted(async () => {
   color:white;
   text-decoration: none;
   align-self: flex-end;
+  cursor:pointer;
   @media (max-width: 1200px) {
     font-size: 28px;
   }

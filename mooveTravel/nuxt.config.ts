@@ -162,6 +162,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      strapiUrl: process.env.STRAPI_URL || 'http://localhost:1337',
       apiToken: process.env.API_TOKEN,
       API_ORDER_TOKEN: process.env.API_ORDER_TOKEN, // добавлено для авторизации заказов туров
     },

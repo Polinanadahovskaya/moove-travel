@@ -2,7 +2,7 @@
   <div @click="goToArticlePageGid(guid?.link)">
     <div class="gid-country_tub">
       <div class="gid-country_inf">
-        <div :style="{backgroundImage: `url('${getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img mobile-none"></div>
+        <div :style="{backgroundImage: `url('${$getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img mobile-none"></div>
         <div class="gid-country_art">
           <div class="gid-header-mobile">
             <div class="gid-country_tittle">{{guid?.title}}</div>
@@ -14,7 +14,7 @@
           <div class="gid-country_text">{{guid?.description}}
           </div>
         </div>
-        <div :style="{backgroundImage: `url('${getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img desc-none"></div>
+        <div :style="{backgroundImage: `url('${$getImageUrl(guid?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="gid-country_img desc-none"></div>
       </div>
       <div class="gid-country_price mobile-none">
         <div class="old-price">{{ formatPrice(guid?.priceBase) }} ₽</div>
@@ -38,13 +38,6 @@ defineProps({
 })
 
 const router = useRouter()
-
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
 
 const formatPrice = (price) => {
   const roundedPrice = Math.round(price);

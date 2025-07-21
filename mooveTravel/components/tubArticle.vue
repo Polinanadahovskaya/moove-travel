@@ -3,7 +3,7 @@
     <div class="article-tab">
       <div class="article-information">
         <div class="article-inf">
-          <img :src="getImageUrl(article?.user?.photo?.url)" :alt="`Фотография автора ${article?.user?.fio || 'статьи'}`" class="article-profile-img">
+          <img :src="$getImageUrl(article?.user?.photo?.url)" :alt="`Фотография автора ${article?.user?.fio || 'статьи'}`" class="article-profile-img">
         <div class="tab-header">
           <div class="article-profile-name">{{article?.user?.fio}}</div>
           <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
@@ -21,7 +21,7 @@
         </div>
       </div>
       </div>
-      <img :src="getImageUrl(article?.articlePhotos[0]?.url)" :alt="article?.title" class="article-img">
+      <img :src="$getImageUrl(article?.articlePhotos[0]?.url)" :alt="article?.title" class="article-img">
     </div>
   </div>
 </template>
@@ -43,13 +43,6 @@ const props = defineProps({
 })
 
 const route = useRoute()
-
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
-}
 
 const formatDate = (dateStr) => {
   if (!dateStr) return '';
@@ -81,7 +74,7 @@ function renderBlock(block) {
       { class: 'art_image-block' },
       [
         h('img', {
-          src: getImageUrl(block.image.url),
+          src: $getImageUrl(block.image.url),
           alt: block.image.alternativeText || '',
           class: 'art_image',
         }),

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="variant-body" :style="{ backgroundImage: `url('${getImageUrl(info?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
+    <div class="variant-body" :style="{ backgroundImage: `url('${$getImageUrl(info?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }">
       <div>
         <div class="variant-tittle">{{ info?.title }}</div>
         <div class="variant-text">{{info?.description}}</div>
@@ -13,7 +13,6 @@
   </div>
 </template>
 <script setup>
-import planeImg from "~/src/assets/images/Plane.svg";
 import {useRouter} from "#vue-router";
 
 defineOptions({
@@ -25,13 +24,6 @@ const router = useRouter()
 const formatPrice = (price) => {
   const roundedPrice = Math.round(price);
   return roundedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}
-
-const getImageUrl = (url) => {
-  if (!url) return planeImg
-  if (url.startsWith('http')) return url
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:1337${url}`
 }
 
 function goToArticlePageGid(link) {

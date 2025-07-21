@@ -64,6 +64,8 @@ declare module 'nuxt/schema' {
    },
   }
   interface PublicRuntimeConfig {
+   strapiUrl: string,
+
    apiToken: string,
 
    API_ORDER_TOKEN: string,

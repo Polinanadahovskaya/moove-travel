@@ -51,12 +51,10 @@ useHead(() => ({
   ]
 }))
 
-onMounted(async () => {
-  await Promise.all([
-    travelGuidesStore.fetchGuidesByCountrySlug(link),
-    countriesStore.fetchCountryByLink(link)
-  ])
-})
+await Promise.all([
+  travelGuidesStore.fetchGuidesByCountrySlug(link),
+  countriesStore.fetchCountryByLink(link)
+])
 
 </script>
 <style scoped>

@@ -12,7 +12,7 @@ export const useArticlesStore = defineStore('articles', {
   }),
   actions: {
     async fetchArticles(force = false) {
-      if (this.articles.length && !force) return;
+      //if (this.articles.length && !force) return;
       this.loading = true
       this.error = null
       try {
@@ -52,7 +52,7 @@ export const useArticlesStore = defineStore('articles', {
       }
     },
     async fetchArticleTags(force = false) {
-      if (this.articleTags.length && !force) return;
+      //if (this.articleTags.length && !force) return;
       this.loading = true
       this.error = null
       try {
@@ -70,7 +70,7 @@ export const useArticlesStore = defineStore('articles', {
       }
     },
     async fetchArticlesByCountryLink(countryLink: string, force = false) {
-      if (this.articles.length && !force) return;
+     // if (this.articles.length && !force) return;
       this.loading = true
       this.error = null
       try {
