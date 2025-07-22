@@ -42,7 +42,7 @@ const downloadGuide = async () => {
     })
     const blob = new Blob([response.data])
     // Используем description как имя файла, если оно есть
-    let fileName = fileDescription.value || 'guide.pdf'
+    let fileName = 'guide.pdf' //fileDescription.value ||
     const fileNameHeader = response.headers['x-file-name']
     if (!fileDescription.value && fileNameHeader) {
       fileName = decodeURIComponent(fileNameHeader)
