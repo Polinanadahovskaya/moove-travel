@@ -114,7 +114,7 @@ onUnmounted(() => {
 
 
 .footer {
-  background-color: #1f2937;
+  background-color: #3E3E3E;
   color: #ffffff;
   padding: 97px 0 76px;
   margin-top: auto;
