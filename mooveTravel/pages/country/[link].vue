@@ -7,22 +7,11 @@
           <button class="back-btn" @click="router.back()">← Назад</button>
         </div>
       </div>
-<!--      <div class="tabs">-->
-<!--        <div-->
-<!--          v-for="art in articles"-->
-<!--          :key="art.id"-->
-<!--          :class="['tab', { active: art.link === route.params.link }]"-->
-<!--          @click="goToArticle(art.link)"-->
-<!--        >-->
-<!--          {{ art.title }}-->
-<!--        </div>-->
-<!--      </div>-->
       <div v-for="art in articles" @click="goToArticle(art.link)">
         <tub-article
             :article="art"
         />
       </div>
-
       <div v-if="!articles.length" class="no-articles-message">
         Похоже, для этой страны пока нет статей. Мы уже работаем над тем, чтобы поделиться с вами интересной информацией и советами по путешествиям!
       </div>
@@ -113,12 +102,15 @@ await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountry
   @media (min-width: 2000px) {
     margin-bottom: -7%;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 900px) {
+    height: 50vh;
+  }
+  @media (max-width: 768px) {
     height: 82px;
     background-size: cover;
-    width: 100%;
-    position: static;
-    margin-left: 0;
+    width: 100vw;
+    position: relative;
+    margin-left: -20px;
     margin-right: 0;
     left: unset;
     right: unset;
@@ -138,7 +130,7 @@ await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountry
   text-shadow: 0 2px 8px #0006;
   position: relative;
   right: 10%;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     font-size: 18px;
     margin-top: 0;
     right: 0;
@@ -154,8 +146,7 @@ await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountry
   align-items: flex-start;
   height: 100%;
   padding: 40px 48px 0 48px;
-  @media (max-width: 576px) {
-    flex-direction: column;
+  @media (max-width: 768px) {
     align-items: flex-start;
     padding: 12px 16px 0 16px;
     gap: 8px;
@@ -177,6 +168,7 @@ await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountry
     bottom: 0;
     left: 0;
     margin-bottom: 4px;
+    align-self: center;
   }
 }
 

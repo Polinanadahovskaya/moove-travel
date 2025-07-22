@@ -70,6 +70,12 @@ defineProps({
   background: linear-gradient(180deg, #D9D9D9A6 0%, #D9D9D9A6 100%);
   pointer-events: none;
   z-index: 1;
+  @media (max-width: 900px){
+    border-radius: 12px;
+  }
+  @media (max-width: 768px){
+    border-radius: 6px;
+  }
 }
 
 .country-text{

@@ -96,6 +96,14 @@ const showBeforePayPopup = ref(false)
   display: flex;
   flex-direction: column;
   background: linear-gradient(273.87deg, #D27A00 3.64%, #F89C1D 76.11%);
+  @media (max-width: 1200px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  @media (max-width: 900px) {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
   @media (max-width: 768px) {
     height: 82px;
     padding: 20px 20px 30px;
@@ -111,6 +119,12 @@ const showBeforePayPopup = ref(false)
   display: flex;
   align-items: center;
   flex: 1;
+  @media (max-width: 1200px) {
+    font-size: 40px;
+  }
+  @media (max-width: 900px) {
+    font-size: 30px;
+  }
   @media (max-width: 768px) {
     font-size: 18px;
   }
@@ -125,6 +139,12 @@ const showBeforePayPopup = ref(false)
   align-self: flex-end;
   cursor: pointer;
   margin-top: 30px;
+  @media (max-width: 1200px) {
+    font-size: 28px;
+  }
+  @media (max-width: 900px) {
+    font-size: 22px;
+  }
   @media (max-width: 768px) {
     font-size: 12px;
   }

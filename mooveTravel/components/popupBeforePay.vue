@@ -308,6 +308,13 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   backdrop-filter: blur(29px);
   border-radius: 16px;
   width: 65%;
+  @media (max-width: 1200px) {
+    width: 80%;
+    padding: 100px 80px;
+  }
+  @media (max-width: 900px) {
+    padding: 80px 40px;
+  }
 }
 
 .prices {
@@ -322,6 +329,12 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   vertical-align: middle;
   @media (max-width: 1600px) {
     font-size: 44px;
+  }
+  @media (max-width: 1400px) {
+    font-size: 36px;
+  }
+  @media (max-width: 900px) {
+    font-size: 20px;
   }
   @media (max-width: 576px) {
     font-size: 24px;
@@ -360,6 +373,30 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   line-height: 100%;
   color: #FFFFFF;
   cursor:pointer;
+  @media (max-width: 1400px) {
+    width: 300px;
+    height: 113px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 1005px) {
+    width: 200px;
+    height: 83px;
+    font-size: 30px;
+  }
+  @media (max-width: 600px) {
+    width: 80px;
+    height: 50px;
+    font-size: 30px;
+  }
+  @media (max-width: 576px) {
+    width: 45%;
+    height: 40px;
+    font-size: 14px;
+    padding: 0;
+    border-radius: 10px;
+  }
 }
 
 .popup-pay {
@@ -388,6 +425,15 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   color: #C3C3C3;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   pointer-events: none;
+  @media (max-width: 1200px) {
+    font-size: 18px;
+    top: 14px;
+    left: 13px;
+  }
+  @media (max-width: 576px) {
+    font-size: 8px;
+    top: 12px;
+  }
 }
 
 .popup-input:focus-visible ~ .popup-label,
@@ -424,7 +470,25 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 26px;
   line-height: 100%;
   vertical-align: middle;
-  border: 3px solid #D9D9D9
+  border: 3px solid #D9D9D9;
+  @media (max-width: 1200px) {
+    height: 52px;
+    border-radius: 10px;
+    padding: 16px 15px;
+    font-size: 15px;
+  }
+  @media (max-width: 768px) {
+    height: 42px;
+    border-radius: 8px;
+    padding: 25px 14px;
+    font-size: 13px;
+  }
+  @media (max-width: 576px) {
+    height: 32px;
+    border-radius: 6px;
+    padding: 16px 13px;
+    font-size: 8px;
+  }
 }
 
 .popup-input.error {
