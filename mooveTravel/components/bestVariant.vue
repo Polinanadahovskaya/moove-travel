@@ -38,7 +38,7 @@ defineProps({
   }
 })
 </script>
-<style scoped>
+<style scoped lang="scss">
 .variant-body {
   width: 100%;
   height: 789px;
@@ -49,6 +49,9 @@ defineProps({
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  @media (max-width: 576px) {
+    height: fit-content
+  }
 }
 .variant-body::after {
   content: "";
