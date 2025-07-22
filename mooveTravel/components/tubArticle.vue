@@ -2,33 +2,36 @@
   <div :class="{'contry-art' : route.path !== '/blog'}">
     <div class="article-tab">
       <div class="article-information">
-        <div class="article-inf">
-          <img :src="$getImageUrl(article?.user?.photo?.url)" :alt="`Фотография автора ${article?.user?.fio || 'статьи'}`" class="article-profile-img">
-        <div class="tab-header">
-          <div class="article-profile-name">{{article?.user?.fio}}</div>
-          <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
+        <div style=" display: flex; flex-direction: column; gap: 20px;">
+          <div class="article-inf">
+            <img :src="$getImageUrl(article?.user?.photo?.url)"
+                 :alt="`Фотография автора ${article?.user?.fio || 'статьи'}`" class="article-profile-img">
+            <div class="tab-header">
+              <div class="article-profile-name">{{ article?.user?.fio }}</div>
+              <div class="article-profile-date">{{ formatDate(article?.createdAt) }}</div>
+            </div>
+          </div>
+          <div class="article-text">
+            <h3 class="article-title" v-if="article?.title">{{ article.title }}</h3>
+            <div class="article-text">
+              {{ article.description }}
+            </div>
+          </div>
         </div>
+        <div class="article-filters">
+          <div v-for="art in article?.article_tags" :key="a">
+            <div class="article-filter" v-if="route.path === '/blog'">{{ art?.name }}</div>
+          </div>
         </div>
-        <div class="article-text">
-          <h3 class="article-title" v-if="article?.title">{{ article.title }}</h3>
-          <template v-for="(block, idx) in article?.content?.filter(b => b.type === 'paragraph').slice(0,5)" :key="idx">
-            <component :is="renderBlock(block)" />
-          </template>
-        </div>
-      <div class="article-filters">
-        <div v-for="art in article?.article_tags" :key="a">
-          <div class="article-filter" v-if="route.path === '/blog'">{{art?.name}}</div>
-        </div>
-      </div>
       </div>
       <img :src="$getImageUrl(article?.articlePhotos[0]?.url)" :alt="article?.title" class="article-img">
     </div>
   </div>
 </template>
 <script setup>
-import { useRoute } from '#app'
-import { h } from 'vue'
-import { marked } from 'marked';
+import {useRoute} from '#app'
+import {h} from 'vue'
+import {marked} from 'marked';
 import planeImg from "~/src/assets/images/Plane.svg";
 
 defineOptions({
@@ -56,32 +59,32 @@ const formatDate = (dateStr) => {
 function renderBlock(block) {
   if (block.type === 'heading') {
     return h(
-      `h${block.level}`,
-      { class: 'art_heading' },
-      block.children?.map(child => child.text).join('')
+        `h${block.level}`,
+        {class: 'art_heading'},
+        block.children?.map(child => child.text).join('')
     );
   }
   if (block.type === 'paragraph') {
     return h(
-      'p',
-      { class: 'art_paragraph' },
-      block.children?.map(child => child.text).join('')
+        'p',
+        {class: 'art_paragraph'},
+        block.children?.map(child => child.text).join('')
     );
   }
   if (block.type === 'image') {
     return h(
-      'div',
-      { class: 'art_image-block' },
-      [
-        h('img', {
-          src: $getImageUrl(block.image.url),
-          alt: block.image.alternativeText || '',
-          class: 'art_image',
-        }),
-        block.image.caption
-          ? h('span', { class: 'art_image-caption' }, block.image.caption)
-          : null,
-      ]
+        'div',
+        {class: 'art_image-block'},
+        [
+          h('img', {
+            src: $getImageUrl(block.image.url),
+            alt: block.image.alternativeText || '',
+            class: 'art_image',
+          }),
+          block.image.caption
+              ? h('span', {class: 'art_image-caption'}, block.image.caption)
+              : null,
+        ]
     );
   }
   return null;
@@ -89,7 +92,7 @@ function renderBlock(block) {
 
 </script>
 <style scoped lang="scss">
-.article-tab{
+.article-tab {
   width: 100%;
   height: 365px;
   border-radius: 28px;
@@ -99,12 +102,12 @@ function renderBlock(block) {
   gap: 41px;
   padding: 20px 30px;
   justify-content: space-between;
-  cursor:pointer;
+  cursor: pointer;
   @media (max-width: 900px) {
-      flex-direction: column;
-      height: auto;
-      padding: 15px 20px;
-      gap: 20px;
+    flex-direction: column;
+    height: auto;
+    padding: 15px 20px;
+    gap: 20px;
   }
   @media (max-width: 576px) {
     gap: 8px;
@@ -112,7 +115,7 @@ function renderBlock(block) {
   }
 }
 
-.tab-header{
+.tab-header {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -150,10 +153,10 @@ function renderBlock(block) {
     width: 58%;
   }
   @media (max-width: 768px) {
-      gap: 20px;
+    gap: 20px;
   }
   @media (max-width: 576px) {
-      gap: 8px;
+    gap: 8px;
   }
 }
 
@@ -208,12 +211,8 @@ function renderBlock(block) {
   font-weight: 400;
   font-size: 24px;
   line-height: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   @media (max-width: 768px) {
-      font-size: 18px;
+    font-size: 18px;
   }
   @media (max-width: 576px) {
     font-size: 8px;
@@ -232,7 +231,7 @@ function renderBlock(block) {
   }
 }
 
-.article-filter{
+.article-filter {
   width: fit-content;
   padding: 5px 30px;
   border-radius: 5px;
@@ -245,10 +244,10 @@ function renderBlock(block) {
   cursor: pointer;
   height: auto;
   min-height: 100%;
-  @media (max-width: 1700px){
+  @media (max-width: 1700px) {
     font-size: 20px;
   }
-  @media (max-width: 1650px){
+  @media (max-width: 1650px) {
     font-size: 18px;
   }
   @media (max-width: 576px) {
@@ -259,22 +258,19 @@ function renderBlock(block) {
   }
 }
 
-.article-filters{
+.article-filters {
   display: flex;
   gap: 10px;
   align-items: stretch;
 }
 
 
+//.article-profile-name,
+//.article-profile-date {
+//  font-size: 18px;
+//}
 
-
-
-  //.article-profile-name,
-  //.article-profile-date {
-  //  font-size: 18px;
-  //}
-
-.contry-art{
+.contry-art {
   z-index: 999;
   position: relative;
 }
