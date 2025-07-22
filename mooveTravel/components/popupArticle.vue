@@ -463,6 +463,10 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+  @media (max-width: 1650px) {
+    width: 35px;
+    height: 35px;
+  }
 }
 
 .popup-checkbox input[type="checkbox"]:checked + label::after {
@@ -480,6 +484,9 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   display: flex;
   gap: 20px;
   align-items: center;
+  @media (max-width: 1650px) {
+    gap: 10px;
+  }
 }
 
 .popup-notification {
@@ -528,8 +535,11 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   line-height: 100%;
   vertical-align: middle;
   color: #FFFFFF;
-  @media (max-width: 1650px) {
+  @media (max-width: 1800px) {
     font-size: 18px;
+  }
+  @media (max-width: 1650px) {
+    font-size: 14px;
   }
 }
 
