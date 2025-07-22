@@ -4,6 +4,7 @@
  */
 import strapiCloud from "@strapi/plugin-cloud/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
+import strapi5SitemapPlugin from "strapi-5-sitemap-plugin/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
 import customisations from "../../src/admin/app.ts";
@@ -14,5 +15,6 @@ renderAdmin(document.getElementById("strapi"), {
   plugins: {
     "strapi-cloud": strapiCloud,
     "users-permissions": usersPermissions,
+    "strapi-5-sitemap-plugin": strapi5SitemapPlugin,
   },
 });
