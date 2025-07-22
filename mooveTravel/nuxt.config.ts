@@ -167,4 +167,11 @@ export default defineNuxtConfig({
       API_ORDER_TOKEN: process.env.API_ORDER_TOKEN, // добавлено для авторизации заказов туров
     },
   },
+  nitro: {
+    routeRules: {
+      '/sitemap.xml': {
+        proxy: `${process.env.STRAPI_URL || 'http://localhost:1337'}/api/strapi-5-sitemap-plugin/sitemap.xml`
+      }
+    }
+  }
 })

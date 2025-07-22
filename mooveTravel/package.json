@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/sitemap": "^7.4.3",
     "axios": "^1.6.7",
     "imask": "^7.6.1",
     "marked": "^16.0.0",

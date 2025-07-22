@@ -632,6 +632,11 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/sitemap.xml": {
+        "proxy": {
+          "to": "http://localhost:1337/api/strapi-5-sitemap-plugin/sitemap.xml"
+        }
+      },
       "/_nuxt/builds/meta/**": {
         "headers": {
           "cache-control": "public, max-age=31536000, immutable"
