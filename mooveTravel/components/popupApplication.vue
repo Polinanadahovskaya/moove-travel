@@ -35,7 +35,7 @@
               @blur="validateName"
           >
           <label class="popup-label" for="userName">Имя</label>
-          <div v-if="nameError" class="error-message">{{ nameError }}</div>
+          <div v-if="nameError" class="error-message error-background">{{ nameError }}</div>
         </div>
         <div class="pop-in"
              :class="{'mobile-border': isMobile && route.path === '/Travel-gids' ||  isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
@@ -52,7 +52,7 @@
               placeholder=" "
           >
           <label class="popup-label" for="userTel">Номер телефона </label>
-          <div v-if="phoneError" class="error-message">{{ phoneError }}</div>
+          <div v-if="phoneError" class="error-message error-background">{{ phoneError }}</div>
         </div>
         <div class="pop-in"
              :class="{'mobile-border': isMobile && route.path === '/Travel-gids' || isTablet && route.path === '/Travel-gids' || route.path.startsWith('/article')}">
@@ -68,7 +68,7 @@
               @input="handleEmailInput"
           >
           <label class="popup-label" for="emailId">Email</label>
-          <div v-if="emailError" class="error-message">{{ emailError }}</div>
+          <div v-if="emailError" class="error-message error-background">{{ emailError }}</div>
         </div>
       </div>
       <div class="popup-questions"
@@ -106,7 +106,7 @@
           </div>
         </div>
       </div>
-      <div v-if="contactError" class="error-message">{{ contactError }}</div>
+      <div v-if="contactError" class="error-background"><div class="error-message">{{ contactError }}</div></div>
       <div class="popup-giv-button">
         <div v-if="isMobile || isTablet" class="giv-lid"
              :class="{'color-black': route.path === '/about' || route.path.startsWith('/article') || route.path === '/Travel-gids', 'text-white': route.path === '/blog'}">
@@ -933,5 +933,15 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.error-background {
+  background: #fff6f6;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px rgba(199,84,84,0.07);
+  display: inline-block;
 }
 </style>
