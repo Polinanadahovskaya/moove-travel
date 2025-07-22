@@ -327,6 +327,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   font-size: 64px;
   line-height: 100%;
   vertical-align: middle;
+  color: #FFFFFF;
   @media (max-width: 1600px) {
     font-size: 44px;
   }
