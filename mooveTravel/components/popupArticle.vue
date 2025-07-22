@@ -5,7 +5,7 @@
         <div class="popup-header">ОСТАВИТЬ ЗАЯВКУ <br/> НА ПОДБОР ТУРА</div>
         <div class="popup-line" style="width: 294px"></div>
       </div>
-      <div style="display: flex; justify-content: space-between; gap: 62px;">
+      <div style="display: flex; justify-content: space-between; gap: 62px; width: 72%;">
         <div class="popup-width">
           <div class="popup-inputs">
             <div class="pop-in">
@@ -524,7 +524,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
 
 .checkbox-text {
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 100%;
   vertical-align: middle;
   color: #FFFFFF;
