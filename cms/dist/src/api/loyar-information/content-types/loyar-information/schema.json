@@ -1,0 +1,21 @@
+{
+    "kind": "singleType",
+    "collectionName": "loyar_informations",
+    "info": {
+        "singularName": "loyar-information",
+        "pluralName": "loyar-informations",
+        "displayName": "Правовая информация"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "content": {
+            "type": "blocks"
+        }
+    }
+}

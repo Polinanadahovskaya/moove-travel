@@ -34,7 +34,7 @@ export const useCountriesStore = defineStore('countries', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get(`http://localhost:1337/api/countries?filters[link][$eq]=${link}&populate=image`, {
+        const response = await axios.get(`http://localhost:1337/api/countries?filters[link][$eq]=${link}&populate=image&populate=backgroundImage`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },

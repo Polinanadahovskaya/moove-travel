@@ -513,6 +513,7 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    backgroundImage: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -594,6 +595,36 @@ export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLoyarInformationLoyarInformation
+  extends Struct.SingleTypeSchema {
+  collectionName: 'loyar_informations';
+  info: {
+    displayName: '\u041F\u0440\u0430\u0432\u043E\u0432\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F';
+    pluralName: 'loyar-informations';
+    singularName: 'loyar-information';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::loyar-information.loyar-information'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1344,6 +1375,7 @@ declare module '@strapi/strapi' {
       'api::country.country': ApiCountryCountry;
       'api::guide-order.guide-order': ApiGuideOrderGuideOrder;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
+      'api::loyar-information.loyar-information': ApiLoyarInformationLoyarInformation;
       'api::main-page.main-page': ApiMainPageMainPage;
       'api::tour-order.tour-order': ApiTourOrderTourOrder;
       'api::travel-guide.travel-guide': ApiTravelGuideTravelGuide;

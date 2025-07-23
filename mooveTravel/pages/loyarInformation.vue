@@ -21,12 +21,17 @@
 import {useRouter} from "#app";
 import {computed, onMounted, ref} from "vue";
 import { useHead } from '#imports'
+import { usePagesStore } from '~/src/store/pages'
+import { useAsyncData } from 'nuxt/app'
 
 defineOptions({
   name: "loyarInformation"
 })
 
 const router = useRouter()
+const pagesStore = usePagesStore()
+await useAsyncData('mainPage', () => pagesStore.fetchLoyarPage())
+
 
 const arrInformation = [
   {
