@@ -10,6 +10,7 @@ export const usePagesStore = defineStore('pages', {
     aboutUsPage: null as any,
     blogPage: null as any,
     guidePage: null as any, // добавлено для guide-page
+    loyarPage: null as any,
   }),
   actions: {
     async fetchMainPage(force = false) {
@@ -84,11 +85,30 @@ export const usePagesStore = defineStore('pages', {
         this.loading = false
       }
     },
+    async fetchLoyarPage(force = false) {
+      if (this.loyarPage && !force) return;
+      this.loading = true
+      this.error = null
+      try {
+        const config = useRuntimeConfig()
+        const response = await axios.get('http://localhost:1337/api/loyar-information?populate=*', {
+          headers: {
+            Authorization: `Bearer ${config.public.apiToken}`,
+          },
+        })
+        this.loyarPage = response.data.data
+      } catch (e: any) {
+        this.error = e.message || 'Ошибка при получении данных страницы Правовых документов'
+      } finally {
+        this.loading = false
+      }
+    },
   },
   getters: {
     getMainPage: (state) => state.mainPage,
     getAboutUsPage: (state) => state.aboutUsPage,
     getBlogPage: (state) => state.blogPage,
     getGuidePage: (state) => state.guidePage, // добавлен геттер для guide-page
+    getLoyarPage: (state) => state.loyarPage,
   },
 }) 
