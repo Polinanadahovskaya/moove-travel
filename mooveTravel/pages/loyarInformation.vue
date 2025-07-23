@@ -2,16 +2,30 @@
   <div>
     <div class="back-country">
       <div class="header-content">
-        <h1>Правовые<br v-if="isMobile"/> документы</h1>
+        <h1>{{ loyarPage?.title }}</h1>
         <button class="back-btn" @click="router.back()">← Назад</button>
       </div>
     </div>
     <div class="info">
-      <div v-for="arr in arrInformation">
-        <div class="info-loyar">
-          <h2 class="loyar-header">{{ arr.header }}</h2>
-          <div class="loyar-info" v-if="arr.id === 1" v-html="arr.text"></div>
-          <div class="loyar-info" v-if="arr.id === 2" v-html="arr.text"></div>
+      <div>
+        <div v-for="(block, idx) in loyarPage?.content" :key="idx">
+          <h2 v-if="block?.type === 'heading'" class="loyar-header">
+            {{ block?.children && block?.children[0] ? block?.children[0].text : '' }}
+            <br/>
+            <br/>
+          </h2>
+          <div
+            v-else-if="block.type === 'paragraph'"
+            class="loyar-info"
+            v-html="block.children && block.children[0] ? block.children[0].text : ''"
+          ></div>
+          <ul v-else-if="block.type === 'list'" class="loyar-info">
+            <li v-for="(item, i) in block.children" :key="i">
+              <span v-for="(child, j) in item.children" :key="j">
+                {{ child.text }}
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -31,6 +45,7 @@ defineOptions({
 const router = useRouter()
 const pagesStore = usePagesStore()
 await useAsyncData('mainPage', () => pagesStore.fetchLoyarPage())
+const loyarPage = computed(() => pagesStore.getLoyarPage)
 
 
 const arrInformation = [
@@ -201,8 +216,9 @@ useHead({
 }
 
 .loyar-info ul {
-  margin: 24px 0 24px 64px;
-  padding: 0;
+  padding-left: 40px !important;
+  margin-left: 0 !important;
+  list-style-position: outside;
 }
 
 .loyar-info {
@@ -220,9 +236,15 @@ useHead({
   margin-bottom: 12px;
   line-height: 1.6;
   list-style-type: disc;
-  margin-left: 0;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
   @media (max-width: 768px) {
     font-size: 8px;
   }
+}
+
+
+li{
+  margin-left: 5%;
 }
 </style>

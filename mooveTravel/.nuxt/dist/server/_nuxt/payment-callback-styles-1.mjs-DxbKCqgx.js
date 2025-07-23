@@ -1,5 +1,0 @@
-const paymentCallback_vue_vue_type_style_index_0_scoped_bb7d72a6_lang = ".payment-callback[data-v-bb7d72a6]{align-items:center;background:#f7f7fa;display:flex;justify-content:center;min-height:60vh}.callback-block[data-v-bb7d72a6]{align-items:center;background:#fff;border-radius:18px;box-shadow:0 4px 32px #00000014;display:flex;flex-direction:column;max-width:420px;padding:48px 32px 36px;text-align:center;width:100%}.icon[data-v-bb7d72a6]{font-size:54px;margin-bottom:18px}.success-icon[data-v-bb7d72a6]{color:#1a7f1a}.fail-icon[data-v-bb7d72a6]{color:#c75454}.loading-icon[data-v-bb7d72a6]{color:#888}h2[data-v-bb7d72a6]{font-size:2rem;font-weight:700;margin-bottom:12px}p[data-v-bb7d72a6]{font-size:1.1rem;margin-bottom:24px}.callback-btn[data-v-bb7d72a6]{background:#c75454;border-radius:8px;color:#fff;cursor:pointer;display:inline-block;font-size:1rem;font-weight:600;padding:12px 32px;text-decoration:none;transition:background .2s}.callback-btn[data-v-bb7d72a6]:hover{background:#a13e3e}";
-export {
-  paymentCallback_vue_vue_type_style_index_0_scoped_bb7d72a6_lang as default
-};
-//# sourceMappingURL=payment-callback-styles-1.mjs-DxbKCqgx.js.map
