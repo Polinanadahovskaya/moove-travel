@@ -2,7 +2,7 @@
   <div>
     <div class="country-block">
       <div class="back-country">
-        <div class="header-content">
+        <div class="header-content" :style="headerContentStyle">
           <h1>{{ country?.name || '...' }}</h1>
           <button class="back-btn" @click="router.back()">← Назад</button>
         </div>
@@ -35,6 +35,22 @@ const router = useRouter()
 const countryLink = computed(() => route.params.link)
 const articles = computed(() => articlesStore.getArticles)
 const country = computed(() => countriesStore.getCurrentCountry)
+
+const headerContentStyle = computed(() => {
+  const rawUrl = country.value?.backgroundImage?.url
+  if (rawUrl) {
+    const imageUrl = $getImageUrl(rawUrl)
+    return {
+      backgroundImage: `url('${imageUrl}')`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    }
+  } else {
+    return {
+      background: '#FFB651',
+    }
+  }
+})
 
 useHead(() => ({
   title: country.value?.name ? `Туры в ${country.value.name} | Moov Travel` : 'Направления | Moov Travel',
