@@ -1,0 +1,2 @@
+import style_0 from './payment-callback-styles-1.mjs-DxbKCqgx.js';
+export default [style_0]

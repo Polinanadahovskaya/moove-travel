@@ -1,0 +1,5 @@
+const main = "*{box-sizing:border-box;margin:0;padding:0}body{color:#333;font-family:Montserrat,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;font-weight:400;line-height:1.6}.font-light{font-weight:300}.font-regular{font-weight:400}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-black{font-weight:900}h1{font-family:Montserrat;font-size:84px;font-weight:700;line-height:100%}@media (max-width:1650px){h1{font-size:64px}}@media (max-width:1400px){h1{font-size:44px}}@media (max-width:1200px){h1{font-size:34px}}@media (max-width:768px){h1{font-size:18px;font-weight:700;line-height:100%;text-transform:uppercase}}h2{color:#1e1e1e;font-family:Montserrat;font-size:64px;font-weight:700;line-height:100%;vertical-align:middle}@media (max-width:1650px){h2{font-size:46px}}@media (max-width:1400px){h2{font-size:40px}}@media (max-width:1200px){h2{font-size:34px}}@media (max-width:768px){h2{font-size:24px}}@media (max-width:576px){h2{font-size:12px}}";
+export {
+  main as default
+};
+//# sourceMappingURL=entry-styles-1.mjs-D7nqt_Qz.js.map

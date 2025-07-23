@@ -1,0 +1,1 @@
+import{_ as s,b as a,k as c,e as t}from"./DHIVwR32.js";const f=Object.assign({name:"TubOffice"},{__name:"tubOffice",setup(o){return(n,e)=>(c(),a("div",null,e[0]||(e[0]=[t("div",{class:"tab-office"},[t("div",{class:"tab-text"},"Дополнительный текст в несколько строчек")],-1)])))}}),_=s(f,[["__scopeId","data-v-d7269efd"]]);export{_ as default};
