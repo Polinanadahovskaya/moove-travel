@@ -47,7 +47,7 @@
     </div>
 
     <div class="navigation">
-      <router-link to="/public">Вернуться на главную</router-link>
+      <router-link to="/">Вернуться на главную</router-link>
     </div>
   </div>
 </template>
