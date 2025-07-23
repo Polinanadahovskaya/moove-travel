@@ -27,6 +27,13 @@
         "videos",
         "audios"
       ]
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

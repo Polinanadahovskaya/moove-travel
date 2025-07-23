@@ -54,9 +54,10 @@ useHead(() => ({
 function goToArticle(link) {
   router.push({ path: `/article/${link}` })
 }
-
-await useAsyncData('country', () => countriesStore.fetchCountryByLink(countryLink.value))
-await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountryLink(countryLink.value))
+await countriesStore.fetchCountryByLink(countryLink.value)
+await articlesStore.fetchArticlesByCountryLink(countryLink.value)
+// await useAsyncData('country', () => countriesStore.fetchCountryByLink(countryLink.value))
+// await useAsyncData('countryArticles', () => articlesStore.fetchArticlesByCountryLink(countryLink.value))
 
 </script>
 <style scoped>
