@@ -45,7 +45,6 @@
     <div class="score-display">
       Счет: {{ score }}
     </div>
-
     <div class="navigation">
       <router-link to="/">Вернуться на главную</router-link>
     </div>
