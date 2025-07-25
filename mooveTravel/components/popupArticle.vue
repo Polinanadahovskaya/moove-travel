@@ -100,7 +100,7 @@ import popupThankYou from './popupThankYou.vue'
 import {useTourOrderStore} from "~/src/store/tourOrder.js";
 
 defineOptions({
-  name: "popupTravelGid",
+  name: "popupArticle",
 })
 
 const email = ref('')

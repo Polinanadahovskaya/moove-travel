@@ -85,7 +85,7 @@
 
 <script setup>
 import {onMounted, computed} from 'vue'
-import PopupApplication from '~/components/popupApplication.vue'
+import popupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
 import { storeToRefs } from 'pinia'

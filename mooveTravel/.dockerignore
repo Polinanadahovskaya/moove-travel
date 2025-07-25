@@ -1,0 +1,9 @@
+node_modules
+.nuxt
+.output
+.git
+.gitignore
+Dockerfile
+.env
+.idea
+.DS_Store 

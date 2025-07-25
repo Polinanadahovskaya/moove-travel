@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: ./mooveTravel
+    container_name: moove-frontend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - NUXT_PUBLIC_API_URL=http://localhost:1337
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./cms
+    container_name: moove-backend
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./cms/public/uploads:/app/public/uploads
+      - ./cms/.tmp:/app/.tmp
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      # Добавьте другие переменные окружения, если нужно 

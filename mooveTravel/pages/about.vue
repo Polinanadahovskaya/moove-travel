@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import PopupApplication from "~/components/popupApplication.vue";
+import popupApplication from "~/components/popupApplication.vue";
 import teamTab from "~/components/teamTab.vue";
 import tanyaImg from '/src/assets/images/tanya.png'
 import andrewImg from '/src/assets/images/andrew.png'

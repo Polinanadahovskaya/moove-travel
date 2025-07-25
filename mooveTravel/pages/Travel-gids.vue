@@ -28,8 +28,8 @@
 import {ref, onMounted, onUnmounted, computed} from 'vue';
 import bestVariant from "~/components/bestVariant.vue";
 import tubCountry from "~/components/tubCountry.vue";
-import PopupTravelGid from '~/components/popupTravelGid.vue';
-import PopupApplication from "~/components/PopupApplication";
+import popupTravelGid from '~/components/popupTravelGid.vue';
+import popupApplication from "~/components/popupApplication";
 import { storeToRefs } from 'pinia'
 import { usePagesStore } from '@/src/store/pages'
 import { useCountriesStore } from '../src/store/countries'
