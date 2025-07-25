@@ -9,8 +9,8 @@ exports.default = () => ({
                 port: 587,
                 secure: false, // STARTTLS
                 auth: {
-                    user: 'mauricio.herzog55@ethereal.email',
-                    pass: 'bHveQZm5yUTnWRHAp5',
+                    user: 'marcella53@ethereal.email',
+                    pass: 'vAnBHF3yAFsDkSckZd',
                 },
                 requireTLS: true,
             },
@@ -20,4 +20,24 @@ exports.default = () => ({
             },
         },
     },
+    // This is the configuration for the Email Designer plugin
+    "email-designer-5": {
+        enabled: true,
+        // Your custom configuration here
+        config: {
+            // Here the Merge Tags defined will be merged with the defaults above
+            mergeTags: {
+                company: {
+                    name: "Company",
+                    mergeTags: {
+                        name: {
+                            name: "Company Name",
+                            value: "ACME Corp",
+                            sample: "ACME Corp",
+                        },
+                    },
+                },
+            },
+        },
+    }
 });

@@ -130,18 +130,64 @@ exports.default = strapi_1.factories.createCoreController('api::tour-order.tour-
                             const fileBuffer = fileResponse.data;
                             console.log('fileBuffer:');
                             // Отправляем email с вложением
-                            await strapi.plugin('email').service('email').send({
-                                to: guideOrder.email,
-                                subject: 'Ваш гид',
-                                text: `Спасибо что выбрали нас! Ваш гид во вложении.`,
-                                html: `<p>Спасибо что выбрали нас! Ваш гид во вложении.</p>`,
-                                attachments: [
-                                    {
-                                        filename: fileName,
-                                        content: fileBuffer,
-                                    },
-                                ],
-                            });
+                            // await strapi.plugin('email').service('email').send({
+                            //   to: guideOrder.email,
+                            //   subject: 'Ваш гид',
+                            //   text: `Спасибо что выбрали нас! Ваш гид во вложении.`,
+                            //   html: `<p>Спасибо что выбрали нас! Ваш гид во вложении.</p>`,
+                            //   attachments: [
+                            //     {
+                            //       filename: fileName,
+                            //       content: fileBuffer,
+                            //     },
+                            //   ],
+                            // });
+                            try {
+                                await strapi
+                                    .plugin("email-designer-5")
+                                    .service("email")
+                                    .sendTemplatedEmail({
+                                    // required
+                                    // This can also be an array of email addresses
+                                    to: guideOrder.email,
+                                    // Optional
+                                    //cc: ["zez@jakce.ad", "ilez@gevcanuso.la"],
+                                    // Optional
+                                    //bcc: ["fud@darfuv.py"],
+                                    // optional if /config/plugins.js -> email.settings.defaultFrom is set
+                                    //from: "from@example.com",
+                                    // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+                                    //replyTo: "reply@example.com",
+                                    // optional array of files
+                                    attachments: [
+                                        {
+                                            filename: fileName,
+                                            content: fileBuffer,
+                                        },
+                                    ],
+                                }, {
+                                    // required - Ref ID defined in the template designer (won't change on import)
+                                    templateReferenceId: 20,
+                                    // If provided here will override the template's subject.
+                                    // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+                                    //subject: `Thank you for your order`,
+                                }, {
+                                // this object must include all variables you're using in your email template
+                                // USER: { firstName: "John", lastName: "Doe" },
+                                // order: {
+                                //   products: [
+                                //     { name: "Article 1", price: 9.99 },
+                                //     { name: "Article 2", price: 5.55 },
+                                //   ],
+                                // },
+                                // shippingCost: 5,
+                                // total: 20.54,
+                                });
+                                strapi.log.info("Email sent");
+                            }
+                            catch (error) {
+                                strapi.log.error(error);
+                            }
                             console.log('email sent:');
                             // После успешной отправки письма обновляем emailSend
                             await strapi.entityService.update('api::guide-order.guide-order', orderNumber, {
