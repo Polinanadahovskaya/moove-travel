@@ -91,14 +91,14 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/loyar-information?populate=*', {
+        const response = await axios.get('http://localhost:1337/api/loyar-information', {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
         })
         this.loyarPage = response.data.data
       } catch (e: any) {
-        this.error = e.message || 'Ошибка при получении данных страницы Правовых документов'
+        this.error = e.message || 'Ошибка при получении данных страницы лояр'
       } finally {
         this.loading = false
       }
@@ -108,7 +108,7 @@ export const usePagesStore = defineStore('pages', {
     getMainPage: (state) => state.mainPage,
     getAboutUsPage: (state) => state.aboutUsPage,
     getBlogPage: (state) => state.blogPage,
-    getGuidePage: (state) => state.guidePage, // добавлен геттер для guide-page
+    getGuidePage: (state) => state.guidePage,
     getLoyarPage: (state) => state.loyarPage,
   },
 }) 

@@ -25,6 +25,7 @@ export const useArticlesStore = defineStore('articles', {
         this.articles = response.data.data
       } catch (e: any) {
         this.error = e.message || 'Ошибка при получении статей'
+        console.error('Error fetching articles:', e)
       } finally {
         this.loading = false
       }
@@ -34,18 +35,17 @@ export const useArticlesStore = defineStore('articles', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get(`http://localhost:1337/api/articles?filters[link][$eq]=${encodeURIComponent(link)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*&populeta[content]`,
-          {
-            headers: {
-              Authorization: `Bearer ${config.public.apiToken}`,
-            },
-          }
-        )
+        const response = await axios.get(`http://localhost:1337/api/articles?filters[link][$eq]=${encodeURIComponent(link)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*&populeta[content]`, {
+          headers: {
+            Authorization: `Bearer ${config.public.apiToken}`,
+          },
+        })
         // Если статья найдена, возвращаем первую (или null)
         this.articlesLink = response.data.data[0]
         return response.data.data[0] || null
       } catch (e: any) {
         this.error = e.message || 'Ошибка при получении статьи по link'
+        console.error('Error fetching article by link:', e)
         return null
       } finally {
         this.loading = false
@@ -65,6 +65,7 @@ export const useArticlesStore = defineStore('articles', {
         this.articleTags = response.data.data
       } catch (e: any) {
         this.error = e.message || 'Ошибка при получении тегов статей'
+        console.error('Error fetching article tags:', e)
       } finally {
         this.loading = false
       }
@@ -87,6 +88,7 @@ export const useArticlesStore = defineStore('articles', {
         return response.data.data
       } catch (e: any) {
         this.error = e.message || 'Ошибка при получении статей по country.link'
+        console.error('Error fetching articles by country:', e)
         return []
       } finally {
         this.loading = false

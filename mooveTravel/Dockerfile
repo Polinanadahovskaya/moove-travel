@@ -1,5 +1,5 @@
 # Используем официальный Node.js образ
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Production image, copy all the files and run next
-FROM node:20-alpine as production
+FROM node:20-alpine AS production
 WORKDIR /app
 
 # Копируем только необходимые файлы из builder stage

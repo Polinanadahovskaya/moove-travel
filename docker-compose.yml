@@ -8,6 +8,10 @@ services:
     restart: unless-stopped
     environment:
       - NUXT_PUBLIC_API_URL=http://localhost:1337
+      - STRAPI_URL=http://localhost:1337
+      # Используем существующий Full Access токен
+      - API_TOKEN=c9ecbfb7c937b1c7665595279dff95170a76e152c4e94c4b8fd3e7772b78c4b815d8145a0b7174e7179ada160daf5ed0b930b64324948e056a6dcdd71e436aed
+      - API_ORDER_TOKEN=81fef943a2414cb8a0fda77d115c6cc22651404a0f8fa89d713eaaac0b287a0a7d371583523d41dd24c25e01e96504a833a8e88b6daf5201232d732380c43508
     depends_on:
       - backend
 
@@ -18,9 +22,18 @@ services:
     ports:
       - "1337:1337"
     volumes:
-      - ./cms/public/uploads:/app/public/uploads
-      - ./cms/.tmp:/app/.tmp
+      - ./cms/public/uploads:/opt/app/public/uploads
+      - ./cms/.tmp:/opt/app/.tmp
     restart: unless-stopped
     environment:
+      # Обязательные переменные окружения для Strapi с SQLite
       - NODE_ENV=production
-      # Добавьте другие переменные окружения, если нужно 
+      - DATABASE_CLIENT=sqlite
+      - DATABASE_FILENAME=.tmp/data.db
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - ADMIN_JWT_SECRET=your-super-secret-admin-jwt-key-change-this-in-production
+      - APP_KEYS=key1,key2,key3,key4
+      - API_TOKEN_SALT=your-api-token-salt-change-this-in-production
+      - TRANSFER_TOKEN_SALT=your-transfer-token-salt-change-this-in-production
+      # Дополнительные переменные
+      - STRAPI_URL=http://localhost:1337 
