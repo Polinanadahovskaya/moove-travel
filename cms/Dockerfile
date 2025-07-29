@@ -7,8 +7,8 @@ WORKDIR /app
 # Копируем package.json и package-lock.json
 COPY package.json package-lock.json ./
 
-# Устанавливаем зависимости
-RUN npm install --production
+# Устанавливаем зависимости (включая devDependencies для сборки)
+RUN npm install
 
 # Копируем остальные файлы проекта
 COPY . .
@@ -16,7 +16,7 @@ COPY . .
 # Собираем админку Strapi
 RUN npm run build
 
-# Открываем порт (по умолчанию 1337, можно переопределить через переменные окружения)
+# Открываем порт
 EXPOSE 1337
 
 # Для хранения загруженных файлов
