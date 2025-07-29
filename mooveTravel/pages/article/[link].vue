@@ -32,8 +32,8 @@
   </div>
 </template>
 <script setup>
-import PopupArticle from "~/components/PopupArticle";
-import PopupApplication from "~/components/PopupApplication";
+import PopupArticle from "~/components/popupArticle.vue";
+import PopupApplication from "~/components/popupApplication.vue";
 import {useArticlesStore} from "~/src/store/articles.js";
 import {computed, h} from "vue";
 import { useRoute } from 'vue-router'

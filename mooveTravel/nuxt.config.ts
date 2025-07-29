@@ -172,6 +172,14 @@ export default defineNuxtConfig({
       '/sitemap.xml': {
         proxy: `${process.env.STRAPI_URL || 'http://localhost:1337'}/api/strapi-5-sitemap-plugin/sitemap.xml`
       }
+    },
+    experimental: {
+      wasm: false
+    }
+  },
+  vite: {
+    optimizeDeps: {
+      exclude: ['oxc-parser']
     }
   }
 })
