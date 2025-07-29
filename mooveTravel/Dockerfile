@@ -1,24 +1,29 @@
-# Используем официальный Node.js образ
-FROM node:20
+# Базовый образ (лучше использовать alpine для меньшего размера)
+FROM node:20-alpine
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json
+# Сначала копируем только файлы зависимостей
 COPY package.json package-lock.json ./
 
-# Устанавливаем зависимости
-RUN npm install --ignore-scripts
+# 1. Чистим кеш npm (опционально)
+# 2. Принудительно переустанавливаем все зависимости
+# 3. Явно устанавливаем нужную архитектуру для oxc-parser (если требуется)
+RUN npm cache clean --force && \
+    npm install --force && \
+    npm install @oxc-parser/binding-linux-x64-musl --force
 
 # Копируем остальные файлы проекта
 COPY . .
 
-# Собираем Nuxt-приложение
+# Собираем приложение
 RUN npm run build
 
-EXPOSE 3000
-
+# Отключаем проблемный парсер (на всякий случай)
 ENV NUXT_OXC_PARSER_DISABLED=true
 ENV NODE_ENV=production
 
-CMD ["npm", "run", "start"] 
+# Открываем порт и запускаем
+EXPOSE 3000
+CMD ["npm", "run", "start"]
