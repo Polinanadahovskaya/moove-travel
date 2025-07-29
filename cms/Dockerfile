@@ -1,5 +1,5 @@
 # Используем официальный Node.js образ
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -14,14 +14,13 @@ RUN npm install --production
 COPY . .
 
 # Собираем админку Strapi
-#RUN npm run build
-RUN npm run develop
+RUN npm run build
 
 # Открываем порт (по умолчанию 1337, можно переопределить через переменные окружения)
 EXPOSE 1337
 
-# Для хранения загруженных файлов и базы данных (если используется SQLite)
-VOLUME ["/app/public/uploads", "/app/.tmp"]
+# Для хранения загруженных файлов
+VOLUME ["/app/public/uploads"]
 
 # Запускаем Strapi
 CMD ["npm", "run", "start"] 
