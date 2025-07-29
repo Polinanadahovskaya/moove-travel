@@ -1,0 +1,43 @@
+#version: '3.8'
+
+services:
+  cms:
+    build: ./cms
+    container_name: moove-cms
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./cms/public/uploads:/app/public/uploads
+    env_file:
+      - ./cms/.env.production
+    depends_on:
+      - moove-db
+    restart: unless-stopped
+
+  moove-db:
+    image: mysql:8.0
+    container_name: moove-db
+    environment:
+      MYSQL_DATABASE: strapi
+      MYSQL_USER: strapi
+      MYSQL_PASSWORD: strapi
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+
+  moovetravel:
+    build: ./mooveTravel
+    container_name: moovetravel
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./mooveTravel:/app
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+volumes:
+  db_data: 

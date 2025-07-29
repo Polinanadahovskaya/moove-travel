@@ -1,0 +1,1 @@
+import{_ as a,b as s,k as c,e as t}from"./Coh7qs2i.js";const o=Object.assign({name:"TubOffice"},{__name:"tubOffice",setup(f){return(n,e)=>(c(),s("div",null,e[0]||(e[0]=[t("div",{class:"tab-office"},[t("div",{class:"tab-text"},"Дополнительный текст в несколько строчек")],-1)])))}}),_=a(o,[["__scopeId","data-v-ea6834c4"]]);export{_ as default};

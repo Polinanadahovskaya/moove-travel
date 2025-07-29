@@ -1,0 +1,27 @@
+{
+  "name": "Moov Travel - Туристическое агентство",
+  "short_name": "Moov Travel",
+  "description": "Профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#C75454",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ru",
+  "categories": ["travel", "business"],
+  "icons": [
+    {
+      "src": "/src/assets/images/logoMoov.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/src/assets/images/logoMoov.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+} 
