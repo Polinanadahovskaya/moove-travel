@@ -1,18 +1,14 @@
-# Базовый образ (лучше использовать alpine для меньшего размера)
-FROM node:20-alpine
+# Используем официальный Node.js образ
+FROM node:20-alpine AS builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Сначала копируем только файлы зависимостей
-COPY package.json package-lock.json ./
+# Копируем package.json и package-lock.json
+COPY package*.json ./
 
-# 1. Чистим кеш npm (опционально)
-# 2. Принудительно переустанавливаем все зависимости
-# 3. Явно устанавливаем нужную архитектуру для oxc-parser (если требуется)
-RUN npm cache clean --force && \
-    npm install --force && \
-    npm install @oxc-parser/binding-linux-x64-musl --force
+# Устанавливаем зависимости
+RUN npm install
 
 # Копируем остальные файлы проекта
 COPY . .
@@ -20,10 +16,17 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-# Отключаем проблемный парсер (на всякий случай)
-ENV NUXT_OXC_PARSER_DISABLED=true
-ENV NODE_ENV=production
+# Production image, copy all the files and run next
+FROM node:20-alpine AS production
+WORKDIR /app
 
-# Открываем порт и запускаем
+# Копируем только необходимые файлы из builder stage
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+
+# Экспонируем порт
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+# Запускаем preview сервер
+CMD ["node", ".output/server/index.mjs"]
