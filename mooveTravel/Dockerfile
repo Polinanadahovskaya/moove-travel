@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Устанавливаем зависимости
-RUN npm install
+RUN yarn cache clean && yarn install --frozen-lockfile
 
 # Копируем остальные файлы проекта
 COPY . .
 
 # Собираем Nuxt-приложение
-RUN npm run build
+RUN yarn build
 
 # Production image
 FROM node:20
@@ -26,4 +26,6 @@ COPY --from=build /app ./
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"] 
+ENV NUXT_OXC_PARSER_DISABLED=true
+
+CMD ["yarn", "start"] 
