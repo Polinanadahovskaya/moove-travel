@@ -163,8 +163,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:1337',
-      apiToken: process.env.API_TOKEN,
-      API_ORDER_TOKEN: process.env.API_ORDER_TOKEN, // добавлено для авторизации заказов туров
+      apiToken: process.env.NUXT_PUBLIC_API_TOKEN,
+      API_ORDER_TOKEN: process.env.NUXT_PUBLIC_API_ORDER_TOKEN, // добавлено для авторизации заказов туров
     },
   },
   nitro: {
