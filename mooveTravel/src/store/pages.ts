@@ -17,6 +17,7 @@ export const usePagesStore = defineStore('pages', {
       const config = useRuntimeConfig()
       console.log('fetchMainPage вызван');
       console.log('config.public.apiUrl', config.public.apiUrl);
+      console.log('config.public.apiToken', config.public.apiToken);
       if (this.mainPage && !force) return;
       this.loading = true
       this.error = null
