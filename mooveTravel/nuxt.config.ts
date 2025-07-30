@@ -162,7 +162,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      strapiUrl: process.env.STRAPI_URL || 'http://localhost:1337',
+      strapiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:1337',
       apiToken: process.env.API_TOKEN,
       API_ORDER_TOKEN: process.env.API_ORDER_TOKEN, // добавлено для авторизации заказов туров
     },
@@ -170,7 +170,7 @@ export default defineNuxtConfig({
   nitro: {
     routeRules: {
       '/sitemap.xml': {
-        proxy: `${process.env.STRAPI_URL || 'http://localhost:1337'}/api/strapi-5-sitemap-plugin/sitemap.xml`
+        proxy: `${process.env.NUXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/strapi-5-sitemap-plugin/sitemap.xml`
       }
     },
     experimental: {

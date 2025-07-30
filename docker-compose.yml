@@ -35,8 +35,8 @@ services:
       - "3000:3000"
     volumes:
       - ./mooveTravel:/app
-    environment:
-      - NODE_ENV=production
+    env_file:
+      - ./mooveTravel/.env.production
     restart: unless-stopped
 
 volumes:

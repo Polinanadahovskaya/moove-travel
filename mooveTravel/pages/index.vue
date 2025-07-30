@@ -10,7 +10,7 @@
     <div class="header-wave"/>
     <div class="help-search">
       <div>
-        <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
+        <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА? 123</h2>
         <div class="tittle-border"></div>
       </div>
       <div style="display: flex; gap: 55px;">
@@ -102,6 +102,7 @@ const { getArticles, loading, error } = storeToRefs(articlesStore)
 const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
 
 onMounted(async () => {
+  console.log('mounted')
   if (!document.querySelector('script[src="//tourvisor.ru/module/init.js"]')) {
     const script = document.createElement('script')
     script.type = 'text/javascript'

@@ -14,11 +14,13 @@ export const usePagesStore = defineStore('pages', {
   }),
   actions: {
     async fetchMainPage(force = false) {
+      const config = useRuntimeConfig()
+      console.log('fetchMainPage вызван');
+      console.log('config.public.apiUrl', config.public.apiUrl);
       if (this.mainPage && !force) return;
       this.loading = true
       this.error = null
       try {
-        const config = useRuntimeConfig()
         const response = await axios.get(`${config.public.apiUrl}/api/main-page?populate[aboutUs][populate]=backgroundImage&populate[advantages][populate]=image`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
