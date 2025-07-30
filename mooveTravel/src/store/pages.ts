@@ -19,7 +19,7 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/main-page?populate[aboutUs][populate]=backgroundImage&populate[advantages][populate]=image', {
+        const response = await axios.get(`${config.public.apiUrl}/api/main-page?populate[aboutUs][populate]=backgroundImage&populate[advantages][populate]=image`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -37,7 +37,7 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/about-us-page?populate[banner][populate]=backgroundImage&populate[office][populate]=image&populate[personal][populate]=image', {
+        const response = await axios.get(`${config.public.apiUrl}/api/about-us-page?populate[banner][populate]=backgroundImage&populate[office][populate]=image&populate[personal][populate]=image`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -55,7 +55,7 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/blog?populate=*', {
+        const response = await axios.get(`${config.public.apiUrl}/api/blog?populate=*`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -73,7 +73,7 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/guide-page', {
+        const response = await axios.get(`${config.public.apiUrl}/api/guide-page`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -91,7 +91,7 @@ export const usePagesStore = defineStore('pages', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/loyar-information?populate=*', {
+        const response = await axios.get(`${config.public.apiUrl}/api/loyar-information?populate=*`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },

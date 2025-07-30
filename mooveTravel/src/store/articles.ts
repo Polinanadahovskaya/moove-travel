@@ -17,7 +17,7 @@ export const useArticlesStore = defineStore('articles', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/articles?populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*', {
+        const response = await axios.get(`${config.public.apiUrl}/api/articles?populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -34,7 +34,7 @@ export const useArticlesStore = defineStore('articles', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get(`http://localhost:1337/api/articles?filters[link][$eq]=${encodeURIComponent(link)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*&populeta[content]`,
+        const response = await axios.get(`${config.public.apiUrl}/api/articles?filters[link][$eq]=${encodeURIComponent(link)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*&populeta[content]`,
           {
             headers: {
               Authorization: `Bearer ${config.public.apiToken}`,
@@ -57,7 +57,7 @@ export const useArticlesStore = defineStore('articles', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/article-tags', {
+        const response = await axios.get(`${config.public.apiUrl}/api/article-tags`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
@@ -76,7 +76,7 @@ export const useArticlesStore = defineStore('articles', {
       try {
         const config = useRuntimeConfig()
         const response = await axios.get(
-          `http://localhost:1337/api/articles?filters[country][link][$eq]=${encodeURIComponent(countryLink)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*`,
+          `${config.public.apiUrl}/api/articles?filters[country][link][$eq]=${encodeURIComponent(countryLink)}&populate[article_tags]=*&populate[country][populate]=*&populate[articlePhotos][populate]=*&populate[user][populate]=*`,
           {
             headers: {
               Authorization: `Bearer ${config.public.apiToken}`,

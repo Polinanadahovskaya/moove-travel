@@ -19,7 +19,7 @@ export const useTourOrderStore = defineStore('tourOrder', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const res = await axios.post('http://localhost:1337/api/tour-orders/send',
+        const res = await axios.post(`${config.public.apiUrl}/api/tour-orders/send`,
           { data: payload },
           {
             headers: {

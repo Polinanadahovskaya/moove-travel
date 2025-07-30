@@ -15,7 +15,7 @@ export const useUsersStore = defineStore('users', {
       this.error = null
       try {
         const config = useRuntimeConfig()
-        const response = await axios.get('http://localhost:1337/api/users', {
+        const response = await axios.get(`${config.public.apiUrl}/api/users`, {
           headers: {
             Authorization: `Bearer ${config.public.apiToken}`,
           },
