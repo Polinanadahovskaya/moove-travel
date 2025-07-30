@@ -31,8 +31,8 @@ services:
   moovetravel:
     build: ./mooveTravel
     container_name: moovetravel
-    ports:
-      - "3000:3000"
+#    ports:
+#      - "3000:3000"
 #    volumes:
 #      - ./mooveTravel:/app
     env_file:
