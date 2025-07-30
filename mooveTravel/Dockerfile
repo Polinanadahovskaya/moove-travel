@@ -29,4 +29,4 @@ COPY --from=builder /app/package*.json ./
 EXPOSE 3000
 
 # Запускаем preview сервер
-CMD ["node", ".output/server/index.mjs"]
+CMD ["npx", "nuxt", "preview"]

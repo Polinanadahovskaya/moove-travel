@@ -10,7 +10,7 @@
     <div class="header-wave"/>
     <div class="help-search">
       <div>
-        <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА? 123</h2>
+        <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
         <div class="tittle-border"></div>
       </div>
       <div style="display: flex; gap: 55px;">

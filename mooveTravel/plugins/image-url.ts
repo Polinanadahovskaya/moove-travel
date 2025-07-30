@@ -2,7 +2,7 @@ import planeImg from '~/src/assets/images/Plane.svg'
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-  const strapiUrl = config.public.strapiUrl
+  const apiUrl = config.public.apiUrl
 
   const getImageUrl = (url: string | undefined): string => {
     if (!url) {
@@ -11,7 +11,7 @@ export default defineNuxtPlugin(() => {
     if (url.startsWith('http')) {
       return url
     }
-    return `${strapiUrl}${url}`
+    return `${apiUrl}${url}`
   }
 
   return {
