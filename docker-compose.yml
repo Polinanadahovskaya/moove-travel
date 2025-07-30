@@ -43,7 +43,8 @@ services:
     image: nginx:alpine
     container_name: moove-nginx
     ports:
-      - "3000:80"
+      - "80:80"     # HTTP
+      - "443:443"   # HTTPS
     depends_on:
       - moovetravel
       - cms
