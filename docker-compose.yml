@@ -33,8 +33,8 @@ services:
     container_name: moovetravel
     ports:
       - "3000:3000"
-    volumes:
-      - ./mooveTravel:/app
+#    volumes:
+#      - ./mooveTravel:/app
     env_file:
       - ./mooveTravel/.env.production
     restart: unless-stopped
