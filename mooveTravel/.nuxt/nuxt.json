@@ -1,9 +1,9 @@
 {
-  "_hash": "rrwhwFs2vwAle8GnjclrEjaA3kV-IvJD9rbBsh9sAcQ",
+  "_hash": "0MGj5J43vIyIO8nrGASKdh2i8DiSbHKTD2J5GCxGg4g",
   "project": {
     "rootDir": "D:/moove-travel/mooveTravel"
   },
   "versions": {
-    "nuxt": "3.17.5"
+    "nuxt": "3.18.0"
   }
 }
