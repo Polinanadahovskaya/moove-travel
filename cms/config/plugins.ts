@@ -29,8 +29,8 @@ export default () => ({
         }
       },
       settings: {
-        defaultFrom: 'no-reply@moov-travel.ru',
-        defaultReplyTo: 'no-reply@moov-travel.ru',
+        defaultFrom: 'sputnik@moov-travel.ru',
+        defaultReplyTo: 'sputnik@moov-travel.ru',
       }
     },
   },
