@@ -51,6 +51,14 @@ services:
       - cms
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - /var/www/certbot:/var/www/certbot
+      - /etc/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - nginx
+    command: certonly --webroot --webroot-path=/var/www/certbot --email andrey@moov-travel.ru --agree-tos --no-eff-email --force-renewal -d moov-travel.ru
 volumes:
   db_data: 
