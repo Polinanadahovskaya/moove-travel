@@ -29,8 +29,8 @@ export default () => ({
         }
       },
       settings: {
-        defaultFrom: 'ваш_логин@yandex.ru',
-        defaultReplyTo: 'ваш_логин@yandex.ru',
+        defaultFrom: 'no-reply@moov-travel.ru',
+        defaultReplyTo: 'no-reply@moov-travel.ru',
       }
     },
   },
