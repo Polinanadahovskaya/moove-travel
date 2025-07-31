@@ -4,14 +4,24 @@ import type { EmailConfig } from "strapi-plugin-email-designer-5/dist/server/src
 export default () => ({
   email: {
     config: {
-      provider: 'nodemailer',
+      // provider: 'nodemailer',
+      // providerOptions: {
+      //   host: 'smtp.ethereal.email',
+      //   port: 587,
+      //   secure: false, // STARTTLS
+      //   auth: {
+      //     user: 'marcella53@ethereal.email',
+      //     pass: 'vAnBHF3yAFsDkSckZd',
+      //   },
+      //   requireTLS: true,
+      // },
       providerOptions: {
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: 'smtp.beget.ru',
+        port: 465,
         secure: false, // STARTTLS
         auth: {
-          user: 'marcella53@ethereal.email',
-          pass: 'vAnBHF3yAFsDkSckZd',
+          user: 'no-reply@moov-travel.ru',
+          pass: '0!JjxpT1*%mD',
         },
         requireTLS: true,
       },
