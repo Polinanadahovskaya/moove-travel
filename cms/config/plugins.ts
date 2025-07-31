@@ -18,13 +18,12 @@ export default () => ({
       providerOptions: {
         host: 'smtp.yandex.ru',
         port: 465,
-        secure: true, // SSL
+        secure: true,
         auth: {
           user: 'sputnik@moov-travel.ru',
           pass: 'pyvTer-mighum-povde9',
         },
         tls: {
-          // Необходимо для работы с Яндекс.Почтой
           rejectUnauthorized: false
         }
       },
