@@ -16,19 +16,22 @@ export default () => ({
       //   requireTLS: true,
       // },
       providerOptions: {
-        host: 'smtp.beget.ru',
+        host: 'smtp.yandex.ru',
         port: 465,
-        secure: false, // STARTTLS
+        secure: true, // SSL
         auth: {
-          user: 'no-reply@moov-travel.ru',
-          pass: '0!JjxpT1*%mD',
+          user: 'sputnik@moov-travel.ru',
+          pass: 'dknebriiydcnyqzo',
         },
-        requireTLS: true,
+        tls: {
+          // Необходимо для работы с Яндекс.Почтой
+          rejectUnauthorized: false
+        }
       },
       settings: {
-        defaultFrom: 'no-reply@moove-travel.ru',
-        defaultReplyTo: 'no-reply@moove-travel.ru',
-      },
+        defaultFrom: 'ваш_логин@yandex.ru',
+        defaultReplyTo: 'ваш_логин@yandex.ru',
+      }
     },
   },
   // This is the configuration for the Email Designer plugin
