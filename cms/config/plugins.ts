@@ -21,7 +21,7 @@ export default () => ({
         secure: true, // SSL
         auth: {
           user: 'sputnik@moov-travel.ru',
-          pass: 'dknebriiydcnyqzo',
+          pass: 'pyvTer-mighum-povde9',
         },
         tls: {
           // Необходимо для работы с Яндекс.Почтой
