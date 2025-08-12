@@ -4,7 +4,7 @@ import type { EmailConfig } from "strapi-plugin-email-designer-5/dist/server/src
 export default () => ({
   email: {
     config: {
-      // provider: 'nodemailer',
+      provider: 'nodemailer',
       // providerOptions: {
       //   host: 'smtp.ethereal.email',
       //   port: 587,
@@ -15,17 +15,30 @@ export default () => ({
       //   },
       //   requireTLS: true,
       // },
+      // providerOptions: {
+      //   host: 'smtp.yandex.ru',
+      //   port: 465,
+      //   secure: true,
+      //   auth: {
+      //     user: 'sputnik@moov-travel.ru',
+      //     pass: 'pyvTer-mighum-povde9',
+      //   },
+      //   tls: {
+      //     rejectUnauthorized: false
+      //   }
+      // },
+      // settings: {
+      //   defaultFrom: 'sputnik@moov-travel.ru',
+      //   defaultReplyTo: 'sputnik@moov-travel.ru',
+      // }
       providerOptions: {
-        host: 'smtp.yandex.ru',
+        host: 'connect.smtp.bz',
         port: 465,
         secure: true,
         auth: {
-          user: 'sputnik@moov-travel.ru',
-          pass: 'pyvTer-mighum-povde9',
+          user: 'mercurial-team@yandex.ru',
+          pass: 'VJCIbY4Rtw1b',
         },
-        tls: {
-          rejectUnauthorized: false
-        }
       },
       settings: {
         defaultFrom: 'sputnik@moov-travel.ru',
@@ -41,12 +54,12 @@ export default () => ({
       // Here the Merge Tags defined will be merged with the defaults above
       mergeTags: {
         company: {
-          name: "Company",
+          name: "Moove Travel",
           mergeTags: {
             name: {
-              name: "Company Name",
-              value: "ACME Corp",
-              sample: "ACME Corp",
+              name: "Moove Travel",
+              value: "Moove Travel",
+              sample: "Moove Travel",
             },
           },
         },
