@@ -90,6 +90,9 @@ useHead({
 </script>
 
 <style scoped>
+.travel-tittle {
+  text-transform: uppercase;
+}
 .travel-country{
   color: #C75454;
   margin-bottom: 80px;

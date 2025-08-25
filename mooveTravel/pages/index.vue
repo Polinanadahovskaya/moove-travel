@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div :class="{ 'content-with-fixed-help': isHelpSearchVisible }">
     <div class="main-header_tittle">
       <h1 class="main-tittle-header">
-        {{mainPage?.title}}
+        {{mainPage?.title.toUpperCase()}}
       </h1>
     </div>
     <div class="tv-search-form" data-tv-moduleid="9971497"></div>
     <div class="main-search"></div>
     <div class="header-wave"/>
-    <div class="help-search">
+    <div class="help-search" :class="{ 'help-search--fixed': isHelpSearchVisible }">
       <div>
         <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
         <div class="tittle-border"></div>
@@ -79,12 +79,13 @@
         </div>
       </div>
     </div>
+    <div id="test"></div>
     <popup-application id="application"/>
   </div>
 </template>
 
 <script setup>
-import {onMounted, computed} from 'vue'
+import {onMounted, computed, ref, onUnmounted} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
@@ -97,9 +98,21 @@ const pagesStore = usePagesStore()
 // SEO-friendly загрузка данных на сервере
 await useAsyncData('mainPage', () => pagesStore.fetchMainPage())
 
-
 const { getArticles, loading, error } = storeToRefs(articlesStore)
 const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
+
+// Состояние для отслеживания видимости блока help-search
+const isHelpSearchVisible = ref(false)
+
+// Обработчик скролла
+const handleScroll = () => {
+  const applicationElement = document.getElementById('test')
+  if (applicationElement) {
+    const rect = applicationElement.getBoundingClientRect()
+    // Скрываем блок, когда элемент application появляется в области видимости
+    isHelpSearchVisible.value = rect.top > window.innerHeight
+  }
+}
 
 onMounted(async () => {
   console.log('mounted')
@@ -115,6 +128,16 @@ onMounted(async () => {
   } else {
     if (window.tv_init) window.tv_init()
   }
+  
+  // Добавляем обработчик скролла
+  window.addEventListener('scroll', handleScroll)
+  // Вызываем один раз для установки начального состояния
+  handleScroll()
+})
+
+onUnmounted(() => {
+  // Удаляем обработчик скролла при размонтировании компонента
+  window.removeEventListener('scroll', handleScroll)
 })
 
 const aboutArray = computed(() => {
@@ -217,6 +240,47 @@ const aboutArray = computed(() => {
   }
   @media (max-width: 576px) {
     padding: 20px;
+  }
+}
+
+.help-search--fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 20px 182px;
+  background: #C75454;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  @media (max-width: 1400px) {
+    padding: 15px 50px;
+  }
+  @media (max-width: 900px) {
+    padding: 10px 40px;
+  }
+  @media (max-width: 768px) {
+    padding: 5px 30px;
+  }
+  @media (max-width: 576px) {
+    padding: 2px 20px;
+  }
+}
+
+.content-with-fixed-help {
+  padding-bottom: 200px;
+  @media (max-width: 1400px) {
+    padding-bottom: 150px;
+  }
+  @media (max-width: 900px) {
+    padding-bottom: 120px;
+  }
+  @media (max-width: 768px) {
+    padding-bottom: 100px;
+  }
+  @media (max-width: 576px) {
+    padding-bottom: 80px;
   }
 }
 

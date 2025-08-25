@@ -218,6 +218,9 @@ useHead({
 </script>
 
 <style scoped>
+.blog-tittle {
+  text-transform: uppercase;
+}
 .blog-tittle-header {
   display: flex;
   flex-direction: column;

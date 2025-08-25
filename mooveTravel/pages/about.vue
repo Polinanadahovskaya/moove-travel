@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="about-baner"   :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
-        <h1 style="color: #FFFFFF">{{getAboutUsPage?.title}}</h1>
+        <h1 style="color: #FFFFFF">{{getAboutUsPage?.title.toUpperCase()}}</h1>
         <div class="about-border"></div>
         <div class="about-points">
           <div v-for="arr in aboutMoove">

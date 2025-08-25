@@ -4,7 +4,6 @@ FROM node:20-alpine AS builder
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json
 COPY package*.json ./
 
 # Устанавливаем зависимости
