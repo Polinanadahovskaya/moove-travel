@@ -46,9 +46,6 @@ h1 {
   font-weight: 700;
   font-size: 84px;
   line-height: 100%;
-  @media (max-width: 1650px) {
-    font-size: 64px;
-  }
   @media (max-width: 1400px) {
     font-size: 44px;
   }

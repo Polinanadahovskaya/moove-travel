@@ -23,5 +23,16 @@ exports.default = [
                 },
             },
         },
+    },
+    {
+        name: "strapi::cors",
+        config: {
+            origin: ['http://localhost:3000', 'http://localhost:1337'],
+            credentials: true,
+        },
+    },
+    {
+        name: 'global::public-api',
+        config: {},
     }
 ];

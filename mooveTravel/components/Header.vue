@@ -61,6 +61,7 @@ const isMenuOpen = ref(false)
   background-color: #3E3E3E;
   border-bottom: 1px solid #e5e7eb;
   padding: 30px 20px;
+    height: 152px;
   @media (min-width: 1300px) {
     padding: 13px 182px 32px;
   }

@@ -2,7 +2,7 @@
   <div>
     <div class="main-header_tittle">
       <h1 class="main-tittle-header">
-        {{mainPage?.title}}
+        {{mainPage?.title.toUpperCase()}}
       </h1>
     </div>
     <div class="tv-search-form" data-tv-moduleid="9971497"></div>
@@ -129,7 +129,7 @@ const aboutArray = computed(() => {
 
 <style scoped lang="scss">
 .main-tittle-header{
-  width: 60%;
+  width: 66%;
  @media (max-width: 1400px) {
    width: 40%;
  }
@@ -699,6 +699,12 @@ const aboutArray = computed(() => {
   @media (max-width: 576px) {
     font-size: 8px;
   }
+}
+
+.about-tittle{
+    @media (min-width: 576px) {
+        font-size: 84px;
+    }
 }
 
 .time-mask {

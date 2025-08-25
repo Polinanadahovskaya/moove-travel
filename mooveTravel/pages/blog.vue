@@ -1,7 +1,7 @@
 <template>
   <div class="blog-page">
     <div class="blog-tittle-header">
-      <h1 class="blog-tittle">Блог</h1>
+      <h1 class="blog-tittle">БЛОГ</h1>
       <div class="blog-border"></div>
     </div>
     <div class="blog-text">{{blogData?.description}}
@@ -357,6 +357,7 @@ useHead({
 .article-tittle {
   color: #C75454;
   margin-bottom: 80px;
+
   @media (max-width: 576px) {
     margin-bottom: 40px;
   }
@@ -364,6 +365,9 @@ useHead({
     margin-bottom: 30px;
     font-size: 22px;
   }
+    @media (min-width: 576px) {
+        font-size: 84px !important;
+    }
 }
 
 .article-article {
@@ -508,7 +512,7 @@ useHead({
 .filter-element {
   cursor: pointer;
   border-radius: 5px;
-  padding: 5px 30px;
+  padding: 5px 15px;
   border: 1px solid #D9D9D9;
   background: #FFFFFF;
   @media (min-width: 576px) {
