@@ -91,7 +91,7 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/site.webmanifest' }
       ],
       
-      // JSON-LD структурированные данные
+            // JSON-LD структурированные данные
       script: [
         {
           type: 'application/ld+json',
@@ -135,7 +135,7 @@ export default defineNuxtConfig({
                 {
                   "@type": "Offer",
                   "itemOffered": {
-                    "@type": "Service", 
+                    "@type": "Service",
                     "name": "Туры в ОАЭ"
                   }
                 },
@@ -184,8 +184,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:1337',
-      apiToken: process.env.API_TOKEN,
-      API_ORDER_TOKEN: process.env.API_ORDER_TOKEN, // добавлено для авторизации заказов туров
+      apiToken: process.env.NUXT_PUBLIC_API_TOKEN,
+      API_ORDER_TOKEN: process.env.NUXT_PUBLIC_API_ORDER_TOKEN, // добавлено для авторизации заказов туров
     },
   },
   nitro: {

@@ -30,7 +30,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
 
     // 3. Отправляем email
     await strapi.plugin('email').service('email').send({
-      to: 'mercurial-team@yandex.ru',
+      to: 'sputnik@moov-travel.ru',
       subject: 'Новая заявка с сайта',
       html,
     });

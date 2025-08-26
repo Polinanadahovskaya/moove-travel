@@ -5,7 +5,7 @@
         {{mainPage?.title.toUpperCase()}}
       </h1>
     </div>
-    <div class="tv-search-form" data-tv-moduleid="9971497"></div>
+    <div class="tv-search-form tv-moduleid-9972104"></div>
     <div class="main-search"></div>
     <div class="header-wave"/>
     <div class="help-search" :class="{ 'help-search--fixed': true, 'help-search--hidden': !isHelpSearchVisible }">
