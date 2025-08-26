@@ -131,7 +131,7 @@ function renderBlock(block) {
   object-fit: cover;
   display: flex;
   align-self: center;
-  @media (max-width: 1650px) {
+  @media (max-width: 1250px) {
     width: 265px;
   }
   @media (max-width: 900px) {

@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div :class="{ 'content-with-fixed-help': isHelpSearchVisible }">
     <div class="main-header_tittle">
       <h1 class="main-tittle-header">
-        {{mainPage?.title}}
+        {{mainPage?.title.toUpperCase()}}
       </h1>
     </div>
     <div class="tv-search-form tv-moduleid-9972104"></div>
     <div class="main-search"></div>
     <div class="header-wave"/>
-    <div class="help-search">
+    <div class="help-search" :class="{ 'help-search--fixed': true, 'help-search--hidden': !isHelpSearchVisible }">
       <div>
         <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
         <div class="tittle-border"></div>
@@ -84,7 +84,7 @@
 </template>
 
 <script setup>
-import {onMounted, computed} from 'vue'
+import {onMounted, computed, ref, onUnmounted} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
 import { useArticlesStore } from '~/src/store/articles'
 import { usePagesStore } from '~/src/store/pages'
@@ -97,9 +97,28 @@ const pagesStore = usePagesStore()
 // SEO-friendly загрузка данных на сервере
 await useAsyncData('mainPage', () => pagesStore.fetchMainPage())
 
-
 const { getArticles, loading, error } = storeToRefs(articlesStore)
 const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
+
+// Состояние для отслеживания видимости блока help-search
+const isHelpSearchVisible = ref(false)
+
+// Throttled обработчик скролла
+let scrollTimeout = null
+const handleScroll = () => {
+  if (scrollTimeout) return
+  
+  scrollTimeout = setTimeout(() => {
+    const applicationElement = document.getElementById('application')
+    if (applicationElement) {
+      const rect = applicationElement.getBoundingClientRect()
+      // Добавляем буфер в 100px для предотвращения дергания
+      const buffer = 100
+      isHelpSearchVisible.value = rect.top > (window.innerHeight + buffer)
+    }
+    scrollTimeout = null
+  }, 50) // Throttle до 50ms
+}
 
 onMounted(async () => {
   console.log('mounted')
@@ -115,6 +134,16 @@ onMounted(async () => {
   } else {
     if (window.tv_init) window.tv_init()
   }
+  
+  // Добавляем обработчик скролла
+  window.addEventListener('scroll', handleScroll)
+  // Вызываем один раз для установки начального состояния
+  handleScroll()
+})
+
+onUnmounted(() => {
+  // Удаляем обработчик скролла при размонтировании компонента
+  window.removeEventListener('scroll', handleScroll)
 })
 
 const aboutArray = computed(() => {
@@ -144,6 +173,9 @@ const aboutArray = computed(() => {
 
 .main-header_tittle {
   margin: 90px auto 33px;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin: 60px auto 28px;
+  }
   @media (max-width: 576px) {
     margin: 27px auto 26px;
   }
@@ -161,7 +193,7 @@ const aboutArray = computed(() => {
   position: relative;
   background-size: cover;
   @media (max-width: 1640px) {
-    height: 500px;
+    height: 400px;
   }
   @media (max-width: 1400px) {
     height: 450px;
@@ -220,17 +252,70 @@ const aboutArray = computed(() => {
   }
 }
 
+.help-search--fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 20px 182px;
+  background: #C75454;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
+  @media (max-width: 1400px) {
+    padding: 15px 50px;
+  }
+  @media (max-width: 900px) {
+    padding: 10px 40px;
+  }
+  @media (max-width: 768px) {
+    padding: 5px 30px;
+  }
+  @media (max-width: 576px) {
+    padding: 2px 20px;
+  }
+}
+
+.help-search--hidden {
+  transform: translateY(100%);
+}
+
+.content-with-fixed-help {
+  padding-bottom: 200px;
+  @media (max-width: 1400px) {
+    padding-bottom: 150px;
+  }
+  @media (max-width: 900px) {
+    padding-bottom: 120px;
+  }
+  @media (max-width: 768px) {
+    padding-bottom: 100px;
+  }
+  @media (max-width: 576px) {
+    padding-bottom: 80px;
+  }
+}
+
 .help-tittle {
   color: #FFFFFF;
+  @media (max-width: 1700px) and (min-width: 1200px) {
+    font-size: 30px;
+  }
 }
 
 .tittle-border {
   border-bottom: 6px solid #FFFFFF;
   margin-top: 40px;
   width: 315px;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin-top: 19px;
+    width: 295px;
+  }
   @media (max-width: 1200px) {
     width: 295px;
-    margin-top: 30px;
     border-width: 5px;
   }
   @media (max-width: 900px) {
@@ -271,9 +356,9 @@ const aboutArray = computed(() => {
     height: 106px;
     font-size: 30px;
   }
-  @media (max-width: 1200px) {
-    width: 295px;
+  @media (max-width: 1600px) and (min-width: 900px) {
     height: 85px;
+    width: 295px;
     border-radius: 13px;
     font-size: 20px;
   }
@@ -299,6 +384,9 @@ const aboutArray = computed(() => {
 
 .help-about {
   margin: 110px auto;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin: 80px auto;
+  }
   @media (max-width: 576px) {
     margin: 40px auto;
   }
@@ -423,6 +511,11 @@ const aboutArray = computed(() => {
   align-items: center;
   background: #ffff;
   box-shadow: 0px 0px 60px 0px #0000001A;
+
+  @media (max-width: 1700px) and (min-width: 1200px) {
+    padding: 26px 34px;
+    height: fit-content;
+  }
   @media (min-width: 1300px) {
     height: 152px;
   }
@@ -454,6 +547,9 @@ const aboutArray = computed(() => {
   line-height: 100%;
   font-variant: small-caps;
   color: #C75454;
+  @media (max-width: 1700px) and (min-width: 1200px) {
+    font-size: 60px;
+  }
   @media (max-width: 1300px) {
     font-size: 64px;
   }
@@ -481,6 +577,9 @@ const aboutArray = computed(() => {
 
 .priorities {
   margin: 110px auto 180px;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin: 80px auto 150px;
+  }
   @media (max-width: 576px) {
     margin: 40px auto;
   }
@@ -510,6 +609,9 @@ const aboutArray = computed(() => {
   flex-direction: column;
   gap: 90px;
   width: 50%;
+  @media (max-width: 1700px) and (min-width: 1200px) {
+    gap: 60px;
+  }
   @media (max-width: 1200px) {
     width: 100%;
     gap: 40px;
@@ -536,7 +638,7 @@ const aboutArray = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: 1200px) {
+  @media (max-width: 1700px) and (min-width: 1200px) {
     width: 100px;
     height: 100px;
   }
@@ -589,6 +691,11 @@ const aboutArray = computed(() => {
   position: relative;
   width: 20px;
   height: 20px;
+  animation: arrowBounce 2s infinite;
+  @media (max-width: 1600px) and (min-width: 1200px) {
+    width: 10px;
+    height: 10px;
+  }
   @media (max-width: 1200px) {
     width: 5px;
     height: 14px;
@@ -607,6 +714,33 @@ const aboutArray = computed(() => {
   }
 }
 
+.hollow-arrow:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hollow-arrow:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.hollow-arrow:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes arrowBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-10px);
+    opacity: 0.7;
+  }
+  60% {
+    transform: translateY(-5px);
+    opacity: 0.9;
+  }
+}
+
 .hollow-arrow::before {
   content: "";
   position: absolute;
@@ -618,6 +752,12 @@ const aboutArray = computed(() => {
   top: 5px;
   left: 5px;
   border-radius: 3px;
+  @media (max-width: 1600px) and (min-width: 1200px) {
+    width: 15px;
+    height: 15px;
+    border-width: 5px;
+    top: 11px;
+  }
   @media (max-width: 1200px) {
     width: 18px;
     height: 18px;
@@ -651,11 +791,11 @@ const aboutArray = computed(() => {
   background-color: #C75454;
   width: 100px;
   height: 100px;
-  @media (max-width: 1200px) {
-    width: 85px;
-    height: 85px;
-    mask-size: 85px 85px !important;
-    -webkit-mask-size: 85px 85px !important;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    width: 65px;
+    height: 65px;
+    mask-size: 65px 65px !important;
+    -webkit-mask-size: 65px 65px !important;
   }
   @media (max-width: 900px) {
     width: 55px;
@@ -675,8 +815,18 @@ const aboutArray = computed(() => {
   display: flex;
   gap: 10px;
   flex-direction: column;
+  animation: arrowGroupPulse 3s infinite;
   @media (max-width: 576px) {
     gap: 2px;
+  }
+}
+
+@keyframes arrowGroupPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
   }
 }
 

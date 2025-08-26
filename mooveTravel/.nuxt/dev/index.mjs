@@ -1,42 +1,42 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, getRequestURL, getResponseHeader, appendResponseHeader, removeResponseHeader, createError, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file://D:/moove-travel/mooveTravel/node_modules/h3/dist/index.mjs';
-import { escapeHtml } from 'file://D:/moove-travel/mooveTravel/node_modules/@vue/shared/dist/shared.cjs.js';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://D:/moove-travel/mooveTravel/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file://D:/moove-travel/mooveTravel/node_modules/ufo/dist/index.mjs';
-import { renderToString } from 'file://D:/moove-travel/mooveTravel/node_modules/vue/server-renderer/index.mjs';
-import { klona } from 'file://D:/moove-travel/mooveTravel/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://D:/moove-travel/mooveTravel/node_modules/defu/dist/defu.mjs';
-import destr, { destr as destr$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/destr/dist/index.mjs';
-import { snakeCase } from 'file://D:/moove-travel/mooveTravel/node_modules/scule/dist/index.mjs';
-import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://D:/moove-travel/mooveTravel/node_modules/unhead/dist/server.mjs';
-import { stringify, uneval } from 'file://D:/moove-travel/mooveTravel/node_modules/devalue/index.js';
-import { isVNode, toValue, isRef } from 'file://D:/moove-travel/mooveTravel/node_modules/vue/index.mjs';
-import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file://D:/moove-travel/mooveTravel/node_modules/unhead/dist/plugins.mjs';
-import { createHooks } from 'file://D:/moove-travel/mooveTravel/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://D:/moove-travel/mooveTravel/node_modules/node-mock-http/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://D:/moove-travel/mooveTravel/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://D:/moove-travel/mooveTravel/node_modules/unstorage/drivers/fs.mjs';
-import { digest } from 'file://D:/moove-travel/mooveTravel/node_modules/ohash/dist/index.mjs';
-import { toRouteMatcher, createRouter } from 'file://D:/moove-travel/mooveTravel/node_modules/radix3/dist/index.mjs';
+import { escapeHtml } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/@vue/shared/dist/shared.cjs.js';
+import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/ufo/dist/index.mjs';
+import { renderToString } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/vue/server-renderer/index.mjs';
+import destr, { destr as destr$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/destr/dist/index.mjs';
+import { createHooks } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/hookable/dist/index.mjs';
+import { createFetch, Headers as Headers$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/ofetch/dist/node.mjs';
+import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/node-mock-http/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unstorage/drivers/fs.mjs';
+import { digest } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/ohash/dist/index.mjs';
+import { klona } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/scule/dist/index.mjs';
+import { getContext } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unctx/dist/index.mjs';
+import { toRouteMatcher, createRouter } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
-import consola, { consola as consola$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file://D:/moove-travel/mooveTravel/node_modules/youch-core/build/index.js';
-import { Youch } from 'file://D:/moove-travel/mooveTravel/node_modules/nitropack/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file://D:/moove-travel/mooveTravel/node_modules/source-map/source-map.js';
+import consola, { consola as consola$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/consola/dist/index.mjs';
+import { ErrorParser } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/youch-core/build/index.js';
+import { Youch } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/nitropack/node_modules/youch/build/index.js';
+import { SourceMapConsumer } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { getContext } from 'file://D:/moove-travel/mooveTravel/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://D:/moove-travel/mooveTravel/node_modules/errx/dist/index.js';
+import { stringify, uneval } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/devalue/index.js';
+import { captureRawStackTrace, parseRawStackTrace } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/errx/dist/index.js';
+import { isVNode, toValue, isRef } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/vue/index.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$1 } from 'file://D:/moove-travel/mooveTravel/node_modules/pathe/dist/index.mjs';
-import { walkResolver } from 'file://D:/moove-travel/mooveTravel/node_modules/unhead/dist/utils.mjs';
+import { dirname as dirname$1, resolve as resolve$1 } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/pathe/dist/index.mjs';
+import { createHead as createHead$1, propsToString, renderSSRHead } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unhead/dist/server.mjs';
+import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unhead/dist/plugins.mjs';
+import { walkResolver } from 'file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/node_modules/unhead/dist/utils.mjs';
 
-const serverAssets = [{"baseName":"server","dir":"D:/moove-travel/mooveTravel/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/server/assets"}];
 
 const assets$1 = createStorage();
 
@@ -48,11 +48,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets$1);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:/moove-travel/mooveTravel","watchOptions":{"ignored":[null]}}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:/moove-travel/mooveTravel/server","watchOptions":{"ignored":[null]}}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:/moove-travel/mooveTravel/.nuxt"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:/moove-travel/mooveTravel/.nuxt/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"D:/moove-travel/mooveTravel/.data/kv"}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel","watchOptions":{"ignored":[null]}}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/server","watchOptions":{"ignored":[null]}}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt"}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt/cache"}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.data/kv"}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -637,7 +637,7 @@ const _inlineRuntimeConfig = {
       },
       "/sitemap.xml": {
         "proxy": {
-          "to": "http://cms:1337/api/strapi-5-sitemap-plugin/sitemap.xml"
+          "to": "http://localhost:1337/api/strapi-5-sitemap-plugin/sitemap.xml"
         }
       },
       "/_nuxt/builds/meta/**": {
@@ -653,9 +653,9 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
-    "strapiUrl": "http://cms:1337",
-    "apiToken": "eb0acafaacdcc9dcad329920698d18c9fa9d755c068ec35202c6562c1effc4d279266e2f698b29f6b28b54997b9fe6522a721a45afe3be0f8ad9d97df975a8c245608a404464a39f2885b66e2819ebe76cfbeb98fcfb3f7fdb741fd1e74185ad9667e855b00bac339c87d61cc294e068694450078b672df8b1ee6728591a87a2",
-    "API_ORDER_TOKEN": "61cc527d3c766af46021354872adf6c4e0b631366f2146975bd4613f4b349b173b1489a7d5970ea4d4fe6ae02cfedcc506c6622ff32ab3bdc3c27bcc774993589e8682c496ffb484ee6c18274f31acec6c52ba20542f89f684349c2cc32740ca0301618d210edc3716bd2a21ed2aa7f8ba734e8ee1ffe65a7b3c55a476779c50"
+    "apiUrl": "http://localhost:1337",
+    "apiToken": "6b68fc0db1043175f82b6cfab367af1a1466131692e77b4d79c5c0b6e7267d1390fab389d361d6eecb404df882a8322e6f6a7517f814f268e975210d91b75b5ef63500a16afd22548f57a70529d393092aa1bd6bf8d21e2ba9105c32175c63543be017c0d1c40711f4dd2e03e727599b0703c389a0699e3982ee938c35bcd5ac",
+    "API_ORDER_TOKEN": "1bf21de43fd779a1813900f3ef31167059db5302386861ca0dd0d34e3788b0aa1b611447bacf8f4d729bc67b888912cf46efb1ce1f333e8065ae266d912e6fcd5be14c6fe63bc256c253fd8bb15a57a838847fb7afc075a4aac66755aa38e226ad503929ac5365a0360bbfb4dbf6c99c3d18699aa81a0e7223df8d0d691c8306"
   }
 };
 const envOptions = {
@@ -700,6 +700,11 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
     }
     return void 0;
   }
+});
+
+getContext("nitro-app", {
+  asyncContext: false,
+  AsyncLocalStorage: void 0
 });
 
 const config = useRuntimeConfig();
@@ -860,10 +865,6 @@ const errorHandler$0 = (async function errorhandler(error, event, { defaultHandl
   }
   const html = await res.text();
   for (const [header, value] of res.headers.entries()) {
-    if (header === "set-cookie") {
-      appendResponseHeader(event, header, value);
-      continue;
-    }
     setResponseHeader(event, header, value);
   }
   setResponseStatus(event, res.status && res.status !== 200 ? res.status : defaultRes.status, res.statusText || defaultRes.statusText);
@@ -1021,15 +1022,15 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _16L6AquKi9o0KzAo_YjggwMfiBz4xpbtolCCXpOvD9o = (function(nitro) {
+const _Da66Z8t6Ddyjhh3GvY8ylDRY4UZZHLznNyXYPVxjiKs = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
-const rootDir = "D:/moove-travel/mooveTravel";
+const rootDir = "/Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel";
 
-const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"format-detection","content":"telephone=no"},{"name":"description","content":"Moov Travel - профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления. Работаем без выходных, ведём клиентов до конца путешествия."},{"name":"keywords","content":"туристическое агентство, туры, отдых, путешествия, Турция, Египет, ОАЭ, Таиланд, Мальдивы, семейный отдых, бронирование туров"},{"name":"author","content":"Moov Travel"},{"name":"robots","content":"index, follow"},{"name":"language","content":"ru"},{"property":"og:title","content":"Moov Travel - Туристическое агентство"},{"property":"og:description","content":"Профессиональное туристическое агентство. Подбираем туры как себе - с учётом всех ваших пожеланий и бюджета."},{"property":"og:type","content":"website"},{"property":"og:url","content":"https://moov-travel.ru"},{"property":"og:image","content":"/src/assets/images/logoMoov.svg"},{"property":"og:image:width","content":"1200"},{"property":"og:image:height","content":"630"},{"property":"og:site_name","content":"Moov Travel"},{"property":"og:locale","content":"ru_RU"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:title","content":"Moov Travel - Туристическое агентство"},{"name":"twitter:description","content":"Профессиональное туристическое агентство. Подбираем туры как себе - с учётом всех ваших пожеланий и бюджета."},{"name":"twitter:image","content":"/src/assets/images/logoMoov.svg"},{"name":"theme-color","content":"#C75454"},{"name":"msapplication-TileColor","content":"#C75454"},{"name":"apple-mobile-web-app-capable","content":"yes"},{"name":"apple-mobile-web-app-status-bar-style","content":"default"},{"name":"apple-mobile-web-app-title","content":"Moov Travel"},{"name":"application-name","content":"Moov Travel"},{"name":"mobile-web-app-capable","content":"yes"},{"name":"geo.region","content":"RU"},{"name":"geo.placename","content":"Москва"},{"name":"business:contact_data:street_address","content":"Скоро откроемся!"},{"name":"business:contact_data:phone_number","content":"+7 903 173-77-88"},{"name":"business:contact_data:email","content":"Sputnik@moov-travel.ru"}],"link":[{"rel":"canonical","href":"https://moov-travel.ru"},{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"},{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"},{"rel":"apple-touch-icon","sizes":"180x180","href":"/src/assets/images/logoMoov.svg"},{"rel":"icon","type":"image/png","sizes":"32x32","href":"/src/assets/images/logoMoov.svg"},{"rel":"icon","type":"image/png","sizes":"16x16","href":"/src/assets/images/logoMoov.svg"},{"rel":"manifest","href":"/site.webmanifest"}],"style":[],"script":[{"type":"application/ld+json","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"TravelAgency\",\"name\":\"Moov Travel\",\"description\":\"Профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления.\",\"url\":\"https://moov-travel.ru\",\"logo\":\"https://moov-travel.ru/src/assets/images/logoMoov.svg\",\"image\":\"https://moov-travel.ru/src/assets/images/logoMoov.svg\",\"telephone\":\"+7 903 173-77-88\",\"email\":\"Sputnik@moov-travel.ru\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Москва\",\"addressCountry\":\"RU\"},\"openingHours\":\"Mo-Su 00:00-23:59\",\"priceRange\":\"$$\",\"areaServed\":[\"RU\"],\"serviceType\":[\"Туристические услуги\",\"Бронирование туров\",\"Организация путешествий\"],\"hasOfferCatalog\":{\"@type\":\"OfferCatalog\",\"name\":\"Туристические направления\",\"itemListElement\":[{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Турцию\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Египет\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в ОАЭ\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Таиланд\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры на Мальдивы\"}}]}}"}],"noscript":[],"title":"Moov Travel - Туристическое агентство | Отпуск, после которого хочется ещё"};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"format-detection","content":"telephone=no"},{"name":"description","content":"Moov Travel - профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления. Работаем без выходных, ведём клиентов до конца путешествия."},{"name":"keywords","content":"туристическое агентство, туры, отдых, путешествия, Турция, Египет, ОАЭ, Таиланд, Мальдивы, семейный отдых, бронирование туров"},{"name":"author","content":"Moov Travel"},{"name":"robots","content":"index, follow"},{"name":"language","content":"ru"},{"property":"og:title","content":"Moov Travel - Туристическое агентство"},{"property":"og:description","content":"Профессиональное туристическое агентство. Подбираем туры как себе - с учётом всех ваших пожеланий и бюджета."},{"property":"og:type","content":"website"},{"property":"og:url","content":"https://moov-travel.ru"},{"property":"og:image","content":"/src/assets/images/logoMoov.svg"},{"property":"og:image:width","content":"1200"},{"property":"og:image:height","content":"630"},{"property":"og:site_name","content":"Moov Travel"},{"property":"og:locale","content":"ru_RU"},{"name":"twitter:card","content":"summary_large_image"},{"name":"twitter:title","content":"Moov Travel - Туристическое агентство"},{"name":"twitter:description","content":"Профессиональное туристическое агентство. Подбираем туры как себе - с учётом всех ваших пожеланий и бюджета."},{"name":"twitter:image","content":"/src/assets/images/logoMoov.svg"},{"name":"theme-color","content":"#C75454"},{"name":"msapplication-TileColor","content":"#C75454"},{"name":"apple-mobile-web-app-capable","content":"yes"},{"name":"apple-mobile-web-app-status-bar-style","content":"default"},{"name":"apple-mobile-web-app-title","content":"Moov Travel"},{"name":"application-name","content":"Moov Travel"},{"name":"mobile-web-app-capable","content":"yes"},{"name":"geo.region","content":"RU"},{"name":"geo.placename","content":"Москва"},{"name":"business:contact_data:street_address","content":"Скоро откроемся!"},{"name":"business:contact_data:phone_number","content":"+7 903 173-77-88"},{"name":"business:contact_data:email","content":"Sputnik@moov-travel.ru"}],"link":[{"rel":"canonical","href":"https://moov-travel.ru"},{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"},{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"},{"rel":"apple-touch-icon","sizes":"180x180","href":"/src/assets/images/logoMoov.svg"},{"rel":"icon","type":"image/png","sizes":"32x32","href":"/src/assets/images/logoMoov.svg"},{"rel":"icon","type":"image/png","sizes":"16x16","href":"/src/assets/images/logoMoov.svg"},{"rel":"manifest","href":"/site.webmanifest"}],"style":[],"script":[{"type":"application/ld+json","innerHTML":"{\"@context\":\"https://schema.org\",\"@type\":\"TravelAgency\",\"name\":\"Moov Travel\",\"description\":\"Профессиональное туристическое агентство. Подбираем туры в Турцию, Египет, ОАЭ, Таиланд, Мальдивы и другие направления.\",\"url\":\"https://moov-travel.ru\",\"logo\":\"https://moov-travel.ru/src/assets/images/logoMoov.svg\",\"image\":\"https://moov-travel.ru/src/assets/images/logoMoov.svg\",\"telephone\":\"+7 903 173-77-88\",\"email\":\"Sputnik@moov-travel.ru\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Москва\",\"addressCountry\":\"RU\"},\"openingHours\":\"Mo-Su 00:00-23:59\",\"priceRange\":\"$$\",\"areaServed\":[\"RU\"],\"serviceType\":[\"Туристические услуги\",\"Бронирование туров\",\"Организация путешествий\"],\"hasOfferCatalog\":{\"@type\":\"OfferCatalog\",\"name\":\"Туристические направления\",\"itemListElement\":[{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Турцию\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Египет\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в ОАЭ\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры в Таиланд\"}},{\"@type\":\"Offer\",\"itemOffered\":{\"@type\":\"Service\",\"name\":\"Туры на Мальдивы\"}}]}}"},{"type":"text/javascript","innerHTML":"\n            (function(m,e,t,r,i,k,a){\n                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};\n                m[i].l=1*new Date();\n                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}\n                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)\n            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103871125', 'ym');\n\n            ym(103871125, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:\"dataLayer\", accurateTrackBounce:true, trackLinks:true});\n          "}],"noscript":[{"children":"<div><img src=\"https://mc.yandex.ru/watch/103871125\" style=\"position:absolute; left:-9999px;\" alt=\"\" /></div>"}],"title":"Moov Travel - Туристическое агентство | Отпуск, после которого хочется ещё"};
 
 const appRootTag = "div";
 
@@ -1046,7 +1047,7 @@ const devReducers = {
   URL: (data) => data instanceof URL ? data.toString() : void 0
 };
 const asyncContext = getContext("nuxt-dev", { asyncContext: true, AsyncLocalStorage });
-const _ONCT6LZLzRmVEoOHV1qcBo4PKFdXu9A1jwtcxoiZpw = (nitroApp) => {
+const _FrIm6uF8DREGtKSSzedkqWLZvWQe4bAv_PdhxI_K_HI = (nitroApp) => {
   const handler = nitroApp.h3App.handler;
   nitroApp.h3App.handler = (event) => {
     return asyncContext.callAsync({ logs: [], event }, () => handler(event));
@@ -1116,8 +1117,8 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _16L6AquKi9o0KzAo_YjggwMfiBz4xpbtolCCXpOvD9o,
-_ONCT6LZLzRmVEoOHV1qcBo4PKFdXu9A1jwtcxoiZpw
+  _Da66Z8t6Ddyjhh3GvY8ylDRY4UZZHLznNyXYPVxjiKs,
+_FrIm6uF8DREGtKSSzedkqWLZvWQe4bAv_PdhxI_K_HI
 ];
 
 const assets = {};
@@ -1145,7 +1146,7 @@ function getAsset (id) {
 
 const METHODS = /* @__PURE__ */ new Set(["HEAD", "GET"]);
 const EncodingMap = { gzip: ".gz", br: ".br" };
-const _gdUtaZ = eventHandler((event) => {
+const _yFym9T = eventHandler((event) => {
   if (event.method && !METHODS.has(event.method)) {
     return;
   }
@@ -1280,8 +1281,8 @@ function publicAssetsURL(...path) {
 
 const APP_ROOT_OPEN_TAG = `<${appRootTag}${propsToString(appRootAttrs)}>`;
 const APP_ROOT_CLOSE_TAG = `</${appRootTag}>`;
-const getServerEntry = () => import('file://D:/moove-travel/mooveTravel/.nuxt//dist/server/server.mjs').then((r) => r.default || r);
-const getClientManifest = () => import('file://D:/moove-travel/mooveTravel/.nuxt//dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file:///Users/polinanadahovskaya/Desktop/moove-travel/mooveTravel/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   if (!manifest) {
@@ -1527,13 +1528,13 @@ async function getIslandContext(event) {
   return ctx;
 }
 
-const _lazy_mgPqYH = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_aY8hHE = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '', handler: _gdUtaZ, lazy: false, middleware: true, method: undefined },
-  { route: '/__nuxt_error', handler: _lazy_mgPqYH, lazy: true, middleware: false, method: undefined },
+  { route: '', handler: _yFym9T, lazy: false, middleware: true, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_aY8hHE, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_mgPqYH, lazy: true, middleware: false, method: undefined }
+  { route: '/**', handler: _lazy_aY8hHE, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -1842,24 +1843,24 @@ const template$1 = (messages) => {
   return '<!DOCTYPE html><html lang="en"><head><title>' + escapeHtml(messages.statusCode) + " - " + escapeHtml(messages.statusMessage || "Internal Server Error") + `</title><meta charset="utf-8"><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0" name="viewport"><style>.spotlight{background:linear-gradient(45deg,#00dc82,#36e4da 50%,#0047e1);bottom:-40vh;filter:blur(30vh);height:60vh;opacity:.8}*,:after,:before{border-color:var(--un-default-border-color,#e5e7eb);border-style:solid;border-width:0;box-sizing:border-box}:after,:before{--un-content:""}html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-moz-tab-size:4;tab-size:4;-webkit-tap-highlight-color:transparent}body{line-height:inherit;margin:0}h1{font-size:inherit;font-weight:inherit}h1,p{margin:0}*,:after,:before{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 transparent;--un-ring-shadow:0 0 transparent;--un-shadow-inset: ;--un-shadow:0 0 transparent;--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: }.pointer-events-none{pointer-events:none}.fixed{position:fixed}.left-0{left:0}.right-0{right:0}.z-10{z-index:10}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.h-auto{height:auto}.min-h-screen{min-height:100vh}.flex{display:flex}.flex-1{flex:1 1 0%}.flex-col{flex-direction:column}.overflow-y-auto{overflow-y:auto}.rounded-t-md{border-top-left-radius:.375rem;border-top-right-radius:.375rem}.bg-black\\/5{background-color:#0000000d}.bg-white{--un-bg-opacity:1;background-color:rgb(255 255 255/var(--un-bg-opacity))}.p-8{padding:2rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.pt-14{padding-top:3.5rem}.text-6xl{font-size:3.75rem;line-height:1}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-black{--un-text-opacity:1;color:rgb(0 0 0/var(--un-text-opacity))}.font-light{font-weight:300}.font-medium{font-weight:500}.leading-tight{line-height:1.25}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media (prefers-color-scheme:dark){.dark\\:bg-black{--un-bg-opacity:1;background-color:rgb(0 0 0/var(--un-bg-opacity))}.dark\\:bg-white\\/10{background-color:#ffffff1a}.dark\\:text-white{--un-text-opacity:1;color:rgb(255 255 255/var(--un-text-opacity))}}@media (min-width:640px){.sm\\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\\:text-8xl{font-size:6rem;line-height:1}}</style><script>!function(){const e=document.createElement("link").relList;if(!(e&&e.supports&&e.supports("modulepreload"))){for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver((e=>{for(const o of e)if("childList"===o.type)for(const e of o.addedNodes)"LINK"===e.tagName&&"modulepreload"===e.rel&&r(e)})).observe(document,{childList:!0,subtree:!0})}function r(e){if(e.ep)return;e.ep=!0;const r=function(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),"use-credentials"===e.crossOrigin?r.credentials="include":"anonymous"===e.crossOrigin?r.credentials="omit":r.credentials="same-origin",r}(e);fetch(e.href,r)}}();<\/script></head><body class="antialiased bg-white dark:bg-black dark:text-white flex flex-col font-sans min-h-screen pt-14 px-10 text-black"><div class="fixed left-0 pointer-events-none right-0 spotlight"></div><h1 class="font-medium mb-6 sm:text-8xl text-6xl">` + escapeHtml(messages.statusCode) + '</h1><p class="font-light leading-tight mb-8 sm:text-2xl text-xl">' + escapeHtml(messages.description) + '</p><div class="bg-black/5 bg-white dark:bg-white/10 flex-1 h-auto overflow-y-auto rounded-t-md"><div class="font-light leading-tight p-8 text-xl z-10">' + escapeHtml(messages.stack) + "</div></div></body></html>";
 };
 
-const errorDev = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const errorDev = /*#__PURE__*/Object.freeze({
   __proto__: null,
   template: template$1
-}, Symbol.toStringTag, { value: 'Module' }));
+});
 
 const template = "";
 
-const _virtual__spaTemplate = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const _virtual__spaTemplate = /*#__PURE__*/Object.freeze({
   __proto__: null,
   template: template
-}, Symbol.toStringTag, { value: 'Module' }));
+});
 
 const styles = {};
 
-const styles$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const styles$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   default: styles
-}, Symbol.toStringTag, { value: 'Module' }));
+});
 
 function renderPayloadResponse(ssrContext) {
   return {
@@ -1996,7 +1997,6 @@ const renderer = defineRenderHandler(async (event) => {
     });
   }
   if (!routeOptions.noScripts) {
-    const tagPosition = "head";
     ssrContext.head.push({
       script: Object.values(scripts).map((resource) => ({
         type: resource.module ? "module" : null,
@@ -2004,7 +2004,7 @@ const renderer = defineRenderHandler(async (event) => {
         defer: resource.module ? null : true,
         // if we are rendering script tag payloads that import an async payload
         // we need to ensure this resolves before executing the Nuxt entry
-        tagPosition,
+        tagPosition: "head",
         crossorigin: ""
       }))
     }, headEntryOptions);
@@ -2048,8 +2048,8 @@ function renderHTMLDocument(html) {
   return `<!DOCTYPE html><html${joinAttrs(html.htmlAttrs)}><head>${joinTags(html.head)}</head><body${joinAttrs(html.bodyAttrs)}>${joinTags(html.bodyPrepend)}${joinTags(html.body)}${joinTags(html.bodyAppend)}</body></html>`;
 }
 
-const renderer$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const renderer$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   default: renderer
-}, Symbol.toStringTag, { value: 'Module' }));
+});
 //# sourceMappingURL=index.mjs.map
