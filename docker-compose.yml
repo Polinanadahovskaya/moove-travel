@@ -20,8 +20,8 @@ services:
     environment:
       MYSQL_DATABASE: strapi
       MYSQL_USER: strapi
-      MYSQL_PASSWORD: strapi
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: MooveTravel2024!
+      MYSQL_ROOT_PASSWORD: RootPassword2024!
     ports:
       - "3306:3306"
     volumes:
