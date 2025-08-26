@@ -226,6 +226,9 @@ useHead({
   flex-direction: column;
   gap: 12px;
   margin-top: 90px;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin-top: 60px;
+  }
   @media (max-width: 576px) {
     margin-top: 17px;
     gap: 7px;
@@ -254,8 +257,8 @@ useHead({
   display: flex;
   flex-direction: column;
   @media (min-width: 768px) {
-    flex-basis: 70%;
-    max-width: 70%;
+    flex-basis: 80%;
+    max-width: 80%;
   }
   @media (min-width: 577px) and (max-width: 1450px) {
     flex-basis: 100%;
@@ -296,6 +299,10 @@ useHead({
   color: #1E1E1E;
   vertical-align: middle;
   margin: 80px 0;
+  @media (max-width: 1700px) and (min-width: 768px) {
+    font-size: 28px;
+    margin: 60px 0;
+  }
   @media (max-width: 768px) {
     font-size: 24px;
     margin: 40px 0;
@@ -460,12 +467,15 @@ useHead({
   border-radius: 30px;
   padding: 40px;
   @media (min-width: 768px) {
-    flex-basis: 30%;
+    flex-basis: 20%;
     display: flex;
     flex-direction: column;
     gap: 60px;
     justify-content: space-between;
     height: 100%;
+  }
+  @media (max-width: 1700px) and (min-width: 768px) {
+    padding: 30px;
   }
   @media (max-width: 576px) {
     padding: 13px 9px;
@@ -518,6 +528,10 @@ useHead({
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+  }
+  @media (max-width: 1700px) and (min-width: 768px) {
+    padding: 5px;
   }
   @media (max-width: 576px) {
     padding: 2px 10px;

@@ -45,9 +45,12 @@ defineProps({
   cursor: pointer;
   box-sizing: border-box;
   position: relative;
-  /* Градиент поверх фона */
   @media (min-width: 768px) {
     aspect-ratio: 502/354;
+    min-height: 200px;
+  }
+  @media (max-width: 1700px) and (min-width: 768px) {
+    aspect-ratio: 402/254;
     min-height: 200px;
   }
   @media (max-width: 900px){
@@ -76,6 +79,7 @@ defineProps({
   @media (max-width: 768px){
     border-radius: 6px;
   }
+
 }
 
 .country-text{

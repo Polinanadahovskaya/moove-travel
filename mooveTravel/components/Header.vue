@@ -64,6 +64,9 @@ const isMenuOpen = ref(false)
   @media (min-width: 1300px) {
     padding: 13px 182px 32px;
   }
+  @media (max-width: 1700px) and (min-width: 1200px) {
+    padding: 10px 182px 22px;
+  }
 }
 
 .container {
@@ -128,6 +131,10 @@ const isMenuOpen = ref(false)
   height: 107px;
   background: url('/src/assets/images/logoMoov.svg') no-repeat center;
   background-size: contain;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    width: 93px;
+    height: 77px;
+  }
   @media (max-width: 768px) {
     width: 62px;
     height: 55px;
@@ -140,6 +147,10 @@ const isMenuOpen = ref(false)
   background: url('/src/assets/images/mooveTravel.svg') no-repeat center;
   background-size: contain;
   margin-top: 20px;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    width: 126px;
+    height: 48px;
+  }
   @media (max-width: 768px) {
     width: 85px;
     height: 35px;

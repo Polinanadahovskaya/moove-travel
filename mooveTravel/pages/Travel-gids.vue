@@ -116,6 +116,9 @@ useHead({
   border-bottom: 6px solid #C75454;
   width: 294px;
   margin: 16px 0 80px;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin: 16px 0 60px;
+  }
   @media (max-width: 576px) {
     width: 103px;
     border-width: 2px;
@@ -130,6 +133,9 @@ useHead({
   vertical-align: middle;
   margin-bottom: 180px;
   width: 90%;
+  @media (max-width: 1700px) and (min-width: 900px) {
+    margin-bottom: 60px;
+  }
   @media (max-width: 576px) {
     font-size: 8px;
     margin-bottom: 40px;
