@@ -182,7 +182,7 @@ await articlesStore.fetchArticleByLink(link)
 }
 
 .art_heading {
-  font-weight: 700;
+  font-weight: bold;
   margin-top: 24px;
   margin-bottom: 12px;
 }
