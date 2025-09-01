@@ -9,7 +9,7 @@
     <div class="main-search"></div>
     <div class="header-wave"/>
     <div class="help-search" :class="{ 'help-search--fixed': true, 'help-search--hidden': !isHelpSearchVisible }">
-      <div style="max-width: 1463px;">
+      <div style="max-width: 1463px;     display: flex;">
         <div>
           <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
           <div class="tittle-border"></div>
