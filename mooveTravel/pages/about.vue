@@ -40,6 +40,7 @@
       </div>
       <div class="team">
         <div>
+        <div>
           <h2 class="about-tittle">КОМАНДА</h2>
           <div class="about-border"></div>
         </div>
@@ -49,6 +50,7 @@
                 :imgUrl="$getImageUrl(arr?.image?.url)"
                 :element="arr"/>
           </div>
+        </div>
         </div>
       </div>
       <popup-application/>
