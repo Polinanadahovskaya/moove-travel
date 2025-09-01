@@ -7,7 +7,9 @@
     </div>
     <div class="tv-search-form tv-moduleid-9972104"></div>
     <div class="main-search"></div>
-    <div class="header-wave"/>
+    <div>
+      <div class="header-wave"/>
+    </div>
     <div class="help-search" :class="{ 'help-search--fixed': true, 'help-search--hidden': !isHelpSearchVisible }">
       <div style="max-width: 1463px;     display: flex; justify-content: space-between;
     width: 100%;">
