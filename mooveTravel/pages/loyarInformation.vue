@@ -2,7 +2,10 @@
   <div>
     <div class="back-country">
       <div class="header-content">
-        <div>
+        <div style="display: flex;
+    width: 100%;
+    max-width: 1463px;
+    justify-content: space-between;">
           <h1>{{ loyarPage?.title.toUpperCase() }}</h1>
           <button class="back-btn" @click="router.back()">← Назад</button>
         </div>
@@ -176,7 +179,10 @@ useHead({
   cursor: pointer;
   margin-top: 8px;
   position: relative;
-  right: 10%;
+  top: -40px;
+  @media (max-width: 1700px) {
+    right: 10%;
+  }
   @media (max-width: 1200px) {
     font-size: 18px;
     margin-top: 0;
@@ -192,9 +198,9 @@ useHead({
   z-index: 2;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   height: 100%;
-  padding: 40px 0px 83px 187px;
+  padding: 40px 0px 83px 0;
   @media (max-width: 1200px) {
     height: 102px;
     padding: 30px 5% 60px;
