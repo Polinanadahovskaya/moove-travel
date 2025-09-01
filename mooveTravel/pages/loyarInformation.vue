@@ -197,7 +197,7 @@ useHead({
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 100%;
   padding: 40px 0px 83px 0;
@@ -212,12 +212,14 @@ useHead({
 }
 
 .header-content h1 {
+  @media (max-width: 1700px) {
+    left: 11%;
+  }
   @media (min-width: 768px) {
     //font-size: 64px;
     //font-weight: bold;
     //color: #222;
     margin: 0;
-    //left: 7.4%;
     position: relative;
     bottom: -38%;
   }
