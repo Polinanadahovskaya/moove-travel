@@ -159,8 +159,10 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
   margin-top: 8px;
   text-shadow: 0 2px 8px #0006;
   position: relative;
-  right: 10%;
   display: flex;
+  @media (max-width: 1700px) {
+    right: 10%;
+  }
   @media (max-width: 768px) {
     font-size: 18px;
     margin-top: 0;
