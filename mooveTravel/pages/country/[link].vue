@@ -3,8 +3,10 @@
     <div class="country-block">
       <div class="back-country">
         <div class="header-content" :style="headerContentStyle">
-          <h1>{{ country?.name.toUpperCase() || '...' }}</h1>
-          <button class="back-btn" @click="router.back()">← Назад</button>
+         <div>
+           <h1>{{ country?.name.toUpperCase() || '...' }}</h1>
+           <button class="back-btn" @click="router.back()">← Назад</button>
+         </div>
         </div>
       </div>
       <div v-for="art in articles" @click="goToArticle(art.link)">
