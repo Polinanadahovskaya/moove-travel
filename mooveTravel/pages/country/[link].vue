@@ -185,6 +185,9 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
 }
 
 .header-content h1 {
+  @media (max-width: 1700px) {
+    left: 10%;
+  }
   @media (min-width: 768px) {
     font-size: 64px;
     font-weight: bold;
