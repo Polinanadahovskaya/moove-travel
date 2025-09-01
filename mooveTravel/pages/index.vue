@@ -7,9 +7,7 @@
     </div>
     <div class="tv-search-form tv-moduleid-9972104"></div>
     <div class="main-search"></div>
-    <div>
       <div class="header-wave"/>
-    </div>
     <div class="help-search" :class="{ 'help-search--fixed': true, 'help-search--hidden': !isHelpSearchVisible }">
       <div style="max-width: 1463px;     display: flex; justify-content: space-between;
     width: 100%;">
@@ -225,6 +223,9 @@ const aboutArray = computed(() => {
   @media (max-width: 576px) {
     height: 131px;
     background-size: cover;
+  }
+  @media (min-width: 3000px) {
+    display: none;
   }
 }
 
