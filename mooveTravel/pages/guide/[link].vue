@@ -119,6 +119,7 @@ const showBeforePayPopup = ref(false)
   align-items: center;
   flex: 1;
   text-transform: uppercase;
+  max-width: 1463px;
   @media (max-width: 1200px) {
     font-size: 40px;
   }

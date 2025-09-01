@@ -134,6 +134,7 @@ onUnmounted(() => {
 
 .container {
   width: calc(100% - clamp(200px, 20vw, 360px));
+  max-width: 1463px;
   margin: 0 auto;
   transition: all 0.3s ease;
   

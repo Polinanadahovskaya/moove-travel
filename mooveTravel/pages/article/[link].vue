@@ -148,6 +148,7 @@ await articlesStore.fetchArticleByLink(link)
   align-items: center;
   flex: 1;
   text-transform: uppercase;
+  max-width: 1463px;
   @media (min-width: 1500px) {
     font-weight: 700;
     font-size: 66px;

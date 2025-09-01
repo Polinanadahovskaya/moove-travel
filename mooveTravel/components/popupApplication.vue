@@ -415,6 +415,8 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
     margin-right: -50vw;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -891,6 +893,7 @@ watch([contactByPhone, contactByEmail, contactByWhatsApp], () => {
   -webkit-backdrop-filter: blur(17.3px);
   background: rgba(255, 255, 255, 0.7);
   margin-bottom: 0;
+  max-width: 1463px;
 }
 
 .mobile-border {

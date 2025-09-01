@@ -26,6 +26,7 @@ import './src/assets/css/main.css'
 .main-content {
   flex: 1;
   width: calc(100% - 360px);
+  max-width: 1463px;
   margin: 0 auto;
 }
 
