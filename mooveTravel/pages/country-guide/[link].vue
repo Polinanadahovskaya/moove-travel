@@ -89,6 +89,7 @@ await useAsyncData('country', () => countriesStore.fetchCountryByLink(link))
   align-items: center;
   flex: 1;
   text-transform: uppercase;
+  max-width: 1276px;
 @media (max-width: 1200px) {
   font-size: 38px;
 }
