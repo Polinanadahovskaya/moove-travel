@@ -1,14 +1,17 @@
 <template>
   <div>
     <div>
-      <div class="about-baner"   :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
-        <h1 style="color: #FFFFFF">{{getAboutUsPage?.title.toUpperCase()}}</h1>
-        <div class="about-border"></div>
-        <div class="about-points">
-          <div v-for="arr in aboutMoove">
-            <div style="display: flex;     align-items: center;">
-              <div class="point-number">{{ arr.id }}</div>
-              <div class="point-text" v-html="arr.text"></div>
+      <div class="about-baner"
+           :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
+        <div style="">
+          <h1 style="color: #FFFFFF">{{ getAboutUsPage?.title.toUpperCase() }}</h1>
+          <div class="about-border"></div>
+          <div class="about-points">
+            <div v-for="arr in aboutMoove">
+              <div style="display: flex;     align-items: center;">
+                <div class="point-number">{{ arr.id }}</div>
+                <div class="point-text" v-html="arr.text"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -18,39 +21,40 @@
         <div class="about-border"></div>
         <div class="about-location">
           <div class="contacts">
-           <div>
-             <div class="location">{{getAboutUsPage?.office?.title}}</div>
-             <div class="location-text">{{getAboutUsPage?.office?.description}}
-           </div>
+            <div>
+              <div class="location">{{ getAboutUsPage?.office?.title }}</div>
+              <div class="location-text">{{ getAboutUsPage?.office?.description }}
+              </div>
             </div>
             <div class="contacts-phone">
               <div class="location">Контакты</div>
               <div class="location-phone">
                 <div class="phone"></div>
-                <div class="number">{{getAboutUsPage?.office?.phone}}</div>
+                <div class="number">{{ getAboutUsPage?.office?.phone }}</div>
               </div>
               <div class="location-phone">
                 <div class="mail"></div>
-                <div class="number">{{getAboutUsPage?.office?.email}}</div>
+                <div class="number">{{ getAboutUsPage?.office?.email }}</div>
               </div>
             </div>
           </div>
-          <div class="map" :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
+          <div class="map"
+               :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.office?.image.url)}')` }"></div>
         </div>
       </div>
       <div class="team">
-        <div>
-        <div>
-          <h2 class="about-tittle">КОМАНДА</h2>
-          <div class="about-border"></div>
-        </div>
-        <div class="blog-grid">
-          <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
-            <team-tab
-                :imgUrl="$getImageUrl(arr?.image?.url)"
-                :element="arr"/>
+        <div style="max-width: 1463px;">
+          <div>
+            <h2 class="about-tittle">КОМАНДА</h2>
+            <div class="about-border"></div>
           </div>
-        </div>
+          <div class="blog-grid">
+            <div v-for="(arr, index) in getAboutUsPage?.personal" class="team-card">
+              <team-tab
+                  :imgUrl="$getImageUrl(arr?.image?.url)"
+                  :element="arr"/>
+            </div>
+          </div>
         </div>
       </div>
       <popup-application/>
@@ -65,19 +69,19 @@ import tanyaImg from '/src/assets/images/tanya.png'
 import andrewImg from '/src/assets/images/andrew.png'
 import planeImg from '~/src/assets/images/Plane.svg'
 import officeImg from '~/src/assets/images/fastOpen.png'
-import { usePagesStore } from '~/src/store/pages'
-import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
-import { useHead } from '#imports'
-import { useAsyncData } from 'nuxt/app'
-import { useNuxtApp } from '#app'
+import {usePagesStore} from '~/src/store/pages'
+import {storeToRefs} from 'pinia'
+import {onMounted} from 'vue'
+import {useHead} from '#imports'
+import {useAsyncData} from 'nuxt/app'
+import {useNuxtApp} from '#app'
 
 defineOptions({
   name: "About",
 })
 
 const pagesStore = usePagesStore()
-const { getAboutUsPage, loading, error } = storeToRefs(pagesStore)
+const {getAboutUsPage, loading, error} = storeToRefs(pagesStore)
 
 // SEO-friendly загрузка данных на сервере
 await useAsyncData('aboutUsPage', () => pagesStore.fetchAboutUsPage())
@@ -85,9 +89,9 @@ await useAsyncData('aboutUsPage', () => pagesStore.fetchAboutUsPage())
 const aboutMoove = computed(() => {
   if (!getAboutUsPage.value?.banner) return []
   return [
-    { id: getAboutUsPage.value?.banner.firstNumber, text: getAboutUsPage.value?.banner.firstText },
-    { id: getAboutUsPage.value?.banner.secondNumber, text: getAboutUsPage.value?.banner.secondText },
-    { id: getAboutUsPage.value?.banner.thirdNumber, text: getAboutUsPage.value?.banner.thirdText }
+    {id: getAboutUsPage.value?.banner.firstNumber, text: getAboutUsPage.value?.banner.firstText},
+    {id: getAboutUsPage.value?.banner.secondNumber, text: getAboutUsPage.value?.banner.secondText},
+    {id: getAboutUsPage.value?.banner.thirdNumber, text: getAboutUsPage.value?.banner.thirdText}
   ]
 })
 
@@ -97,15 +101,18 @@ const $getImageUrl = nuxtApp.$getImageUrl
 useHead({
   title: 'О нас | Moov Travel',
   meta: [
-    { name: 'description', content: 'Узнайте больше о туристическом агентстве Moov Travel, нашей команде и ценностях.' },
-    { property: 'og:title', content: 'О нас | Moov Travel' },
-    { property: 'og:description', content: 'Узнайте больше о туристическом агентстве Moov Travel, нашей команде и ценностях.' },
-    { property: 'og:image', content: '/src/assets/images/logoMoov.svg' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://moov-travel.ru/about' },
+    {name: 'description', content: 'Узнайте больше о туристическом агентстве Moov Travel, нашей команде и ценностях.'},
+    {property: 'og:title', content: 'О нас | Moov Travel'},
+    {
+      property: 'og:description',
+      content: 'Узнайте больше о туристическом агентстве Moov Travel, нашей команде и ценностях.'
+    },
+    {property: 'og:image', content: '/src/assets/images/logoMoov.svg'},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: 'https://moov-travel.ru/about'},
   ],
   link: [
-    { rel: 'canonical', href: 'https://moov-travel.ru/about' }
+    {rel: 'canonical', href: 'https://moov-travel.ru/about'}
   ]
 })
 
@@ -457,6 +464,8 @@ useHead({
   margin-right: -50vw;
   padding: 70px 182px 150px;
   margin-bottom: 180px;
+  display: flex;
+  justify-content: center;
   @media (max-width: 1550px) {
     padding: 50px 150px 90px;
     margin-bottom: 40px;
