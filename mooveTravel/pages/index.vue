@@ -2,27 +2,28 @@
   <div :class="{ 'content-with-fixed-help': isHelpSearchVisible }">
     <div class="main-header_tittle">
       <h1 class="main-tittle-header">
-        {{mainPage?.title.toUpperCase()}}
+        {{ mainPage?.title.toUpperCase() }}
       </h1>
     </div>
     <div class="tv-search-form tv-moduleid-9972104"></div>
     <div class="main-search"></div>
     <div class="header-wave"/>
     <div class="help-search" :class="{ 'help-search--fixed': true, 'help-search--hidden': !isHelpSearchVisible }">
-      <div>
-        <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
-        <div class="tittle-border"></div>
-      </div>
-      <div style="display: flex; gap: 55px;">
-        <div class="many-arrow">
-          <div v-for="a in 3">
-            <div class="hollow-arrow"></div>
-          </div>
+      <div style="max-width: 1463px;">
+        <div>
+          <h2 class="help-tittle">НУЖНА ПОМОЩЬ <br/> С ПОДБОРОМ ТУРА?</h2>
+          <div class="tittle-border"></div>
         </div>
-        <a href="#application" style="text-decoration: none">
-          <div class="tittle-button">Оставить заявку</div>
-        </a>
-
+        <div style="display: flex; gap: 55px;">
+          <div class="many-arrow">
+            <div v-for="a in 3">
+              <div class="hollow-arrow"></div>
+            </div>
+          </div>
+          <a href="#application" style="text-decoration: none">
+            <div class="tittle-button">Оставить заявку</div>
+          </a>
+        </div>
       </div>
     </div>
     <div class="help-about">
@@ -30,7 +31,8 @@
         <h2 class="about-tittle">О НАС</h2>
         <div class="about-border"></div>
       </div>
-      <div class="about-block" :style="{ backgroundImage: `url('${$getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')`}">
+      <div class="about-block"
+           :style="{ backgroundImage: `url('${$getImageUrl(mainPage?.aboutUs?.backgroundImage?.url)}')`}">
         <NuxtLink :to="mainPage?.aboutUs?.buttonLink" class="link-button">
           <div class="block-button">Подробнее</div>
         </NuxtLink>
@@ -71,7 +73,7 @@
                   <div class="mask"
                        :style="{ mask: `url('${$getImageUrl(arr?.image?.url)}')` }"></div>
                 </div>
-                <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{arr.description }}
+                <div class="tab-text"><span class="bold">{{ arr.title }}</span> — {{ arr.description }}
                 </div>
               </div>
             </div>
@@ -86,10 +88,10 @@
 <script setup>
 import {onMounted, computed, ref, onUnmounted} from 'vue'
 import PopupApplication from '~/components/popupApplication.vue'
-import { useArticlesStore } from '~/src/store/articles'
-import { usePagesStore } from '~/src/store/pages'
-import { storeToRefs } from 'pinia'
-import { useAsyncData } from 'nuxt/app'
+import {useArticlesStore} from '~/src/store/articles'
+import {usePagesStore} from '~/src/store/pages'
+import {storeToRefs} from 'pinia'
+import {useAsyncData} from 'nuxt/app'
 
 const articlesStore = useArticlesStore()
 const pagesStore = usePagesStore()
@@ -97,8 +99,8 @@ const pagesStore = usePagesStore()
 // SEO-friendly загрузка данных на сервере
 await useAsyncData('mainPage', () => pagesStore.fetchMainPage())
 
-const { getArticles, loading, error } = storeToRefs(articlesStore)
-const { getMainPage: mainPage, loading: loadingPage, error: errorPage } = storeToRefs(pagesStore)
+const {getArticles, loading, error} = storeToRefs(articlesStore)
+const {getMainPage: mainPage, loading: loadingPage, error: errorPage} = storeToRefs(pagesStore)
 
 // Состояние для отслеживания видимости блока help-search
 const isHelpSearchVisible = ref(false)
@@ -107,7 +109,7 @@ const isHelpSearchVisible = ref(false)
 let scrollTimeout = null
 const handleScroll = () => {
   if (scrollTimeout) return
-  
+
   scrollTimeout = setTimeout(() => {
     const applicationElement = document.getElementById('application')
     if (applicationElement) {
@@ -134,7 +136,7 @@ onMounted(async () => {
   } else {
     if (window.tv_init) window.tv_init()
   }
-  
+
   // Добавляем обработчик скролла
   window.addEventListener('scroll', handleScroll)
   // Вызываем один раз для установки начального состояния
@@ -149,20 +151,20 @@ onUnmounted(() => {
 const aboutArray = computed(() => {
   if (!mainPage.value?.aboutUs) return []
   return [
-    { number: mainPage.value.aboutUs.firstNumber, text: mainPage.value.aboutUs.firstText },
-    { number: mainPage.value.aboutUs.secondNumber, text: mainPage.value.aboutUs.secondText },
-    { number: mainPage.value.aboutUs.thirdNumber, text: mainPage.value.aboutUs.thirdText }
+    {number: mainPage.value.aboutUs.firstNumber, text: mainPage.value.aboutUs.firstText},
+    {number: mainPage.value.aboutUs.secondNumber, text: mainPage.value.aboutUs.secondText},
+    {number: mainPage.value.aboutUs.thirdNumber, text: mainPage.value.aboutUs.thirdText}
   ]
 })
 
 </script>
 
 <style scoped lang="scss">
-.main-tittle-header{
+.main-tittle-header {
   width: 60%;
- @media (max-width: 1400px) {
-   width: 40%;
- }
+  @media (max-width: 1400px) {
+    width: 40%;
+  }
   @media (max-width: 1200px) {
     width: 35%;
   }
@@ -237,6 +239,7 @@ const aboutArray = computed(() => {
   padding: 60px 182px;
   background: #C75454;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   @media (max-width: 1400px) {
     padding: 50px;

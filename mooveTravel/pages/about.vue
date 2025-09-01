@@ -3,7 +3,7 @@
     <div>
       <div class="about-baner"
            :style="{ backgroundImage: `url('${$getImageUrl(getAboutUsPage?.banner?.backgroundImage?.url)}')`}">
-        <div style="">
+        <div style="max-width: 1463px;">
           <h1 style="color: #FFFFFF">{{ getAboutUsPage?.title.toUpperCase() }}</h1>
           <div class="about-border"></div>
           <div class="about-points">
@@ -123,6 +123,7 @@ useHead({
   width: 100vw;
   position: relative;
   display: flex;
+  align-items: center;
   flex-direction: column;
   background-size: cover;
   left: 50%;
