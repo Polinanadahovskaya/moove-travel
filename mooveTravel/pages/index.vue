@@ -265,7 +265,7 @@ const aboutArray = computed(() => {
   padding: 20px 182px;
   background: #C75454;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
   transform: translateY(0);
   transition: transform 0.3s ease-in-out;
