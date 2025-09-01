@@ -21,7 +21,7 @@
       </div>
       <div class="none-art" >
         <div class="article_images">
-          <div v-for="img in article?.articlePhotos?.slice(0, 2)" :key="img.id">
+          <div v-for="img in article?.articlePhotos" :key="img.id">
             <div class="article_image" :style="{backgroundImage: `url('${$getImageUrl(img.url)}')`}"></div>
           </div>
         </div>
@@ -54,7 +54,12 @@ function renderBlock(block) {
     return h(
         'p',
         { class: 'art_paragraph' },
-        block.children?.map(child => child.text).join('')
+        block.children?.map(child => {
+          if (child.bold) {
+            return h('strong', {}, child.text);
+          }
+          return child.text;
+        })
     );
   }
   if (block.type === 'image') {
@@ -112,18 +117,18 @@ await articlesStore.fetchArticleByLink(link)
   padding-left: 182px;
   padding-right: 182px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-direction: row-reverse;
   @media (min-width: 900px) {
     height: 245px;
     padding-top: 37px;
   }
   @media (max-width: 1500px) {
-    padding: 40px 30px;
     margin-bottom: 50px;
   }
   @media (max-width: 900px) {
-    padding: 16px 20px 30px;
     margin-bottom: 40px;
+    padding: 16px 20px 30px;
   }
 }
 
@@ -142,6 +147,7 @@ await articlesStore.fetchArticleByLink(link)
   display: flex;
   align-items: center;
   flex: 1;
+  text-transform: uppercase;
   @media (min-width: 1500px) {
     font-weight: 700;
     font-size: 66px;
@@ -235,7 +241,6 @@ await articlesStore.fetchArticleByLink(link)
   line-height: 100%;
   color:white;
   text-decoration: none;
-  align-self: flex-end;
   cursor:pointer;
   @media (max-width: 1200px) {
     font-size: 28px;

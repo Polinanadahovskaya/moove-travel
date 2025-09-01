@@ -82,21 +82,25 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .logo-moove {
-  width: 123px;
-  height: 107px;
+  width: clamp(60px, 8vw, 123px);
+  height: clamp(50px, 7vw, 107px);
   background: url('/src/assets/images/logoMoov.svg') no-repeat center;
   background-size: contain;
+  transition: all 0.3s ease;
+  
   @media (max-width: 1300px) {
     display: none;
   }
 }
 
 .logo-text {
-  width: 166px;
-  height: 68px;
+  width: clamp(80px, 12vw, 166px);
+  height: clamp(35px, 5vw, 68px);
   background: url('/src/assets/images/mooveTravel.svg') no-repeat center;
   background-size: contain;
-  margin-top: 20px;
+  margin-top: clamp(10px, 1.5vw, 20px);
+  transition: all 0.3s ease;
+  
   @media (max-width: 1300px) {
     display: none;
   }
@@ -107,6 +111,8 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   width: fit-content;
+  transition: all 0.3s ease;
+  
   @media (max-width: 1300px) {
     display: none;
   }
@@ -116,50 +122,60 @@ onUnmounted(() => {
 .footer {
   background-color: #3E3E3E;
   color: #ffffff;
-  padding: 97px 0 76px;
+  padding: clamp(20px, 8vw, 97px) 0 clamp(12px, 6vw, 76px);
   margin-top: auto;
-  height: 337px;
+  height: clamp(200px, 25vw, 337px);
+  transition: all 0.3s ease;
+  
   @media (max-width: 1300px) {
-    padding: 20px 20px 12px;
+    padding: clamp(15px, 2vw, 20px) clamp(15px, 2vw, 20px) clamp(8px, 1vw, 12px);
   }
 }
 
 .container {
-  width: calc(100% - 360px);
+  width: calc(100% - clamp(200px, 20vw, 360px));
   margin: 0 auto;
+  transition: all 0.3s ease;
+  
   @media (max-width: 1400px) {
-      width: calc(100vw - 80px);
-      margin: 0 40px;
+      width: calc(100vw - clamp(40px, 5vw, 80px));
+      margin: 0 clamp(20px, 3vw, 40px);
       padding: 0;
   }
+  
   @media (max-width: 768px) {
-      width: calc(100vw - 40px);
-      margin: 0 20px;
+      width: calc(100vw - clamp(20px, 3vw, 40px));
+      margin: 0 clamp(10px, 2vw, 20px);
       padding: 0;
   }
 }
 
 .footer-content {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: clamp(1rem, 2vw, 2rem);
   width: 100%;
   justify-content: space-between;
+  transition: all 0.3s ease;
+  
   @media (max-width: 1650px) {
-    gap: 5%;
+    gap: clamp(3%, 4vw, 5%);
   }
+  
   @media (max-width: 900px) {
-    padding-right: 20px;
+    padding-right: clamp(15px, 2vw, 20px);
   }
+  
   @media (min-width: 1650px) {
-    gap: 10%;
+    gap: clamp(8%, 9vw, 10%);
   }
 }
 
 .footer-section h4 {
   font-weight: 700;
-  font-size: 24px;
+  font-size: clamp(16px, 2vw, 24px);
   line-height: 100%;
   color: #FFFFFF;
+  transition: all 0.3s ease;
 }
 
 .footer-section ul {
@@ -167,29 +183,33 @@ onUnmounted(() => {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 12px;
+  gap: clamp(8px, 1vw, 12px);
   flex-direction: column;
+  transition: all 0.3s ease;
+  
   @media (max-width: 768px) {
-    gap: 6px;
+    gap: clamp(4px, 0.8vw, 6px);
   }
 }
 
 .footer-section li {
   font-family: Rubik;
   font-weight: 400;
-  font-size: 18px;
+  font-size: clamp(14px, 1.5vw, 18px);
   line-height: 100%;
+  transition: all 0.3s ease;
 }
 
 .footer-link {
   color: #FFFFFF;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
   text-wrap: nowrap;
+  
   @media (max-width: 768px) {
     font-weight: 400;
     font-style: Regular;
-    font-size: 8px;
+    font-size: clamp(6px, 1vw, 8px);
     leading-trim: NONE;
   }
 }
@@ -198,8 +218,9 @@ onUnmounted(() => {
   color: #d1d5db;
   font-weight: 400;
   font-style: italic;
-  font-size: 18px;
+  font-size: clamp(12px, 1.5vw, 18px);
   line-height: 100%;
+  transition: all 0.3s ease;
 }
 
 .wrap-text{
@@ -212,73 +233,87 @@ onUnmounted(() => {
 
 .footer-section p {
   color: #FFFFFF;
-  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
+  transition: all 0.3s ease;
 }
 
 .social-media{
   display: flex;
-  gap: 24px;
+  gap: clamp(16px, 2vw, 24px);
+  transition: all 0.3s ease;
+  
   @media (max-width: 1300px) {
-    margin-bottom: 20px;
+    margin-bottom: clamp(15px, 2vw, 20px);
   }
 }
 
 h4{
-  margin-bottom: 16px;
+  margin-bottom: clamp(12px, 1.5vw, 16px);
   font-weight: 700;
   font-style: Bold;
-  font-size: 24px;
+  font-size: clamp(16px, 2vw, 24px);
   leading-trim: NONE;
   line-height: 100%;
   text-wrap: nowrap;
+  transition: all 0.3s ease;
+  
   @media (min-width: 1200px) {
-    font-size: 20px;
+    font-size: clamp(16px, 1.8vw, 20px);
   }
+  
   @media (min-width: 900px) {
-    font-size: 16px;
+    font-size: clamp(12px, 1.5vw, 16px);
   }
+  
   @media (min-width: 768px) {
-    font-size: 12px;
+    font-size: clamp(10px, 1.2vw, 12px);
   }
+  
   @media (min-width: 576px) {
-    font-size: 8px;
+    font-size: clamp(6px, 1vw, 8px);
   }
 }
 
 .loy-inform{
   font-weight: 400;
   font-style: Italic;
-  font-size: 12px;
+  font-size: clamp(8px, 1.2vw, 12px);
   leading-trim: NONE;
   line-height: 100%;
+  transition: all 0.3s ease;
+  
   @media (max-width: 768px) {
     font-weight: 400;
     font-style: Regular;
-    font-size: 8px;
+    font-size: clamp(6px, 1vw, 8px);
     leading-trim: NONE;
   }
 }
 
 .mobile-none{
+  transition: all 0.3s ease;
+  
   @media (max-width: 1300px) {
     display: none;
   }
 }
 
 .footer-mask{
-  width: 40px;
-  height: 40px;
-  mask-size: 32px 32px;
-  -webkit-mask-size: 32px 32px;
+  width: clamp(25px, 3vw, 40px);
+  height: clamp(25px, 3vw, 40px);
+  mask-size: clamp(20px, 2.5vw, 32px) clamp(20px, 2.5vw, 32px);
+  -webkit-mask-size: clamp(20px, 2.5vw, 32px) clamp(20px, 2.5vw, 32px);
   text-decoration: none;
   color: #FFFFFF;
   background: #FFFFFF;
   cursor: pointer;
+  transition: all 0.3s ease;
+  
   @media (max-width: 768px) {
-    mask-size: 25px 25px;
-    -webkit-mask-size: 25px 25px;
-    width: 25px;
-    height: 25px;
+    mask-size: clamp(18px, 2vw, 25px) clamp(18px, 2vw, 25px);
+    -webkit-mask-size: clamp(18px, 2vw, 25px) clamp(18px, 2vw, 25px);
+    width: clamp(18px, 2vw, 25px);
+    height: clamp(18px, 2vw, 25px);
   }
 }
 

@@ -68,16 +68,15 @@ await useAsyncData('country', () => countriesStore.fetchCountryByLink(link))
   padding-right: 182px;
   height: 245px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-direction: row-reverse;
   background: linear-gradient(273.87deg, #D27A00 3.64%, #F89C1D 76.11%);
 @media (max-width: 1200px) {
   height: 182px;
-  padding: 40px;
 }
 @media (max-width: 768px) {
   height: 82px;
   padding: 20px 20px 30px;
-  justify-content: flex-end;
 }
 }
 
@@ -89,6 +88,7 @@ await useAsyncData('country', () => countriesStore.fetchCountryByLink(link))
   display: flex;
   align-items: center;
   flex: 1;
+  text-transform: uppercase;
 @media (max-width: 1200px) {
   font-size: 38px;
 }
@@ -103,11 +103,11 @@ await useAsyncData('country', () => countriesStore.fetchCountryByLink(link))
   line-height: 100%;
   color: white;
   text-decoration: none;
-  align-self: flex-end;
   cursor: pointer;
   margin-top: 30px;
 @media (max-width: 768px) {
   font-size: 12px;
+  margin-top: 0;
 }
 }
 
