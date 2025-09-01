@@ -2,8 +2,10 @@
   <div>
     <div class="back-country">
       <div class="header-content">
-        <h1>{{ loyarPage?.title.toUpperCase() }}</h1>
-        <button class="back-btn" @click="router.back()">← Назад</button>
+        <div>
+          <h1>{{ loyarPage?.title.toUpperCase() }}</h1>
+          <button class="back-btn" @click="router.back()">← Назад</button>
+        </div>
       </div>
     </div>
     <div class="info">
