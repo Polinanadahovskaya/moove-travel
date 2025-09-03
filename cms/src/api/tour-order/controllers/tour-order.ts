@@ -98,6 +98,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
         orderId,
       };
       const response = await axios.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
+      return response;
       let result = response.data;
       // Если оплата успешна, обновляем guide-order
 
