@@ -271,7 +271,7 @@ const submitForm = async () => {
       orderData.travel_guide = props.currentGuide.documentId;
     }
     try {
-      const response = await axios.post('http://localhost:1337/api/tour-order/alfa-register', orderData, {
+      const response = await axios.post(window.location.origin + '/api/tour-order/alfa-register', orderData, {
         headers: {
           Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
         },
