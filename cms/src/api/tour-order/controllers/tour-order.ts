@@ -94,7 +94,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
       }
       const params = {
         userName: 'r-id65022_u_on-api',
-        password: 'r-id65022_u_on*?1',
+        password: 'dd69kWSrktsSdkY#',
         orderId,
       };
       const response = await axios.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
