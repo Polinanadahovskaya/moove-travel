@@ -69,7 +69,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
       const orderNumber = Number(guideOrder.id) - 1;
       const params = {
         userName: 'r-id65022_u_on-api',
-        password: 'r-id65022_u_on*?1',
+        password: 'dd69kWSrktsSdkY#',
         amount,
         orderNumber,
         returnUrl,
@@ -98,8 +98,8 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
         orderId,
       };
       const response = await axios.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
-      console.log('response:', response, response.data)
-      return response;
+      //console.log('response:', response, response.data)
+      //return response;
       let result = response.data;
       // Если оплата успешна, обновляем guide-order
 
