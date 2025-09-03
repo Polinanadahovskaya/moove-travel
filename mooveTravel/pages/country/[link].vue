@@ -3,8 +3,10 @@
     <div class="country-block">
       <div class="back-country">
         <div class="header-content" :style="headerContentStyle">
-          <h1>{{ country?.name || '...' }}</h1>
-          <button class="back-btn" @click="router.back()">← Назад</button>
+          <div style="    max-width: 1463px; display: flex; justify-content: space-between; width: 100%; height: 100%;">
+            <h1>{{ country?.name.toUpperCase() || '...' }}</h1>
+            <button class="back-btn" @click="router.back()">← Назад</button>
+          </div>
         </div>
       </div>
       <div v-for="art in articles" @click="goToArticle(art.link)">
@@ -13,20 +15,21 @@
         />
       </div>
       <div v-if="!articles.length" class="no-articles-message">
-        Похоже, для этой страны пока нет статей. Мы уже работаем над тем, чтобы поделиться с вами интересной информацией и советами по путешествиям!
+        Похоже, для этой страны пока нет статей. Мы уже работаем над тем, чтобы поделиться с вами интересной информацией
+        и советами по путешествиям!
       </div>
     </div>
   </div>
 </template>
 <script setup>
 import TubArticle from "~/components/tubArticle.vue";
-import { useArticlesStore } from '~/src/store/articles'
-import { useCountriesStore } from '~/src/store/countries'
-import { computed } from 'vue'
-import { useRoute, useRouter, useHead, useNuxtApp } from '#app'
-import { useAsyncData } from 'nuxt/app'
+import {useArticlesStore} from '~/src/store/articles'
+import {useCountriesStore} from '~/src/store/countries'
+import {computed} from 'vue'
+import {useRoute, useRouter, useHead, useNuxtApp} from '#app'
+import {useAsyncData} from 'nuxt/app'
 
-const { $getImageUrl } = useNuxtApp()
+const {$getImageUrl} = useNuxtApp()
 const articlesStore = useArticlesStore()
 const countriesStore = useCountriesStore()
 const route = useRoute()
@@ -55,21 +58,31 @@ const headerContentStyle = computed(() => {
 useHead(() => ({
   title: country.value?.name ? `Туры в ${country.value.name} | Moov Travel` : 'Направления | Moov Travel',
   meta: [
-    { name: 'description', content: country.value?.description || `Лучшие туры и предложения по направлению. Узнайте больше о путешествиях с Moov Travel.` },
-    { property: 'og:title', content: country.value?.name ? `Туры в ${country.value.name} | Moov Travel` : 'Направления | Moov Travel' },
-    { property: 'og:description', content: country.value?.description || `Лучшие туры и предложения по направлению. Узнайте больше о путешествиях с Moov Travel.` },
-    { property: 'og:image', content: $getImageUrl(country.value?.mainPhoto?.url) },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: `https://moov-travel.ru/country/${countryLink.value}` },
+    {
+      name: 'description',
+      content: country.value?.description || `Лучшие туры и предложения по направлению. Узнайте больше о путешествиях с Moov Travel.`
+    },
+    {
+      property: 'og:title',
+      content: country.value?.name ? `Туры в ${country.value.name} | Moov Travel` : 'Направления | Moov Travel'
+    },
+    {
+      property: 'og:description',
+      content: country.value?.description || `Лучшие туры и предложения по направлению. Узнайте больше о путешествиях с Moov Travel.`
+    },
+    {property: 'og:image', content: $getImageUrl(country.value?.mainPhoto?.url)},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: `https://moov-travel.ru/country/${countryLink.value}`},
   ],
   link: [
-    { rel: 'canonical', href: `https://moov-travel.ru/country/${countryLink.value}` }
+    {rel: 'canonical', href: `https://moov-travel.ru/country/${countryLink.value}`}
   ]
 }))
 
 function goToArticle(link) {
-  router.push({ path: `/article/${link}` })
+  router.push({path: `/article/${link}`})
 }
+
 await countriesStore.fetchCountryByLink(countryLink.value)
 await articlesStore.fetchArticlesByCountryLink(countryLink.value)
 // await useAsyncData('country', () => countriesStore.fetchCountryByLink(countryLink.value))
@@ -146,7 +159,10 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
   margin-top: 8px;
   text-shadow: 0 2px 8px #0006;
   position: relative;
-  right: 10%;
+  display: flex;
+  @media (max-width: 1700px) {
+    right: 10%;
+  }
   @media (max-width: 768px) {
     font-size: 18px;
     margin-top: 0;
@@ -159,7 +175,7 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   height: 100%;
   padding: 40px 48px 0 48px;
@@ -171,12 +187,14 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
 }
 
 .header-content h1 {
+  @media (max-width: 1700px) {
+    left: 10%;
+  }
   @media (min-width: 768px) {
     font-size: 64px;
     font-weight: bold;
     color: #222;
     margin: 0;
-    left: 7.4%;
     position: relative;
     bottom: -38%;
   }
@@ -194,6 +212,7 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
   gap: 16px;
   margin-bottom: 24px;
 }
+
 .tab {
   padding: 8px 16px;
   border-radius: 8px;
@@ -201,10 +220,12 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .tab.active {
   background: #ffc472;
   font-weight: bold;
 }
+
 .no-articles-message {
   font-weight: bold;
   color: #C75454;

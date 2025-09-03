@@ -94,11 +94,10 @@ const showBeforePayPopup = ref(false)
   padding-right: 182px;
   height: 245px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-direction: row-reverse;
   background: linear-gradient(273.87deg, #D27A00 3.64%, #F89C1D 76.11%);
   @media (max-width: 1200px) {
-    padding-left: 100px;
-    padding-right: 100px;
   }
   @media (max-width: 900px) {
     padding-left: 70px;
@@ -119,6 +118,8 @@ const showBeforePayPopup = ref(false)
   display: flex;
   align-items: center;
   flex: 1;
+  text-transform: uppercase;
+  max-width: 1276px;
   @media (max-width: 1200px) {
     font-size: 40px;
   }
@@ -136,7 +137,6 @@ const showBeforePayPopup = ref(false)
   line-height: 100%;
   color:white;
   text-decoration: none;
-  align-self: flex-end;
   cursor: pointer;
   margin-top: 30px;
   @media (max-width: 1200px) {
@@ -144,6 +144,7 @@ const showBeforePayPopup = ref(false)
   }
   @media (max-width: 900px) {
     font-size: 22px;
+    margin-top: 0;
   }
   @media (max-width: 768px) {
     font-size: 12px;
@@ -166,6 +167,7 @@ const showBeforePayPopup = ref(false)
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 
 .article-tittle{

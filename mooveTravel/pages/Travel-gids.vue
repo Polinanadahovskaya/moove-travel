@@ -6,7 +6,7 @@
         <div class="travel-border"></div>
       </div>
       <div class="travel-text">{{guidePage?.description}}</div>
-      <h2 class="travel-tittle travel-country">Лучшие предложения</h2>
+      <h2 class="travel-tittle travel-country" style="text-transform: none">Лучшие предложения</h2>
       <div class="travel-grid">
         <div v-for="arr in guidePage?.bestGuides" :key="arr?.id">
           <best-variant :info="arr?.travel_guide"/>
