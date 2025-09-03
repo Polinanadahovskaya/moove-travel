@@ -76,7 +76,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
         description,
       };
       console.log('alfa params:', params);
-      const response = await axios.post('https://alfa.rbsuat.com/payment/rest/register.do', null, { params });
+      const response = await axios.post('https://payment.alfabank.ru/payment/rest/register.do', null, { params });
       ctx.send(response.data);
     } catch (e: any) {
       ctx.status = 500;
@@ -97,7 +97,7 @@ export default factories.createCoreController('api::tour-order.tour-order', ({ s
         password: 'dd69kWSrktsSdkY#',
         orderId,
       };
-      const response = await axios.get('https://alfa.rbsuat.com/payment/rest/getOrderStatusExtended.do', { params });
+      const response = await axios.get('https://payment.alfabank.ru/payment/rest/getOrderStatusExtended.do', { params });
       //console.log('response:', response, response.data)
       //return response;
       let result = response.data;
