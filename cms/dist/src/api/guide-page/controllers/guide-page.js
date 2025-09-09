@@ -12,7 +12,7 @@ exports.default = strapi_1.factories.createCoreController('api::guide-page.guide
                 bestGuides: {
                     populate: {
                         travel_guide: {
-                            populate: ['images', 'country']
+                            populate: ['images', 'countryPageImages', 'guidePageImages', 'country']
                         }
                     }
                 },
