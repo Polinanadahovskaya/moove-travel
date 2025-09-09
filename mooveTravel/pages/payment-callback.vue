@@ -33,7 +33,7 @@ const fileDescription = ref(null)
 const downloadGuide = async () => {
   if (!orderNumber.value) return
   try {
-    const response = await axios.get('http://localhost:1337/api/tour-order/download-guide', {
+    const response = await axios.get(window.location.origin + '/api/tour-order/download-guide', {
       params: { orderId: orderNumber.value },
       responseType: 'blob',
       headers: {

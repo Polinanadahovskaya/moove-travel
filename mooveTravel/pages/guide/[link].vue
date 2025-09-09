@@ -10,7 +10,7 @@
           <div class="article">
 <!--            <div class="article-tittle">{{currentGuide?.title}}</div>-->
             <div class="article-text">{{currentGuide?.description}}</div>
-            <div :style="{backgroundImage: `url('${$getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
+            <div :style="{backgroundImage: `url('${$getImageUrl(currentGuide?.guidePageImages?.[0]?.url || currentGuide?.images?.[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img desctop-none"></div>
           </div>
           <div class="article-elements">
           <div class="gid-country_price">
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div :style="{backgroundImage: `url('${$getImageUrl(currentGuide?.images[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none"></div>
+        <div :style="{backgroundImage: `url('${$getImageUrl(currentGuide?.guidePageImages?.[0]?.url || currentGuide?.images?.[0]?.url)}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}" class="article-img mobile-none"></div>
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@ useHead(() => ({
     { name: 'description', content: currentGuide.value?.description || 'Подробные и полезные гайды для путешественников от Moov Travel.' },
     { property: 'og:title', content: currentGuide.value?.title ? `${currentGuide.value.title} | Moov Travel` : 'Гайды | Moov Travel' },
     { property: 'og:description', content: currentGuide.value?.description || 'Подробные и полезные гайды для путешественников от Moov Travel.' },
-    { property: 'og:image', content: $getImageUrl(currentGuide.value?.images?.[0]?.url) },
+    { property: 'og:image', content: $getImageUrl(currentGuide.value?.guidePageImages?.[0]?.url || currentGuide.value?.images?.[0]?.url) },
     { property: 'og:type', content: 'article' },
     { property: 'og:url', content: `https://moov-travel.ru/guide/${link}` },
   ],
