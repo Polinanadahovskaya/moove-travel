@@ -70,7 +70,7 @@ onMounted(async () => {
   const orderId = route.query.orderId
   if (orderId) {
     try {
-      const response = await axios.get(`http://localhost:1337/api/tour-order/alfa-status`, {
+      const response = await axios.get(window.location.origin + '/api/tour-order/alfa-status', {
         params: { orderId },
         headers: {
           Authorization: `Bearer ${config.public.API_ORDER_TOKEN}`,
