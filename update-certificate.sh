@@ -20,7 +20,7 @@ echo "📝 Обновляем сертификат через certbot..."
 docker run --rm \
   -v /etc/letsencrypt:/etc/letsencrypt \
   -v /var/www/certbot:/var/www/certbot \
-  certbot/certbot renew --webroot \
+  certbot/certbot certonly --webroot \
   --webroot-path=/var/www/certbot \
   --email $EMAIL \
   --agree-tos \
