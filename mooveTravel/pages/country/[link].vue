@@ -98,8 +98,6 @@ await articlesStore.fetchArticlesByCountryLink(countryLink.value)
 }
 
 .back-country {
-  background: linear-gradient(90deg, #FFB651 0%, #FFC472 25%, rgba(255, 196, 114, 0) 70%),
-  url("/src/assets/images/countryArticle.jpg");
   background-size: 100% 100%, cover;
   background-repeat: no-repeat;
   background-position: 0 0, center;
